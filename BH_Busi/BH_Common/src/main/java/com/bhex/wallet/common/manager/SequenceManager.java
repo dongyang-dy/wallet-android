@@ -78,11 +78,15 @@ public class SequenceManager {
     }
 
     public synchronized String getSequence(String v_sequence){
-        String key = SEQUENCE_KEY.concat(BHUserManager.getInstance().getCurrentBhWallet().address);
-        int vv_sequence =  MMKVManager.getInstance().mmkv().decodeInt(key,0);
-        LogUtils.d("SequenceManager===>:","vv_sequence=="+vv_sequence);
-        int i_sequence = Math.max(Integer.valueOf(v_sequence),sequence.get());
-        sequence.set(i_sequence);
+        //String key = SEQUENCE_KEY.concat(BHUserManager.getInstance().getCurrentBhWallet().address);
+        //int vv_sequence =  MMKVManager.getInstance().mmkv().decodeInt(key,0);
+        //LogUtils.d("SequenceManager===>:","vv_sequence=="+vv_sequence);
+        if(!TextUtils.isEmpty(v_sequence) && "0".equals(v_sequence)){
+            sequence.set(0);
+        }else{
+            int i_sequence = Math.max(Integer.valueOf(v_sequence),sequence.get());
+            sequence.set(i_sequence);
+        }
         return sequence.get()+"";
     }
 
