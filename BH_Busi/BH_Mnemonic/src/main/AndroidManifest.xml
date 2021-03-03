@@ -6,7 +6,9 @@
         android:allowBackup="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-\        <activity android:name=".ui.activity.AddWalletActivity" />
+        <activity android:name=".ui.activity.AddWalletActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activity.FingerLoginActivity"
             android:launchMode="singleTop"
@@ -42,7 +44,7 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.TrusteeshipManagerActivity"
+            android:name=".ui.activity.AccountManagerActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity

@@ -14,16 +14,19 @@
         <!--
                 <item>修改安全密码</item>
         -->
-        <item>备份助记词</item>
+        <!--<item>备份助记词</item>
         <item>备份私钥</item>
-        <item>备份Keystore</item>
+        <item>备份Keystore</item>-->
         <!--
                 <item>治理提案</item>
         -->
+        <item>账户与安全</item>
+        <item>备份导出</item>
         <item>公告</item>
+        <item>消息中心</item>
+        <item>设置</item>
         <item>帮助中心</item>
         <item>@string/about_us</item>
-        <item>设置</item>
         <!--<item>版本号</item>-->
     </string-array>
 
@@ -82,6 +85,15 @@
         <item>@string/version_logs</item>
         <item>@string/check_update</item>
         <item>@string/contact_us</item>
+    </string-array>
+
+    <string-array name="account_detail_list">
+        <item>@string/update_name</item>
+        <item>@string/reset_security_pwd</item>
+        <item>@string/export_mnemonic</item>
+        <item>@string/export_private_key</item>
+        <item>@string/export_keystore</item>
+        <item>@string/delete_wallet</item>
     </string-array>
 
 </resources>

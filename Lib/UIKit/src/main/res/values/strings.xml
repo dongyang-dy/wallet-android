@@ -556,4 +556,14 @@
     <string name="palace_holder">--</string>
     <!--<string name="transfer_in2">收款</string>
     <string name="transfer_out2">转账</string>-->
+
+    <string name="account_detail">账户详情</string>
+    <string name="update_name">更改名称</string>
+    <string name="reset_security_pwd">重置安全密码</string>
+    <string name="export_mnemonic">导出助记词</string>
+    <string name="export_private_key">导出私钥</string>
+    <string name="export_keystore">导出Keystore</string>
+    <string name="delete_wallet">删除钱包</string>
+    <string name="update_success">修改成功</string>
+
 </resources>

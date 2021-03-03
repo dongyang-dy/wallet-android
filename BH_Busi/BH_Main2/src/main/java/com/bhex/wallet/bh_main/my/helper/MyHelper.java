@@ -41,22 +41,17 @@ public class MyHelper {
         List<MyItem> myItems = new ArrayList<>();
 
         String [] res = context.getResources().getStringArray(R.array.my_list_item);
-        MyItem item = null;
         for (int i = 0; i < res.length; i++) {
-            if (i == 5) {
-                item = new MyItem(i,res[i], true, "v"+PackageUtils.getVersionName(context)+"("+PackageUtils.getVersionCode(context)+")");
-            } else {
-                item = new MyItem(i,res[i], true, "");
-            }
+            MyItem item = new MyItem(i,res[i], true, "");
             myItems.add(item);
         }
-        boolean flag1 = BHUserManager.getInstance().getCurrentBhWallet().getWay()== MAKE_WALLET_TYPE.创建助记词.getWay();
+        /*boolean flag1 = BHUserManager.getInstance().getCurrentBhWallet().getWay()== MAKE_WALLET_TYPE.创建助记词.getWay();
         boolean flag2 = BHUserManager.getInstance().getCurrentBhWallet().getWay()== MAKE_WALLET_TYPE.导入助记词.getWay();
 
         //LogUtils.d("MyHelper===>:","flag1=="+flag1+"flag2=="+flag2);
         if(!flag1 &&  !flag2){
             myItems.remove(0);
-        }
+        }*/
 
         return myItems;
     }
@@ -177,6 +172,17 @@ public class MyHelper {
             }*/
             MyItem item = new MyItem(i,res[i], true, "");
 
+            myItems.add(item);
+        }
+        return myItems;
+    }
+
+    //账户详情
+    public static List<MyItem> getAcountDetailFunction(Context context){
+        List<MyItem> myItems = new ArrayList<>();
+        String []res = context.getResources().getStringArray(R.array.account_detail_list);
+        for (int i = 0; i < res.length; i++) {
+            MyItem item = new MyItem(i,res[i], true, "");
             myItems.add(item);
         }
         return myItems;

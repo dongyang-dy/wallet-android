@@ -3,7 +3,8 @@
     <color name="white">#FFFFFF</color>
     <!--全局的色值-->
     <!--分割线颜色-->
-    <color name="global_divider_color">#F4F7FF</color>
+<!--    <color name="global_divider_color">#F4F7FF</color>-->
+    <color name="global_divider_color">#F3F3F3</color>
     <color name="dialog_fragment_divider_color">#F4F7FF</color>
     <color name="grid_divider_color">#E7ECF4</color>
     <color name="dash_divider_color">#ACB5C3</color>
@@ -192,23 +193,13 @@
     <color name="text_black_color">#000000</color>
 
     <color name="balance_label_color">#0A1825</color>
-   <!--公告颜色-->
-    <!--<color name="activity_bg_color">#1A35E5DB</color>
-    <color name="alarm_bg_color">#1AED3756</color>
-    <color name="announcement_bg_color">#1A4299FF</color>
-    <color name="tips_bg_color">#1AFF922E</color>
-
-    <color name="activity_type_color">#2735E5DB</color>
-    <color name="alarm_type_color">#27ED3756</color>
-    <color name="announcement_type_color">#274299FF</color>
-    <color name="tips_type_color">#27FF922E</color>
-
-    <color name="activity_icon_color">#35E5DB</color>
-    <color name="alarm_icon_color">#ED3756</color>
-    <color name="announcement_icon_color">#4299FF</color>
-    <color name="tips_icon_color">#FF922E</color>-->
-
 
     <color name="address_label_bg_color">#F4F7FF</color>
     <color name="cookie_bar_default_bg_color">#323232</color>
+
+    <!--灰色-->
+    <color name="global_main_gray_color">#8F9298</color>
+    <color name="card_bg_color">#F7F8FB</color>
+    <color name="v_line_divider_color">#C7D3E4</color>
+
 </resources>

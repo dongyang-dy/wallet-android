@@ -22,7 +22,7 @@ import java.util.List;
  * Date: 2020/3/14
  * Time: 23:01
  */
-public class TrustManagerAdapter extends BaseQuickAdapter<BHWalletItem, TrustManagerAdapter.TrustManagerVH> {
+/*public class TrustManagerAdapter extends BaseQuickAdapter<BHWalletItem, TrustManagerAdapter.TrustManagerVH> {
 
     private OnCheckClickListener mOnCheckClickListener;
 
@@ -48,12 +48,12 @@ public class TrustManagerAdapter extends BaseQuickAdapter<BHWalletItem, TrustMan
             ck.setChecked(false);
             viewHolder.getView(R.id.tv_wallet_default).setVisibility(View.INVISIBLE);
         }
-        /*ck.setOnClickListener(v -> {
+        *//*ck.setOnClickListener(v -> {
             ck.setChecked(!ck.isChecked());
             if(mOnCheckClickListener!=null){
                 mOnCheckClickListener.checkClickListener(positoin,bhWalletItem);
             }
-        });*/
+        });*//*
 
     }
 
@@ -78,4 +78,4 @@ public class TrustManagerAdapter extends BaseQuickAdapter<BHWalletItem, TrustMan
     public void setOnCheckClickListener(OnCheckClickListener onCheckClickListener) {
         this.mOnCheckClickListener = onCheckClickListener;
     }
-}
+}*/

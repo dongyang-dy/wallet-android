@@ -21,7 +21,6 @@
         android:layout_gravity="center"
         android:gravity="center"
         style="@style/toolbar_layout_title_style"
-        android:text="@string/wallet_create_trusteeship"
         tools:text="@string/wallet_create_trusteeship" />
 
 </androidx.appcompat.widget.Toolbar>

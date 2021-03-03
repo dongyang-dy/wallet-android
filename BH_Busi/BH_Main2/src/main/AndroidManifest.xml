@@ -76,6 +76,11 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateUnchanged|adjustResize|stateHidden" />
+
+        <activity android:name=".my.ui.activity.AccountDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            />
     </application>
 
 </manifest>

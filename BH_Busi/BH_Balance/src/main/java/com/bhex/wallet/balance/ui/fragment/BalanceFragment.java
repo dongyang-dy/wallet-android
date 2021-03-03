@@ -144,7 +144,6 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
         balanceViewModel = ViewModelProviders.of(MainActivityManager._instance.mainActivity).get(BalanceViewModel.class).build(getYActivity());
         //资产订阅
         LiveDataBus.getInstance().with(BHConstants.Label_Account, LoadDataModel.class).observe(this, ldm->{
-            LogUtils.d("BalanceViewModel==>","refresh==account=="+ldm.getLoadingStatus());
             refreshfinish();
             if(ldm.loadingStatus==LoadingStatus.SUCCESS){
                 updateAssets();

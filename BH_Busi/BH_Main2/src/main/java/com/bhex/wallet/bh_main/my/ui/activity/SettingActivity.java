@@ -4,18 +4,16 @@ import android.view.View;
 import android.widget.CheckedTextView;
 
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.bhex.lib.uikit.widget.RecycleViewExtDivider;
-import com.bhex.wallet.bh_main.my.ui.MyRecyclerViewDivider;
+import com.bhex.wallet.bh_main.my.ui.decoration.MyRecyclerViewDivider;
 import com.bhex.wallet.common.base.BaseActivity;
 import com.bhex.network.utils.ToastUtils;
 import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.ColorUtil;
 import com.bhex.tools.utils.NavigateUtil;
-import com.bhex.tools.utils.PixelUtils;
 import com.bhex.wallet.bh_main.R;
 import com.bhex.wallet.bh_main.R2;
 import com.bhex.wallet.bh_main.my.adapter.SettingAdapter;
@@ -42,6 +40,7 @@ import butterknife.BindView;
  * 2020-3-12 15:48:18
  * 设置
  */
+@Route(path = ARouterConfig.My.My_Account_Setting, name="设置")
 public class SettingActivity extends BaseActivity{
 
     @BindView(R2.id.recycler_setting)
@@ -65,7 +64,7 @@ public class SettingActivity extends BaseActivity{
 
         MyRecyclerViewDivider myRecyclerDivider = new MyRecyclerViewDivider(this,
                 ColorUtil.getColor(this,R.color.global_divider_color),
-                getResources().getDimension(R.dimen.default_item_divider_height),
+                getResources().getDimension(R.dimen.item_large_divider_height),
                 new int[]{2,3});
 
         recycler_setting.addItemDecoration(myRecyclerDivider);

@@ -41,6 +41,10 @@ public class ARouterConfig {
         public static final String My_Security_Setting = "/my/security/setIndex";
         //关于我们
         public static final String My_About = "/my/about";
+        //设置
+        public static final String My_Account_Setting = "/my/account_set";
+        //账户详情
+        public static final String ACCOUNT_DETAIL_PAGE = "/my/account/detail";
 
     }
 
@@ -54,7 +58,7 @@ public class ARouterConfig {
      */
     public static final String MNEMONIC_INDEX_PAGE = "/mnemonic/index";
     //托管单元管理
-    public static final String MNEMONIC_TRUSTEESHIP_MANAGER_PAGE = "/mnemonic/trusteeship/manager";
+    public static final String ACCOUNT_MANAGER_PAGE = "/account/manager";
 
     //托管单元创建成功页面
     public static final String TRUSTEESHIP_CREATE_OK_PAGE = "/mnemonic/trusteeship/success";
