@@ -40,11 +40,13 @@
     <color name="light_text">#ACB5C3</color>
 
     <!--水印字色-->
-    <color name="global_input_hint_color">#6E8196</color>
+    <!--<color name="global_input_hint_color">#6E8196</color>-->
+    <color name="global_input_hint_color">#8F9298</color>
     <!--输入字色-->
     <color name="global_input_text_color">#0A1825</color>
 
-    <color name="global_input_profix_text_color">#6E8196</color>
+    <color name="global_input_profix_text_color">#8F9298</color>
+    <!--<color name="global_input_profix_text_color">#6E8196</color>-->
 
     <!--输入框背景色-->
     <color name="global_input_background">#F9F9FB</color>
@@ -198,8 +200,18 @@
     <color name="cookie_bar_default_bg_color">#323232</color>
 
     <!--灰色-->
+    <color name="page_bg_color">#F7F8FB</color>
+    <color name="item_bg_color">#FFFFFF</color>
     <color name="global_main_gray_color">#8F9298</color>
     <color name="card_bg_color">#F7F8FB</color>
     <color name="v_line_divider_color">#C7D3E4</color>
-
+    <color name="white_60">#9AFFFFFF</color>
+    <color name="bg_wallet_checked">#344299FF</color>
+    <color name="bg_wallet_uncheck">#F7F8FB</color>
+    <color name="pay_code_color">#9FA7AD</color>
+    <color name="pay_address_color">#696A6F</color>
+    <color name="transfer_tips_text_color">#37373E</color>
+    <color name="transfer_tips_bg_color">#F3F3F3</color>
+    <color name="btn_save_qr_bg_color">#9FB5DC</color>
+    <color name="btn_copy_address_bg_color">#3369E9</color>
 </resources>

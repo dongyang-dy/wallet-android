@@ -2,7 +2,6 @@ package com.bhex.wallet.balance.ui.viewhodler;
 
 import android.Manifest;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.text.TextUtils;
 import android.view.View;
@@ -29,6 +28,7 @@ import com.bhex.tools.utils.ToolUtils;
 import com.bhex.wallet.balance.R;
 import com.bhex.wallet.balance.helper.BHBalanceHelper;
 import com.bhex.wallet.balance.ui.activity.TransferInActivity;
+import com.bhex.wallet.balance.ui.activity.TransferInCrossActivity;
 import com.bhex.wallet.balance.ui.fragment.DepositTipsFragment;
 import com.bhex.wallet.common.cache.SymbolCache;
 import com.bhex.wallet.common.db.entity.BHWallet;
@@ -46,53 +46,55 @@ import io.reactivex.Observable;
  * @author gongdongyang
  * 2020-12-6 22:59:29
  */
-public class TransferInVH {
-    public TransferInActivity mActivity;
+public class TransferInCrossVH {
 
-    public View mRootView;
+    private TransferInCrossActivity mActivity;
+    private View view;
+    public String mSymbol;
 
     //token-icon
     public AppCompatImageView iv_token_icon;
+    //token-name
+    public AppCompatTextView tv_token_name;
     //token-二维码地址
     public AppCompatImageView iv_address_qr;
-    //token-文本地址
+    //token-地址
     public AppCompatTextView tv_token_address;
-
     //保存二维码
     public AppCompatTextView btn_save_qr;
     //复制地址
     public AppCompatTextView btn_copy_address;
-
-    public FrameLayout layout_token_icon;
-
-    public TransferInVH( TransferInActivity mActivity,View mRootView) {
-        this.mActivity = mActivity;
-        this.mRootView = mRootView;
+    //跨链充值提示
+    //最小充值数量
+    public AppCompatTextView tv_min_deposit_amount;
+    //充值入账数量
+    public AppCompatTextView tv_deposit_collect;
+    public TransferInCrossVH(TransferInCrossActivity activity, View view, String  symbol) {
+        this.mActivity = activity;
+        this.view = view;
+        this.mSymbol = symbol;
         //初始化布局
-        iv_token_icon = mRootView.findViewById(R.id.iv_token_icon);
-        iv_address_qr = mRootView.findViewById(R.id.iv_address_qr);
+        btn_save_qr = view.findViewById(R.id.btn_save_qr);
+        btn_copy_address = view.findViewById(R.id.btn_copy_address);
+        //
+        iv_token_icon = view.findViewById(R.id.iv_token_icon);
+        tv_token_name = view.findViewById(R.id.tv_token_name);
+        //
+        iv_address_qr = view.findViewById(R.id.iv_address_qr);
+        tv_token_address = view.findViewById(R.id.tv_token_address);
 
-        tv_token_address = mRootView.findViewById(R.id.tv_token_address);
-        btn_save_qr = mRootView.findViewById(R.id.btn_save_qr);
-        btn_copy_address = mRootView.findViewById(R.id.btn_copy_address);
-
-        layout_token_icon = mRootView.findViewById(R.id.layout_token_icon);
+        tv_min_deposit_amount = view.findViewById(R.id.tv_min_deposit_amount);
+        tv_deposit_collect = view.findViewById(R.id.tv_deposit_collect);
 
         //设置按钮为圆角
-        GradientDrawable btn_save_drawable = ShapeUtils.getRoundRectDrawable(PixelUtils.dp2px(mActivity,100),
-                ColorUtil.getColor(mActivity,R.color.btn_save_qr_bg_color));
+        GradientDrawable btn_save_drawable = ShapeUtils.getRoundRectDrawable(PixelUtils.dp2px(activity,100),
+                ColorUtil.getColor(activity,R.color.btn_save_qr_bg_color));
         btn_save_qr.setBackgroundDrawable(btn_save_drawable);
 
-        GradientDrawable btn_copy_drawable = ShapeUtils.getRoundRectDrawable(PixelUtils.dp2px(mActivity,100),
-                ColorUtil.getColor(mActivity,R.color.btn_copy_address_bg_color));
+        GradientDrawable btn_copy_drawable = ShapeUtils.getRoundRectDrawable(PixelUtils.dp2px(activity,100),
+                ColorUtil.getColor(activity,R.color.btn_copy_address_bg_color));
         btn_copy_address.setBackgroundDrawable(btn_copy_drawable);
 
-        //设置圆环
-        GradientDrawable token_ring_drawable = ShapeUtils.getRoundRectStrokeDrawable(PixelUtils.dp2px(mActivity,58), Color.TRANSPARENT,
-                ColorUtil.getColor(mActivity,R.color.white),PixelUtils.dp2px(mActivity,2));
-        layout_token_icon.setBackgroundDrawable(token_ring_drawable);
-
-        //点击事件
         //复制地址
         btn_copy_address.setOnClickListener(v -> {
             if (TextUtils.isEmpty(tv_token_address.getText())) {
@@ -106,23 +108,36 @@ public class TransferInVH {
         btn_save_qr.setOnClickListener(v->{
             requestPermissions();
         });
+
     }
 
-    public void updateTokenInfo(String symbol){
-        //token-logo
-        BHToken token = SymbolCache.getInstance().getBHToken(symbol);
+    public void updateTokenInfo(String  symbol){
+        this.mSymbol = symbol;
+        BHToken token = SymbolCache.getInstance().getBHToken(mSymbol);
         ImageLoaderUtil.loadImageView(mActivity,token.logo,iv_token_icon,R.mipmap.ic_default_coin);
+        tv_token_name.setText(token.name.toUpperCase());
 
-        BHWallet currentWallet = BHUserManager.getInstance().getCurrentBhWallet();
-        //二维码地址
-        Bitmap bitmap = QRCodeEncoder.syncEncodeQRCode(currentWallet.address, PixelUtils.dp2px(mActivity,168),
+        //获取链对应的资产
+        BHBalance chainBalance = BHBalanceHelper.getBHBalanceFromAccount(token.chain);
+        String deposit_address = chainBalance!=null?chainBalance.external_address:"";
+
+        //二维码
+        Bitmap bitmap = QRCodeEncoder.syncEncodeQRCode(deposit_address,PixelUtils.dp2px(mActivity,168),
                 ColorUtil.getColor(mActivity,android.R.color.black));
         iv_address_qr.setImageBitmap(bitmap);
-        //文本地址
-        tv_token_address.setText(currentWallet.address);
+        //链上的地址
+        tv_token_address.setText(chainBalance.external_address);
 
+        //最小充值数量
+        String v_amount_str =  String.format(mActivity.getString(R.string.string_deposit_threshold),
+                token.name.toUpperCase(),token.deposit_threshold+" "+token.name.toUpperCase());
+        tv_min_deposit_amount.setText(v_amount_str);
+
+        //充值归集费
+        String v_amount_str2 =  String.format(mActivity.getString(R.string.string_deposit_enter_fee),
+                token.collect_fee+" "+token.chain.toUpperCase());
+        tv_deposit_collect.setText(v_amount_str2);
     }
-
 
     //保存二维码
     private void requestPermissions() {
@@ -170,6 +185,4 @@ public class TransferInVH {
                 .as(AutoDispose.autoDisposable(AndroidLifecycleScopeProvider.from(mActivity)))
                 .subscribe(observer);
     }
-
-
 }

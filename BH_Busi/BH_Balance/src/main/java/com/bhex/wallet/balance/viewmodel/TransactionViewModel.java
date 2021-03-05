@@ -307,6 +307,7 @@ public class TransactionViewModel extends AndroidViewModel implements LifecycleO
                             v_sequence,feeAmount,txMsgList);
 
                     String body = JsonUtils.toJson(bhSendTranscation);
+                    LogUtils.d("TransactionViewModel==>:","body=="+body);
                     RequestBody txBody = HUtils.createJson(body);
                     return BHttpApi.getService(BHttpApiInterface.class).sendTransaction(txBody);
                 })

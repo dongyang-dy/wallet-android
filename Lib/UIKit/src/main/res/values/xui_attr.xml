@@ -111,9 +111,9 @@
     <!-- 圆形按钮 -->
     <declare-styleable name="RoundButton">
         <!-- 背景颜色-->
-        <attr name="rb_backgroundColor" format="reference" />
+        <attr name="rb_backgroundColor" format="reference|string" />
         <!-- 边框颜色 -->
-        <attr name="rb_borderColor" format="reference" />
+        <attr name="rb_borderColor" format="reference|string" />
         <!-- 边框宽度，默认1dp -->
         <attr name="rb_borderWidth" format="dimension" />
         <attr name="rb_isRadiusAdjustBounds" format="boolean" />

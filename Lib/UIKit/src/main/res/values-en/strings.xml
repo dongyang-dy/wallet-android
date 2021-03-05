@@ -533,8 +533,8 @@
     <string name="hbtc_transfer_in_tip">This account supports HBC, HRC10 and cross-chain custody assets on HBTC chain</string>
     <string name="input_receive_address">Input transfer-in address</string>
     <string name="input_withdraw_address">Input withdrawal address</string>
-    <string name="cross_transfer_out_tips">Tip:\nYou are withdrawing tokens across the chains.Please ensure that the token withdrawal address is its public chain address</string>
-    <string name="cross_transfer_inner_tips">Tip:\nThis account supports HBC, HRC10 and cross-chain custody assets on HBTC chain</string>
+    <string name="cross_transfer_out_tips">You are withdrawing tokens across the chains.Please ensure that the token withdrawal address is its public chain address</string>
+    <string name="cross_transfer_inner_tips">This account supports HBC, HRC10 and cross-chain custody assets on HBTC chain</string>
     <string name="confrim_create">Comfirm to create</string>
     <string name="token">Token</string>
     <string name="create_crosslink_deposit_address">Create cross-chain deposit address</string>
@@ -551,7 +551,7 @@
     <string name="clear">Clear</string>
     <string name="cross_address_generatoring">cross-chain address generating</string>
     <string name="palace_holder">--</string>
+    <string name="place_holder">--</string>
     <!--<string name="transfer_in2">Receive</string>
     <string name="transfer_out2">Transfer</string>-->
-
 </resources>

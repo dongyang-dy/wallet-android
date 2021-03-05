@@ -46,12 +46,6 @@ public class AddWalletActivity extends BaseCacheActivity<ImportPresenter> {
     @BindView(R2.id.tv_center_title)
     AppCompatTextView tv_center_title;
 
-    @BindView(R2.id.rec_function)
-    RecyclerView rec_function;
-
-    List<FunctionItem> mFunctionItemList;
-    private AddWalletAdapter mAddWalletAdapter;
-
     @Override
     protected int getLayoutId() {
         return R.layout.activity_add_wallet;
@@ -64,79 +58,35 @@ public class AddWalletActivity extends BaseCacheActivity<ImportPresenter> {
                 :getResources().getString(R.string.add_wallet);
 
         tv_center_title.setText(title);
-        mFunctionItemList = (flag==0)?getPresenter().loadImportList():getPresenter().loadFunctionList();
-        rec_function.setAdapter(mAddWalletAdapter = new AddWalletAdapter(mFunctionItemList));
-        //添加分割线
-        rec_function.addItemDecoration(new AddWalletDecoration(this,
-                ColorUtil.getColor(this,R.color.app_bg),
-                        new int[]{3}));
 
+        //只有导入功能
+        if(flag==0){
+            findViewById(R.id.layout_create).setVisibility(View.INVISIBLE);
+        }
     }
-
-
 
     @Override
     protected void addEvent() {
-        mAddWalletAdapter.setOnItemClickListener(this::onItemClick);
-    }
+        //导入助记词
+        findViewById(R.id.layout_import_mnemonic).setOnClickListener(v->{
+            ARouter.getInstance().build(ARouterConfig.TRUSTEESHIP_IMPORT_MNEMONIC)
+                    .navigation();
+        });
+        //导入KS
+        findViewById(R.id.layout_import_keystore).setOnClickListener(v->{
+            ARouter.getInstance().build(ARouterConfig.TRUSTEESHIP_IMPORT_KEYSTORE)
+                    .navigation();
+        });
 
-    //添加点击事件
-    private void onItemClick(BaseQuickAdapter<?,?> baseQuickAdapter, View view, int position) {
-        FunctionItem item = mAddWalletAdapter.getData().get(position);
-        switch (MAKE_WALLET_TYPE.getWay(item.index)){
-            case 导入助记词:
-                ARouter.getInstance().build(ARouterConfig.TRUSTEESHIP_IMPORT_MNEMONIC)
-                        .navigation();
-                //MainActivityManager.getInstance().setTargetClass(TrusteeshipManagerActivity.class);
-                break;
-
-            case 导入KS:
-                ARouter.getInstance().build(ARouterConfig.TRUSTEESHIP_IMPORT_KEYSTORE)
-                        .navigation();
-                //MainActivityManager.getInstance().setTargetClass(TrusteeshipManagerActivity.class);
-                break;
-
-            case PK:
-                ARouter.getInstance().build(ARouterConfig.TRUSTEESHIP_IMPORT_PRIVATEKEY)
-                        .navigation();
-                //MainActivityManager.getInstance().setTargetClass(TrusteeshipManagerActivity.class);
-                break;
-
-            case 创建助记词:
-                ARouter.getInstance().build(ARouterConfig.TRUSTEESHIP_MNEMONIC_FRIST)
-                        .navigation();
-                //MainActivityManager.getInstance().setTargetClass(TrusteeshipManagerActivity.class);
-                break;
-        }
-    }
-
-    @Override
-    protected void initPresenter() {
-        mPresenter = new ImportPresenter(this);
-    }
-
-    //添加钱包
-    public class AddWalletAdapter extends BaseMultiItemQuickAdapter< FunctionItem, BaseViewHolder> {
-
-        public AddWalletAdapter( @Nullable List<FunctionItem> data) {
-            //super(R.layout.item_import_way, data);
-            super(data);
-            addItemType(FunctionItem.TYPE_ITEM,R.layout.item_import_way);
-            addItemType(FunctionItem.TYPE_TITLE,R.layout.item_title);
-        }
-
-        @Override
-        protected void convert(@NotNull BaseViewHolder viewHolder, FunctionItem functionItem) {
-            switch (functionItem.getItemType()) {
-                case FunctionItem.TYPE_ITEM:
-                    viewHolder.setImageResource(R.id.iv_import_ic,functionItem.resId);
-                    viewHolder.setText(R.id.tv_import_title,functionItem.title);
-                    break;
-                case FunctionItem.TYPE_TITLE:
-                    viewHolder.setText(R.id.tv_title,functionItem.title);
-                    break;
-            }
-
-        }
+        //导入PK
+        findViewById(R.id.layout_import_pk).setOnClickListener(v->{
+            ARouter.getInstance().build(ARouterConfig.TRUSTEESHIP_IMPORT_PRIVATEKEY)
+                    .navigation();
+        });
+        //创建助记词
+        findViewById(R.id.layout_create_wallet).setOnClickListener(v->{
+            ARouter.getInstance().build(ARouterConfig.TRUSTEESHIP_MNEMONIC_FRIST)
+                    .navigation();
+        });
     }
 }

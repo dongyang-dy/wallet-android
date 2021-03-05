@@ -5,21 +5,260 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/app_bg"
     tools:context=".ui.activity.AddWalletActivity">
 
     <include
         layout="@layout/layout_toolbar"
         />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rec_function"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:itemCount="4"
-        tools:listitem="@layout/item_import_way"
+        android:layout_height="match_parent"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:orientation="vertical"
+        android:background="@color/page_bg_color">
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:text="@string/string_import"
+            android:textSize="20sp"
+            android:textColor="@color/global_main_text_color"/>
+
+        <com.bhex.lib.uikit.widget.layout.XUIRelativeLayout
+            android:id="@+id/layout_import_mnemonic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/item_bg_color"
+            android:layout_marginTop="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="10dp"
+            app:xui_radius="12dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@mipmap/ic_import_word"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:orientation="vertical"
+                android:layout_marginStart="64dp"
+                android:layout_marginEnd="30dp">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="23dp"
+                    android:text="@string/import_mnemonic"
+                    android:textSize="17sp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/global_main_text_color"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="19dp"
+                    android:text="12个单词"
+                    android:textSize="13sp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/global_main_text_color"/>
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@mipmap/ic_gray_arrow"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                />
+        </com.bhex.lib.uikit.widget.layout.XUIRelativeLayout>
+
+
+        <com.bhex.lib.uikit.widget.layout.XUIRelativeLayout
+            android:id="@+id/layout_import_keystore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/item_bg_color"
+            android:layout_marginTop="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="10dp"
+            app:xui_radius="12dp">
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@mipmap/ic_import_ks"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:orientation="vertical"
+                android:layout_marginStart="64dp"
+                android:layout_marginEnd="30dp">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="23dp"
+                    android:text="@string/import_keystore"
+                    android:textSize="17sp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/global_main_text_color"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="19dp"
+                    android:text="一段长文本字符
+"
+                    android:textSize="13sp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/global_main_text_color"/>
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_arrow"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@mipmap/ic_gray_arrow"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                />
+        </com.bhex.lib.uikit.widget.layout.XUIRelativeLayout>
+
+
+        <com.bhex.lib.uikit.widget.layout.XUIRelativeLayout
+            android:id="@+id/layout_import_pk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@color/item_bg_color"
+            android:paddingStart="16dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="16dp"
+            app:xui_radius="12dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@mipmap/ic_import_pk" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="64dp"
+                android:layout_marginEnd="30dp"
+                android:orientation="vertical">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="23dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/import_private_key"
+                    android:textColor="@color/global_main_text_color"
+                    android:textSize="17sp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="19dp"
+                    android:gravity="center_vertical"
+                    android:text="看起来像abcdefxxxx....的一串字符"
+                    android:textColor="@color/global_main_text_color"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/ic_gray_arrow" />
+        </com.bhex.lib.uikit.widget.layout.XUIRelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_create"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/create"
+                android:textSize="20sp"
+                android:textColor="@color/global_main_text_color"/>
+
+
+            <com.bhex.lib.uikit.widget.layout.XUIRelativeLayout
+                android:id="@+id/layout_create_wallet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/item_bg_color"
+                android:layout_marginTop="20dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="10dp"
+                app:xui_radius="12dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@mipmap/ic_create_wallet"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="23dp"
+                    android:text="@string/create_wallet_account"
+                    android:textSize="17sp"
+                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/global_main_text_color"
+                    android:layout_marginStart="64dp"
+                    android:layout_marginEnd="30dp"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@mipmap/ic_gray_arrow"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    />
+            </com.bhex.lib.uikit.widget.layout.XUIRelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <!--<FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/page_bg_color">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rec_function"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="4"
+            tools:listitem="@layout/item_import_way"
         />
+    </FrameLayout>-->
 </LinearLayout>

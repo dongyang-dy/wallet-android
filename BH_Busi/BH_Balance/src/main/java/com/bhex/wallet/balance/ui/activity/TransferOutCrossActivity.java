@@ -1,12 +1,14 @@
 package com.bhex.wallet.balance.ui.activity;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.lifecycle.ViewModelProviders;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
 import android.view.View;
-
-import androidx.appcompat.widget.AppCompatTextView;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -16,20 +18,23 @@ import com.bhex.lib_qr.util.QRCodeAnalyzeUtils;
 import com.bhex.network.base.LoadDataModel;
 import com.bhex.network.base.LoadingStatus;
 import com.bhex.network.utils.ToastUtils;
+import com.bhex.tools.AndroidBug5497Workaround;
 import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.PathUtils;
+import com.bhex.wallet.balance.R;
 import com.bhex.wallet.balance.R2;
 import com.bhex.wallet.balance.event.TransctionEvent;
 import com.bhex.wallet.balance.ui.fragment.ChooseTokenFragment;
-import com.bhex.wallet.common.base.BaseActivity;
-import com.bhex.wallet.balance.R;
-import com.bhex.wallet.balance.ui.viewhodler.TransferOutVH;
+import com.bhex.wallet.balance.ui.viewhodler.TransferInVH;
+import com.bhex.wallet.balance.ui.viewhodler.TransferOutCrossVH;
 import com.bhex.wallet.balance.viewmodel.TokenViewModel;
 import com.bhex.wallet.balance.viewmodel.TransactionViewModel;
+import com.bhex.wallet.common.base.BaseActivity;
 import com.bhex.wallet.common.config.ARouterConfig;
 import com.bhex.wallet.common.enums.BH_BUSI_TYPE;
 import com.bhex.wallet.common.manager.MainActivityManager;
 import com.bhex.wallet.common.model.AccountInfo;
+import com.bhex.wallet.common.model.BHToken;
 import com.bhex.wallet.common.tx.BHRawTransaction;
 import com.bhex.wallet.common.tx.TxReq;
 import com.bhex.wallet.common.ui.activity.BHQrScanActivity;
@@ -40,17 +45,17 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.math.BigInteger;
 import java.util.List;
 
 import butterknife.BindView;
 
 /**
  * @author gongdongyang
- * 转账、提币代码重构
+ * 提币
+ * 2021-3-4 16:54:38
  */
-@Route(path = ARouterConfig.Balance.Balance_transfer_out)
-public class TransferOutActivity extends BaseActivity {
+@Route(path = ARouterConfig.Balance.Balance_transfer_out_cross,name = "提币")
+public class TransferOutCrossActivity extends BaseActivity {
 
     @Autowired(name="symbol")
     String m_symbol;
@@ -58,40 +63,36 @@ public class TransferOutActivity extends BaseActivity {
     @BindView(R2.id.tv_center_title)
     AppCompatTextView tv_center_title;
 
+    private SmartRefreshLayout mRefreshLayout;
     int def_dailog_count = 0;
 
-    TransferOutVH transferOutVH;
+    private BalanceViewModel mBalanceViewModel;
+    private TransactionViewModel mTransactionViewModel;
+    private TokenViewModel mTokenViewModel;
 
-    BalanceViewModel mBalanceViewModel;
-
-    TransactionViewModel mTransactionViewModel;
-
-    TokenViewModel mTokenViewModel;
-
-    private SmartRefreshLayout mRefreshLayout;
+    //
+    TransferOutCrossVH transferOutCrossVH;
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_transfer_out;
+        return R.layout.activity_transfer_out_cross;
     }
 
     @Override
     protected void initView() {
-        tv_center_title.setText(getString(R.string.transfer));
         ARouter.getInstance().inject(this);
+        tv_center_title.setText(getString(R.string.cross_withdraw));
         mRefreshLayout = findViewById(R.id.refreshLayout);
-        transferOutVH = new TransferOutVH(this,findViewById(R.id.root_view));
-        /*//
-        findViewById(R.id.btn_drawwith_coin).setOnClickListener(this::onSubmitAction);
-        findViewById(R.id.btn_transfer_out_token).setOnClickListener(this::chooseTokenAction);*/
+        //AndroidBug5497Workaround.assistActivity(this);
+        transferOutCrossVH = new TransferOutCrossVH(this,findViewById(R.id.root_view));
 
-        transferOutVH.layout_select_token.setOnClickListener(this::selectTokenAction);
-        transferOutVH.btn_transfer.setOnClickListener(this::transferAction);
+        transferOutCrossVH.layout_select_token.setOnClickListener(this::selectTokenAction);
+        transferOutCrossVH.btn_drawwith_coin.setOnClickListener(this::withDrawAtion);
     }
 
     @Override
     protected void addEvent() {
-        transferOutVH.updateTokenInfo(m_symbol);
+        transferOutCrossVH.updateTokenInfo(m_symbol);
         mBalanceViewModel = ViewModelProviders.of(MainActivityManager._instance.mainActivity).get(BalanceViewModel.class).build(MainActivityManager._instance.mainActivity);
         //资产订阅
         LiveDataBus.getInstance().with(BHConstants.Label_Account, LoadDataModel.class).observe(this, ldm->{
@@ -105,7 +106,31 @@ public class TransferOutActivity extends BaseActivity {
         mTransactionViewModel.mutableLiveData.observe(this,ldm -> {
             updateTransferStatus(ldm);
         });
+
+
+        mTokenViewModel = ViewModelProviders.of(this).get(TokenViewModel.class);
+        mTokenViewModel.queryLiveData.observe(this,ldm->{
+            if(ldm.loadingStatus==LoadingStatus.SUCCESS){
+                transferOutCrossVH.withDrawFeeToken = (BHToken) ldm.getData();
+            }
+            refreshFinish();
+        });
     }
+
+
+    public void refreshFinish(){
+        def_dailog_count++;
+        if(def_dailog_count==2){
+            mRefreshLayout.finishRefresh();
+        }
+    }
+
+    //更新资产
+    private void updateAssets(AccountInfo accountInfo) {
+        //mTransferOutViewHolder.updateBalance();
+        transferOutCrossVH.updateAssets();
+    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -115,7 +140,7 @@ public class TransferOutActivity extends BaseActivity {
             if(resultCode == RESULT_OK){
                 //处理扫描结果（在界面上显示）
                 String qrCode  = data.getExtras().getString(XQRCode.RESULT_DATA);
-                transferOutVH.inp_transfer_in_address.setText(qrCode);
+                transferOutCrossVH.inp_drawwith_address.setText(qrCode);
             }else if(resultCode == BHQrScanActivity.REQUEST_IMAGE){
                 getAnalyzeQRCodeResult(data.getData());
             }
@@ -126,7 +151,7 @@ public class TransferOutActivity extends BaseActivity {
         XQRCode.analyzeQRCode(PathUtils.getFilePathByUri(this, uri), new QRCodeAnalyzeUtils.AnalyzeCallback() {
             @Override
             public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
-                transferOutVH.inp_transfer_in_address.setText(result);
+                transferOutCrossVH.inp_drawwith_address.setText(result);
             }
 
             @Override
@@ -138,7 +163,7 @@ public class TransferOutActivity extends BaseActivity {
 
     //选择币种
     public void selectTokenAction(View view){
-        ChooseTokenFragment fragment = ChooseTokenFragment.showFragment(m_symbol, BH_BUSI_TYPE.链内转账.value,this::selectTokenListener);
+        ChooseTokenFragment fragment = ChooseTokenFragment.showFragment(m_symbol, BH_BUSI_TYPE.跨链转账.value,this::selectTokenListener);
         fragment.show(getSupportFragmentManager(),ChooseTokenFragment.class.getName());
     }
 
@@ -146,56 +171,45 @@ public class TransferOutActivity extends BaseActivity {
     private void selectTokenListener(String symbol, int position) {
         //更新token
         m_symbol = symbol;
-        transferOutVH.updateTokenInfo(symbol);
+        transferOutCrossVH.updateTokenInfo(symbol);
     }
 
-    //转账
-    private void transferAction(View view) {
-       boolean flag= transferOutVH.verifyTransferAction();
-       if(!flag){
-           return;
-       }
+    //提币
+    private void withDrawAtion(View view) {
+        boolean flag = transferOutCrossVH.verifyWithDrawAction();
+        if(!flag){
+            return;
+        }
+
         Password30PFragment.showPasswordDialog(getSupportFragmentManager(),
                 Password30PFragment.class.getName(),
-                this::transferConfirmAction,0,true);
+                this::callbackWithdraw,0,true);
     }
 
-    //密码对话框回调
-    public void transferConfirmAction(String password, int position,int verifyPwdWay) {
-        String to_address = transferOutVH.inp_transfer_in_address.getText().toString().trim();
-        BigInteger gasPrice = BigInteger.valueOf ((long)(BHConstants.BHT_GAS_PRICE));
-        //转账金额
-        String v_transfer_amount = transferOutVH.inp_transfer_amount.getText().toString().trim();
+
+    public void callbackWithdraw(String password, int position,int verifyPwdWay) {
+        String to_address = transferOutCrossVH.inp_drawwith_address.getText().toString().trim();
+        //提币数量
+        String withDrawAmount = transferOutCrossVH.inp_withdraw_amount.getText().toString().trim();
         //交易手续费
-        String v_fee_amount = transferOutVH.tv_fee.getText().toString().trim();
-        //创建转账信息
-        List<TxReq.TxMsg> tx_msg_list = BHRawTransaction.createTransferMsg(to_address,v_transfer_amount,m_symbol);
-        mTransactionViewModel.transferInnerExt(this,password,v_fee_amount,tx_msg_list);
+        String feeAmount = transferOutCrossVH.tv_fee.getText().toString();
+        //提币手续费
+        String withDrawFeeAmount = transferOutCrossVH.tv_withdraw_fee.getText().toString();
+        //创建提币信息
+        List<TxReq.TxMsg> tx_msg_list = BHRawTransaction.createwithDrawWMsg(to_address,withDrawAmount,withDrawFeeAmount,
+                transferOutCrossVH.tranferToken.symbol);
+        mTransactionViewModel.transferInnerExt(this,password,feeAmount,tx_msg_list);
     }
 
-
-    //更新可用资产
-    private void updateAssets(AccountInfo accountInfo) {
-        transferOutVH.updateAssets();
-    }
-
-    //更新转账状态
+    //更新状态
     private void updateTransferStatus(LoadDataModel ldm) {
         if(ldm.loadingStatus== LoadingStatus.SUCCESS){
             ToastUtils.showToast(getResources().getString(R.string.transfer_in_success));
             EventBus.getDefault().post(new TransctionEvent());
             finish();
         }else{
-            //ToastUtils.showToast(getResources().getString(R.string.transfer_in_fail));
+            ToastUtils.showToast(getResources().getString(R.string.transfer_in_fail));
         }
     }
 
-
-
-    public void refreshFinish(){
-        def_dailog_count++;
-        if(def_dailog_count==2){
-            mRefreshLayout.finishRefresh();
-        }
-    }
 }

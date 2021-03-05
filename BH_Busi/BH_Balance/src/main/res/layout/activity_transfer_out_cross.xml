@@ -5,27 +5,27 @@
     android:id="@+id/root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:fitsSystemWindows="true"
-    tools:context=".ui.activity.TransferOutActivity">
+    tools:context=".ui.activity.TransferOutCrossActivity">
 
-    <include
-        layout="@layout/layout_toolbar"
-        />
+    <include layout="@layout/layout_toolbar" />
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/btn_transfer"
+        android:layout_above="@+id/btn_drawwith_coin"
         android:layout_below="@+id/toolbar"
         android:layout_marginBottom="24dp"
         app:srlEnableLoadMore="false">
 
-        <androidx.core.widget.NestedScrollView
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/page_bg_color"
             android:overScrollMode="never">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -33,50 +33,15 @@
                 android:background="@color/app_bg"
                 android:orientation="vertical">
 
-                <RelativeLayout
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingStart="@dimen/main_padding_left"
                     android:paddingEnd="@dimen/main_padding_right"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginBottom="16dp">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/global_main_text_color"
-                        android:textSize="15sp"
-                        android:text="@string/transfer_address"
-                        android:layout_centerVertical="true"
-                        />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_transfer_out_address"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/global_input_hint_color"
-                        android:textSize="12sp"
-                        android:text="@string/transfer_address"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        tools:text="HBCb3Xu5XvbSAi8SM13231p4kEaNNvHtPjSN"
-                        />
-                </RelativeLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/global_divider_color"/>
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:textColor="@color/global_main_text_color"
-                    android:text="@string/string_transfer_in_address"
                     android:textSize="15sp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    />
+                    android:text="@string/draw_coin_address"
+                    android:paddingTop="24dp"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -86,7 +51,7 @@
                     >
 
                     <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/inp_transfer_in_address"
+                        android:id="@+id/inp_drawwith_address"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_toLeftOf="@+id/btn_scan_address"
@@ -106,10 +71,12 @@
                         android:layout_alignParentEnd="true"
                         />
                 </RelativeLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/global_divider_color"/>
+                    android:background="@color/global_divider_color"
+                    />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
@@ -117,10 +84,9 @@
                     android:textSize="12sp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="16dp"
-                    android:textColor="@color/global_main_gray_color"
                     android:paddingStart="@dimen/main_padding_left"
                     android:paddingEnd="@dimen/main_padding_right"
-                    android:text="@string/cross_transfer_inner_tips"
+                    android:text="@string/cross_transfer_out_tips"
                     />
 
                 <View
@@ -128,7 +94,7 @@
                     android:layout_height="8dp"
                     android:background="@color/global_divider_color"
                     />
-
+                
                 <RelativeLayout
                     android:id="@+id/layout_select_token"
                     android:layout_width="match_parent"
@@ -141,12 +107,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/global_main_text_color"
-                        android:text="@string/select_transfer_token"
+                        android:text="@string/select_withdraw_token"
                         android:textSize="15sp"
                         android:layout_centerVertical="true"/>
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_transfer_token"
+                        android:id="@+id/tv_withdraw_token"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/global_main_text_color"
@@ -154,7 +120,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_marginEnd="24dp"
                         android:textSize="15sp"
-                        tools:text="HBC"/>
+                        tools:text="BTC"/>
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="24dp"
@@ -174,7 +140,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/global_main_text_color"
-                    android:text="@string/transfer_amount"
+                    android:text="@string/draw_coin_count"
                     android:textSize="15sp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
@@ -189,13 +155,13 @@
                     >
 
                     <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/inp_transfer_amount"
+                        android:id="@+id/inp_withdraw_amount"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_toLeftOf="@+id/btn_all"
                         android:layout_centerVertical="true"
                         android:textColorHint="@color/global_input_hint_color"
-                        android:hint="@string/please_transfer_amount"
+                        android:hint="@string/input_withdraw_amount"
                         android:background="@null"
                         android:textSize="14sp"
                         />
@@ -227,8 +193,59 @@
                     android:textSize="12sp"
                     android:textColor="@color/global_input_profix_text_color"
                     android:paddingStart="@dimen/main_padding_left"
-                    tools:text="可用: 0 HBC"
+                    tools:text="可用: 0 BTC"
                     />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:background="@color/global_divider_color"
+                    />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:paddingStart="@dimen/main_padding_left"
+                    android:paddingEnd="@dimen/main_padding_right"
+                    >
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/withdraw_fee"
+                        android:textColor="@color/global_main_text_color"
+                        android:textSize="15sp"
+                        />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_withdraw_fee"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/place_holder"
+                        android:textSize="15sp"
+                        android:textColor="@color/global_main_text_color"
+                        android:layout_toLeftOf="@+id/tv_withdraw_fee_token"
+                        android:layout_marginEnd="4dp"
+                        android:layout_centerVertical="true"
+                        tools:text="0.00054434"
+                        />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_withdraw_fee_token"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/all"
+                        android:textSize="15sp"
+                        android:textColor="@color/global_main_gray_color"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        tools:text="BTC"
+                        />
+                </RelativeLayout>
 
                 <View
                     android:layout_width="match_parent"
@@ -271,22 +288,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="HBC"
+                        android:text="@string/all"
                         android:textSize="15sp"
                         android:textColor="@color/global_main_gray_color"
                         android:layout_centerVertical="true"
                         android:layout_alignParentEnd="true"
-                        tools:text="HBC"
+                        tools:text="BTC"
                         />
                 </RelativeLayout>
             </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
 
 
+        </ScrollView>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_transfer"
+        android:id="@+id/btn_drawwith_coin"
         style="@style/main_material_btn"
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -298,7 +315,7 @@
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:stateListAnimator="@null"
-        android:text="@string/transfer"
+        android:text="@string/draw_coin"
         app:backgroundTint="@color/global_button_bg_color"
         app:cornerRadius="6dp" />
 </RelativeLayout>

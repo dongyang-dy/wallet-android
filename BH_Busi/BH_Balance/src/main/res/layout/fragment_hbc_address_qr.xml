@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/app_bg"
+    tools:context=".ui.fragment.HbcAddressQrFragment">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        >
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_wallet_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/global_main_text_color"
+            android:layout_centerVertical="true"
+            android:textStyle="bold"
+            tools:text="Aclili"
+            />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_close"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@mipmap/ic_close"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            />
+    </RelativeLayout>
+
+    <com.bhex.lib.uikit.widget.layout.XUIFrameLayout
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/card_bg_color"
+        app:xui_radius="12dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_address_qr"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_gravity="center"
+            tools:background="@color/white"
+            />
+
+    </com.bhex.lib.uikit.widget.layout.XUIFrameLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_wallet_address"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textColor="@color/global_main_text_color"
+        android:textSize="13sp"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:gravity="center"
+        tools:text="HBCxasrgkbkdsvssdvbkewkhksnsafasfds"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_copy_address"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:stateListAnimator="@null"
+        android:layout_marginBottom="@dimen/main_margin_bottom"
+        style="@style/main_material_btn"
+        android:textSize="15sp"
+        android:enabled="true"
+        app:backgroundTint="@color/global_button_bg_color"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        app:cornerRadius="6dp"
+        android:text="@string/copy_address"
+        />
+</LinearLayout>

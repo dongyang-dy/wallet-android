@@ -71,16 +71,19 @@ public class AccountManagerActivity extends BaseActivity<TrustManagerPresenter>{
                     .withString("wallet_address",wallet.address)
                     .navigation(AccountManagerActivity.this,Account_request_code);
         });
+
+        //导入账户
+        findViewById(R.id.btn_import_wallet).setOnClickListener(v->{
+            ARouter.getInstance().build(ARouterConfig.Trusteeship.Trusteeship_Add_Index).navigation();
+        });
+
+        //导入账户
+        findViewById(R.id.btn_create_wallet).setOnClickListener(v->{
+            ARouter.getInstance().build(ARouterConfig.TRUSTEESHIP_MNEMONIC_FRIST).navigation();
+        });
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //所有账户地址
-        /*List<BHWallet> walletList = BHUserManager.getInstance().getAllWallet();
-        accountAdapter.getData().clear();
-        accountAdapter.addData(walletList);*/
-    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

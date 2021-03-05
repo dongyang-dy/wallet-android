@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/app_default_bg"
+    android:orientation="vertical"
+
+    tools:context=".ui.fragment.AccountListFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/main_padding_left"
+        android:paddingEnd="@dimen/main_padding_right"
+        android:layout_marginTop="40dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/global_main_text_color"
+            android:textSize="20sp"
+            android:layout_centerVertical="true"
+            android:text="@string/account"/>
+
+
+        <com.bhex.lib.uikit.widget.layout.XUIFrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:background="#1998C1FF"
+            app:xui_radius="100dp"
+            >
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@mipmap/ic_plus"
+                android:text="新增账户"
+                android:textColor="@color/highlight_text_color"
+                android:textSize="15sp"
+                android:paddingTop="7dp"
+                android:paddingBottom="7dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:drawablePadding="4dp"
+                android:gravity="center_vertical"
+                />
+        </com.bhex.lib.uikit.widget.layout.XUIFrameLayout>
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv_account_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="20dp"
+        android:overScrollMode="never"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_account_list"
+        />
+
+
+</LinearLayout>

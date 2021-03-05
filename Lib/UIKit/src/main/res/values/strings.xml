@@ -535,8 +535,10 @@
     <string name="hbtc_transfer_in_tip">该账户支持HBC，HBTC链上资产以及HBTC链上的跨链托管资产</string>
     <string name="input_receive_address">请输入接收地址</string>
     <string name="input_withdraw_address">请输入提币地址</string>
-    <string name="cross_transfer_out_tips">提示：\n您正在进行跨链提币,请务必确认提币地址为该链的原生公链地址</string>
-    <string name="cross_transfer_inner_tips">提示：\n您正在进行HBTC链内转账,请务必确认接收地址以HBC开头</string>
+
+    <!--<string name="cross_transfer_out_tips">提示：\n您正在进行跨链提币,请务必确认提币地址为该链的原生公链地址</string>-->
+    <string name="cross_transfer_out_tips">您正在进行跨链提币,请务必确认提币地址为该链的原生公链地址</string>
+    <string name="cross_transfer_inner_tips">您正在进行HBTC链内转账,请务必确认接收地址以HBC开头</string>
 
     <string name="confrim_create">确认创建</string>
     <string name="token">币种</string>
@@ -565,5 +567,6 @@
     <string name="export_keystore">导出Keystore</string>
     <string name="delete_wallet">删除钱包</string>
     <string name="update_success">修改成功</string>
-
+    <string name="save_qr_code">保存二维码</string>
+    <string name="place_holder">--</string>
 </resources>

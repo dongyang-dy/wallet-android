@@ -9,7 +9,7 @@ import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.NumberUtil;
 import com.bhex.tools.utils.RegexUtil;
 import com.bhex.wallet.balance.R;
-import com.bhex.wallet.balance.ui.viewhodler.TransferOutViewHolder;
+import com.bhex.wallet.balance.ui.viewhodler.TransferOutVH;
 import com.bhex.wallet.common.manager.BHUserManager;
 
 /**
@@ -18,8 +18,8 @@ import com.bhex.wallet.common.manager.BHUserManager;
  * Date: 2020/4/15
  * Time: 11:00
  */
-public class TransferOutPresenter extends BasePresenter {
-    public TransferOutViewHolder mTransferViewHolder;
+/*public class TransferOutPresenter extends BasePresenter {
+    public TransferOutVH mTransferViewHolder;
 
     public TransferOutPresenter(BaseActivity activity) {
         super(activity);
@@ -163,4 +163,4 @@ public class TransferOutPresenter extends BasePresenter {
         }
         return true;
     }
-}
+}*/

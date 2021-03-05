@@ -99,8 +99,10 @@ public class ARouterConfig {
         public static final String Balance_Token_Detail = "/balance/token/detail";
         //充币
         public static final String Balance_transfer_in = "/balance/transfer/in";
+        public static final String Balance_transfer_in_cross = "/balance/transfer/incross";
         //提币
         public static final String Balance_transfer_out = "/balance/transfer/out";
+        public static final String Balance_transfer_out_cross = "/balance/transfer/outcross";
         //跨链地址生成页面
         public static final String Balance_cross_address = "/balance/cross_adress";
 

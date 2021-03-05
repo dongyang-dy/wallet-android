@@ -1,53 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/app_default_bg"
+    android:background="@color/page_bg_color"
     android:orientation="vertical"
     tools:context=".ui.fragment.BalanceFragment">
 
-    <com.bhex.lib.uikit.widget.StatusBarView
-        android:id="@+id/status_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/bg_trans"
-        tools:visibility="gone" />
-
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/status_bar"
-        android:layout_marginTop="40dp">
+        app:srlEnableLoadMore="false">
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <include layout="@layout/layout_balance" />
 
+                <include layout="@layout/layout_balance_top" />
 
-                <RelativeLayout
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_account_manager"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="16dp"
+                    android:paddingEnd="12dp"
+                    android:text="@string/trustship_manager"
+                    android:textColor="@color/global_main_text_color"
+                    android:textSize="13sp"
+                    tools:background="#FF0000" />
+
+                <com.bhex.lib.uikit.widget.layout.XUIRelativeLayout
                     android:id="@+id/layout_announce"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="48dp"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="19dp"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="10dp"
-                    android:elevation="5dp"
-                    tools:background="@color/card_bg">
+                    android:layout_marginBottom="16dp"
+                    android:background="@color/card_bg"
+                    app:xui_radius="12dp">
+
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/iv_announce_type"
@@ -58,7 +58,7 @@
                         android:src="@mipmap/ic_announcement" />
 
                     <com.bhex.lib.uikit.widget.text.marqueen.MarqueeView
-                        android:id="@+id/layout_balance_tip"
+                        android:id="@+id/marquee_announce"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="36dp"
@@ -73,37 +73,19 @@
                         android:paddingEnd="12dp"
                         android:src="@mipmap/ic_close_announce" />
 
-                </RelativeLayout>
+                </com.bhex.lib.uikit.widget.layout.XUIRelativeLayout>
 
-
-                <FrameLayout
-                    android:id="@+id/layout_content"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcv_chain"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minHeight="300dp">
-
-                    <com.yanzhenjie.recyclerview.SwipeRecyclerView
-                        android:id="@+id/recycler_balance"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/view_divider_line"
-                        android:overScrollMode="never"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        app:layout_constraintTop_toBottomOf="@+id/ck_hidden_small"
-                        tools:listitem="@layout/item_chain">
-
-
-                    </com.yanzhenjie.recyclerview.SwipeRecyclerView>
-
-                    <include
-                        android:id="@+id/empty_layout"
-                        layout="@layout/layout_empty_asset"
-                        android:visibility="gone" />
-
-                </FrameLayout>
-
+                    android:overScrollMode="never"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_chain"
+                    android:layout_marginBottom="20dp"
+                    />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
-</RelativeLayout>
+</LinearLayout>

@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintBottom_toTopOf="@+id/btn_wallet_impot"
+        app:layout_constraintBottom_toTopOf="@+id/btn_import_wallet"
         android:overScrollMode="never"
         android:layout_marginBottom="16dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -26,7 +26,7 @@
 
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_wallet_impot"
+        android:id="@+id/btn_import_wallet"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginBottom="@dimen/main_margin_bottom"
@@ -35,7 +35,7 @@
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:textColor="@color/border_button_text_color"
-        app:layout_constraintEnd_toStartOf="@+id/btn_wallet_create"
+        app:layout_constraintEnd_toStartOf="@+id/btn_create_wallet"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_weight="1"
@@ -48,7 +48,7 @@
         />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_wallet_create"
+        android:id="@+id/btn_create_wallet"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginBottom="@dimen/main_margin_bottom"
@@ -57,7 +57,7 @@
         android:insetBottom="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_wallet_impot"
+        app:layout_constraintStart_toEndOf="@+id/btn_import_wallet"
         app:layout_constraintHorizontal_weight="1"
         app:backgroundTint="@color/global_button_bg_color"
         android:text="@string/wallet_create_trusteeship"

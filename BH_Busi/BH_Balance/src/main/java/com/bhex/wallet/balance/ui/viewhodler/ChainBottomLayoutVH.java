@@ -99,14 +99,14 @@ public class ChainBottomLayoutVH {
                             .withString("chain",mChain)
                             .withString("symbol",mSymbol).navigation();
                 }else{
-                    ARouter.getInstance().build(ARouterConfig.Balance.Balance_transfer_in)
+                    ARouter.getInstance().build(ARouterConfig.Balance.Balance_transfer_in_cross)
                             .withString("symbol", mSymbol)
                             .withInt("way", BH_BUSI_TYPE.跨链转账.getIntValue())
                             .navigation();
                 }
             } else if (view.getId() == R.id.btn_item2) {
 
-                ARouter.getInstance().build(ARouterConfig.Balance.Balance_transfer_out)
+                ARouter.getInstance().build(ARouterConfig.Balance.Balance_transfer_out_cross)
                         .withString("symbol", mSymbol)
                         .withInt("way", BH_BUSI_TYPE.跨链转账.getIntValue())
                         .navigation();

@@ -55,7 +55,6 @@
             android:textColor="@color/light_text"
             android:textSize="13sp"
             android:text="@string/hint_import_way"
-            android:visibility="gone"
             />
 
         <androidx.appcompat.widget.AppCompatImageView

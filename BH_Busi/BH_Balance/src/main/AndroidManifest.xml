@@ -8,16 +8,19 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activity.ChainTokenActivity"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
-        <activity android:name=".ui.activity.TranscationViewActivity"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
+
+        <activity
+            android:name=".ui.activity.ChainTokenActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.TranscationViewActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.DelegateActivity"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.TranscationDetailActivity"
             android:launchMode="singleTop"
@@ -26,15 +29,23 @@
             android:name=".ui.activity.GenerateAddressActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.activity.TransferOutActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateUnchanged|adjustResize|stateHidden"/>
+            android:windowSoftInputMode="stateUnchanged|adjustResize|stateHidden" />
 
+        <activity android:name=".ui.activity.TransferOutCrossActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateUnchanged|adjustResize|stateHidden"
+            />
         <activity
             android:name=".ui.activity.TransferInActivity"
+            android:launchMode="standard"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.TransferInCrossActivity"
             android:launchMode="standard"
             android:screenOrientation="portrait" />
         <activity
@@ -50,7 +61,6 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-
         <activity
             android:name=".ui.activity.DexTokenDetailActivity"
             android:launchMode="singleTop"
