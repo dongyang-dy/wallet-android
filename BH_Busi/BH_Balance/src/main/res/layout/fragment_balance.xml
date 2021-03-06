@@ -9,6 +9,7 @@
     tools:context=".ui.fragment.BalanceFragment">
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:srlEnableLoadMore="false">
@@ -22,11 +23,10 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-
                 <include layout="@layout/layout_balance_top" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_account_manager"
+                    android:id="@+id/btn_account_manager"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
@@ -35,7 +35,8 @@
                     android:text="@string/trustship_manager"
                     android:textColor="@color/global_main_text_color"
                     android:textSize="13sp"
-                    tools:background="#FF0000" />
+                    android:gravity="center_vertical"
+                    />
 
                 <com.bhex.lib.uikit.widget.layout.XUIRelativeLayout
                     android:id="@+id/layout_announce"

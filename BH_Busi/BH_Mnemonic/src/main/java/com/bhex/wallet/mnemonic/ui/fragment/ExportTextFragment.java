@@ -35,10 +35,11 @@ public class ExportTextFragment extends BaseFragment {
     @BindView(R2.id.btn_copy)
     MaterialButton btn_copy;
 
-    BHWallet mCurrentWallet;
+    BHWallet chooseWallet;
 
     private String flag;
     private String inptPwd;
+    private String wallet_address;
 
     @Override
     public int getLayoutId() {
@@ -50,16 +51,18 @@ public class ExportTextFragment extends BaseFragment {
         et_private_key.setFocusable(false);
         et_private_key.setFocusableInTouchMode(false);
 
-        mCurrentWallet = BHUserManager.getInstance().getCurrentBhWallet();
         flag = getArgumentValue(ExportTextFragment.KEY_FLAG);
         inptPwd = getArgumentValue(BHConstants.INPUT_PASSWORD);
+        wallet_address = getArgumentValue(BHConstants.WALLET_ADDRESS);
+
+        chooseWallet = BHUserManager.getInstance().getBHWalletByAddress(wallet_address);
 
         if(BH_BUSI_TYPE.备份私钥.value.equals(flag)){
             //et_private_key.setText(BHUserManager.getInstance().getOriginContext(mCurrentWallet.keystorePath,inptPwd));
-            et_private_key.setText(BHWalletHelper.getOriginPK(mCurrentWallet.keystorePath,inptPwd));
+            et_private_key.setText(BHWalletHelper.getOriginPK(chooseWallet.keystorePath,inptPwd));
             btn_copy.setText(getString(R.string.copy_privatekey));
         }else{
-            et_private_key.setText(BHWalletHelper.getOriginKeyStore(mCurrentWallet.keystorePath));
+            et_private_key.setText(BHWalletHelper.getOriginKeyStore(chooseWallet.keystorePath));
             btn_copy.setText(getString(R.string.copy_keystore));
         }
     }

@@ -88,11 +88,11 @@ public class TransferInCrossVH {
 
         //设置按钮为圆角
         GradientDrawable btn_save_drawable = ShapeUtils.getRoundRectDrawable(PixelUtils.dp2px(activity,100),
-                ColorUtil.getColor(activity,R.color.btn_save_qr_bg_color));
+                ColorUtil.getColor(activity,R.color.btn_gray_bg_color));
         btn_save_qr.setBackgroundDrawable(btn_save_drawable);
 
         GradientDrawable btn_copy_drawable = ShapeUtils.getRoundRectDrawable(PixelUtils.dp2px(activity,100),
-                ColorUtil.getColor(activity,R.color.btn_copy_address_bg_color));
+                ColorUtil.getColor(activity,R.color.btn_blue_bg_color));
         btn_copy_address.setBackgroundDrawable(btn_copy_drawable);
 
         //复制地址
@@ -107,6 +107,11 @@ public class TransferInCrossVH {
         //保存二维码事件
         btn_save_qr.setOnClickListener(v->{
             requestPermissions();
+        });
+
+        //入账费用提示
+        view.findViewById(R.id.iv_help).setOnClickListener(v->{
+            DepositTipsFragment.newInstance().show(mActivity.getSupportFragmentManager(),DepositTipsFragment.class.getName());
         });
 
     }

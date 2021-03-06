@@ -32,6 +32,9 @@ public class ExportIndexActivity extends BaseActivity {
     @Autowired(name = "flag")
     String flag;
 
+    @Autowired(name = BHConstants.WALLET_ADDRESS)
+    String wallet_address;
+
     @Autowired(name=BHConstants.INPUT_PASSWORD)
     String inputPwd;
 
@@ -81,12 +84,14 @@ public class ExportIndexActivity extends BaseActivity {
             ARouter.getInstance().build(ARouterConfig.TRUSTEESHIP_EXPORT_PRIVATEKEY)
                     .withString("title",title)
                     .withString("flag",flag)
+                    .withString(BHConstants.WALLET_ADDRESS,wallet_address)
                     .withString(BHConstants.INPUT_PASSWORD,inputPwd)
                     .navigation();
         }else{
             ARouter.getInstance().build(ARouterConfig.TRUSTEESHIP_EXPORT_KEYSTORE)
                     .withString("title",title)
                     .withString("flag",flag)
+                    .withString(BHConstants.WALLET_ADDRESS,wallet_address)
                     .withString(BHConstants.INPUT_PASSWORD,inputPwd)
                     .navigation();
         }

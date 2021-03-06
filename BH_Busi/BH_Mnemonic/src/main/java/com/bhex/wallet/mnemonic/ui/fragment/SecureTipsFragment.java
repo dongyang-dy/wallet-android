@@ -21,6 +21,8 @@ import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.ColorUtil;
 import com.bhex.tools.utils.PixelUtils;
 import com.bhex.wallet.common.config.ARouterConfig;
+import com.bhex.wallet.common.db.entity.BHWallet;
+import com.bhex.wallet.common.manager.BHUserManager;
 import com.bhex.wallet.common.ui.fragment.Password30PFragment;
 import com.bhex.wallet.mnemonic.R;
 
@@ -95,8 +97,12 @@ public class SecureTipsFragment extends BaseBottomSheetDialog implements View.On
 
     @Override
     public void confirmAction(String password, int position,int way) {
+        //当前钱包地址
+        BHWallet currentWallet = BHUserManager.getInstance().getCurrentBhWallet();
+
         ARouter.getInstance().build(ARouterConfig.MNEMONIC_BACKUP)
                 .withString(BHConstants.INPUT_PASSWORD,password)
+                .withString(BHConstants.WALLET_ADDRESS,currentWallet.address)
                 .navigation();
         dismiss();
     }

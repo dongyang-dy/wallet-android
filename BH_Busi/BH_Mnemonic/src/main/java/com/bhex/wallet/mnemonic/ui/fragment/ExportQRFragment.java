@@ -38,10 +38,11 @@ public class ExportQRFragment extends BaseFragment {
     @BindView(R2.id.iv_qr)
     AppCompatImageView iv_qr;
 
-    BHWallet mCurrentWallet;
+    BHWallet chooseWallet;
 
     private String flag;
     private String inptPwd;
+    private String wallet_address;
 
     @Override
     public int getLayoutId() {
@@ -50,10 +51,11 @@ public class ExportQRFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-        mCurrentWallet = BHUserManager.getInstance().getCurrentBhWallet();
         flag = getArgumentValue(ExportTextFragment.KEY_FLAG);
         inptPwd = getArgumentValue(BHConstants.INPUT_PASSWORD);
+        wallet_address = getArgumentValue(BHConstants.WALLET_ADDRESS);
 
+        chooseWallet = BHUserManager.getInstance().getBHWalletByAddress(wallet_address);
     }
 
     @Override
@@ -69,9 +71,9 @@ public class ExportQRFragment extends BaseFragment {
     private void showQR() {
         String content = "";
         if(BH_BUSI_TYPE.备份私钥.value.equals(flag)){
-            content = BHWalletHelper.getOriginPK(mCurrentWallet.keystorePath, inptPwd);
+            content = BHWalletHelper.getOriginPK(chooseWallet.keystorePath, inptPwd);
         }else{
-            content = BHWalletHelper.getOriginKeyStore(mCurrentWallet.keystorePath);
+            content = BHWalletHelper.getOriginKeyStore(chooseWallet.keystorePath);
         }
 
         /*Bitmap bitmap = QREncodUtil.createQRCode(content,

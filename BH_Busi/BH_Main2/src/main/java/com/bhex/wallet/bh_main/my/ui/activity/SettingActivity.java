@@ -4,10 +4,14 @@ import android.view.View;
 import android.widget.CheckedTextView;
 
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.bhex.lib.uikit.widget.RecycleViewExtDivider;
+import com.bhex.tools.utils.PixelUtils;
 import com.bhex.wallet.bh_main.my.ui.decoration.MyRecyclerViewDivider;
 import com.bhex.wallet.common.base.BaseActivity;
 import com.bhex.network.utils.ToastUtils;
@@ -43,6 +47,9 @@ import butterknife.BindView;
 @Route(path = ARouterConfig.My.My_Account_Setting, name="设置")
 public class SettingActivity extends BaseActivity{
 
+    @BindView(R2.id.tv_center_title)
+    AppCompatTextView tv_center_title;
+
     @BindView(R2.id.recycler_setting)
     RecyclerView recycler_setting;
 
@@ -57,17 +64,24 @@ public class SettingActivity extends BaseActivity{
 
     @Override
     protected void initView() {
-        mItems = MyHelper.getSettingItems(this);
+        tv_center_title.setText(getString(R.string.setting));
 
+        mItems = MyHelper.getSettingItems(this);
         mSettingAdapter = new SettingAdapter(mItems);
         recycler_setting.setAdapter(mSettingAdapter);
 
-        MyRecyclerViewDivider myRecyclerDivider = new MyRecyclerViewDivider(this,
+        /*MyRecyclerViewDivider myRecyclerDivider = new MyRecyclerViewDivider(this,
                 ColorUtil.getColor(this,R.color.global_divider_color),
-                getResources().getDimension(R.dimen.item_large_divider_height),
-                new int[]{2,3});
+                getResources().getDimension(R.dimen.item_large_divider_height));
 
-        recycler_setting.addItemDecoration(myRecyclerDivider);
+
+        recycler_setting.addItemDecoration(myRecyclerDivider);*/
+
+        RecycleViewExtDivider itemDecoration = new RecycleViewExtDivider(
+                this, LinearLayoutManager.VERTICAL,
+                PixelUtils.dp2px(this,32),0,
+                ColorUtil.getColor(this,R.color.global_divider_color));
+        recycler_setting.addItemDecoration(itemDecoration);
 
         EventBus.getDefault().register(this);
     }

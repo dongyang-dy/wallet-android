@@ -80,11 +80,11 @@ public class TransferInVH {
 
         //设置按钮为圆角
         GradientDrawable btn_save_drawable = ShapeUtils.getRoundRectDrawable(PixelUtils.dp2px(mActivity,100),
-                ColorUtil.getColor(mActivity,R.color.btn_save_qr_bg_color));
+                ColorUtil.getColor(mActivity,R.color.btn_gray_bg_color));
         btn_save_qr.setBackgroundDrawable(btn_save_drawable);
 
         GradientDrawable btn_copy_drawable = ShapeUtils.getRoundRectDrawable(PixelUtils.dp2px(mActivity,100),
-                ColorUtil.getColor(mActivity,R.color.btn_copy_address_bg_color));
+                ColorUtil.getColor(mActivity,R.color.btn_blue_bg_color));
         btn_copy_address.setBackgroundDrawable(btn_copy_drawable);
 
         //设置圆环

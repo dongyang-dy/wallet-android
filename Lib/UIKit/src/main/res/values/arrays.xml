@@ -4,12 +4,30 @@
     <string name="contact_us">联系我们</string>
     <string name="check_update">检测更新</string>
     <string name="version_logs">版本日志</string>
+    <string name="account_securtiy">账户与安全</string>
+    <string name="backup_export">备份导出</string>
+    <string name="dark_model">暗色模式</string>
+    <string name="everytime_need_password">每次操作都要密码(默认)</string>
+    <string name="thirty_minute_noneed_paaword">每次操作都要密码(默认)</string>
+    <string name="backup_keystore">备份Keystore</string>
+    <string name="backup_privatekey">备份私钥</string>
     <string-array name="app_language_type">
         <item>简体中文</item>
         <item>English</item>
         <!--<item>한국어</item>-->
     </string-array>
 
+    <string-array name="backup_list">
+        <item>@string/backup_nnemonic</item>
+        <item>@string/backup_keystore</item>
+        <item>@string/backup_privatekey</item>
+    </string-array>
+
+    <string-array name="account_securtiy_list">
+        <item>@string/trustship_manager</item>
+        <item>@string/safe_setting</item>
+        <item>@string/string_fingerprint_identify</item>
+    </string-array>
     <string-array name="my_list_item">
         <!--
                 <item>修改安全密码</item>
@@ -20,11 +38,11 @@
         <!--
                 <item>治理提案</item>
         -->
-        <item>账户与安全</item>
-        <item>备份导出</item>
+        <item>@string/account_securtiy</item>
+        <item>@string/backup_export</item>
         <item>公告</item>
-        <item>消息中心</item>
-        <item>设置</item>
+        <item>@string/message_center</item>
+        <item>@string/setting</item>
         <item>帮助中心</item>
         <item>@string/about_us</item>
         <!--<item>版本号</item>-->
@@ -33,15 +51,15 @@
     <string-array name="set_list_item">
         <item>语言</item>
         <item>计价货币</item>
-        <item>暗色模式</item>
-        <item>修改安全密码</item>
-        <item>指纹识别</item>
-        <item>安全设置</item>
+        <!--<item>暗色模式</item>-->
+        <!--<item>修改安全密码</item>
+        <item>@string/string_fingerprint_identify</item>
+        <item>@string/safe_setting</item>-->
     </string-array>
 
     <string-array name="security_list">
-        <item>每次操作都要密码(默认)</item>
-        <item>30分钟内免密码输入</item>
+        <item>@string/everytime_need_password</item>
+        <item>@string/thirty_minute_noneed_paaword</item>
     </string-array>
 
     <string-array name="Currency_list">
@@ -90,9 +108,9 @@
     <string-array name="account_detail_list">
         <item>@string/update_name</item>
         <item>@string/reset_security_pwd</item>
-        <item>@string/export_mnemonic</item>
-        <item>@string/export_private_key</item>
-        <item>@string/export_keystore</item>
+        <item>@string/backup_nnemonic</item>
+        <item>@string/backup_privatekey</item>
+        <item>@string/backup_keystore</item>
         <item>@string/delete_wallet</item>
     </string-array>
 

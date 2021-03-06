@@ -62,10 +62,12 @@ public class Password30PFragment extends BaseDialogFragment {
 
     private boolean isShow30Password = true;
 
+    //选择账户地址
+    private String choose_wallet_address;
+
     PasswordInputView mPasswordInputView;
     PasswordKeyBoardView mPasswordKeyboardView;
     CheckedTextView ck_password;
-
     WalletViewModel walletViewModel;
 
     private Password30PFragment.PasswordClickListener passwordClickListener;
@@ -84,7 +86,6 @@ public class Password30PFragment extends BaseDialogFragment {
         mPasswordInputView = mRootView.findViewById(R.id.input_password);
         mPasswordKeyboardView = mRootView.findViewById(R.id.my_keyboard);
         ck_password = mRootView.findViewById(R.id.ck_password);
-
 
         mPasswordKeyboardView.setAttachToEditText(getActivity(),mPasswordInputView.m_input_content,mPasswordInputView,
                 mRootView.findViewById(R.id.keyboard_root));
@@ -106,6 +107,7 @@ public class Password30PFragment extends BaseDialogFragment {
             @Override
             public void onComplete(String input) {
                 //checkPassword(input);
+
                 verifyKeystore(input);
             }
 
@@ -136,24 +138,32 @@ public class Password30PFragment extends BaseDialogFragment {
     private void verifyKeystore(String inputPwd) {
         mInputPassword = inputPwd;
         if(verifyPwdWay==BH_BUSI_TYPE.校验当前账户密码.getIntValue()){
-            BHWallet wallet = BHUserManager.getInstance().getCurrentBhWallet();
-            if(TextUtils.isEmpty(wallet.password)){
-                walletViewModel.verifyKeystore(this,wallet.keystorePath,inputPwd);
-            }else{
-                //当前密码不为空
-                checkPassword(inputPwd);
-            }
+            verifyCurrentKeystore(inputPwd);
         }else{
-            if(passwordClickListener!=null){
+            /*if(passwordClickListener!=null){
                 passwordClickListener.confirmAction(inputPwd,position,verifyPwdWay);
-            }
-            /*BHWallet wallet = BHUserManager.getInstance().getAllWallet().get(position);
-            walletViewModel.verifyKeystore((BaseActivity) getActivity(),wallet.keystorePath,inputPwd,false,false);*/
+            }*/
+            verifyChooseKeystore(inputPwd);
         }
-
     }
 
+    //校验当前Keystore
+    private void verifyCurrentKeystore(String inputPwd){
+        BHWallet wallet = BHUserManager.getInstance().getCurrentBhWallet();
+        if(TextUtils.isEmpty(wallet.password)){
+            walletViewModel.verifyKeystore(this,wallet.keystorePath,inputPwd);
+        }else{
+            //当前密码不为空
+            checkPassword(inputPwd);
+        }
+    }
 
+    //校验非当前账户Keystore
+    private void verifyChooseKeystore(String inputPwd){
+        //
+        BHWallet chooseWallet = BHUserManager.getInstance().getBHWalletByAddress(choose_wallet_address);
+        walletViewModel.verifyChooseKeystore(this,chooseWallet.keystorePath,inputPwd);
+    }
 
     @Override
     public void onResume() {
@@ -221,6 +231,14 @@ public class Password30PFragment extends BaseDialogFragment {
     }
 
     private void verifyKeyStoreStatus(LoadDataModel ldm) {
+        if(verifyPwdWay==BH_BUSI_TYPE.校验当前账户密码.getIntValue()){
+            verifyCurrentKSStatus(ldm);
+        }else{
+            verifyChooseKSStatus(ldm);
+        }
+    }
+
+    private void verifyCurrentKSStatus(LoadDataModel ldm) {
         if(ldm.getLoadingStatus()== LoadingStatus.SUCCESS){
             //
             dismiss();
@@ -243,9 +261,24 @@ public class Password30PFragment extends BaseDialogFragment {
                     .create();
             fragment.show(getActivity().getSupportFragmentManager(),CommonFragment.class.getName());
         }
-
     }
 
+    private void verifyChooseKSStatus(LoadDataModel ldm) {
+        if(ldm.getLoadingStatus()== LoadingStatus.SUCCESS) {
+            dismiss();
+            passwordClickListener.confirmAction(mInputPassword,position,verifyPwdWay);
+        }else{
+            dismissAllowingStateLoss();
+            CommonFragment fragment = CommonFragment
+                    .builder(getActivity())
+                    .setMessage(getActivity().getString(R.string.password_error_retry))
+                    .setLeftText(getActivity().getString(R.string.cancel))
+                    .setRightText(getActivity().getString(R.string.retry))
+                    .setAction(this::commonViewClick)
+                    .create();
+            fragment.show(getActivity().getSupportFragmentManager(),CommonFragment.class.getName());
+        }
+    }
 
     //低
     private void commonViewClick(View view) {
@@ -294,9 +327,18 @@ public class Password30PFragment extends BaseDialogFragment {
         return pfrag;
     }
 
-    public void setVerifyPwdWay(int verifyPwdWay) {
-        this.verifyPwdWay = verifyPwdWay;
+    public static Password30PFragment showPasswordChooseDialog(FragmentManager fm,
+                                                         Password30PFragment.PasswordClickListener listener, int position,String wallet_address) {
+        Password30PFragment pfrag = new Password30PFragment();
+        pfrag.passwordClickListener = listener;
+        pfrag.position = position;
+        pfrag.isShow30Password = false;
+        pfrag.choose_wallet_address = wallet_address;
+        pfrag.verifyPwdWay = BH_BUSI_TYPE.校验选择账户密码.getIntValue();
+        pfrag.mFm = fm;
+        return pfrag;
     }
+
 
     public interface PasswordClickListener {
         void confirmAction(String password, int position,int way);

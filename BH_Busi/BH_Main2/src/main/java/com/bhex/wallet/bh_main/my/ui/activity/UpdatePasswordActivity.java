@@ -41,6 +41,8 @@ import butterknife.OnClick;
 public class UpdatePasswordActivity extends BaseActivity<MyPresenter>{
     @Autowired(name="title")
     String title;
+    @Autowired(name="wallet_address")
+    String wallet_address;
 
     @BindView(R2.id.tv_center_title)
     AppCompatTextView tv_center_title;
@@ -73,7 +75,7 @@ public class UpdatePasswordActivity extends BaseActivity<MyPresenter>{
 
     private WalletViewModel walletViewModel;
 
-    private BHWallet mCurrentWallet;
+    private BHWallet mUpdateWallet;
 
     @Override
     protected int getLayoutId() {
@@ -100,7 +102,7 @@ public class UpdatePasswordActivity extends BaseActivity<MyPresenter>{
 
     @Override
     protected void addEvent() {
-        mCurrentWallet = BHUserManager.getInstance().getCurrentBhWallet();
+        mUpdateWallet = BHUserManager.getInstance().getBHWalletByAddress(wallet_address);
         walletViewModel = ViewModelProviders.of(this).get(WalletViewModel.class);
         walletViewModel.walletLiveData.observe(this,loadDataModel -> {
             if(loadDataModel.loadingStatus== LoadingStatus.SUCCESS){
@@ -153,7 +155,7 @@ public class UpdatePasswordActivity extends BaseActivity<MyPresenter>{
                     inp_confrim_pwd.getInputString());
 
             if(flag){
-                BHWallet item = getPresenter().makeBhWallet(mCurrentWallet);
+                BHWallet item = getPresenter().makeBhWallet(mUpdateWallet);
                 walletViewModel.updatePassword(this,inp_old_pwd.getInputString(),inp_new_pwd.getInputString(),item);
             }
         }

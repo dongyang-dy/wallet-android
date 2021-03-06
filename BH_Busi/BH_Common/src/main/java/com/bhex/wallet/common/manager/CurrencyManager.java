@@ -77,14 +77,6 @@ public class CurrencyManager {
     }
 
     public String getCurrencyDecription(Context context, double value){
-
-        /*if(CurrencyManager.getInstance().loadCurrency(context).equalsIgnoreCase(CURRENCY_TYPE.CNY.shortName)){
-            return "¥"+currencyFormat.format(value);
-        }else if(CurrencyManager.getInstance().loadCurrency(context).equalsIgnoreCase(CURRENCY_TYPE.USD.shortName)){
-            return "$"+currencyFormat.format(value);
-        }else if(CurrencyManager.getInstance().loadCurrency(context).equalsIgnoreCase(CURRENCY_TYPE.USD.shortName)){
-
-        }*/
         if(value==0){
             return CURRENCY_TYPE.valueOf(CurrencyManager.getInstance().loadCurrency(context).toUpperCase()).character+"0";
 
@@ -107,7 +99,6 @@ public class CurrencyManager {
         if(CurrencyManager.getInstance().loadCurrency(context).equalsIgnoreCase(CURRENCY_TYPE.CNY.shortName)){
             return Double.valueOf(ratesBean.getCny());
         }else if(CurrencyManager.getInstance().loadCurrency(context).equalsIgnoreCase(CURRENCY_TYPE.USD.shortName)){
-            //LogUtils.d("CurrencyManager===>:","currency=="+ratesBean.getUsd());
             return Double.valueOf(ratesBean.getUsd());
         }else if(CurrencyManager.getInstance().loadCurrency(context).equalsIgnoreCase(CURRENCY_TYPE.KRW.shortName)){
             return Double.valueOf(ratesBean.getKrw());

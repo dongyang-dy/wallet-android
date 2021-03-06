@@ -127,7 +127,6 @@ public class TransferOutCrossActivity extends BaseActivity {
 
     //更新资产
     private void updateAssets(AccountInfo accountInfo) {
-        //mTransferOutViewHolder.updateBalance();
         transferOutCrossVH.updateAssets();
     }
 

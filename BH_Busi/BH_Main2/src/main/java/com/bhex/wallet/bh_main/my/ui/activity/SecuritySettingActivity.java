@@ -32,8 +32,6 @@ import butterknife.BindView;
 @Route(path = ARouterConfig.My.My_Security_Setting, name = "安全设置")
 public class SecuritySettingActivity extends BaseActivity implements Password30PFragment.PasswordClickListener {
 
-    @Autowired(name = "title")
-    String mTitle;
 
     @BindView(R2.id.rcy_choose_list)
     RecyclerView rcy_choose_list;
@@ -50,8 +48,8 @@ public class SecuritySettingActivity extends BaseActivity implements Password30P
 
     @Override
     protected void initView() {
-        ARouter.getInstance().inject(this);
-        tv_center_title.setText(mTitle);
+        tv_center_title.setText(getString(R.string.safe_setting));
+        
         mItems = MyHelper.getSecSettingItems(this);
         mSecSetAdapter = new SecuritySettingAdapter(mItems,null);
 

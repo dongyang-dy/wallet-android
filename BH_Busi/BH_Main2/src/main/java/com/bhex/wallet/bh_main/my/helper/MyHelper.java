@@ -93,8 +93,8 @@ public class MyHelper {
         myItems.get(1).rightTxt = CURRENCY_TYPE.getValue(currency_name).name+"("+CURRENCY_TYPE.getValue(currency_name)+")";
 
         //
-        String []secTipsArray = context.getResources().getStringArray(R.array.security_list);
-        myItems.get(5).rightTxt = SecuritySettingManager.getInstance().thirty_in_time?secTipsArray[1]:secTipsArray[0];
+        //String []secTipsArray = context.getResources().getStringArray(R.array.security_list);
+        //myItems.get(5).rightTxt = SecuritySettingManager.getInstance().thirty_in_time?secTipsArray[1]:secTipsArray[0];
         return myItems;
     }
 
@@ -166,12 +166,7 @@ public class MyHelper {
         List<MyItem> myItems = new ArrayList<>();
         String []res = context.getResources().getStringArray(R.array.about_us_list);
         for (int i = 0; i < res.length; i++) {
-            String right_text="";
-            /*if(i==1){
-                right_text =  "v"+PackageUtils.getVersionName(context)+"("+PackageUtils.getVersionCode(context)+")";
-            }*/
             MyItem item = new MyItem(i,res[i], true, "");
-
             myItems.add(item);
         }
         return myItems;
@@ -181,6 +176,27 @@ public class MyHelper {
     public static List<MyItem> getAcountDetailFunction(Context context){
         List<MyItem> myItems = new ArrayList<>();
         String []res = context.getResources().getStringArray(R.array.account_detail_list);
+        for (int i = 0; i < res.length; i++) {
+            MyItem item = new MyItem(i,res[i], true, "");
+            myItems.add(item);
+        }
+        return myItems;
+    }
+
+    public static List<MyItem> getAccountSecurityList(Context context){
+        List<MyItem> myItems = new ArrayList<>();
+        String []res = context.getResources().getStringArray(R.array.account_securtiy_list);
+        for (int i = 0; i < res.length; i++) {
+            MyItem item = new MyItem(i,res[i], true, "");
+            myItems.add(item);
+        }
+        return myItems;
+    }
+
+
+    public static List<MyItem> getBackupList(Context context){
+        List<MyItem> myItems = new ArrayList<>();
+        String []res = context.getResources().getStringArray(R.array.backup_list);
         for (int i = 0; i < res.length; i++) {
             MyItem item = new MyItem(i,res[i], true, "");
             myItems.add(item);

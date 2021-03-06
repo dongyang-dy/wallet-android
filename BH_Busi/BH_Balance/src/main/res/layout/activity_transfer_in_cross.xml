@@ -94,7 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
-            android:textColor="@color/pay_code_color"
+            android:textColor="@color/global_third_text_color"
             android:textSize="13sp"
             android:text="@string/scan_qr_pay_me"
             />
@@ -105,7 +105,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
-            android:textColor="@color/pay_address_color"
+            android:textColor="@color/label_address_color"
             android:textSize="13sp"
             tools:text="0x626C96F956269bcc09F20421Dbfff6b1EA0CDAC"
             />
@@ -180,14 +180,29 @@
             android:layout_marginTop="3dp"
             android:text="@string/string_deposit_threshold"/>
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_deposit_collect"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/transfer_tips_text_color"
-            android:textSize="12sp"
             android:layout_marginTop="3dp"
-            android:text="@string/string_deposit_enter_fee"/>
+            android:orientation="horizontal">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_deposit_collect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:includeFontPadding="false"
+                android:textColor="@color/transfer_tips_text_color"
+                android:textSize="12sp"
+                android:text="@string/string_deposit_enter_fee"/>
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_help"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_help"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="5dp"
+                />
+        </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

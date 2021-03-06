@@ -50,7 +50,7 @@ public class MyRecyclerViewDivider extends RecyclerView.ItemDecoration {
         super.getItemOffsets(outRect, view, parent, state);
         int position = parent.getChildLayoutPosition(view);
         IntStreams.range(0,mDividerPosition.length).forEach(t->{
-            if(mDividerPosition[t]==position){
+            if(mDividerPosition !=null && mDividerPosition[t]==position){
                 outRect.bottom = (int)mDividerHeight;
             }else{
                 outRect.bottom = (int)mDividerLineHeight;
@@ -70,7 +70,7 @@ public class MyRecyclerViewDivider extends RecyclerView.ItemDecoration {
         for (i = 0; i < childCount; i++) {
             View v = parent.getChildAt(i);
             IntStreams.range(0,mDividerPosition.length).forEach(t->{
-                if(mDividerPosition[t]==i){
+                if(mDividerPosition !=null &&  mDividerPosition[t]==i){
                     int left = parent.getPaddingLeft();
                     canvas.drawRect(left, v.getBottom(), right,
                             v.getBottom()+mDividerHeight, mPaint);

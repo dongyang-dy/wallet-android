@@ -75,7 +75,6 @@ public class WalletViewModel extends ViewModel {
         bhWalletDao = AppDataBase.getInstance(BaseApplication.getInstance()).bhWalletDao();
     }
 
-
     /**
      * 创建助记词并保存本地
      */
@@ -111,9 +110,12 @@ public class WalletViewModel extends ViewModel {
                 int res = bhWalletDao.updateNoDefault(BH_BUSI_TYPE.非默认托管单元.getIntValue());
                 //把bh_id设置默认
                 res = bhWalletDao.update(id,BH_BUSI_TYPE.默认托管单元.getIntValue());
-
                 BHUserManager.getInstance().setCurrentBhWallet(bhWallet);
-                SequenceManager.getInstance().initSequence();
+
+                //获取所有钱包
+                List<BHWallet> list =  bhWalletDao.loadAll();
+                BHUserManager.getInstance().setAllWallet(list);
+                //SequenceManager.getInstance().initSequence();
                 emitter.onNext(bhWallet);
                 emitter.onComplete();
             }catch (Exception e){
@@ -185,10 +187,12 @@ public class WalletViewModel extends ViewModel {
             //把bh_id设置默认
             res = bhWalletDao.update(bh_id,isDefault);
 
+            List<BHWallet> list = bhWalletDao.loadAll();
+            BHUserManager.getInstance().setAllWallet(list);
             emitter.onNext("");
             emitter.onComplete();
         }).flatMap((Function<String, ObservableSource<String>>)s -> {
-            List<BHWallet> list = bhWalletDao.loadAll();
+
             return  Observable.just("apply");
         }).compose(RxSchedulersHelper.io_main())
                 .as(AutoDispose.autoDisposable(AndroidLifecycleScopeProvider.from(activity)))
@@ -552,6 +556,35 @@ public class WalletViewModel extends ViewModel {
                     String encrypt_mnemonic = CryptoUtil.encryptMnemonic(orgin_mnemonic,pwd);
                     bhWallet.setMnemonic(encrypt_mnemonic);
                 }
+            }
+            emitter.onNext(bh_address);
+            emitter.onComplete();
+        }).compose(RxSchedulersHelper.io_main())
+                .as(AutoDispose.autoDisposable(AndroidLifecycleScopeProvider.from(fragment)))
+                .subscribe(observer);
+    }
+
+    public void verifyChooseKeystore(Fragment fragment,String keyStore,String pwd){
+        BHBaseObserver observer = new BHBaseObserver<String>(false) {
+            @Override
+            protected void onSuccess(String result) {
+                LoadDataModel ldm = new LoadDataModel(result);
+                pwdVerifyLiveData.postValue(ldm);
+            }
+
+            @Override
+            protected void onFailure(int code, String errorMsg) {
+                super.onFailure(code, errorMsg);
+                LoadDataModel ldm = new LoadDataModel(code,errorMsg);
+                pwdVerifyLiveData.postValue(ldm);
+            }
+        };
+
+        Observable.create(emitter -> {
+            String bh_address = "" ;
+            Credentials credentials = BHWalletUtils.verifyKeystore(keyStore,pwd);
+            if(credentials!=null){
+                bh_address = BHKey.getBhexUserDpAddress(credentials.getEcKeyPair().getPublicKey());
             }
             emitter.onNext(bh_address);
             emitter.onComplete();

@@ -11,6 +11,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bhex.lib.uikit.util.ShapeUtils;
+import com.bhex.lib.uikit.widget.layout.XUILinearLayout;
 import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.ColorUtil;
 import com.bhex.tools.utils.ImageLoaderUtil;
@@ -36,30 +37,18 @@ public class ETHViewHolder {
     public BHChain mBhChain;
     public LinearLayout viewHolder;
 
-    public AppCompatTextView tv_token_address;
+
     public AppCompatTextView tv_token_name;
     public AppCompatImageView iv_token_icon;
-    public LinearLayout btn_genernate_address;
+    //public LinearLayout layout_token_address_make;
     public ETHViewHolder(ChainTokenActivity activity, LinearLayout view, BHChain bhChain){
         viewHolder = view;
         mContext = activity;
         this.mBhChain = bhChain;
-
-        /*tv_token_address = view.findViewById(R.id.tv_token_address);
-        tv_token_name = view.findViewById(R.id.tv_token_name);
-        iv_token_icon = view.findViewById(R.id.iv_token_icon);
-        btn_genernate_address = view.findViewById(R.id.btn_genernate_address);*/
     }
 
     public void initViewContent( BHChain bhChain){
         this.mBhChain = bhChain;
-        //BHBalance balance = BHBalanceHelper.getBHBalanceFromAccount(bhChain.chain);
-        FrameLayout layout_token_address = viewHolder.findViewById(R.id.layout_token_address);
-
-        GradientDrawable drawable = ShapeUtils.getRoundRectDrawable(PixelUtils.dp2px(mContext,20),
-                ColorUtil.getColor(mContext,R.color.address_label_bg_color));
-        layout_token_address.setBackground(drawable);
-
         //Token-Logo
         AppCompatImageView iv_token_icon = viewHolder.findViewById(R.id.iv_token_icon);
         BHToken symbolToken = SymbolCache.getInstance().getBHToken(bhChain.chain);
@@ -69,7 +58,58 @@ public class ETHViewHolder {
 
     //
     public void setTokenAddress(String symbol) {
-        FrameLayout layout_token_address = viewHolder.findViewById(R.id.layout_token_address);
+        //链地址-label
+        AppCompatTextView tv_token_address_label = viewHolder.findViewById(R.id.tv_token_address_label);
+
+        XUILinearLayout layout_token_address = viewHolder.findViewById(R.id.layout_token_address);
+        AppCompatTextView tv_token_address = viewHolder.findViewById(R.id.tv_token_address);
+
+        LinearLayout layout_token_address_make = viewHolder.findViewById(R.id.layout_token_address_make);
+        AppCompatTextView tv_make_address = viewHolder.findViewById(R.id.tv_make_address);
+
+        //hbc链地址
+        if(mBhChain.chain.equalsIgnoreCase(BHConstants.BHT_TOKEN)){
+            tv_token_address_label.setText(mContext.getResources().getString(R.string.hbtc_chain_address));
+            BHWalletHelper.proccessAddress(tv_token_address,BHUserManager.getInstance().getCurrentBhWallet().address);
+            layout_token_address.setOnClickListener(this::showAdddressQRFragment);
+            tv_token_address.setTag(BHUserManager.getInstance().getCurrentBhWallet().address);
+            layout_token_address.setVisibility(View.VISIBLE);
+            layout_token_address_make.setVisibility(View.GONE);
+            return;
+        }
+
+        //跨链地址
+        tv_token_address_label.setText(mContext.getResources().getString(R.string.crosslink_deposit_address));
+        tv_token_address_label.setTextColor(ColorUtil.getColor(mContext,R.color.label_address_color));
+        //跨链地址-资产
+        BHBalance chainBalance = BHBalanceHelper.getBHBalanceFromAccount(mBhChain.chain);
+        if(!TextUtils.isEmpty(chainBalance.external_address)){
+            BHWalletHelper.proccessAddress(tv_token_address,chainBalance.external_address);
+            layout_token_address.setOnClickListener(this::showAdddressQRFragment);
+            tv_token_address.setTag(chainBalance.external_address);
+            layout_token_address.setVisibility(View.VISIBLE);
+            layout_token_address_make.setVisibility(View.GONE);
+        }else if(!TextUtils.isEmpty(SequenceManager.getInstance().getAddressStatus())){
+            //创建跨链充值地址
+            tv_make_address.setText(mContext.getString(R.string.cross_address_generatoring));
+            //清空点击事件
+            ViewUtil.getListenInfo(layout_token_address_make);
+            layout_token_address.setVisibility(View.GONE);
+            layout_token_address_make.setVisibility(View.VISIBLE);
+        }else{
+            tv_make_address.setText(mContext.getString(R.string.create_crosslink_deposit_address));
+            layout_token_address_make.setOnClickListener(v->{
+                ARouter.getInstance()
+                        .build(ARouterConfig.Balance.Balance_cross_address)
+                        .withString("chain",mBhChain.chain)
+                        .withString("symbol",symbol).navigation();
+            });
+            layout_token_address.setVisibility(View.GONE);
+            layout_token_address_make.setVisibility(View.VISIBLE);
+        }
+    }
+    /*public void setTokenAddress(String symbol) {
+        XUILinearLayout layout_token_address = viewHolder.findViewById(R.id.layout_token_address);
         BHToken symbolToken = SymbolCache.getInstance().getBHToken(symbol);
         //hbc链地址
         AppCompatTextView tv_token_address_label = viewHolder.findViewById(R.id.tv_token_address_label);
@@ -108,16 +148,17 @@ public class ETHViewHolder {
                         .withString("symbol",symbol).navigation();
             });
         }
-    }
+    }*/
 
     //显示地址Fragment
     private void showAdddressQRFragment(View view) {
+        AppCompatTextView tv_token_address = viewHolder.findViewById(R.id.tv_token_address);
         if(tv_token_address.getTag()==null){
             return;
         }
         AddressQRFragment.showFragment(mContext.getSupportFragmentManager(),
                 AddressQRFragment.class.getSimpleName(),
-                mBalance.symbol.toUpperCase(),
+                mBhChain.chain.toUpperCase(),
                 tv_token_address.getTag().toString());
     }
 

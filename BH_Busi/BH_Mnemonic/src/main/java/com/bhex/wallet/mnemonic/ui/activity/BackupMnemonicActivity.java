@@ -11,10 +11,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.bhex.network.utils.ToastUtils;
 import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.NavigateUtil;
 import com.bhex.tools.utils.ToolUtils;
@@ -23,7 +23,6 @@ import com.bhex.wallet.common.base.BaseCacheActivity;
 import com.bhex.wallet.common.config.ARouterConfig;
 import com.bhex.wallet.common.event.AccountEvent;
 import com.bhex.wallet.common.manager.BHUserManager;
-import com.bhex.wallet.common.manager.MainActivityManager;
 import com.bhex.wallet.mnemonic.R;
 import com.bhex.wallet.mnemonic.R2;
 import com.bhex.wallet.mnemonic.adapter.MnemonicAdapter;
@@ -53,6 +52,9 @@ public class BackupMnemonicActivity extends BaseCacheActivity {
     @Autowired(name="inputPwd")
     String inputPwd;
 
+    @Autowired(name=BHConstants.WALLET_ADDRESS)
+    String wallet_address;
+
     @Autowired(name = "gotoTarget")
     String mGotoTarget;
 
@@ -73,7 +75,7 @@ public class BackupMnemonicActivity extends BaseCacheActivity {
 
     @Override
     protected void addEvent() {
-        mnemonicItemList = MnemonicDataHelper.makeMnemonic(inputPwd);
+        mnemonicItemList = MnemonicDataHelper.makeMnemonic(inputPwd,wallet_address);
 
         mnemonicAdapter = new MnemonicAdapter(R.layout.item_mnemonic,mnemonicItemList);
 
@@ -91,18 +93,14 @@ public class BackupMnemonicActivity extends BaseCacheActivity {
     @OnClick({R2.id.btn_start_verify})
     public void onViewClicked(View view) {
         if(view.getId()== R.id.btn_start_verify){
-            //NavigateUtil.startActivity(this, VerifyMnemonicActivity.class);
-            if(TextUtils.isEmpty(mGotoTarget)){
-                ARouter.getInstance().build(ARouterConfig.MNEMONIC_VERIFY)
-                        .withString(BHConstants.INPUT_PASSWORD,inputPwd)
-                        .navigation();
-            }else{
-                ARouter.getInstance().build(ARouterConfig.MNEMONIC_VERIFY)
-                        .withString(BHConstants.INPUT_PASSWORD,inputPwd)
-                        .withString("gotoTarget",mGotoTarget)
-                        .navigation();
+            ARouter.getInstance().build(ARouterConfig.MNEMONIC_VERIFY);
+            Postcard postcard = ARouter.getInstance().build(ARouterConfig.MNEMONIC_VERIFY);
+            postcard.withString(BHConstants.INPUT_PASSWORD,inputPwd);
+            postcard.withString(BHConstants.WALLET_ADDRESS,wallet_address);
+            if(!TextUtils.isEmpty(mGotoTarget)){
+                postcard.withString("gotoTarget",mGotoTarget);
             }
-
+            postcard.navigation();
         }
     }
 

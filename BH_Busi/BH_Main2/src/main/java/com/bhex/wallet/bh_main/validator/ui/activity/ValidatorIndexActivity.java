@@ -50,6 +50,7 @@ import com.bhex.wallet.common.tx.TxReq;
 import com.bhex.wallet.common.ui.fragment.Password30PFragment;
 import com.bhex.wallet.common.utils.LiveDataBus;
 import com.bhex.wallet.common.viewmodel.BalanceViewModel;
+import com.gyf.immersionbar.ImmersionBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,6 +112,12 @@ public class ValidatorIndexActivity extends BaseActivity<AssetPresenter> {
 
     @Override
     protected void initView() {
+        ImmersionBar.with(this)
+                .transparentStatusBar()
+                .statusBarDarkFont(true)
+                .navigationBarDarkIcon(true)
+                .fitsSystemWindows(false).init();
+
         mBhWallet = BHUserManager.getInstance().getCurrentBhWallet();
 
         tv_center_title.setText(getResources().getString(R.string.delegate));

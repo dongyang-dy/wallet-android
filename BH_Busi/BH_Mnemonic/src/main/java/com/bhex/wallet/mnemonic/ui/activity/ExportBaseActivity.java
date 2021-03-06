@@ -49,6 +49,7 @@ public abstract class ExportBaseActivity extends BaseActivity {
         Bundle bundle = new Bundle();
         bundle.putString(ExportTextFragment.KEY_FLAG,getFlag());
         bundle.putString(BHConstants.INPUT_PASSWORD,getInputPwd());
+        bundle.putString(BHConstants.WALLET_ADDRESS,getWalletAddress());
         exportTextFragment.setArguments(bundle);
 
         //二维码导出
@@ -84,4 +85,6 @@ public abstract class ExportBaseActivity extends BaseActivity {
     protected abstract String getFlag();
 
     protected abstract String getInputPwd();
+
+    protected abstract String getWalletAddress();
 }

@@ -15,6 +15,7 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bhex.lib.uikit.widget.GradientTabLayout;
+import com.bhex.tools.constants.BHConstants;
 import com.bhex.wallet.common.base.BaseActivity;
 import com.bhex.wallet.common.config.ARouterConfig;
 import com.bhex.wallet.mnemonic.R;
@@ -45,6 +46,9 @@ public class ExportPrivateKeyActivity extends ExportBaseActivity {
     @Autowired(name="inputPwd")
     String inputPwd;
 
+    @Autowired(name = BHConstants.WALLET_ADDRESS)
+    String wallet_address;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_export_private_key;
@@ -71,5 +75,10 @@ public class ExportPrivateKeyActivity extends ExportBaseActivity {
     @Override
     protected String getInputPwd() {
         return inputPwd;
+    }
+
+    @Override
+    protected String getWalletAddress() {
+        return wallet_address;
     }
 }

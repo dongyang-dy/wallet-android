@@ -4,37 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/page_bg_color"
     tools:context=".my.ui.activity.SettingActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="@drawable/ic_back"
-        app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay"
-        app:titleTextAppearance="@style/Toolbar_textsize">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center"
-            style="@style/toolbar_layout_title_style"
-            android:text="@string/setting"
-            tools:text="@string/setting" />
-
-    </androidx.appcompat.widget.Toolbar>
+    <include
+        layout="@layout/layout_toolbar"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_setting"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/app_bg"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_setting"
         >

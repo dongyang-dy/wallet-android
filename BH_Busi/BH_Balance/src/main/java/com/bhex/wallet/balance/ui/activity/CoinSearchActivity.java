@@ -83,8 +83,6 @@ public class CoinSearchActivity extends BaseActivity implements OnRefreshListene
 
         mTokenList = CoinSearchHelper.loadVerifiedToken(mChain);
 
-        /*LinearLayoutManager lm = new LinearLayoutManager(this);
-        lm.setOrientation(LinearLayoutManager.VERTICAL);*/
 
         recycler_coin.setAdapter(mCoinSearchAdapter = new CoinSearchAdapter(mTokenList));
 

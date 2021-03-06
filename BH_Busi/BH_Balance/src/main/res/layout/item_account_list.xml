@@ -38,7 +38,7 @@
 
     </LinearLayout>
 
-    <RadioButton
+    <androidx.appcompat.widget.AppCompatCheckBox
         android:id="@+id/ck_wallet"
         android:layout_width="24dp"
         android:layout_height="24dp"

@@ -59,6 +59,8 @@ public class VerifyMnemonicActivity extends BaseCacheActivity<VerifyPresenter> {
 
     @Autowired(name="inputPwd")
     String inputPwd;
+    @Autowired(name=BHConstants.WALLET_ADDRESS)
+    String wallet_address;
     @Autowired(name = "gotoTarget")
     String mGotoTarget;
 
@@ -83,7 +85,7 @@ public class VerifyMnemonicActivity extends BaseCacheActivity<VerifyPresenter> {
         ARouter.getInstance().inject(this);
 
 
-        orginMnemonicItemList = MnemonicDataHelper.makeMnemonic(inputPwd);
+        orginMnemonicItemList = MnemonicDataHelper.makeMnemonic(inputPwd,wallet_address);
         underMnemonicItemList = MnemonicDataHelper.makeNewMnemonicList(orginMnemonicItemList);
 
         Collections.shuffle(underMnemonicItemList);

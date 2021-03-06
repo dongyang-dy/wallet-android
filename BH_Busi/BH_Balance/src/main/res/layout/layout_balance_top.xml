@@ -4,15 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_balance_top"
     android:layout_width="match_parent"
-    android:layout_height="392dp"
+    android:layout_height="372dp"
     android:background="@mipmap/bg_balance_index"
     android:fitsSystemWindows="true"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
-    <!--<com.bhex.lib.uikit.widget.StatusBarView
+    <!--
+    <com.bhex.lib.uikit.widget.StatusBarView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />-->
+        />
+    -->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -76,10 +79,10 @@
 
     <com.bhex.lib.uikit.widget.layout.XUILinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="205dp"
         android:layout_marginStart="18dp"
         android:layout_marginEnd="18dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:orientation="vertical"
         android:background="@mipmap/bg_balance_card">
 
@@ -124,12 +127,15 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_asset"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
+            android:layout_height="36sp"
             android:textSize="30sp"
-            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:includeFontPadding="false"
             android:layout_marginStart="35dp"
-            tools:text="172612.0337"/>
+            android:textColor="@color/white"
+            tools:text="$172612.0337"
+            />
+
 
         <LinearLayout
             android:layout_width="wrap_content"

@@ -5,12 +5,16 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.AbsoluteSizeSpan;
+import android.text.style.BackgroundColorSpan;
+import android.text.style.ForegroundColorSpan;
 import android.widget.CheckedTextView;
 
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
 
+import com.bhex.network.app.BaseApplication;
+import com.bhex.tools.utils.ColorUtil;
 import com.bhex.tools.utils.LogUtils;
 import com.bhex.tools.utils.PixelUtils;
 import com.bhex.tools.utils.ToolUtils;
@@ -215,8 +219,10 @@ public class BalancePresenter extends BasePresenter {
 
     public void setTextFristSamll(AppCompatTextView tv_asset, String allTokenAssetsText) {
         LogUtils.d("BalanceP");
+
         SpannableString spanStr = new SpannableString(allTokenAssetsText);
-        spanStr.setSpan(new AbsoluteSizeSpan(PixelUtils.dp2px(getActivity(),15)), 0, 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        spanStr.setSpan(new AbsoluteSizeSpan(PixelUtils.dp2px(getActivity(),16)), 0, 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        spanStr.setSpan(new ForegroundColorSpan(ColorUtil.getColor(BaseApplication.getInstance(),R.color.white_60)), 0 ,1,Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
         tv_asset.setText(spanStr);
         tv_asset.setTag(R.id.tag_first,allTokenAssetsText);
     }

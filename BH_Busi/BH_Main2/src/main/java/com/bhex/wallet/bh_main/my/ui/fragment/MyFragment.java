@@ -75,8 +75,10 @@ public class MyFragment extends BaseFragment  {
             switch (BUSI_MY_TYPE.getType(item.id)){
                 case 账户与安全:
                     //
+                    ARouter.getInstance().build(ARouterConfig.My.My_Account_Security).navigation();
                     break;
                 case 备份导出:
+                    ARouter.getInstance().build(ARouterConfig.My.My_Account_Backup).navigation();
                     break;
                 case 公告:
                     ARouter.getInstance().build(ARouterConfig.Market.market_webview)

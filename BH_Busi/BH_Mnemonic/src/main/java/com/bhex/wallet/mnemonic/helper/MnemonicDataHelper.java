@@ -26,21 +26,12 @@ import java.util.List;
  * Time: 20:43
  */
 public class MnemonicDataHelper {
-    public static List<MnemonicItem> makeMnemonic(String inputPassword){
+    public static List<MnemonicItem> makeMnemonic(String inputPassword,String wallet_address){
         List<MnemonicItem> list = new ArrayList<>();
         try{
-            /*String encryptMnemonic = BHUserManager.getInstance().getTmpBhWallet().getMnemonic();
-            //String pwd = "";
-            if(!TextUtils.isEmpty(encryptMnemonic)){
-                encryptMnemonic = BHUserManager.getInstance().getTmpBhWallet().getMnemonic();
-            }else{
-                encryptMnemonic = BHUserManager.getInstance().getCurrentBhWallet().getMnemonic();
-            }
-            String mnemonic = CryptoUtil.decryptMnemonic(encryptMnemonic, MD5.md5(inputPassword));*/
-            ObjectMapper objectMapper = ObjectMapperFactory.getObjectMapper();
-            BHWallet currentWallet = BHUserManager.getInstance().getCurrentBhWallet();
-            LogUtils.d("MnemonicDataHelper===>","currentWallet=="+currentWallet.address);
 
+            ObjectMapper objectMapper = ObjectMapperFactory.getObjectMapper();
+            BHWallet currentWallet = BHUserManager.getInstance().getBHWalletByAddress(wallet_address);
             //解密助记词
             String []array = null;
             HWalletFile old_walletFile = objectMapper.readValue(currentWallet.keystorePath, HWalletFile.class);
@@ -54,21 +45,9 @@ public class MnemonicDataHelper {
                 list.add(item);
             }
 
-            LogUtils.d("MnemonicDataHelper===>","list.size=="+list.size());
         }catch (Exception e){
             e.printStackTrace();
         }
-
-        return list;
-    }
-
-    public static List<String> makeMnemonicString(){
-        /*String []array= new String[]{"deer", "bleak","bring", "biology", "pole",
-                "energy", "galaxy", "situate", "upgrade", "south", "clarify", "lava"};*/
-        //sniff float truck talent walk search mad boat away fossil sleep dune
-        String []array= new String[]{"sniff", "float","truck", "talent", "walk",
-                "search", "mad", "boat", "away", "fossil", "sleep", "dune"};
-        List<String> list = Arrays.asList(array);
 
         return list;
     }

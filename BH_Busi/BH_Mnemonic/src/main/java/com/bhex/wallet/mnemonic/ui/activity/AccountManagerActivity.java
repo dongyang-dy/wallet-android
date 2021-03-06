@@ -4,12 +4,11 @@ import android.content.Intent;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatTextView;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.LogUtils;
 import com.bhex.wallet.common.base.BaseActivity;
 import com.bhex.wallet.common.config.ARouterConfig;
@@ -43,8 +42,7 @@ public class AccountManagerActivity extends BaseActivity<TrustManagerPresenter>{
 
     AccountManagerAdapter accountAdapter;
 
-    WalletViewModel walletViewModel;
-
+    //WalletViewModel walletViewModel;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_account_manager;
@@ -52,8 +50,6 @@ public class AccountManagerActivity extends BaseActivity<TrustManagerPresenter>{
 
     @Override
     protected void initView() {
-        //walletViewModel = ViewModelProviders.of(this).get(WalletViewModel.class);
-
         //账户管理
         tv_center_title.setText(getString(R.string.trustship_manager));
         //所有账户地址
@@ -68,7 +64,7 @@ public class AccountManagerActivity extends BaseActivity<TrustManagerPresenter>{
 
             ARouter.getInstance()
                     .build(ARouterConfig.My.ACCOUNT_DETAIL_PAGE)
-                    .withString("wallet_address",wallet.address)
+                    .withString(BHConstants.WALLET_ADDRESS,wallet.address)
                     .navigation(AccountManagerActivity.this,Account_request_code);
         });
 

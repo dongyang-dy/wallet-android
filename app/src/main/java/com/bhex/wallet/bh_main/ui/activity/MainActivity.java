@@ -65,12 +65,9 @@ public class MainActivity extends BaseActivity<MainPresenter> {
         TRANSCATION_BUSI_TYPE.init(this);
     }
 
-
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        //LogUtils.d("MainPresenter===>:","isReset=2="+isReset);
-
         if(savedInstanceState!=null && !isReset){
             mCurrentCheckId = savedInstanceState.getInt("index",0);
         }
@@ -143,14 +140,15 @@ public class MainActivity extends BaseActivity<MainPresenter> {
 
     @Subscribe(threadMode= ThreadMode.MAIN)
     public void changeAccount(AccountEvent accountEvent){
-        isReset = true;
+        /*isReset = true;
         mBottomNavigationView.setSelectedItemId(mBottomNavigationView.getMenu().getItem(0).getItemId());
         getPresenter().showIsBackup();
-        SequenceManager.getInstance().initSequence();
+        SequenceManager.getInstance().initSequence();*/
+        recreate();
     }
 
     @Subscribe(threadMode= ThreadMode.MAIN)
-    public void changeAccount(NightEvent nightEvent){
+    public void changeModel(NightEvent nightEvent){
         isReset = false;
     }
 

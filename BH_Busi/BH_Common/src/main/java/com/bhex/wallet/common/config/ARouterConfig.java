@@ -39,10 +39,14 @@ public class ARouterConfig {
         public static final String My_Recognition = "/my/recognition";
         //安全设置
         public static final String My_Security_Setting = "/my/security/setIndex";
+        //账户与安全
+        public static final String My_Account_Security = "/my/account/security";
+
+        public static final String My_Account_Backup = "/my/account/backcup";
         //关于我们
         public static final String My_About = "/my/about";
         //设置
-        public static final String My_Account_Setting = "/my/account_set";
+        public static final String My_Account_Setting = "/my/account/set";
         //账户详情
         public static final String ACCOUNT_DETAIL_PAGE = "/my/account/detail";
 
@@ -90,7 +94,7 @@ public class ARouterConfig {
     //私钥导出提醒
     public static final String TRUSTEESHIP_EXPORT_INDEX = "/mnemonic/export/index";
 
-
+    public static final String TRUSTEESHIP_Delete_tip= "/mnemonic/delete_tip";
     //资产
     public static class Balance{
         //资产搜索

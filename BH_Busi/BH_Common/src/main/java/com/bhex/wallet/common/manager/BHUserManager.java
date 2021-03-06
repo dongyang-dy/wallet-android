@@ -87,10 +87,6 @@ public class BHUserManager {
         }
     }
 
-    /*public BHWallet getTmpBhWallet() {
-        return tmpBhWallet;
-    }*/
-
     public CreateWalletParams getCreateWalletParams() {
         if(createWalletParams==null){
             createWalletParams = new CreateWalletParams();
@@ -108,6 +104,10 @@ public class BHUserManager {
             if(bhWallet.isDefault==BH_BUSI_TYPE.默认托管单元.getIntValue()){
                 mCurrentBhWallet = bhWallet;
             }
+        }
+
+        if(mCurrentBhWallet==null || TextUtils.isEmpty(mCurrentBhWallet.address)){
+            mCurrentBhWallet = allWallet.get(0);
         }
     }
 
@@ -184,6 +184,17 @@ public class BHUserManager {
 
     public void clear(){
         //MainActivityManager._instance.setTargetClass(null);
+    }
+
+    // 通过address 获取Wallet
+    public   BHWallet getBHWalletByAddress(String address ){
+        List<BHWallet> list = BHUserManager.getInstance().getAllWallet();
+        for(BHWallet item:list){
+            if(address.equals(item.address)){
+                return item;
+            }
+        }
+        return null;
     }
 
 }

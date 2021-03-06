@@ -62,16 +62,6 @@ public class SettingAdapter extends BaseQuickAdapter<MyItem, BaseViewHolder> {
                 ck.setChecked(false);
             }
             viewHolder.getView(R.id.iv_arrow).setVisibility(View.INVISIBLE);
-            /*ck.setOnClickListener((buttonView, isChecked) -> {
-                if(switchCheckListener!=null){
-                    switchCheckListener.checkStatus(null, isChecked);
-                }
-            });*/
-            /*ck.setOnClickListener(v -> {
-                if(switchCheckListener!=null){
-                    switchCheckListener.checkStatus(null, ck.isChecked());
-                }
-            });*/
             sc.setVisibility(View.GONE);
             ck.setVisibility(View.VISIBLE);
         }else{

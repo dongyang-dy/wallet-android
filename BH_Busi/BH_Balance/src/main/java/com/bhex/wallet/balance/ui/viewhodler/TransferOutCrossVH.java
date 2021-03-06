@@ -168,7 +168,7 @@ public class TransferOutCrossVH {
 
         //提币手续费
         String v_inp_withdraw_fee = tv_withdraw_fee.getText().toString().trim();
-        
+
         //判断提币数量大于可用
         //1. 主链币
         if(tranferToken.name.equals(tranferToken.chain)){
