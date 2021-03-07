@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -11,6 +12,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.bhex.lib.uikit.RefreshLayoutManager;
 import com.bhex.lib.uikit.util.BottomNavigationViewUtil;
 import com.bhex.network.utils.ToastUtils;
+import com.bhex.tools.utils.LogUtils;
 import com.bhex.tools.utils.ToolUtils;
 import com.bhex.wallet.R;
 import com.bhex.wallet.bh_main.persenter.MainPresenter;
@@ -57,6 +59,12 @@ public class MainActivity extends BaseActivity<MainPresenter> {
     }
 
     @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        LogUtils.d("MainActivity===>:","==onCreate==");
+    }
+
+    @Override
     protected void initView() {
         ARouter.getInstance().inject(this);
         MainActivityManager._instance.mainActivity = this;
@@ -68,9 +76,11 @@ public class MainActivity extends BaseActivity<MainPresenter> {
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
+
         if(savedInstanceState!=null && !isReset){
             mCurrentCheckId = savedInstanceState.getInt("index",0);
         }
+        LogUtils.d("MainActivity===>:","==onRestoreInstanceState==mCurrentCheckId=="+mCurrentCheckId+"=isReset="+isReset);
         mBottomNavigationView.setSelectedItemId(mBottomNavigationView.getMenu().getItem(mCurrentCheckId).getItemId());
     }
 
@@ -140,11 +150,13 @@ public class MainActivity extends BaseActivity<MainPresenter> {
 
     @Subscribe(threadMode= ThreadMode.MAIN)
     public void changeAccount(AccountEvent accountEvent){
+        LogUtils.d("MainActivity===>:","==changeAccount==");
         /*isReset = true;
         mBottomNavigationView.setSelectedItemId(mBottomNavigationView.getMenu().getItem(0).getItemId());
         getPresenter().showIsBackup();
         SequenceManager.getInstance().initSequence();*/
         recreate();
+        isReset = true;
     }
 
     @Subscribe(threadMode= ThreadMode.MAIN)

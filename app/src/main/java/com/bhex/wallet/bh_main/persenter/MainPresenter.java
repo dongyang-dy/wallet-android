@@ -56,6 +56,7 @@ public class MainPresenter extends BasePresenter {
     @Override
     public void onCreate(@NotNull LifecycleOwner owner) {
         super.onCreate(owner);
+        LogUtils.d("MainPresenter==>:","==onCreate==");
         showIsBackup();
         mUpgradeVM = ViewModelProviders.of(getActivity()).get(UpgradeViewModel.class);
         //升级请求

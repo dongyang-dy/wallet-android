@@ -172,10 +172,6 @@ public class VerifyMnemonicActivity extends BaseCacheActivity<VerifyPresenter> {
      *
      */
     private void gotoTarget(){
-        /*if(MainActivityManager.getInstance().getTargetClass()!=null &&
-                MainActivityManager.getInstance().getTargetClass().equals(TrusteeshipManagerActivity.class)){
-            EventBus.getDefault().post(new AccountEvent());
-        }*/
         if(!TextUtils.isEmpty(mGotoTarget)){
             ActivityCache.getInstance().finishActivity();
             ToastUtils.showToast(getString(R.string.mnemonic_backup_success));

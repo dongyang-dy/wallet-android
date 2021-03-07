@@ -4,6 +4,9 @@
     <string name="contact_us">Contact us</string>
     <string name="check_update">Check for update</string>
     <string name="version_logs">Version log</string>
+    <string name="account_securtiy">账户与安全</string>
+    <string name="backup_export">备份导出</string>
+    <string name="dark_model">Night mode</string>
 
     <string-array name="app_language_type">
         <item>简体中文</item>
@@ -15,19 +18,27 @@
 <!--
         <item>Reset Password</item>
 -->
-        <item>Backup mnemonic phrase</item>
+        <!--<item>Backup mnemonic phrase</item>
         <item>Backup private key</item>
         <item>Backup Keystore</item>
-        <!--
+        &lt;!&ndash;
                 <item>Proposals</item>
-        -->
+        &ndash;&gt;
         <item>Notice</item>
         <item>Help Center</item>
         <item>@string/about_us</item>
-        <item>Settings</item>
+        <item>Settings</item>-->
 <!--
         <item>Version</item>
 -->
+
+        <item>@string/account_securtiy</item>
+        <item>@string/backup_export</item>
+        <item>Notice</item>
+        <item>@string/message_center</item>
+        <item>@string/setting</item>
+        <item>Help Center</item>
+        <item>@string/about_us</item>
     </string-array>
 
     <string-array name="set_list_item">

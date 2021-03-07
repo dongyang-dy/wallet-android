@@ -160,8 +160,8 @@ public class WalletViewModel extends ViewModel {
     /**
      * 更新钱包的状态
      */
-    public void updateWallet(AppCompatActivity activity,BHWallet bhWallet,int bh_id,int isDefault){
-        BHProgressObserver pbo = new BHProgressObserver<String>(activity) {
+    public void updateWallet(AppCompatActivity activity,BHWallet bhWallet,int bh_id,int isDefault,boolean isShowDialog){
+        BHProgressObserver pbo = new BHProgressObserver<String>(activity,false) {
             @Override
             protected void onSuccess(String str) {
                 LoadDataModel loadDataModel = new LoadDataModel("");
@@ -191,9 +191,6 @@ public class WalletViewModel extends ViewModel {
             BHUserManager.getInstance().setAllWallet(list);
             emitter.onNext("");
             emitter.onComplete();
-        }).flatMap((Function<String, ObservableSource<String>>)s -> {
-
-            return  Observable.just("apply");
         }).compose(RxSchedulersHelper.io_main())
                 .as(AutoDispose.autoDisposable(AndroidLifecycleScopeProvider.from(activity)))
                 .subscribe(pbo);

@@ -11,6 +11,7 @@ import com.bhex.tools.constants.BHConstants;
 import com.bhex.wallet.balance.R;
 import com.bhex.wallet.balance.ui.fragment.AccountListFragment;
 import com.bhex.wallet.balance.ui.fragment.HbcAddressQrFragment;
+import com.bhex.wallet.common.base.BaseActivity;
 import com.bhex.wallet.common.config.ARouterConfig;
 import com.bhex.wallet.common.db.entity.BHWallet;
 import com.bhex.wallet.common.enums.BH_BUSI_TYPE;
@@ -23,7 +24,7 @@ import com.bhex.wallet.common.manager.BHUserManager;
  */
 public class BalanceViewHolder {
 
-    public Context mContext;
+    public BaseActivity mContext;
     public View viewHolder;
     //当前钱包
     BHWallet currentWallet;
@@ -37,7 +38,7 @@ public class BalanceViewHolder {
     //钱包二维码地址展示
     public AppCompatImageView iv_wallet_qr;
 
-    public BalanceViewHolder(Context mContext, View viewHolder) {
+    public BalanceViewHolder(BaseActivity mContext, View viewHolder) {
         this.mContext = mContext;
         this.viewHolder = viewHolder;
 
@@ -61,7 +62,8 @@ public class BalanceViewHolder {
         iv_wallet_qr = viewHolder.findViewById(R.id.iv_wallet_qr);
         //添加钱包
         viewHolder.findViewById(R.id.iv_add_wallet).setOnClickListener(v->{
-            ARouter.getInstance().build(ARouterConfig.Trusteeship.Trusteeship_Add_Index).withInt("flag",1).navigation();
+            //ARouter.getInstance().build(ARouterConfig.Trusteeship.Trusteeship_Add_Index).withInt("flag",1).navigation();
+            mContext.recreate();
         });
 
 

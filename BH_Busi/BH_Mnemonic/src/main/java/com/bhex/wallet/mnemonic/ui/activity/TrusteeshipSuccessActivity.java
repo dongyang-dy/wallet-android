@@ -9,10 +9,12 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bhex.tools.constants.BHConstants;
+import com.bhex.tools.utils.LogUtils;
 import com.bhex.tools.utils.NavigateUtil;
 import com.bhex.wallet.common.ActivityCache;
 import com.bhex.wallet.common.base.BaseCacheActivity;
 import com.bhex.wallet.common.config.ARouterConfig;
+import com.bhex.wallet.common.db.entity.BHWallet;
 import com.bhex.wallet.common.event.AccountEvent;
 import com.bhex.wallet.common.manager.BHUserManager;
 import com.bhex.wallet.common.manager.MainActivityManager;
@@ -63,23 +65,24 @@ public class TrusteeshipSuccessActivity extends BaseCacheActivity implements Scr
             ScreenShotTipsFragment fragment = ScreenShotTipsFragment.showDialog(getSupportFragmentManager(),ScreenShotTipsFragment.class.getName());
             fragment.setIKnowListener(TrusteeshipSuccessActivity.this);
         }else if(view.getId()== R.id.btn_later_backup){
-            /*if(MainActivityManager.getInstance().getTargetClass()!=null &&
-                    MainActivityManager.getInstance().getTargetClass().equals(TrusteeshipManagerActivity.class)){
-            }*/
             //钱包创建成功，返回首页
-            EventBus.getDefault().post(new AccountEvent());
+            LogUtils.d("MainActivity===>:","==开始跳转首页==");
             NavigateUtil.startMainActivity(this,
                     new String[]{BHConstants.BACKUP_TEXT, BHConstants.LATER_BACKUP});
             ActivityCache.getInstance().finishActivity();
-        }
+            EventBus.getDefault().post(new AccountEvent());
 
+        }
     }
 
     @Override
     public void clickBtn() {
         //NavigateUtil.startActivity(this, BackupMnemonicActivity.class);
+        BHWallet currentWallet = BHUserManager.getInstance().getCurrentBhWallet();
+
         ARouter.getInstance().build(ARouterConfig.MNEMONIC_BACKUP)
                 .withString(BHConstants.INPUT_PASSWORD,inputPwd)
+                .withString(BHConstants.WALLET_ADDRESS,currentWallet.address)
                 .navigation();
         ActivityCache.getInstance().finishActivity();
     }

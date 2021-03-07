@@ -96,6 +96,7 @@ public class BHConstants {
     public static final String INPUT_PASSWORD = "inputPwd";
 
     public static final String WALLET_ADDRESS = "wallet_address";
+    public static final String GOTO_TARGET = "gotoTarget";
 
 
     public static final int PRIVATE_KEY_LENGTH = 64;

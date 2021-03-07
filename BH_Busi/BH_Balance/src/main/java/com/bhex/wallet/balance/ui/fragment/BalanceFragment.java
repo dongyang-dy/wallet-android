@@ -33,6 +33,7 @@ import com.bhex.wallet.common.enums.BH_BUSI_TYPE;
 import com.bhex.wallet.common.event.AccountEvent;
 import com.bhex.wallet.common.manager.BHUserManager;
 import com.bhex.wallet.common.manager.CurrencyManager;
+import com.bhex.wallet.common.manager.MainActivityManager;
 import com.bhex.wallet.common.model.BHChain;
 import com.bhex.wallet.common.utils.LiveDataBus;
 import com.bhex.wallet.common.viewmodel.BalanceViewModel;
@@ -187,15 +188,15 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
     }
 
     private void chooseAccountAction(BHWallet chooseWallet){
-        walletViewModel.updateWallet(getYActivity(),chooseWallet,chooseWallet.id, BH_BUSI_TYPE.默认托管单元.getIntValue());
+        chooseWallet.isDefault = BH_BUSI_TYPE.默认托管单元.getIntValue();
+        BHUserManager.getInstance().setCurrentBhWallet(chooseWallet);
+        getActivity().recreate();
+        walletViewModel.updateWallet(MainActivityManager.getInstance().mainActivity,chooseWallet,chooseWallet.id, BH_BUSI_TYPE.默认托管单元.getIntValue(),false);
     }
 
     private void updateWalletStatus(LoadDataModel ldm) {
         if(ldm.getLoadingStatus()==LoadDataModel.SUCCESS){
-            EventBus.getDefault().post(new AccountEvent());
-            NavigateUtil.startMainActivity(getYActivity(),new String[]{BHConstants.BACKUP_TEXT, BHConstants.LATER_BACKUP});
-            ActivityCache.getInstance().finishActivity();
-            BHUserManager.getInstance().clear();
+
         }
     }
 

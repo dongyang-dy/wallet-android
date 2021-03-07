@@ -569,4 +569,6 @@
     <string name="update_success">修改成功</string>
     <string name="save_qr_code">保存二维码</string>
     <string name="place_holder">--</string>
+    <string name="mnemonic_checksum_error">助记词校验位错误</string>
+
 </resources>

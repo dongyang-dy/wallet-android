@@ -49,13 +49,13 @@ public class BackupMnemonicActivity extends BaseCacheActivity {
     @BindView(R2.id.btn_start_verify)
     AppCompatButton btn_start_verify;
 
-    @Autowired(name="inputPwd")
+    @Autowired(name=BHConstants.INPUT_PASSWORD)
     String inputPwd;
 
     @Autowired(name=BHConstants.WALLET_ADDRESS)
     String wallet_address;
 
-    @Autowired(name = "gotoTarget")
+    @Autowired(name = BHConstants.GOTO_TARGET)
     String mGotoTarget;
 
     private List<MnemonicItem> mnemonicItemList;
@@ -98,7 +98,7 @@ public class BackupMnemonicActivity extends BaseCacheActivity {
             postcard.withString(BHConstants.INPUT_PASSWORD,inputPwd);
             postcard.withString(BHConstants.WALLET_ADDRESS,wallet_address);
             if(!TextUtils.isEmpty(mGotoTarget)){
-                postcard.withString("gotoTarget",mGotoTarget);
+                postcard.withString(BHConstants.GOTO_TARGET,mGotoTarget);
             }
             postcard.navigation();
         }
@@ -116,11 +116,10 @@ public class BackupMnemonicActivity extends BaseCacheActivity {
         }else{
             finish();
         }*/
-        //
         EventBus.getDefault().post(new AccountEvent());
-        NavigateUtil.startMainActivity(this,new String[]{BHConstants.BACKUP_TEXT, BHConstants.LATER_BACKUP});
-        ActivityCache.getInstance().finishActivity();
-        BHUserManager.getInstance().clear();
+        //NavigateUtil.startMainActivity(this,new String[]{BHConstants.BACKUP_TEXT, BHConstants.LATER_BACKUP});
+        //ActivityCache.getInstance().finishActivity();
+        //BHUserManager.getInstance().clear();
     }
 
     @Override

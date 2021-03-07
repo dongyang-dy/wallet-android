@@ -136,7 +136,7 @@ public class LockActivity extends BaseCacheActivity<LoginPresenter> implements A
         if(bhWallet.id!=mCurrentWallet.id){
             mCurrentWallet = bhWallet;
             BHUserManager.getInstance().setCurrentBhWallet(mCurrentWallet);
-            walletVM.updateWallet(this, mCurrentWallet, mCurrentWallet.id, BHWalletItem.SELECTED);
+            walletVM.updateWallet(this, mCurrentWallet, mCurrentWallet.id, BHWalletItem.SELECTED,false);
             BHWalletHelper.proccessAddress(tv_bh_address, mCurrentWallet.getAddress());
             iv_username.setText(mCurrentWallet.getName());
         }
