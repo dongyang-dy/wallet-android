@@ -7,7 +7,12 @@
     <string name="account_securtiy">账户与安全</string>
     <string name="backup_export">备份导出</string>
     <string name="dark_model">Night mode</string>
-
+    <string name="everytime_need_password">Password is required for each transaction</string>
+    <string name="thirty_minute_noneed_paaword">Password is required for each transaction(by default)</string>
+    <string name="backup_keystore">Backup Keystore</string>
+    <string name="backup_privatekey">Backup private key</string>
+    <string name="helper_center">Help Center</string>
+    <string name="string_notice">Notice</string>
     <string-array name="app_language_type">
         <item>简体中文</item>
         <item>English</item>
@@ -34,20 +39,20 @@
 
         <item>@string/account_securtiy</item>
         <item>@string/backup_export</item>
-        <item>Notice</item>
+        <item>@string/string_notice</item>
         <item>@string/message_center</item>
         <item>@string/setting</item>
-        <item>Help Center</item>
+        <item>@string/helper_center</item>
         <item>@string/about_us</item>
     </string-array>
 
     <string-array name="set_list_item">
         <item>Language</item>
         <item>Currency</item>
-        <item>Night mode</item>
+        <!--<item>Night mode</item>
         <item>Reset Password</item>
         <item>Touch ID</item>
-        <item>Security settings</item>
+        <item>Security settings</item>-->
     </string-array>
 
     <string-array name="Currency_list">

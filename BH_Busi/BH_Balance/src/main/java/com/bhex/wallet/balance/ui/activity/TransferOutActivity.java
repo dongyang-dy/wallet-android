@@ -15,9 +15,11 @@ import com.bhex.lib_qr.XQRCode;
 import com.bhex.lib_qr.util.QRCodeAnalyzeUtils;
 import com.bhex.network.base.LoadDataModel;
 import com.bhex.network.base.LoadingStatus;
+import com.bhex.network.cache.stategy.CacheStrategy;
 import com.bhex.network.utils.ToastUtils;
 import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.PathUtils;
+import com.bhex.tools.utils.ToolUtils;
 import com.bhex.wallet.balance.R2;
 import com.bhex.wallet.balance.event.TransctionEvent;
 import com.bhex.wallet.balance.ui.fragment.ChooseTokenFragment;
@@ -57,6 +59,9 @@ public class TransferOutActivity extends BaseActivity {
 
     @BindView(R2.id.tv_center_title)
     AppCompatTextView tv_center_title;
+
+    @BindView(R2.id.refreshLayout)
+    SmartRefreshLayout refreshLayout;
 
     int def_dailog_count = 0;
 
@@ -105,6 +110,13 @@ public class TransferOutActivity extends BaseActivity {
         mTransactionViewModel.mutableLiveData.observe(this,ldm -> {
             updateTransferStatus(ldm);
         });
+
+        mRefreshLayout.setOnRefreshListener(refreshLayout -> {
+            def_dailog_count = 0;
+            mBalanceViewModel.getAccountInfo(this, CacheStrategy.onlyRemote());
+            //mTokenViewModel.queryToken(this,transferOutVH.tranferToken.symbol);
+        });
+        mRefreshLayout.autoRefresh();
     }
 
     @Override
@@ -151,17 +163,22 @@ public class TransferOutActivity extends BaseActivity {
 
     //转账
     private void transferAction(View view) {
+        //隐藏键盘
+        ToolUtils.hintKeyBoard(this);
+
        boolean flag= transferOutVH.verifyTransferAction();
        if(!flag){
            return;
        }
-        Password30PFragment.showPasswordDialog(getSupportFragmentManager(),
+
+       Password30PFragment.showPasswordDialog(getSupportFragmentManager(),
                 Password30PFragment.class.getName(),
                 this::transferConfirmAction,0,true);
     }
 
     //密码对话框回调
     public void transferConfirmAction(String password, int position,int verifyPwdWay) {
+
         String to_address = transferOutVH.inp_transfer_in_address.getText().toString().trim();
         BigInteger gasPrice = BigInteger.valueOf ((long)(BHConstants.BHT_GAS_PRICE));
         //转账金额
@@ -194,7 +211,7 @@ public class TransferOutActivity extends BaseActivity {
 
     public void refreshFinish(){
         def_dailog_count++;
-        if(def_dailog_count==2){
+        if(def_dailog_count==1){
             mRefreshLayout.finishRefresh();
         }
     }

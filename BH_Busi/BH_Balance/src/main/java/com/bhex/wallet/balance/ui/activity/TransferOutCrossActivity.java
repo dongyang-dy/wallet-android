@@ -21,6 +21,7 @@ import com.bhex.network.utils.ToastUtils;
 import com.bhex.tools.AndroidBug5497Workaround;
 import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.PathUtils;
+import com.bhex.tools.utils.ToolUtils;
 import com.bhex.wallet.balance.R;
 import com.bhex.wallet.balance.R2;
 import com.bhex.wallet.balance.event.TransctionEvent;
@@ -57,7 +58,7 @@ import butterknife.BindView;
 @Route(path = ARouterConfig.Balance.Balance_transfer_out_cross,name = "提币")
 public class TransferOutCrossActivity extends BaseActivity {
 
-    @Autowired(name="symbol")
+    @Autowired(name=BHConstants.SYMBOL)
     String m_symbol;
 
     @BindView(R2.id.tv_center_title)
@@ -111,7 +112,9 @@ public class TransferOutCrossActivity extends BaseActivity {
         mTokenViewModel = ViewModelProviders.of(this).get(TokenViewModel.class);
         mTokenViewModel.queryLiveData.observe(this,ldm->{
             if(ldm.loadingStatus==LoadingStatus.SUCCESS){
-                transferOutCrossVH.withDrawFeeToken = (BHToken) ldm.getData();
+                transferOutCrossVH.tranferToken = (BHToken) ldm.getData();
+                //更新跨链提币手续费
+                transferOutCrossVH.updateWithDrawFee();
             }
             refreshFinish();
         });
@@ -175,6 +178,9 @@ public class TransferOutCrossActivity extends BaseActivity {
 
     //提币
     private void withDrawAtion(View view) {
+        //隐藏键盘
+        ToolUtils.hintKeyBoard(this);
+        
         boolean flag = transferOutCrossVH.verifyWithDrawAction();
         if(!flag){
             return;

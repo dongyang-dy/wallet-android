@@ -74,7 +74,7 @@ public class ChainTokenActivity extends BaseActivity<BalancePresenter> implement
     @Autowired (name = "bhChain")
     public BHChain bhChain;
 
-    @Autowired(name="title")
+    @Autowired(name=BHConstants.TITLE)
     public String title;
 
     BHBalance mBalance;
@@ -113,7 +113,7 @@ public class ChainTokenActivity extends BaseActivity<BalancePresenter> implement
         ARouter.getInstance().inject(this);
         tv_center_title = findViewById(R.id.tv_center_title);
 
-        BHToken bhToken = SymbolCache.getInstance().getBHToken(bhChain.chain);
+        BHToken bhToken = SymbolCache.getInstance().getBHToken(bhChain.chain.toLowerCase());
         mBalance = BHBalanceHelper.getBHBalanceFromAccount(bhToken!=null?bhToken.symbol:bhChain.chain);
         //链的名称
         tv_center_title.setText(bhChain.chain.toUpperCase());
@@ -172,7 +172,7 @@ public class ChainTokenActivity extends BaseActivity<BalancePresenter> implement
             BHBalance bhBalance = BHBalanceHelper.getBHBalanceFromAccount(bhTokenItem.symbol);
 
             Postcard postcard = ARouter.getInstance().build(ARouterConfig.Balance.Balance_Token_Detail)
-                    .withString("symbol",bhBalance.symbol);
+                    .withString(BHConstants.SYMBOL,bhBalance.symbol);
             LogisticsCenter.completion(postcard);
             Intent intent = new Intent(this, postcard.getDestination());
             intent.putExtras(postcard.getExtras());

@@ -49,16 +49,15 @@ public class MyRecyclerViewDivider extends RecyclerView.ItemDecoration {
     public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
         int position = parent.getChildLayoutPosition(view);
-        IntStreams.range(0,mDividerPosition.length).forEach(t->{
-            if(mDividerPosition !=null && mDividerPosition[t]==position){
-                outRect.bottom = (int)mDividerHeight;
-            }else{
-                outRect.bottom = (int)mDividerLineHeight;
-            }
+        boolean flag = isExistsDivider(position);
+        if(flag){
+            outRect.bottom = (int)mDividerHeight;
+        }else{
+            outRect.bottom = (int)mDividerLineHeight;
+        }
 
-        });
     }
-    int i = 0;
+    //int i = 0;
     @Override
     public void onDraw(@NonNull Canvas canvas, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
         super.onDraw(canvas, parent, state);
@@ -66,27 +65,37 @@ public class MyRecyclerViewDivider extends RecyclerView.ItemDecoration {
         //int left = parent.getPaddingLeft();
         final int right = parent.getMeasuredWidth() - parent.getPaddingRight();
         mPaint.setColor(mDividerColor);
-        //i = 0;
-        for (i = 0; i < childCount; i++) {
+        for (int i = 0; i < childCount; i++){
             View v = parent.getChildAt(i);
-            IntStreams.range(0,mDividerPosition.length).forEach(t->{
-                if(mDividerPosition !=null &&  mDividerPosition[t]==i){
-                    int left = parent.getPaddingLeft();
-                    canvas.drawRect(left, v.getBottom(), right,
-                            v.getBottom()+mDividerHeight, mPaint);
-                }else{
-                    int left = (int)mContext.getResources().getDimension(R.dimen.main_padding_left);
-                    canvas.drawRect(left, v.getBottom(), right,
-                            v.getBottom()+mDividerLineHeight, mPaint);
-                }
-            });
-
+            boolean flag = isExistsDivider(i);
+            if(flag){
+                int left = parent.getPaddingLeft();
+                canvas.drawRect(left, v.getBottom(), right,
+                        v.getBottom()+mDividerHeight, mPaint);
+            }else{
+                int left = (int)mContext.getResources().getDimension(R.dimen.main_padding_left);
+                canvas.drawRect(left, v.getBottom(), right,
+                        v.getBottom()+mDividerLineHeight, mPaint);
+            }
         }
+
     }
 
 
     /*public void setDividerColor(int mDividerColor) {
         this.mDividerColor = mDividerColor;
     }*/
+
+    private boolean isExistsDivider(int position){
+        boolean flag = false;
+        if(mDividerPosition!=null){
+            for(int i =0;i<mDividerPosition.length;i++){
+                if(mDividerPosition[i]==position){
+                    return true;
+                }
+            }
+        }
+        return flag;
+    }
 
 }

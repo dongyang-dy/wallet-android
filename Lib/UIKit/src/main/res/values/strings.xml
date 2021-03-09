@@ -63,7 +63,7 @@
     <string name="set_pwd_tip_3">·请务必妥善保管密码</string>
 
     <string name="set_pwd_alarm_1">·安全密码是保护钱包私钥和操作资产的重要凭证,非常重要</string>
-    <string name="set_pwd_alarm_2"> ·HBTC钱包不会缓存，上传，存储您的密码，也无法帮您找回，请务必牢记并妥善保管您的密码.</string>
+    <string name="set_pwd_alarm_2">·HBTC钱包不会缓存，上传，存储您的密码，也无法帮您找回，请务必牢记并妥善保管您的密码.</string>
 
     <!--<string name="set_pwd_hint">请设置钱包密码(不少于8位)</string>-->
     <string name="set_pwd_hint">请设置钱包密码(6位数字)</string>
@@ -570,5 +570,7 @@
     <string name="save_qr_code">保存二维码</string>
     <string name="place_holder">--</string>
     <string name="mnemonic_checksum_error">助记词校验位错误</string>
+    <string name="delete_wallet_tips">您正在使用当前钱包,请切换后再删除</string>
+    <string name="string_native">原生</string>
 
 </resources>

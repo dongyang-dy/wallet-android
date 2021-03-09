@@ -22,31 +22,6 @@
         tools:listitem="@layout/item_account_manager"
         />
 
-
-
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_import_wallet"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="@dimen/main_margin_bottom"
-        android:layout_marginEnd="@dimen/main_margin_right"
-        android:layout_marginStart="@dimen/main_margin_left"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        android:textColor="@color/border_button_text_color"
-        app:layout_constraintEnd_toStartOf="@+id/btn_create_wallet"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_weight="1"
-        app:backgroundTint="@color/border_button_bg_color"
-        app:strokeWidth="1dp"
-        app:strokeColor="@color/border_button_border_color"
-        app:cornerRadius="@dimen/main_radius_conner"
-        style="@style/main_material_btn"
-        android:text="@string/wallet_import_trusteeship"
-        />
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_create_wallet"
         android:layout_width="0dp"
@@ -55,13 +30,35 @@
         android:layout_marginEnd="@dimen/main_margin_right"
         android:insetTop="0dp"
         android:insetBottom="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_import_wallet"
+        android:layout_marginStart="@dimen/main_margin_left"
+        app:layout_constraintEnd_toStartOf="@+id/btn_import_wallet"
         app:layout_constraintHorizontal_weight="1"
         app:backgroundTint="@color/global_button_bg_color"
         android:text="@string/wallet_create_trusteeship"
         style="@style/main_material_btn"
         android:textColor="@color/global_button_text_color"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_import_wallet"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="@dimen/main_margin_bottom"
+        android:layout_marginEnd="@dimen/main_margin_right"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:textColor="@color/border_button_text_color"
+        app:layout_constraintStart_toEndOf="@+id/btn_create_wallet"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:backgroundTint="@color/border_button_bg_color"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/border_button_border_color"
+        app:cornerRadius="@dimen/main_radius_conner"
+        style="@style/main_material_btn"
+        android:text="@string/wallet_import_trusteeship"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

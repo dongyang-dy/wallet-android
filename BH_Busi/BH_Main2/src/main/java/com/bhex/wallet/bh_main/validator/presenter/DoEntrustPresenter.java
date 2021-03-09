@@ -96,7 +96,7 @@ public class DoEntrustPresenter extends BasePresenter {
 
 
     public String getAmountForUser(String amount, String frozen_amount, String symbol) {
-        BHToken bhToken = CacheCenter.getInstance().getSymbolCache().getBHToken(symbol.toLowerCase());
+        BHToken bhToken = CacheCenter.getInstance().getSymbolCache().getBHToken(symbol);
         int decimals = bhToken!=null?bhToken.decimals:2;
         decimals = 0;
         String tmp = NumberUtil.sub(amount,frozen_amount);

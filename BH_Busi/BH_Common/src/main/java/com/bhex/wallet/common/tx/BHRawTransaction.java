@@ -61,7 +61,7 @@ public class BHRawTransaction {
         String from = BHUserManager.getInstance().getCurrentBhWallet().address;
 
         SymbolCache symbolCache = CacheCenter.getInstance().getSymbolCache();
-        BHToken bhToken = symbolCache.getBHToken(symbol.toLowerCase());
+        BHToken bhToken = symbolCache.getBHToken(symbol);
 
         BigInteger double_amount = NumberUtil.mulExt(String.valueOf(Math.pow(10,bhToken.decimals)),amount);
 
@@ -98,7 +98,7 @@ public class BHRawTransaction {
 
         //提币手续费
         BHToken symbolBHToken = SymbolCache.getInstance().getBHToken(symbol);
-        BHToken withDrawFeeBHToken = SymbolCache.getInstance().getBHToken(symbolBHToken.chain);
+        BHToken withDrawFeeBHToken = SymbolCache.getInstance().getBHToken(symbolBHToken.chain.toLowerCase());
 
         BigInteger double_gas_fee =  NumberUtil.mulExt(String.valueOf(Math.pow(10,withDrawFeeBHToken.decimals)),withDrawFeeAmount);
 
@@ -205,7 +205,7 @@ public class BHRawTransaction {
 
         //委托数量
         SymbolCache symbolCache = CacheCenter.getInstance().getSymbolCache();
-        BHToken bhToken = symbolCache.getBHToken(symbol.toLowerCase());
+        BHToken bhToken = symbolCache.getBHToken(symbol);
         BigInteger double_delegator_amount = NumberUtil.mulExt(String.valueOf(Math.pow(10,bhToken.decimals)),delegator_amount);
 
         //委托人
@@ -240,7 +240,7 @@ public class BHRawTransaction {
 
         //委托数量
         SymbolCache symbolCache = CacheCenter.getInstance().getSymbolCache();
-        BHToken bhToken = symbolCache.getBHToken(symbol.toLowerCase());
+        BHToken bhToken = symbolCache.getBHToken(symbol);
         BigInteger double_un_delegator_amount = NumberUtil.mulExt(String.valueOf(Math.pow(10,bhToken.decimals)),un_delegator_amount);
 
         //委托人
@@ -335,7 +335,7 @@ public class BHRawTransaction {
 
         //质押数量
         SymbolCache symbolCache = CacheCenter.getInstance().getSymbolCache();
-        BHToken bhToken = symbolCache.getBHToken(symbol.toLowerCase());
+        BHToken bhToken = symbolCache.getBHToken(symbol);
         BigInteger double_pledge_amount = NumberUtil.mulExt(String.valueOf(Math.pow(10,bhToken.decimals)),pledge_amount);
 
         //开始创建一个交易TxMsg
@@ -372,7 +372,7 @@ public class BHRawTransaction {
 
         //提案费用
         SymbolCache symbolCache = CacheCenter.getInstance().getSymbolCache();
-        BHToken bhToken = symbolCache.getBHToken(symbol.toLowerCase());
+        BHToken bhToken = symbolCache.getBHToken(symbol);
         BigInteger double_proposal_amount = NumberUtil.mulExt(String.valueOf(Math.pow(10,bhToken.decimals)),proposal_amount);
 
         TxReq.TxMsg<TransactionMsg.CreateProposalMsg> msg = new TxReq.TxMsg<TransactionMsg.CreateProposalMsg>();

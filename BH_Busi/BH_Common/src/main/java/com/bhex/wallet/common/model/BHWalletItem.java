@@ -26,6 +26,8 @@ public class BHWalletItem {
 
     public String password;
 
+    public String asset;//资产
+
     public boolean isSelect;
 
     public String headUrl;

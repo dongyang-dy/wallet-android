@@ -243,12 +243,15 @@ public class Password30PFragment extends BaseDialogFragment {
             //
             dismiss();
             passwordClickListener.confirmAction(mInputPassword,position,verifyPwdWay);
-            if(ck_password.isChecked()){
-                //开启30分钟计时
-                SecuritySettingManager.getInstance().request_thirty_in_time(true,mInputPassword);
-            }else{
-                //关闭30分钟计时
-                SecuritySettingManager.getInstance().request_thirty_in_time(false,"");
+            //不需要显示是否开启30分钟免
+            if(isShow30Password){
+                if(ck_password.isChecked()){
+                    //开启30分钟计时
+                    SecuritySettingManager.getInstance().request_thirty_in_time(true,mInputPassword);
+                }else{
+                    //关闭30分钟计时
+                    SecuritySettingManager.getInstance().request_thirty_in_time(false,"");
+                }
             }
         }else{
             dismissAllowingStateLoss();

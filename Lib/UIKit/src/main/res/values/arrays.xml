@@ -8,9 +8,11 @@
     <string name="backup_export">备份导出</string>
     <string name="dark_model">暗色模式</string>
     <string name="everytime_need_password">每次操作都要密码(默认)</string>
-    <string name="thirty_minute_noneed_paaword">每次操作都要密码(默认)</string>
+    <string name="thirty_minute_noneed_paaword">30分钟内免密码输入</string>
     <string name="backup_keystore">备份Keystore</string>
     <string name="backup_privatekey">备份私钥</string>
+    <string name="helper_center">帮助中心</string>
+    <string name="string_notice">公告</string>
     <string-array name="app_language_type">
         <item>简体中文</item>
         <item>English</item>
@@ -40,10 +42,10 @@
         -->
         <item>@string/account_securtiy</item>
         <item>@string/backup_export</item>
-        <item>公告</item>
+        <item>@string/string_notice</item>
         <item>@string/message_center</item>
         <item>@string/setting</item>
-        <item>帮助中心</item>
+        <item>@string/helper_center</item>
         <item>@string/about_us</item>
         <!--<item>版本号</item>-->
     </string-array>

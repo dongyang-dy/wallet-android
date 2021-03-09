@@ -6,12 +6,15 @@ import android.widget.CheckedTextView;
 import androidx.appcompat.widget.AppCompatCheckedTextView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.bhex.lib.uikit.widget.RecycleViewExtDivider;
 import com.bhex.network.utils.ToastUtils;
 import com.bhex.tools.constants.BHConstants;
+import com.bhex.tools.utils.ColorUtil;
 import com.bhex.wallet.bh_main.R;
 import com.bhex.wallet.bh_main.R2;
 import com.bhex.wallet.bh_main.my.helper.MyHelper;
@@ -55,6 +58,12 @@ public class AccountSecurityActivity extends BaseActivity {
         tv_center_title.setText(getString(R.string.account_securtiy));
         List<MyItem> list = MyHelper.getAccountSecurityList(this);
         rcv_function.setAdapter(adapter=new AccountSecurityAdapter(list));
+
+        RecycleViewExtDivider itemDecoration = new RecycleViewExtDivider(
+                this, LinearLayoutManager.VERTICAL,
+                (int)getResources().getDimension(R.dimen.main_padding_left),0,
+                ColorUtil.getColor(this,R.color.global_divider_color));
+        rcv_function.addItemDecoration(itemDecoration);
     }
 
     @Override
@@ -88,10 +97,17 @@ public class AccountSecurityActivity extends BaseActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adapter.notifyDataSetChanged();
+    }
+
     class  AccountSecurityAdapter extends BaseQuickAdapter<MyItem, BaseViewHolder>{
 
         public AccountSecurityAdapter( @Nullable List<MyItem> data) {
             super(R.layout.item_setting, data);
+            addChildClickViewIds(R.id.ck_select);
         }
 
         @Override

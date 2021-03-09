@@ -3,11 +3,13 @@ package com.bhex.wallet.balance.helper;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.ArrayMap;
+import android.util.Log;
 
 import androidx.appcompat.widget.AppCompatImageView;
 
 import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.ImageLoaderUtil;
+import com.bhex.tools.utils.LogUtils;
 import com.bhex.tools.utils.NumberUtil;
 import com.bhex.tools.utils.ToolUtils;
 import com.bhex.wallet.balance.R;
@@ -20,11 +22,14 @@ import com.bhex.wallet.common.manager.CurrencyManager;
 import com.bhex.wallet.common.menu.MenuItem;
 import com.bhex.wallet.common.model.AccountInfo;
 import com.bhex.wallet.common.model.BHBalance;
+import com.bhex.wallet.common.model.BHChain;
 import com.bhex.wallet.common.model.BHToken;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by BHEX.
@@ -62,8 +67,8 @@ public class BHBalanceHelper {
      */
     public static String[]  getAmountToCurrencyValue(Context context,String amount, String symbol,boolean flag){
         String []result = new String[2];
-
-        BHToken bhToken = CacheCenter.getInstance().getSymbolCache().getBHToken(symbol.toLowerCase());
+        LogUtils.d("BHBalanceHelper===>:","==symbol=="+symbol);
+        BHToken bhToken = CacheCenter.getInstance().getSymbolCache().getBHToken(symbol);
         int decimals = bhToken!=null?bhToken.decimals:2;
         if(!flag){
             decimals = 0;
@@ -81,7 +86,7 @@ public class BHBalanceHelper {
 
     public static String getAmountForUser(BaseActivity context, String amount, String frozen_amount, String symbol) {
         SymbolCache symbolCache = CacheCenter.getInstance().getSymbolCache();
-        BHToken bhToken = symbolCache.getBHToken(symbol.toLowerCase());
+        BHToken bhToken = symbolCache.getBHToken(symbol);
         int decimals = bhToken!=null?bhToken.decimals:2;
         decimals = 0;
         String tmp = NumberUtil.sub(TextUtils.isEmpty(amount)?"0":amount,TextUtils.isEmpty(frozen_amount)?"0":frozen_amount);
@@ -186,16 +191,19 @@ public class BHBalanceHelper {
     //获取链下的资产
     public static double getAssetByChain(Context context,String chain){
         double res = 0;
+        LogUtils.d("BHBalanceHelper===>:","getAssetByChain=="+BHUserManager.getInstance().getAccountInfo());
         AccountInfo accountInfo = BHUserManager.getInstance().getAccountInfo();
         if(accountInfo==null){
             return res;
         }
+        LogUtils.d("BHBalanceHelper===>:","accountInfo==");
         List<AccountInfo.AssetsBean> list = accountInfo.assets;
         if(ToolUtils.checkListIsEmpty(list)){
             return res;
         }
         for (int i = 0; i < list.size(); i++) {
             AccountInfo.AssetsBean assetsBean = list.get(i);
+            LogUtils.d("BHBalanceHelper===>:","symbol=="+assetsBean.symbol);
             BHToken bhToken = CacheCenter.getInstance().getSymbolCache().getBHToken(assetsBean.symbol);
             if(bhToken==null){
                 continue;
@@ -212,6 +220,8 @@ public class BHBalanceHelper {
         }
         return res;
     }
+
+
 
 
 }

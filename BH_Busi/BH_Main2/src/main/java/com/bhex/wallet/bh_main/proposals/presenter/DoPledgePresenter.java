@@ -47,7 +47,7 @@ public class DoPledgePresenter extends BasePresenter {
 
     public String getAmountForUser(String amount, String frozen_amount, String symbol) {
         SymbolCache symbolCache = CacheCenter.getInstance().getSymbolCache();
-        BHToken bhToken = symbolCache.getBHToken(symbol.toLowerCase());
+        BHToken bhToken = symbolCache.getBHToken(symbol);
         int decimals = bhToken!=null?bhToken.decimals:2;
         decimals = 0;
         String tmp = NumberUtil.sub(amount,frozen_amount);

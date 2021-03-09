@@ -1,11 +1,14 @@
 package com.bhex.wallet.bh_main.my.ui.activity;
 
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.bhex.lib.uikit.widget.RecycleViewExtDivider;
 import com.bhex.tools.constants.BHConstants;
+import com.bhex.tools.utils.ColorUtil;
 import com.bhex.wallet.bh_main.R;
 import com.bhex.wallet.bh_main.R2;
 import com.bhex.wallet.bh_main.my.helper.MyHelper;
@@ -51,12 +54,28 @@ public class BackupActivity extends BaseActivity {
         tv_center_title.setText(getString(R.string.backup_export));
         List<MyItem> list = MyHelper.getBackupList(this);
         rcv_function.setAdapter(adapter = new BackupAdapter(list));
+        RecycleViewExtDivider itemDecoration = new RecycleViewExtDivider(
+                this, LinearLayoutManager.VERTICAL,
+                (int)getResources().getDimension(R.dimen.main_padding_left),0,
+                ColorUtil.getColor(this,R.color.global_divider_color));
+        rcv_function.addItemDecoration(itemDecoration);
     }
 
     @Override
     protected void addEvent() {
         adapter.setOnItemClickListener((adapter1, view, position) -> {
-            switch (position){
+            MyItem item =  adapter.getData().get(position);
+            if(item.title.equals(getString(R.string.backup_nnemonic))){
+                Password30PFragment.showPasswordDialog(getSupportFragmentManager(),Password30PFragment.class.getName(),
+                        this::passwordListener,BH_BUSI_TYPE.备份助记词.getIntValue(),false);
+            }else if(item.title.equals(getString(R.string.backup_keystore))){
+                Password30PFragment.showPasswordDialog(getSupportFragmentManager(),Password30PFragment.class.getName(),
+                        this::passwordListener,BH_BUSI_TYPE.备份KS.getIntValue(),false);
+            }else if(item.title.equals(getString(R.string.backup_privatekey))){
+                Password30PFragment.showPasswordDialog(getSupportFragmentManager(),Password30PFragment.class.getName(),
+                        this::passwordListener,BH_BUSI_TYPE.备份私钥.getIntValue(),false);
+            }
+            /*switch (position){
                 case 0:
                     Password30PFragment.showPasswordDialog(getSupportFragmentManager(),Password30PFragment.class.getName(),
                             this::passwordListener,BH_BUSI_TYPE.备份助记词.getIntValue(),false);
@@ -69,7 +88,7 @@ public class BackupActivity extends BaseActivity {
                     Password30PFragment.showPasswordDialog(getSupportFragmentManager(),Password30PFragment.class.getName(),
                             this::passwordListener,BH_BUSI_TYPE.备份私钥.getIntValue(),false);
                     break;
-            }
+            }*/
         });
     }
 

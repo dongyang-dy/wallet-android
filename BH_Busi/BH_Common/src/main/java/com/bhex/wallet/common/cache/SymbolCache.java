@@ -123,6 +123,7 @@ public class SymbolCache extends BaseCache {
                             return;
                         }
                         //缓存所有的token
+                        LogUtils.d("BalanceAdapter==>","coinList=="+coinList.size());
                         putSymbolToMap(coinList,BH_BUSI_TYPE.默认币种.getIntValue());
                     }
 

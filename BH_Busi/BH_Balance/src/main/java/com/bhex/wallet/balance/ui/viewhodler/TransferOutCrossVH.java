@@ -11,6 +11,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bhex.network.utils.ToastUtils;
 import com.bhex.tools.constants.BHConstants;
+import com.bhex.tools.utils.LogUtils;
 import com.bhex.tools.utils.NumberUtil;
 import com.bhex.tools.utils.RegexUtil;
 import com.bhex.wallet.balance.R;
@@ -117,7 +118,10 @@ public class TransferOutCrossVH {
         withDrawFeeToken = CacheCenter.getInstance().getSymbolCache().getBHToken(tranferToken.chain);
         tv_withdraw_fee.setText(tranferToken!=null?tranferToken.withdrawal_fee:"");
 
-        tv_withdraw_fee_token.setText(tranferToken.name.toUpperCase());
+        //跨链手续费Token
+        //tv_withdraw_fee_token.setText(tranferToken.name.toUpperCase());
+        tv_withdraw_fee_token.setText(tranferToken.chain.toUpperCase());
+
         //手续费
         tv_fee.setText(BHUserManager.getInstance().getDefaultGasFee().displayFee);
         tv_fee_token.setText(BHConstants.BHT_TOKEN.toUpperCase());
@@ -193,5 +197,10 @@ public class TransferOutCrossVH {
         String available_amount_str =  BHBalanceHelper.getAmountForUser(m_activity,tranferBalance.amount,"0",tranferBalance.symbol);
         available_amount = Double.valueOf(available_amount_str);
         tv_available_amount.setText(m_activity.getString(R.string.available)+" "+available_amount_str+" "+tranferToken.name.toUpperCase());
+    }
+
+    //更新跨链提币手续费
+    public void updateWithDrawFee() {
+        tv_withdraw_fee.setText(tranferToken!=null?tranferToken.withdrawal_fee:"");
     }
 }

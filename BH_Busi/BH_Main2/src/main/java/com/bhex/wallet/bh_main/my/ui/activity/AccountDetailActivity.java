@@ -46,7 +46,7 @@ import butterknife.BindView;
 @Route(path = ARouterConfig.My.ACCOUNT_DETAIL_PAGE, name = "账户详情")
 public class AccountDetailActivity extends BaseActivity {
 
-    @Autowired(name="wallet_address")
+    @Autowired(name=BHConstants.WALLET_ADDRESS)
     String wallet_address;
 
     @BindView(R2.id.tv_center_title)
@@ -70,7 +70,7 @@ public class AccountDetailActivity extends BaseActivity {
         ARouter.getInstance().inject(this);
         tv_center_title.setText(getString(R.string.account_detail));
         chooseWallet = BHUserManager.getInstance().getBHWalletByAddress(wallet_address);
-        List<MyItem> list = MyHelper.getAcountDetailFunction(this);
+        List<MyItem> list = MyHelper.getAcountDetailFunction(this,chooseWallet);
         rcv_account_function.setAdapter(accountAdapter = new AccountFunctionAdapter(list,chooseWallet.name));
 
         FunctionItemDecoration itemDecoration = new FunctionItemDecoration(this,
@@ -90,31 +90,31 @@ public class AccountDetailActivity extends BaseActivity {
         });
         accountAdapter.setOnItemClickListener((adapter, view, position) -> {
             MyItem item = accountAdapter.getData().get(position);
-            if(position==0){
+            if(item.title.equals(getString(R.string.update_name))){
                 UpdateName2Fragment.getInstance(chooseWallet,this::updateNameCallback).show(getSupportFragmentManager(),
                         UpdateName2Fragment.class.getName());
-            }else if(position==1){
+            }else if(item.title.equals(getString(R.string.reset_security_pwd))){
                 ARouter.getInstance().build(ARouterConfig.My.My_Update_Password)
-                        .withString("title",item.title)
+                        .withString(BHConstants.TITLE,item.title)
                         .withString(BHConstants.WALLET_ADDRESS,chooseWallet.getAddress())
                         .navigation();
-            } else if(position==2){
+            } else if(item.title.equals(getString(R.string.backup_nnemonic))){
                 Password30PFragment fragment  = Password30PFragment.showPasswordChooseDialog(
                         getSupportFragmentManager(),this::passwordListener, BH_BUSI_TYPE.备份助记词.getIntValue(),wallet_address);
                 fragment.show(getSupportFragmentManager(),Password30PFragment.class.getName());
-            } else if(position==3){
+            } else if(item.title.equals(getString(R.string.backup_privatekey))){
                 Password30PFragment fragment  = Password30PFragment.showPasswordChooseDialog(
                         getSupportFragmentManager(),this::passwordListener, BH_BUSI_TYPE.备份私钥.getIntValue(),wallet_address);
                 fragment.show(getSupportFragmentManager(),Password30PFragment.class.getName());
-            }else if(position==4){
+            }else if(item.title.equals(getString(R.string.backup_keystore))){
                 Password30PFragment fragment  = Password30PFragment.showPasswordChooseDialog(
                         getSupportFragmentManager(),this::passwordListener, BH_BUSI_TYPE.备份KS.getIntValue(),wallet_address);
                 fragment.show(getSupportFragmentManager(),Password30PFragment.class.getName());
-            }else if(position==5){
+            }else if(item.title.equals(getString(R.string.delete_wallet))){
                 //判断是否是当前账户
                 BHWallet currentWallet = BHUserManager.getInstance().getCurrentBhWallet();
                 if(currentWallet.address.equals(chooseWallet.address)){
-                    ToastUtils.showToast("不能删除当前账户");
+                    ToastUtils.showToast(getString(R.string.delete_wallet_tips));
                     return;
                 }
                 DeleteTipFragment.getInstance(this::deleteCallback).show(AccountDetailActivity.this.getSupportFragmentManager(),

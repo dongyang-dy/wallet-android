@@ -51,7 +51,7 @@ public class ETHViewHolder {
         this.mBhChain = bhChain;
         //Token-Logo
         AppCompatImageView iv_token_icon = viewHolder.findViewById(R.id.iv_token_icon);
-        BHToken symbolToken = SymbolCache.getInstance().getBHToken(bhChain.chain);
+        BHToken symbolToken = SymbolCache.getInstance().getBHToken(bhChain.chain.toLowerCase());
         ImageLoaderUtil.loadImageView(mContext,symbolToken!=null?symbolToken.logo:"",iv_token_icon,R.mipmap.ic_default_coin);
         setTokenAddress(bhChain.chain);
     }
@@ -158,7 +158,7 @@ public class ETHViewHolder {
         }
         AddressQRFragment.showFragment(mContext.getSupportFragmentManager(),
                 AddressQRFragment.class.getSimpleName(),
-                mBhChain.chain.toUpperCase(),
+                mBhChain.chain.toLowerCase(),
                 tv_token_address.getTag().toString());
     }
 

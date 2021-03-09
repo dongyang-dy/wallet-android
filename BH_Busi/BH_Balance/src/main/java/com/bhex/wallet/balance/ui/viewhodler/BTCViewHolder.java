@@ -116,7 +116,7 @@ public class BTCViewHolder {
     private void showQRDialog() {
         AddressQRFragment.showFragment(mContext.getSupportFragmentManager(),
                 AddressQRFragment.class.getSimpleName(),
-                mBalance.symbol.toUpperCase(),
+                mBalance.symbol.toLowerCase(),
                 tv_hbc_address.getTag().toString());
     }
 
@@ -131,7 +131,7 @@ public class BTCViewHolder {
         //BHBalance bthBalance = BHBalanceHelper.getBHBalanceFromAccount(BHConstants.BHT_TOKEN);
 
         Postcard postcard = ARouter.getInstance().build(ARouterConfig.Balance.Balance_cross_address)
-                .withString("symbol", mBalance.symbol)
+                .withString(BHConstants.SYMBOL, mBalance.symbol)
                 //.withObject("bhtBalance",bthBalance)
                 .withInt("way", BH_BUSI_TYPE.跨链转账.getIntValue());
         LogisticsCenter.completion(postcard);

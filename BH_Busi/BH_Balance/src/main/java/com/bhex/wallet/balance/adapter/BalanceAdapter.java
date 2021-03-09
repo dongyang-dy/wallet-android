@@ -88,25 +88,28 @@ public class BalanceAdapter extends BaseQuickAdapter<BHTokenItem, BaseViewHolder
         updatePriceAndAmount(balanceItem,viewHolder);
         //标签
         AppCompatTextView tv_coin_type = viewHolder.getView(R.id.tv_coin_type);
-        BHToken bhCoin  = CacheCenter.getInstance().getSymbolCache().getBHToken(balanceItem.symbol.toLowerCase());
+        LogUtils.d("BalanceAdapter==>:","balanceItem.symbol=="+balanceItem.symbol);
+        BHToken bhCoin  = CacheCenter.getInstance().getSymbolCache().getBHToken(balanceItem.symbol);
 
         if(bhCoin==null){
+            LogUtils.d("BalanceAdapter==>:","bhCoin==null");
             return;
         }
 
-        if(bhCoin.symbol.equalsIgnoreCase(BHConstants.BHT_TOKEN)){
+        LogUtils.d("BalanceAdapter==>:","bhCoin.is_native=="+bhCoin.is_native);
+        if(bhCoin.name.equalsIgnoreCase(BHConstants.BHT_TOKEN)){
             tv_coin_type.setVisibility(View.GONE);
             tv_coin_type.setBackgroundColor(0);
         } else if(bhCoin.is_native){
             tv_coin_type.setVisibility(View.VISIBLE);
             tv_coin_type.setText(R.string.native_token);
-            tv_coin_type.setTextAppearance(getContext(),R.style.tx_native_link_token);
+            tv_coin_type.setTextAppearance(getContext(),R.style.token_label_style);
             //tv_coin_type.setBackgroundResource(R.drawable.shape_20_green);
             tv_coin_type.setBackgroundDrawable(ContextCompat.getDrawable(getContext(),R.drawable.shape_native_token));
         }else {
             tv_coin_type.setVisibility(View.VISIBLE);
             tv_coin_type.setText(R.string.no_native_token);
-            tv_coin_type.setTextAppearance(getContext(),R.style.tx_cross_link_token);
+            tv_coin_type.setTextAppearance(getContext(),R.style.token_label_style);
             tv_coin_type.setBackgroundDrawable(ContextCompat.getDrawable(getContext(),R.drawable.shape_dark20_blue));
 
         }
@@ -170,6 +173,7 @@ public class BalanceAdapter extends BaseQuickAdapter<BHTokenItem, BaseViewHolder
         //币的数量
         if(isHidden.equals("0")){
             if(!TextUtils.isEmpty(balanceItem.amount) && Double.valueOf(balanceItem.amount)>0) {
+                LogUtils.d("BalanceAdapter==>","==balanceItem.symbol=="+balanceItem.symbol);
                 String []result = BHBalanceHelper.getAmountToCurrencyValue(getContext(),balanceItem.amount,balanceItem.symbol,false);
                 viewHolder.setText(R.id.tv_coin_amount, result[0]);
                 viewHolder.setText(R.id.tv_coin_count, "≈"+result[1]);

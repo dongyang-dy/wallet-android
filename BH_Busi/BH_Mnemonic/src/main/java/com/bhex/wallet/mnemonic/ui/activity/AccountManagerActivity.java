@@ -4,25 +4,33 @@ import android.content.Intent;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.bhex.network.base.LoadingStatus;
 import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.LogUtils;
 import com.bhex.wallet.common.base.BaseActivity;
 import com.bhex.wallet.common.config.ARouterConfig;
 import com.bhex.wallet.common.db.entity.BHWallet;
 import com.bhex.wallet.common.manager.BHUserManager;
+import com.bhex.wallet.common.manager.MainActivityManager;
+import com.bhex.wallet.common.model.BHWalletItem;
+import com.bhex.wallet.common.viewmodel.BalanceViewModel;
 import com.bhex.wallet.common.viewmodel.WalletViewModel;
 import com.bhex.wallet.mnemonic.R;
 import com.bhex.wallet.mnemonic.R2;
 import com.bhex.wallet.mnemonic.adapter.AccountManagerAdapter;
 import com.bhex.wallet.mnemonic.persenter.TrustManagerPresenter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import java8.util.stream.RefStreams;
+import java8.util.stream.StreamSupport;
 
 /**
  * @author gongdongyang
@@ -42,6 +50,8 @@ public class AccountManagerActivity extends BaseActivity<TrustManagerPresenter>{
 
     AccountManagerAdapter accountAdapter;
 
+    private BalanceViewModel balanceViewModel;
+
     //WalletViewModel walletViewModel;
     @Override
     protected int getLayoutId() {
@@ -54,13 +64,28 @@ public class AccountManagerActivity extends BaseActivity<TrustManagerPresenter>{
         tv_center_title.setText(getString(R.string.trustship_manager));
         //所有账户地址
         List<BHWallet> walletList = BHUserManager.getInstance().getAllWallet();
-        rcv_account_manager.setAdapter(accountAdapter = new AccountManagerAdapter(walletList));
+        List<BHWalletItem> list = new ArrayList<>();
+        StreamSupport.stream(walletList).forEach(item->{
+            BHWalletItem bhWalletItem = BHWalletItem.makeBHWalletItem(item);
+            list.add(bhWalletItem);
+        });
+
+        rcv_account_manager.setAdapter(accountAdapter = new AccountManagerAdapter(list));
+        balanceViewModel = ViewModelProviders.of(MainActivityManager.getInstance().mainActivity).get(BalanceViewModel.class);
+
+        balanceViewModel.accountLiveData.observe(MainActivityManager.getInstance().mainActivity,ldm->{
+            if(ldm.getLoadingStatus()== LoadingStatus.SUCCESS){
+                //LogUtils.d("AccountManagerAdapter==","address==>:"+ldm.getData().address);
+                accountAdapter.updateAsset(ldm.getData());
+            }
+        });
+
     }
 
     @Override
     protected void addEvent() {
         accountAdapter.setOnItemClickListener((adapter, view, position) -> {
-            BHWallet wallet = accountAdapter.getData().get(position);
+            BHWalletItem wallet = accountAdapter.getData().get(position);
 
             ARouter.getInstance()
                     .build(ARouterConfig.My.ACCOUNT_DETAIL_PAGE)
@@ -77,18 +102,25 @@ public class AccountManagerActivity extends BaseActivity<TrustManagerPresenter>{
         findViewById(R.id.btn_create_wallet).setOnClickListener(v->{
             ARouter.getInstance().build(ARouterConfig.TRUSTEESHIP_MNEMONIC_FRIST).navigation();
         });
+
+        List<BHWallet> walletList = BHUserManager.getInstance().getAllWallet();
+        for(int i=0;i<walletList.size();i++){
+            BHWallet bhWallet = walletList.get(i);
+            balanceViewModel.getAccountInfoByAddress(MainActivityManager.getInstance().mainActivity,bhWallet.address);
+        }
     }
-
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==Account_request_code){
-            LogUtils.d("AccountManagerActivity==>:","==onActivityResult==");
             List<BHWallet> walletList = BHUserManager.getInstance().getAllWallet();
-            //accountAdapter.getData().clear();
-            accountAdapter.setNewData(walletList);
+            List<BHWalletItem> list = new ArrayList<>();
+            StreamSupport.stream(walletList).forEach(item->{
+                BHWalletItem bhWalletItem = BHWalletItem.makeBHWalletItem(item);
+                list.add(bhWalletItem);
+            });
+            accountAdapter.setNewData(list);
         }
     }
 }

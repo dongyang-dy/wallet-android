@@ -171,6 +171,8 @@
     <color name="label_native_text_color">#4299FF</color>
     <color name="label_native_bg_color">#334299FF</color>
 
+    <color name="label_token_bg_color">#2698C1FF</color>
+
     <color name="dark20">#33242b32</color>
 
 
@@ -215,4 +217,7 @@
     <color name="transfer_tips_bg_color">#F3F3F3</color>
     <color name="btn_gray_bg_color">#9FB5DC</color>
     <color name="btn_blue_bg_color">#3369E9</color>
+
+    <color name="native_token_text_color">#1F5DC1</color>
+    <color name="cross_token_text_color">#0A1825</color>
 </resources>

@@ -70,16 +70,9 @@ public class SettingActivity extends BaseActivity{
         mSettingAdapter = new SettingAdapter(mItems);
         recycler_setting.setAdapter(mSettingAdapter);
 
-        /*MyRecyclerViewDivider myRecyclerDivider = new MyRecyclerViewDivider(this,
-                ColorUtil.getColor(this,R.color.global_divider_color),
-                getResources().getDimension(R.dimen.item_large_divider_height));
-
-
-        recycler_setting.addItemDecoration(myRecyclerDivider);*/
-
         RecycleViewExtDivider itemDecoration = new RecycleViewExtDivider(
                 this, LinearLayoutManager.VERTICAL,
-                PixelUtils.dp2px(this,32),0,
+                (int)getResources().getDimension(R.dimen.main_padding_left),0,
                 ColorUtil.getColor(this,R.color.global_divider_color));
         recycler_setting.addItemDecoration(itemDecoration);
 

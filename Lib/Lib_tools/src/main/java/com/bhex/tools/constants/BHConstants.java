@@ -98,6 +98,8 @@ public class BHConstants {
     public static final String WALLET_ADDRESS = "wallet_address";
     public static final String GOTO_TARGET = "gotoTarget";
 
+    public static final String TITLE = "title";
+    public static final String SYMBOL = "symbol";
 
     public static final int PRIVATE_KEY_LENGTH = 64;
 

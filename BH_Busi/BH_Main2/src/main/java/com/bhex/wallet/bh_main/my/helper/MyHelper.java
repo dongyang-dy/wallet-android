@@ -16,6 +16,7 @@ import com.bhex.wallet.bh_main.my.model.SecuritySettingItem;
 import com.bhex.wallet.bh_main.my.ui.item.MyItem;
 import com.bhex.wallet.common.cache.CacheCenter;
 import com.bhex.wallet.common.cache.SymbolCache;
+import com.bhex.wallet.common.db.entity.BHWallet;
 import com.bhex.wallet.common.enums.CURRENCY_TYPE;
 import com.bhex.wallet.common.enums.MAKE_WALLET_TYPE;
 import com.bhex.wallet.common.manager.BHUserManager;
@@ -135,7 +136,7 @@ public class MyHelper {
 
     public static String getAmountForUser(BaseActivity context, String amount, String frozen_amount, String symbol) {
         SymbolCache symbolCache = CacheCenter.getInstance().getSymbolCache();
-        BHToken bhToken = symbolCache.getBHToken(symbol.toLowerCase());
+        BHToken bhToken = symbolCache.getBHToken(symbol);
         int decimals = bhToken!=null?bhToken.decimals:2;
         decimals = 0;
         String tmp = NumberUtil.sub(TextUtils.isEmpty(amount)?"0":amount,TextUtils.isEmpty(frozen_amount)?"0":frozen_amount);
@@ -173,12 +174,17 @@ public class MyHelper {
     }
 
     //账户详情
-    public static List<MyItem> getAcountDetailFunction(Context context){
+    public static List<MyItem> getAcountDetailFunction(Context context, BHWallet chooseWallet){
         List<MyItem> myItems = new ArrayList<>();
         String []res = context.getResources().getStringArray(R.array.account_detail_list);
         for (int i = 0; i < res.length; i++) {
             MyItem item = new MyItem(i,res[i], true, "");
             myItems.add(item);
+        }
+        //创建和导入助记词 能备份
+        if(chooseWallet.getWay()!= MAKE_WALLET_TYPE.创建助记词.getWay() &&
+                chooseWallet.getWay()!= MAKE_WALLET_TYPE.导入助记词.getWay()){
+            myItems.remove(0);
         }
         return myItems;
     }
@@ -201,6 +207,13 @@ public class MyHelper {
             MyItem item = new MyItem(i,res[i], true, "");
             myItems.add(item);
         }
+
+        BHWallet currentWallet = BHUserManager.getInstance().getCurrentBhWallet();
+        //创建和导入助记词 能备份
+        if(currentWallet.getWay()!= MAKE_WALLET_TYPE.创建助记词.getWay() && currentWallet.getWay()!= MAKE_WALLET_TYPE.导入助记词.getWay()){
+            myItems.remove(0);
+        }
+
         return myItems;
     }
 }

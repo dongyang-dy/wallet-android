@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.OnLifecycleEvent;
 
 import com.bhex.network.RxSchedulersHelper;
@@ -33,6 +34,8 @@ import com.bhex.wallet.common.model.BHRates;
 import com.bhex.wallet.common.utils.LiveDataBus;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
+import com.uber.autodispose.AutoDispose;
+import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -57,8 +60,8 @@ public class BalanceViewModel extends CacheAndroidViewModel implements Lifecycle
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    //public static MutableLiveData<LoadDataModel<AccountInfo>> accountLiveData  = new MutableLiveData<>();
-    //public MutableLiveData<LoadDataModel<List<TransactionOrder>>> transLiveData  = new MutableLiveData<>();
+    public MutableLiveData<LoadDataModel<AccountInfo>> accountLiveData  = new MutableLiveData<>();
+
     public BalanceViewModel(@NonNull Application application) {
         super(application);
     }
@@ -72,14 +75,12 @@ public class BalanceViewModel extends CacheAndroidViewModel implements Lifecycle
             @Override
             protected void onSuccess(JsonObject jsonObject) {
                 //super.onSuccess(jsonObject);
-                LogUtils.d("BalanceViewModel==>","==onSuccess==");
                 AccountInfo accountInfo = JsonUtils.fromJson(jsonObject.toString(),AccountInfo.class);
                 LoadDataModel loadDataModel = new LoadDataModel(accountInfo);
                 if(accountInfo!=null){
                     BHUserManager.getInstance().setAccountInfo(accountInfo);
                     //移除正在生成中的地址
                     SequenceManager.getInstance().removeAddressStatus(accountInfo);
-
                 }
                 LiveDataBus.getInstance().with(BHConstants.Label_Account,LoadDataModel.class).postValue(loadDataModel);
             }
@@ -98,6 +99,39 @@ public class BalanceViewModel extends CacheAndroidViewModel implements Lifecycle
                 .compose(RxCache.getDefault().transformObservable(cache_key,type,getCacheStrategy(strategy)))
                 .map(new CacheResult.MapFunc<JsonObject>())
                 //.as(AutoDispose.autoDisposable(AndroidLifecycleScopeProvider.from(activity,Lifecycle.Event.ON_DESTROY)))
+                .subscribe(observer);
+    }
+
+    //获取资产
+    public void getAccountInfoByAddress(BaseActivity activity,String address){
+
+        Type type = (new TypeToken<JsonObject>() {}).getType();
+        String cache_key = address+"_"+BH_BUSI_TYPE.账户资产缓存.value;
+        BHBaseObserver<JsonObject> observer = new BHBaseObserver<JsonObject>(false) {
+            @Override
+            protected void onSuccess(JsonObject jsonObject) {
+                //super.onSuccess(jsonObject);
+                AccountInfo accountInfo = JsonUtils.fromJson(jsonObject.toString(),AccountInfo.class);
+                LoadDataModel ldm = new LoadDataModel(accountInfo);
+                if(accountInfo!=null){
+                    accountLiveData.setValue(ldm);
+                }
+            }
+
+            @Override
+            protected void onFailure(int code, String errorMsg) {
+                super.onFailure(code, errorMsg);
+                LoadDataModel ldm = new LoadDataModel(LoadingStatus.ERROR,"");
+                accountLiveData.setValue(ldm);
+            }
+        };
+
+        BHttpApi.getService(BHttpApiInterface.class)
+                .loadAccount(address)
+                .compose(RxSchedulersHelper.io_main())
+                .compose(RxCache.getDefault().transformObservable(cache_key,type,getCacheStrategy(CacheStrategy.cacheAndRemote())))
+                .map(new CacheResult.MapFunc<JsonObject>())
+                .as(AutoDispose.autoDisposable(AndroidLifecycleScopeProvider.from(activity,Lifecycle.Event.ON_DESTROY)))
                 .subscribe(observer);
     }
 

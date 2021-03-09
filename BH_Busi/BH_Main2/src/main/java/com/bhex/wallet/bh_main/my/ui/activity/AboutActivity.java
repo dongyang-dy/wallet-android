@@ -3,6 +3,7 @@ package com.bhex.wallet.bh_main.my.ui.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -11,11 +12,13 @@ import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.bhex.lib.uikit.widget.RecycleViewExtDivider;
 import com.bhex.network.base.LoadDataModel;
 import com.bhex.network.base.LoadingStatus;
 import com.bhex.network.utils.PackageUtils;
 import com.bhex.network.utils.ToastUtils;
 import com.bhex.tools.language.LocalManageUtil;
+import com.bhex.tools.utils.ColorUtil;
 import com.bhex.wallet.bh_main.R;
 import com.bhex.wallet.bh_main.my.helper.MyHelper;
 import com.bhex.wallet.bh_main.my.ui.item.MyItem;
@@ -67,6 +70,12 @@ public class AboutActivity extends BaseActivity {
         mDatas = MyHelper.getAboutUs(this);
         rec_function.setAdapter(aboutusAdapter = new AboutusAdapter(mDatas));
         aboutusAdapter.setOnItemClickListener(this::clickItemAction);
+
+        RecycleViewExtDivider itemDecoration = new RecycleViewExtDivider(
+                this, LinearLayoutManager.VERTICAL,
+                (int)getResources().getDimension(R.dimen.main_padding_left),0,
+                ColorUtil.getColor(this,R.color.global_divider_color));
+        rec_function.addItemDecoration(itemDecoration);
     }
 
     @Override

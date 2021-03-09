@@ -26,6 +26,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
 import com.bhex.tools.utils.ColorUtil;
+import com.bhex.tools.utils.LogUtils;
 import com.bhex.tools.utils.PixelUtils;
 import com.bhex.lib.uikit.util.ShapeUtils;
 import com.bhex.network.mvx.base.BaseDialogFragment;
@@ -70,7 +71,8 @@ public class AddressQRFragment extends BaseDialogFragment {
         /*GradientDrawable drawable = ShapeUtils.getRoundRectDrawable(16, Color.parseColor("#00FFFFFF"),Color.parseColor("#1A3375E0"));
         layout_index_0.setBackground(drawable);*/
         AppCompatImageView iv = view.findViewById(R.id.iv_token_icon);
-        BHToken bhToken = CacheCenter.getInstance().getSymbolCache().getBHToken(symbol.toLowerCase());
+        LogUtils.d("AddressQRFragment===>:","symbol=="+symbol);
+        BHToken bhToken = CacheCenter.getInstance().getSymbolCache().getBHToken(symbol);
 
         ImageLoaderUtil.loadImageView(getContext(),bhToken.logo, iv,R.mipmap.ic_default_coin);
         AppCompatImageView iv_qr_code = view.findViewById(R.id.iv_qr_code);
@@ -136,6 +138,7 @@ public class AddressQRFragment extends BaseDialogFragment {
 
     public static AddressQRFragment showFragment(FragmentManager fm, String tag, String tokenName, String address) {
         AddressQRFragment fragment = new AddressQRFragment();
+        LogUtils.d("AddressQRFragment===>:","symbol=uu="+fragment.symbol);
         fragment.address = address;
         fragment.symbol = tokenName;
         fragment.show(fm, tag);

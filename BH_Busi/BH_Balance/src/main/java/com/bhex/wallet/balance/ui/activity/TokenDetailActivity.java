@@ -1,10 +1,12 @@
 package com.bhex.wallet.balance.ui.activity;
 
+import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.View;
 
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,6 +15,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.bhex.lib.uikit.widget.EmptyLayout;
 import com.bhex.lib.uikit.widget.RecycleViewExtDivider;
 import com.bhex.lib.uikit.widget.layout.XUIFrameLayout;
+import com.bhex.lib.uikit.widget.layout.XUIRelativeLayout;
 import com.bhex.network.base.LoadDataModel;
 import com.bhex.network.base.LoadingStatus;
 import com.bhex.network.utils.ToastUtils;
@@ -98,6 +101,18 @@ public abstract class TokenDetailActivity extends BaseActivity<AssetPresenter> {
     @BindView(R2.id.iv_coin_ic)
     AppCompatImageView iv_coin_ic;
 
+    @BindView(R2.id.layout_hbc_view)
+    ConstraintLayout layout_hbc_view;
+
+    @BindView(R2.id.tv_available_value)
+    AppCompatTextView tv_available_value;
+    @BindView(R2.id.tv_entrust_value)
+    AppCompatTextView tv_entrust_value;
+    @BindView(R2.id.tv_redemption_value)
+    AppCompatTextView tv_redemption_value;
+    @BindView(R2.id.tv_income_value)
+    AppCompatTextView tv_income_value;
+
     AppCompatTextView tv_right_title;
 
     TxOrderAdapter mTxOrderAdapter;
@@ -152,14 +167,19 @@ public abstract class TokenDetailActivity extends BaseActivity<AssetPresenter> {
     }
 
     private void initTokenView() {
-        XUIFrameLayout layout_asset_top = findViewById(R.id.layout_asset_top);
-        //layout_asset_top.setShadowColor(ColorUtil.getColor(this,R.color.highlight_text_color));
-
+        //XUIRelativeLayout layout_top = findViewById(R.id.layout_top);
+        //layout_top.setShadowColor(Color.parseColor("#1F3375E0"));
+        if(BHConstants.BHT_TOKEN.equalsIgnoreCase(symbolToken.name)){
+            layout_hbc_view.setVisibility(View.VISIBLE);
+        }else{
+            layout_hbc_view.setVisibility(View.GONE);
+        }
 
         if(!TextUtils.isEmpty(symbolToken.logo)){
             iv_coin_ic.setAlpha(0.1f);
             ImageLoaderUtil.loadImageView(this,symbolToken.logo,iv_coin_ic,R.mipmap.ic_default_coin);
         }
+
         if(BHConstants.BHT_TOKEN.equalsIgnoreCase(symbolBalance.symbol)){
             //转账
             btn_item1.setText(getResources().getString(R.string.transfer_in));
@@ -175,7 +195,6 @@ public abstract class TokenDetailActivity extends BaseActivity<AssetPresenter> {
             btn_item1.setText(getResources().getString(R.string.deposit));
             btn_item2.setText(getResources().getString(R.string.draw_coin));
             //转账
-
         }
 
         //兑币功能
@@ -199,6 +218,24 @@ public abstract class TokenDetailActivity extends BaseActivity<AssetPresenter> {
         //对应法币实际值
         tv_coin_currency.setText(res[1]);
         //链上资产
+
+        //初始化话HBC资产
+        if(BHUserManager.getInstance().getAccountInfo()==null){
+            return;
+        }
+        String available_value = NumberUtil.dispalyForUsertokenAmount4Level(BHUserManager.getInstance().getAccountInfo() .available );
+        tv_available_value.setText(available_value);
+
+        //委托中
+        String bonded_value = NumberUtil.dispalyForUsertokenAmount4Level(BHUserManager.getInstance().getAccountInfo().bonded);
+        tv_entrust_value.setText(bonded_value);
+        //赎回中
+        String unbonding_value = NumberUtil.dispalyForUsertokenAmount4Level(BHUserManager.getInstance().getAccountInfo().unbonding);
+        tv_redemption_value.setText(unbonding_value);
+
+        //已收益
+        String claimed_reward_value = NumberUtil.dispalyForUsertokenAmount4Level(BHUserManager.getInstance().getAccountInfo().claimed_reward);
+        tv_income_value.setText(claimed_reward_value);
     }
 
     @Override

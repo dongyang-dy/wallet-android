@@ -2,9 +2,12 @@ package com.bhex.wallet.bh_main.my.ui.fragment;
 
 
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.bhex.network.base.LoadingStatus;
 import com.bhex.network.utils.ToastUtils;
 import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.ColorUtil;
@@ -15,14 +18,17 @@ import com.bhex.wallet.bh_main.R2;
 import com.bhex.wallet.bh_main.my.adapter.MyAdapter;
 import com.bhex.wallet.bh_main.my.enums.BUSI_MY_TYPE;
 import com.bhex.wallet.bh_main.my.helper.MyHelper;
+import com.bhex.wallet.bh_main.my.model.BHMessage;
 import com.bhex.wallet.bh_main.my.ui.decoration.MyRecyclerViewDivider;
 import com.bhex.wallet.bh_main.my.ui.item.MyItem;
+import com.bhex.wallet.bh_main.my.viewmodel.MessageViewModel;
 import com.bhex.wallet.common.base.BaseFragment;
 import com.bhex.wallet.common.config.ARouterConfig;
 import com.bhex.wallet.common.db.entity.BHWallet;
 import com.bhex.wallet.common.enums.BH_BUSI_URL;
 import com.bhex.wallet.common.helper.BHWalletHelper;
 import com.bhex.wallet.common.manager.BHUserManager;
+import com.bhex.wallet.common.model.BHPage;
 
 import java.util.List;
 
@@ -48,6 +54,8 @@ public class MyFragment extends BaseFragment  {
     private MyAdapter mMyAdapter;
     private BHWallet mCurrentWallet;
 
+    private MessageViewModel msgViewModel;
+
     @Override
     public int getLayoutId() {
         return R.layout.fragment_my;
@@ -55,6 +63,7 @@ public class MyFragment extends BaseFragment  {
 
     @Override
     protected void initView() {
+        msgViewModel = ViewModelProviders.of(this).get(MessageViewModel.class);
 
         mItems = MyHelper.getAllItems(getYActivity());
         rec_my_function.setNestedScrollingEnabled(false);
@@ -115,6 +124,14 @@ public class MyFragment extends BaseFragment  {
         mRootView.findViewById(R.id.layout_index_1).setOnClickListener(v->{
             ARouter.getInstance().build(ARouterConfig.ACCOUNT_MANAGER_PAGE).navigation();
         });
+
+        //消息查询
+        msgViewModel.messageLiveData.observe(this,ldm->{
+            if(ldm.getLoadingStatus()== LoadingStatus.SUCCESS){
+                BHPage<BHMessage> page =  (BHPage<BHMessage>)ldm.getData();
+                mMyAdapter.changeMessageCount(page.unread);
+            }
+        });
     }
 
 
@@ -129,10 +146,21 @@ public class MyFragment extends BaseFragment  {
     }
 
     @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(!hidden){
+            msgViewModel.loadMessageByAddress(this,1,null);
+        }
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         mCurrentWallet = BHUserManager.getInstance().getCurrentBhWallet();
         tv_username.setText(mCurrentWallet.getName());
         BHWalletHelper.proccessAddress(tv_address,mCurrentWallet.getAddress());
+
+        mMyAdapter.notifyItemChanged(3);
+        msgViewModel.loadMessageByAddress(this,1,null);
     }
 }

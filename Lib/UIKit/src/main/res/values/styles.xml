@@ -163,23 +163,33 @@
     <style name="tx_native_link_token">
         <item name="android:paddingTop">1.5dp</item>
         <item name="android:paddingBottom">1.5dp</item>
-        <item name="android:paddingStart">3dp</item>
-        <item name="android:paddingEnd">3dp</item>
+        <item name="android:paddingStart">4dp</item>
+        <item name="android:paddingEnd">4dp</item>
         <item name="android:textSize">10sp</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:textColor">@color/label_native_text_color</item>
+        <item name="android:textColor">@color/global_main_text_color</item>
         <item name="android:background">@drawable/shape_native_token</item>
     </style>
 
     <style name="tx_cross_link_token">
         <item name="android:paddingTop">1.5dp</item>
         <item name="android:paddingBottom">1.5dp</item>
-        <item name="android:paddingStart">3dp</item>
-        <item name="android:paddingEnd">3dp</item>
+        <item name="android:paddingStart">4dp</item>
+        <item name="android:paddingEnd">4dp</item>
         <item name="android:textSize">10sp</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:textColor">@color/global_label_text_color</item>
+        <item name="android:textColor">@color/global_main_text_color</item>
         <item name="android:background">@drawable/shape_dark20_blue</item>
+    </style>
+
+    <style name="token_label_style">
+        <item name="android:paddingTop">1.5dp</item>
+        <item name="android:paddingBottom">1.5dp</item>
+        <item name="android:paddingStart">4dp</item>
+        <item name="android:paddingEnd">4dp</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:background">@drawable/shape_native_token</item>
     </style>
 
     <style name="tx_status_success">

@@ -552,6 +552,9 @@
     <string name="cross_address_generatoring">cross-chain address generating</string>
     <string name="palace_holder">--</string>
     <string name="place_holder">--</string>
+    <string name="mnemonic_checksum_error">Incorrect Mnemonic checksum</string>
+    <string name="delete_wallet_tips">您正在使用当前钱包,请切换后再删除</string>
+    <string name="string_native">Native</string>
     <!--<string name="transfer_in2">Receive</string>
     <string name="transfer_out2">Transfer</string>-->
 </resources>

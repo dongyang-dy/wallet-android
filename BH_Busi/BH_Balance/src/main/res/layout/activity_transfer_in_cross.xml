@@ -11,9 +11,28 @@
     tools:context=".ui.activity.TransferInActivity"
     tools:ignore="MissingDefaultResource">
 
-    <include
-        layout="@layout/layout_toolbar"
-        />
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:navigationIcon="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay"
+        app:titleTextAppearance="@style/Toolbar_textsize"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_center_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            style="@style/toolbar_layout_title_style"
+            tools:text="@string/wallet_create_trusteeship" />
+
+    </androidx.appcompat.widget.Toolbar>
 
     <com.bhex.lib.uikit.widget.layout.XUIRelativeLayout
         android:id="@+id/layout_select_token"

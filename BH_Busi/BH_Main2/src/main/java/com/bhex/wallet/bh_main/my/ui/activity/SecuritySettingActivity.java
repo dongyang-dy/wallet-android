@@ -8,6 +8,7 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bhex.tools.utils.ColorUtil;
+import com.bhex.tools.utils.LogUtils;
 import com.bhex.tools.utils.PixelUtils;
 import com.bhex.lib.uikit.widget.RecycleViewExtDivider;
 import com.bhex.wallet.common.base.BaseActivity;
@@ -73,6 +74,7 @@ public class SecuritySettingActivity extends BaseActivity implements Password30P
         });
     }
 
+
     //设置
     private void updateItemStatus(int position){
         SecuritySettingItem item = mItems.get(position);
@@ -103,16 +105,20 @@ public class SecuritySettingActivity extends BaseActivity implements Password30P
             }
         }
         mSecSetAdapter.notifyDataSetChanged();
-
+        LogUtils.d("SecuritySettingManager==>:","==updateViewStatus==");
         switch (position){
             case 0:
+                LogUtils.d("SecuritySettingManager==>:","==position=0="+position);
                 SecuritySettingManager.getInstance().request_thirty_in_time(false,"");
                 break;
             case 1:
+                LogUtils.d("SecuritySettingManager==>:","==position=1="+position);
                 SecuritySettingManager.getInstance().request_thirty_in_time(true,pwd);
                 break;
             default:
                 break;
         }
     }
+
+
 }

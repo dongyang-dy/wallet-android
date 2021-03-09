@@ -14,6 +14,7 @@ import com.bhex.network.base.LoadDataModel;
 import com.bhex.network.base.LoadingStatus;
 import com.bhex.network.cache.stategy.CacheStrategy;
 import com.bhex.tools.constants.BHConstants;
+import com.bhex.tools.utils.LogUtils;
 import com.bhex.tools.utils.NavigateUtil;
 import com.bhex.wallet.balance.R;
 import com.bhex.wallet.balance.adapter.AnnouncementMF;
@@ -73,6 +74,8 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
 
     @Override
     protected void initView() {
+        LogUtils.d("BalanceFragment===>:","==initView==");
+
         refreshLayout = mRootView.findViewById(R.id.refreshLayout);
         balanceViewHolder = new BalanceViewHolder(getYActivity(),mRootView.findViewById(R.id.layout_balance_top));
         rcv_chain = mRootView.findViewById(R.id.rcv_chain);
@@ -112,6 +115,8 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
         });
 
         refreshLayout.autoRefresh();
+
+
     }
 
 
@@ -152,7 +157,7 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
             BHChain bhChain =  mChainAdapter.getData().get(position);
             ARouter.getInstance().build(ARouterConfig.Balance.Balance_chain_tokens)
                     .withObject("bhChain",bhChain)
-                    .withString("title",BHConstants.BHT_TOKEN)
+                    .withString(BHConstants.TITLE,BHConstants.BHT_TOKEN)
                     .navigation();
         });
 
@@ -185,13 +190,20 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
         String allTokenAssetsText = CurrencyManager.getInstance().getCurrencyDecription(getYActivity(),allTokenAssets);
         balanceViewHolder.tv_asset.setText(allTokenAssetsText);
         mPresenter.setTextFristSamll(balanceViewHolder.tv_asset,allTokenAssetsText);
+
+        //更新列表资产
+        mChainAdapter.notifyDataSetChanged();
     }
 
     private void chooseAccountAction(BHWallet chooseWallet){
         chooseWallet.isDefault = BH_BUSI_TYPE.默认托管单元.getIntValue();
         BHUserManager.getInstance().setCurrentBhWallet(chooseWallet);
+        //请显示的资产
+        BHUserManager.getInstance().setAccountInfo(null);
+        mChainAdapter.notifyDataSetChanged();
         getActivity().recreate();
         walletViewModel.updateWallet(MainActivityManager.getInstance().mainActivity,chooseWallet,chooseWallet.id, BH_BUSI_TYPE.默认托管单元.getIntValue(),false);
+        balanceViewModel.getAccountInfo(MainActivityManager.getInstance().mainActivity,CacheStrategy.cacheAndRemote());
     }
 
     private void updateWalletStatus(LoadDataModel ldm) {

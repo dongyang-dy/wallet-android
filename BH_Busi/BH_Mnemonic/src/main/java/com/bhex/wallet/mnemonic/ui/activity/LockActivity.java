@@ -80,7 +80,7 @@ public class LockActivity extends BaseCacheActivity<LoginPresenter> implements A
 
     @Override
     protected void initView() {
-        inp_wallet_pwd.getEditText().setInputType(InputType.TYPE_CLASS_NUMBER);
+        //inp_wallet_pwd.getEditText().setInputType(InputType.TYPE_NUMBER_VARIATION_PASSWORD);
         mCurrentWallet = BHUserManager.getInstance().getCurrentBhWallet();
         tv_bh_address.setText(mCurrentWallet.getAddress());
         iv_username.setText(mCurrentWallet.getName());
