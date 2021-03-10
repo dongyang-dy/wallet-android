@@ -81,6 +81,8 @@ public class LockActivity extends BaseCacheActivity<LoginPresenter> implements A
     @Override
     protected void initView() {
         //inp_wallet_pwd.getEditText().setInputType(InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+        inp_wallet_pwd.getEditText().setInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+
         mCurrentWallet = BHUserManager.getInstance().getCurrentBhWallet();
         tv_bh_address.setText(mCurrentWallet.getAddress());
         iv_username.setText(mCurrentWallet.getName());
@@ -91,7 +93,6 @@ public class LockActivity extends BaseCacheActivity<LoginPresenter> implements A
     @Override
     protected void addEvent() {
         SecuritySettingManager.getInstance().initSecuritySetting();
-
         walletVM = ViewModelProviders.of(this).get(WalletViewModel.class);
         walletVM.mutableLiveData.observe(this, ldm -> {
             if (ldm.loadingStatus == LoadingStatus.SUCCESS) {

@@ -66,6 +66,9 @@ public class ImportKeystoreActivity extends BaseCacheActivity {
         et_keystore.setGravity(Gravity.TOP);
         et_keystore.setSingleLine(false);
         et_keystore.setHorizontallyScrolling(false);
+
+        inp_origin_pwd.getEditText().setInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+
         /*mPasswordKeyboardView = findViewById(R.id.my_keyboard);
         mPasswordKeyboardView.setAttachToEditText(this,inp_origin_pwd.getEditText(),findViewById(R.id.root_view),findViewById(R.id.keyboard_root));
         findViewById(R.id.keyboard_root).setVisibility(View.GONE);*/
