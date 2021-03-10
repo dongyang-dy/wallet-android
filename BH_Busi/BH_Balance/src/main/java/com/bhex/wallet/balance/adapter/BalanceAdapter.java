@@ -88,15 +88,11 @@ public class BalanceAdapter extends BaseQuickAdapter<BHTokenItem, BaseViewHolder
         updatePriceAndAmount(balanceItem,viewHolder);
         //标签
         AppCompatTextView tv_coin_type = viewHolder.getView(R.id.tv_coin_type);
-        LogUtils.d("BalanceAdapter==>:","balanceItem.symbol=="+balanceItem.symbol);
         BHToken bhCoin  = CacheCenter.getInstance().getSymbolCache().getBHToken(balanceItem.symbol);
 
         if(bhCoin==null){
-            LogUtils.d("BalanceAdapter==>:","bhCoin==null");
             return;
         }
-
-        LogUtils.d("BalanceAdapter==>:","bhCoin.is_native=="+bhCoin.is_native);
         if(bhCoin.name.equalsIgnoreCase(BHConstants.BHT_TOKEN)){
             tv_coin_type.setVisibility(View.GONE);
             tv_coin_type.setBackgroundColor(0);
@@ -173,7 +169,6 @@ public class BalanceAdapter extends BaseQuickAdapter<BHTokenItem, BaseViewHolder
         //币的数量
         if(isHidden.equals("0")){
             if(!TextUtils.isEmpty(balanceItem.amount) && Double.valueOf(balanceItem.amount)>0) {
-                LogUtils.d("BalanceAdapter==>","==balanceItem.symbol=="+balanceItem.symbol);
                 String []result = BHBalanceHelper.getAmountToCurrencyValue(getContext(),balanceItem.amount,balanceItem.symbol,false);
                 viewHolder.setText(R.id.tv_coin_amount, result[0]);
                 viewHolder.setText(R.id.tv_coin_count, "≈"+result[1]);

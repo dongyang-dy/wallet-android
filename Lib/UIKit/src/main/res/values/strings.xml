@@ -538,7 +538,8 @@
 
     <!--<string name="cross_transfer_out_tips">提示：\n您正在进行跨链提币,请务必确认提币地址为该链的原生公链地址</string>-->
     <string name="cross_transfer_out_tips">您正在进行跨链提币,请务必确认提币地址为该链的原生公链地址</string>
-    <string name="cross_transfer_inner_tips">您正在进行HBTC链内转账,请务必确认接收地址以HBC开头</string>
+    <string name="transfer_inner_tips">您正在进行HBTC链内转账,请务必确认接收地址以HBC开头</string>
+    <string name="cross_transfer_highlight_text">该链的原生公链地址</string>
 
     <string name="confrim_create">确认创建</string>
     <string name="token">币种</string>
@@ -555,7 +556,8 @@
     <string name="retry">重试</string>
     <string name="clear">清空</string>
     <string name="cross_address_generatoring">跨链地址生成中</string>
-    <string name="palace_holder">--</string>
+    <string name="place_holder">--</string>
+
     <!--<string name="transfer_in2">收款</string>
     <string name="transfer_out2">转账</string>-->
 
@@ -568,9 +570,15 @@
     <string name="delete_wallet">删除钱包</string>
     <string name="update_success">修改成功</string>
     <string name="save_qr_code">保存二维码</string>
-    <string name="place_holder">--</string>
     <string name="mnemonic_checksum_error">助记词校验位错误</string>
     <string name="delete_wallet_tips">您正在使用当前钱包,请切换后再删除</string>
     <string name="string_native">原生</string>
+    <string name="input_address_hint">请粘贴地址或扫描地址二维码</string>
+    <string name="import_mnemonic_subtitle">12个单词</string>
+    <string name="import_keystore_subtitle">一段长文本字符</string>
+    <string name="import_pk_subtitle">看起来像abcdefxxxx....的一串字符</string>
+    <string name="delete_account_confirm">确定删除当前账户</string>
+    <string name="add_account">新增账户</string>
+    <string name="input_delete_account_hint">确认删除，请输安全密码</string>
 
 </resources>

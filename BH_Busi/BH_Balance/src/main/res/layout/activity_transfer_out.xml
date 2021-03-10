@@ -92,7 +92,7 @@
                         android:layout_toLeftOf="@+id/btn_scan_address"
                         android:layout_centerVertical="true"
                         android:textColorHint="@color/global_input_hint_color"
-                        android:hint="请粘贴地址或扫描地址二维码"
+                        android:hint="@string/input_address_hint"
                         android:background="@null"
                         android:textSize="14sp"
                         />
@@ -112,6 +112,7 @@
                     android:background="@color/global_divider_color"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_transfer_out_tip"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
@@ -120,7 +121,7 @@
                     android:textColor="@color/global_main_gray_color"
                     android:paddingStart="@dimen/main_padding_left"
                     android:paddingEnd="@dimen/main_padding_right"
-                    android:text="@string/cross_transfer_inner_tips"
+                    android:text="@string/transfer_inner_tips"
                     />
 
                 <View
@@ -198,6 +199,7 @@
                         android:hint="@string/please_transfer_amount"
                         android:background="@null"
                         android:textSize="14sp"
+                        android:inputType="numberDecimal"
                         />
 
                     <androidx.appcompat.widget.AppCompatTextView

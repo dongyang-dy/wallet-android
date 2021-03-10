@@ -17,7 +17,7 @@
             android:id="@+id/tv_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/delete_account"
+            android:text="@string/delete_account_confirm"
             android:textSize="15sp"
             android:layout_centerVertical="true"
             android:textColor="@color/global_main_text_color"/>
@@ -52,7 +52,7 @@
         android:background="@null"
         android:textSize="14sp"
         android:inputType="numberPassword"
-        android:hint="确认删除，请输安全密码"
+        android:hint="@string/input_delete_account_hint"
         />
 
     <View

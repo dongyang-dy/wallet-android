@@ -54,7 +54,7 @@ import butterknife.BindView;
 @Route(path = ARouterConfig.Balance.Balance_transfer_out)
 public class TransferOutActivity extends BaseActivity {
 
-    @Autowired(name="symbol")
+    @Autowired(name=BHConstants.SYMBOL)
     String m_symbol;
 
     @BindView(R2.id.tv_center_title)
@@ -71,7 +71,7 @@ public class TransferOutActivity extends BaseActivity {
 
     TransactionViewModel mTransactionViewModel;
 
-    TokenViewModel mTokenViewModel;
+    //TokenViewModel mTokenViewModel;
 
     private SmartRefreshLayout mRefreshLayout;
 

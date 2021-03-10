@@ -184,7 +184,7 @@ public class MyHelper {
         //创建和导入助记词 能备份
         if(chooseWallet.getWay()!= MAKE_WALLET_TYPE.创建助记词.getWay() &&
                 chooseWallet.getWay()!= MAKE_WALLET_TYPE.导入助记词.getWay()){
-            myItems.remove(0);
+            myItems.remove(2);
         }
         return myItems;
     }

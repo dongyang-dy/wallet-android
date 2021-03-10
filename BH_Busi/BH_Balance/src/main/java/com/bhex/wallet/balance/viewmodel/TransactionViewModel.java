@@ -277,13 +277,11 @@ public class TransactionViewModel extends AndroidViewModel implements LifecycleO
             @Override
             protected void onFailure(int code, String errorMsg) {
                 super.onFailure(code, errorMsg);
-                LogUtils.d("TransactionViewModel===>:","===code=="+code);
 
                 LoadDataModel lmd = new LoadDataModel(code,errorMsg);
                 mutableLiveData.postValue(lmd);
             }
         };
-        LogUtils.d("TransactionViewModel==>:","==address=="+BHUserManager.getInstance().getCurrentBhWallet().address);
         BHttpApi.getService(BHttpApiInterface.class)
                 .loadAccount(BHUserManager.getInstance().getCurrentBhWallet().address)
                 .observeOn(Schedulers.io())

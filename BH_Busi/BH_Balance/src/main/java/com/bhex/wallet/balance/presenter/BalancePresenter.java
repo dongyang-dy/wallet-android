@@ -218,7 +218,6 @@ public class BalancePresenter extends BasePresenter {
 
 
     public void setTextFristSamll(AppCompatTextView tv_asset, String allTokenAssetsText) {
-        LogUtils.d("BalanceP");
 
         SpannableString spanStr = new SpannableString(allTokenAssetsText);
         spanStr.setSpan(new AbsoluteSizeSpan(PixelUtils.dp2px(getActivity(),16)), 0, 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);

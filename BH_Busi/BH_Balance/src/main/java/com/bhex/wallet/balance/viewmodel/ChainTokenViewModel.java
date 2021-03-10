@@ -102,7 +102,6 @@ public class ChainTokenViewModel extends AndroidViewModel {
             @Override
             protected void onFailure(int code, String errorMsg) {
                 super.onFailure(code, errorMsg);
-                LogUtils.d("ChainTokenViewModel===>:","error====");
             }
         };
 

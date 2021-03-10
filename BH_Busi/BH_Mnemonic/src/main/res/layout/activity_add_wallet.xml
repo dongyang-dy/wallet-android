@@ -65,7 +65,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="19dp"
-                    android:text="12个单词"
+                    android:text="@string/import_mnemonic_subtitle"
                     android:textSize="13sp"
                     android:gravity="center_vertical"
                     android:textColor="@color/global_main_text_color"/>
@@ -120,8 +120,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="19dp"
-                    android:text="一段长文本字符
-"
+                    android:text="@string/import_keystore_subtitle"
                     android:textSize="13sp"
                     android:gravity="center_vertical"
                     android:textColor="@color/global_main_text_color"/>
@@ -177,7 +176,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="19dp"
                     android:gravity="center_vertical"
-                    android:text="看起来像abcdefxxxx....的一串字符"
+                    android:text="@string/import_pk_subtitle"
                     android:textColor="@color/global_main_text_color"
                     android:textSize="13sp" />
             </LinearLayout>

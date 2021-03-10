@@ -506,6 +506,7 @@
     <string name="add_wallet">Add wallet</string>
     <string name="number_password">6-digit password</string>
     <string name="please_number_password">please input 6-digit password</string>
+    <string name="password_input_rule">密码不能为6位连续或者重复的数字</string>
     <string name="create">Create</string>
     <string name="confirm_number_password">Input 6-digit password again</string>
     <string name="input_security_password">Input password</string>
@@ -534,7 +535,8 @@
     <string name="input_receive_address">Input transfer-in address</string>
     <string name="input_withdraw_address">Input withdrawal address</string>
     <string name="cross_transfer_out_tips">You are withdrawing tokens across the chains.Please ensure that the token withdrawal address is its public chain address</string>
-    <string name="cross_transfer_inner_tips">This account supports HBC, HRC10 and cross-chain custody assets on HBTC chain</string>
+    <string name="transfer_inner_tips">This account supports HBC, HRC10 and cross-chain custody assets on HBTC chain</string>
+    <string name="cross_transfer_highlight_text">该链的原生公链地址</string>
     <string name="confrim_create">Comfirm to create</string>
     <string name="token">Token</string>
     <string name="create_crosslink_deposit_address">Create cross-chain deposit address</string>
@@ -550,11 +552,28 @@
     <string name="retry">Retry</string>
     <string name="clear">Clear</string>
     <string name="cross_address_generatoring">cross-chain address generating</string>
-    <string name="palace_holder">--</string>
     <string name="place_holder">--</string>
+
+
+    <string name="account_detail">账户详情</string>
+    <string name="update_name">更改名称</string>
+    <string name="reset_security_pwd">重置安全密码</string>
+    <string name="export_mnemonic">导出助记词</string>
+    <string name="export_private_key">导出私钥</string>
+    <string name="export_keystore">导出Keystore</string>
+    <string name="delete_wallet">删除钱包</string>
+    <string name="update_success">修改成功</string>
+    <string name="save_qr_code">保存二维码</string>
     <string name="mnemonic_checksum_error">Incorrect Mnemonic checksum</string>
     <string name="delete_wallet_tips">您正在使用当前钱包,请切换后再删除</string>
     <string name="string_native">Native</string>
+    <string name="input_address_hint">请粘贴地址或扫描地址二维码</string>
+    <string name="import_mnemonic_subtitle">12个单词</string>
+    <string name="import_keystore_subtitle">一段长文本字符</string>
+    <string name="import_pk_subtitle">看起来像abcdefxxxx....的一串字符</string>
+    <string name="delete_account_confirm">确定删除当前账户</string>
+    <string name="add_account">新增账户</string>
+    <string name="input_delete_account_hint">确认删除，请输安全密码</string>
     <!--<string name="transfer_in2">Receive</string>
     <string name="transfer_out2">Transfer</string>-->
 </resources>

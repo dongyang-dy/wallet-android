@@ -67,7 +67,6 @@ public class BHBalanceHelper {
      */
     public static String[]  getAmountToCurrencyValue(Context context,String amount, String symbol,boolean flag){
         String []result = new String[2];
-        LogUtils.d("BHBalanceHelper===>:","==symbol=="+symbol);
         BHToken bhToken = CacheCenter.getInstance().getSymbolCache().getBHToken(symbol);
         int decimals = bhToken!=null?bhToken.decimals:2;
         if(!flag){
@@ -191,19 +190,16 @@ public class BHBalanceHelper {
     //获取链下的资产
     public static double getAssetByChain(Context context,String chain){
         double res = 0;
-        LogUtils.d("BHBalanceHelper===>:","getAssetByChain=="+BHUserManager.getInstance().getAccountInfo());
         AccountInfo accountInfo = BHUserManager.getInstance().getAccountInfo();
         if(accountInfo==null){
             return res;
         }
-        LogUtils.d("BHBalanceHelper===>:","accountInfo==");
         List<AccountInfo.AssetsBean> list = accountInfo.assets;
         if(ToolUtils.checkListIsEmpty(list)){
             return res;
         }
         for (int i = 0; i < list.size(); i++) {
             AccountInfo.AssetsBean assetsBean = list.get(i);
-            LogUtils.d("BHBalanceHelper===>:","symbol=="+assetsBean.symbol);
             BHToken bhToken = CacheCenter.getInstance().getSymbolCache().getBHToken(assetsBean.symbol);
             if(bhToken==null){
                 continue;

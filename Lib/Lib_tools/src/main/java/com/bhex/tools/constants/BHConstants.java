@@ -100,6 +100,8 @@ public class BHConstants {
 
     public static final String TITLE = "title";
     public static final String SYMBOL = "symbol";
+    public static final String WAY = "way";
+    public static final String URL = "url";
 
     public static final int PRIVATE_KEY_LENGTH = 64;
 

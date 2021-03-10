@@ -46,10 +46,14 @@ public class SecuritySettingManager {
         BHWallet bhWallet = BHUserManager.getInstance().getCurrentBhWallet();
         //String key = thirty_in_time_label;
         SecuritySettingManager.getInstance().thirty_in_time = checked;
-        bhWallet.pwd = pwd;
+
         if(!TextUtils.isEmpty(pwd)){
+            bhWallet.pwd = pwd;
             SecurityTimer.getInstance().start();
         }else{
+            bhWallet.pwd = pwd;
+            bhWallet.password = "";
+            bhWallet.mnemonic = "";
             SecurityTimer.getInstance().stop();
         }
         //MMKVManager.getInstance().mmkv().encode(key,checked);

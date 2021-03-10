@@ -45,6 +45,8 @@ public class SecurityTimer {
                         isStart = false;
                         BHWallet bhWallet = BHUserManager.getInstance().getCurrentBhWallet();
                         bhWallet.pwd = "";
+                        bhWallet.password = "";
+                        bhWallet.mnemonic = "";
                         SecuritySettingManager.getInstance().thirty_in_time = false;
                     }
                 };

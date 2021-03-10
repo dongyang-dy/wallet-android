@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableStart="@mipmap/ic_plus"
-                android:text="新增账户"
+                android:text="@string/add_account"
                 android:textColor="@color/highlight_text_color"
                 android:textSize="15sp"
                 android:paddingTop="7dp"

@@ -35,6 +35,7 @@ import com.bhex.wallet.common.event.AccountEvent;
 import com.bhex.wallet.common.manager.BHUserManager;
 import com.bhex.wallet.common.manager.CurrencyManager;
 import com.bhex.wallet.common.manager.MainActivityManager;
+import com.bhex.wallet.common.manager.SecuritySettingManager;
 import com.bhex.wallet.common.model.BHChain;
 import com.bhex.wallet.common.utils.LiveDataBus;
 import com.bhex.wallet.common.viewmodel.BalanceViewModel;
@@ -42,6 +43,8 @@ import com.bhex.wallet.common.viewmodel.WalletViewModel;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -74,8 +77,7 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
 
     @Override
     protected void initView() {
-        LogUtils.d("BalanceFragment===>:","==initView==");
-
+        EventBus.getDefault().register(this);
         refreshLayout = mRootView.findViewById(R.id.refreshLayout);
         balanceViewHolder = new BalanceViewHolder(getYActivity(),mRootView.findViewById(R.id.layout_balance_top));
         rcv_chain = mRootView.findViewById(R.id.rcv_chain);
@@ -115,8 +117,6 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
         });
 
         refreshLayout.autoRefresh();
-
-
     }
 
 
@@ -134,7 +134,7 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
             if(!TextUtils.isEmpty(holder.getData().jump_url)){
                 ARouter.getInstance()
                         .build(ARouterConfig.Market.market_webview)
-                        .withString("url",holder.getData().jump_url)
+                        .withString(BHConstants.URL,holder.getData().jump_url)
                         .navigation();
             }
         });
@@ -166,6 +166,14 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
             ARouter.getInstance().build(ARouterConfig.ACCOUNT_MANAGER_PAGE).navigation();
         });
 
+
+        mRootView.findViewById(R.id.iv_announce_close).setOnClickListener(v->{
+            //关闭通知
+            mRootView.findViewById(R.id.layout_announce).setVisibility(View.GONE);
+            //
+            MarqueeView marqueeView = mRootView.findViewById(R.id.marquee_announce);
+            marqueeView.stopFlipping();
+        });
     }
 
     //更新公告
@@ -195,6 +203,7 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
         mChainAdapter.notifyDataSetChanged();
     }
 
+    //切换账户--事件
     private void chooseAccountAction(BHWallet chooseWallet){
         chooseWallet.isDefault = BH_BUSI_TYPE.默认托管单元.getIntValue();
         BHUserManager.getInstance().setCurrentBhWallet(chooseWallet);
@@ -204,6 +213,8 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
         getActivity().recreate();
         walletViewModel.updateWallet(MainActivityManager.getInstance().mainActivity,chooseWallet,chooseWallet.id, BH_BUSI_TYPE.默认托管单元.getIntValue(),false);
         balanceViewModel.getAccountInfo(MainActivityManager.getInstance().mainActivity,CacheStrategy.cacheAndRemote());
+        //取消定时
+        SecuritySettingManager.getInstance().request_thirty_in_time(false,"");
     }
 
     private void updateWalletStatus(LoadDataModel ldm) {
@@ -212,19 +223,25 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
         }
     }
 
-    /*@Subscribe(threadMode = ThreadMode.MAIN)
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void changeAccount(AccountEvent walletEvent){
         //当前钱包用户
-        *//*bhWallet = BHUserManager.getInstance().getCurrentBhWallet();
+        //balanceViewModel.c = BHUserManager.getInstance().getCurrentBhWallet();
         //AssetHelper.proccessAddress(tv_address,bhWallet.getAddress());
         //清空原始用户资产
         balanceViewHolder.tv_asset.setText("");
-        balanceViewHolder.tv_wallet_name.setText(bhWallet.name);
-        //balanceViewHolder.tv_wallet_name.setText(bhWallet.name+"-" +SequenceManager.getInstance().getSequence());
         mChainAdapter.notifyDataSetChanged();
+        //取消定时
+        SecuritySettingManager.getInstance().request_thirty_in_time(false,"");
         //更新资产
-        balanceViewModel.getAccountInfo(getYActivity(),null);*//*
-    }*/
+        balanceViewModel.getAccountInfo(getYActivity(),CacheStrategy.cacheAndRemote());
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 
     int refreshCount = 0;
     public void refreshfinish(){

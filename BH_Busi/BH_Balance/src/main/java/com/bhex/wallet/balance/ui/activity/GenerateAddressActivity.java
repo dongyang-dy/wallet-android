@@ -44,7 +44,7 @@ import java.util.List;
 public class GenerateAddressActivity extends BaseActivity
         implements Password30PFragment.PasswordClickListener{
 
-    @Autowired(name = "symbol")
+    @Autowired(name = BHConstants.SYMBOL)
     String symbol;
 
     @Autowired(name = "chain")

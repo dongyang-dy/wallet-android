@@ -1,7 +1,11 @@
 package com.bhex.wallet.balance.ui.viewhodler;
 
+import android.graphics.Color;
 import android.text.InputType;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 
 import androidx.appcompat.widget.AppCompatEditText;
@@ -11,6 +15,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bhex.network.utils.ToastUtils;
 import com.bhex.tools.constants.BHConstants;
+import com.bhex.tools.utils.ColorUtil;
 import com.bhex.tools.utils.NumberUtil;
 import com.bhex.tools.utils.RegexUtil;
 import com.bhex.wallet.balance.R;
@@ -46,6 +51,9 @@ public class TransferOutVH {
     public AppCompatTextView tv_available_amount;
     //手续费
     public AppCompatTextView tv_fee;
+    
+    //转账提示
+    public AppCompatTextView tv_transfer_out_tip;
 
     //转账按钮
     public MaterialButton btn_transfer;
@@ -76,7 +84,7 @@ public class TransferOutVH {
         tv_available_amount = mRootView.findViewById(R.id.tv_available_amount);
         tv_fee = mRootView.findViewById(R.id.tv_fee);
         btn_transfer = mRootView.findViewById(R.id.btn_transfer);
-
+        tv_transfer_out_tip = mRootView.findViewById(R.id.tv_transfer_out_tip);
 
         //二维码扫描
         btn_scan_address.setOnClickListener(v -> {
@@ -86,7 +94,21 @@ public class TransferOutVH {
         btn_all.setOnClickListener(this::transferAllAction);
 
         //设置输入框键盘类型
-        inp_transfer_amount.setInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        //inp_transfer_amount.setInputType(InputType.Te|InputType.TYPE_NUMBER_FLAG_DECIMAL);
+
+        //设置提示文本颜色
+        String v_transfer_inner_tips = activity.getString(R.string.transfer_inner_tips);
+        SpannableString spannableString = new SpannableString(v_transfer_inner_tips);
+        int start_index = v_transfer_inner_tips.indexOf(BHConstants.BHT_TOKEN.toUpperCase());
+        if(start_index>=0){
+            //设置HBC 高亮
+            ForegroundColorSpan colorSpan = new ForegroundColorSpan(ColorUtil.getColor(m_activity,R.color.transfer_highlight_text_color));
+
+            spannableString.setSpan(colorSpan,start_index ,
+                    start_index+BHConstants.BHT_TOKEN.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+
+            tv_transfer_out_tip.setText(spannableString);
+        }
     }
 
 

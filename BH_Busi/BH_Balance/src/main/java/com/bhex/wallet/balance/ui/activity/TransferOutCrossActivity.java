@@ -180,7 +180,7 @@ public class TransferOutCrossActivity extends BaseActivity {
     private void withDrawAtion(View view) {
         //隐藏键盘
         ToolUtils.hintKeyBoard(this);
-        
+
         boolean flag = transferOutCrossVH.verifyWithDrawAction();
         if(!flag){
             return;

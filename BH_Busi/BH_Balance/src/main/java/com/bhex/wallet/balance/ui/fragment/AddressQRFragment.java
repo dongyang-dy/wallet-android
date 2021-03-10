@@ -71,7 +71,6 @@ public class AddressQRFragment extends BaseDialogFragment {
         /*GradientDrawable drawable = ShapeUtils.getRoundRectDrawable(16, Color.parseColor("#00FFFFFF"),Color.parseColor("#1A3375E0"));
         layout_index_0.setBackground(drawable);*/
         AppCompatImageView iv = view.findViewById(R.id.iv_token_icon);
-        LogUtils.d("AddressQRFragment===>:","symbol=="+symbol);
         BHToken bhToken = CacheCenter.getInstance().getSymbolCache().getBHToken(symbol);
 
         ImageLoaderUtil.loadImageView(getContext(),bhToken.logo, iv,R.mipmap.ic_default_coin);
@@ -138,7 +137,6 @@ public class AddressQRFragment extends BaseDialogFragment {
 
     public static AddressQRFragment showFragment(FragmentManager fm, String tag, String tokenName, String address) {
         AddressQRFragment fragment = new AddressQRFragment();
-        LogUtils.d("AddressQRFragment===>:","symbol=uu="+fragment.symbol);
         fragment.address = address;
         fragment.symbol = tokenName;
         fragment.show(fm, tag);

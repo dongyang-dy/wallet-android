@@ -56,7 +56,6 @@ public class TipsViewHolder {
             }*/
 
             int index = LocalManageUtil.getSetLanguageLocaleIndex(context);
-            LogUtils.d("TipsViewHolder==>:","index=="+index);
 
             if(index==2){
                 tv_tip_content.setSingleLine(true);

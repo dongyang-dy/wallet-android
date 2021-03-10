@@ -37,7 +37,7 @@ import butterknife.OnClick;
 @Route(path = ARouterConfig.Balance.Balance_Token_Detail)
 public class DexTokenDetailActivity extends TokenDetailActivity {
 
-    @Autowired(name = "symbol")
+    @Autowired(name = BHConstants.SYMBOL)
     String symbol;
     @Autowired(name = "chain")
     String chain;
@@ -47,8 +47,8 @@ public class DexTokenDetailActivity extends TokenDetailActivity {
         if (view.getId() == R.id.btn_item1) {
             if(symbolToken.chain.toLowerCase().equals(BHConstants.BHT_TOKEN)){
                 ARouter.getInstance().build(ARouterConfig.Balance.Balance_transfer_in)
-                        .withString("symbol", symbol)
-                        .withInt("way", BH_BUSI_TYPE.链内转账.getIntValue())
+                        .withString(BHConstants.SYMBOL, symbol)
+                        .withInt(BHConstants.WAY, BH_BUSI_TYPE.链内转账.getIntValue())
                         .navigation();
             }else{
                 if(TextUtils.isEmpty(chainSymbolBalance.external_address)){
@@ -56,8 +56,8 @@ public class DexTokenDetailActivity extends TokenDetailActivity {
                     generateCrossLinkAddress();
                 }else{
                     ARouter.getInstance().build(ARouterConfig.Balance.Balance_transfer_in)
-                            .withString("symbol", symbol)
-                            .withInt("way", BH_BUSI_TYPE.跨链转账.getIntValue())
+                            .withString(BHConstants.SYMBOL, symbol)
+                            .withInt(BHConstants.WAY, BH_BUSI_TYPE.跨链转账.getIntValue())
                             .navigation();
                 }
             }
@@ -65,20 +65,20 @@ public class DexTokenDetailActivity extends TokenDetailActivity {
         } else if (view.getId() == R.id.btn_item2) {
             if(symbolToken.chain.toLowerCase().equals(BHConstants.BHT_TOKEN)){
                 ARouter.getInstance().build(ARouterConfig.Balance.Balance_transfer_out)
-                        .withString("symbol", symbol)
-                        .withInt("way", BH_BUSI_TYPE.链内转账.getIntValue())
+                        .withString(BHConstants.SYMBOL, symbol)
+                        .withInt(BHConstants.WAY, BH_BUSI_TYPE.链内转账.getIntValue())
                         .navigation();
             }else{
                 ARouter.getInstance().build(ARouterConfig.Balance.Balance_transfer_out)
-                        .withString("symbol", symbol)
-                        .withInt("way",BH_BUSI_TYPE.跨链转账.getIntValue())
+                        .withString(BHConstants.SYMBOL, symbol)
+                        .withInt(BHConstants.WAY,BH_BUSI_TYPE.跨链转账.getIntValue())
                         .navigation();
             }
 
         } else if (view.getId() == R.id.btn_item3) {
             //提取收益
             //withdrawShare();
-            ARouter.getInstance().build(ARouterConfig.Market_swap_mapping).withString("symbol",symbol).navigation();
+            ARouter.getInstance().build(ARouterConfig.Market_swap_mapping).withString(BHConstants.SYMBOL,symbol).navigation();
         } else if (view.getId() == R.id.btn_item4) {
             //reDelegate();
             //
@@ -139,20 +139,20 @@ public class DexTokenDetailActivity extends TokenDetailActivity {
                 //请求用户资产 获取链外地址
                 //balanceViewModel.getAccountInfo(this, CacheStrategy.onlyRemote());
                 ARouter.getInstance().build(ARouterConfig.Balance.Balance_cross_address)
-                        .withString("symbol", symbol)
-                        .withInt("way",BH_BUSI_TYPE.跨链转账.getIntValue())
+                        .withString(BHConstants.SYMBOL, symbol)
+                        .withInt(BHConstants.WAY,BH_BUSI_TYPE.跨链转账.getIntValue())
                         .navigation();
             }else{
 
                 ARouter.getInstance().build(ARouterConfig.Balance.Balance_transfer_in)
-                        .withString("symbol", symbol)
-                        .withInt("way",BH_BUSI_TYPE.跨链转账.getIntValue())
+                        .withString(BHConstants.SYMBOL, symbol)
+                        .withInt(BHConstants.WAY,BH_BUSI_TYPE.跨链转账.getIntValue())
                         .navigation();
             }
         }else if(position==1){
             ARouter.getInstance().build(ARouterConfig.Balance.Balance_transfer_out)
-                    .withString("symbol", symbol)
-                    .withInt("way",BH_BUSI_TYPE.跨链转账.getIntValue())
+                    .withString(BHConstants.SYMBOL, symbol)
+                    .withInt(BHConstants.WAY,BH_BUSI_TYPE.跨链转账.getIntValue())
                     .navigation();
         }
     };

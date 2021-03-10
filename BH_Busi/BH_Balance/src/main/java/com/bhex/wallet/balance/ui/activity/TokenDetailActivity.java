@@ -100,6 +100,9 @@ public abstract class TokenDetailActivity extends BaseActivity<AssetPresenter> {
     SmartRefreshLayout refreshLayout;
     @BindView(R2.id.iv_coin_ic)
     AppCompatImageView iv_coin_ic;
+    @BindView(R2.id.iv_coin_small_ic)
+    AppCompatImageView iv_coin_small_ic;
+
 
     @BindView(R2.id.layout_hbc_view)
     ConstraintLayout layout_hbc_view;
@@ -178,6 +181,9 @@ public abstract class TokenDetailActivity extends BaseActivity<AssetPresenter> {
         if(!TextUtils.isEmpty(symbolToken.logo)){
             iv_coin_ic.setAlpha(0.1f);
             ImageLoaderUtil.loadImageView(this,symbolToken.logo,iv_coin_ic,R.mipmap.ic_default_coin);
+            //小图标
+            ImageLoaderUtil.loadImageView(this,symbolToken.logo, iv_coin_small_ic,R.mipmap.ic_default_coin);
+
         }
 
         if(BHConstants.BHT_TOKEN.equalsIgnoreCase(symbolBalance.symbol)){
@@ -416,7 +422,6 @@ public abstract class TokenDetailActivity extends BaseActivity<AssetPresenter> {
                 .concat("tokens/")
                 .concat(getSymbol())
                 .concat("?lang=").concat(v_local_display);
-        LogUtils.d("url==>"+url);
 
         return url;
     }

@@ -102,12 +102,10 @@ public class Password30PFragment extends BaseDialogFragment {
             }
         });
 
-
         mPasswordInputView.setOnInputListener(new PasswordInputView.OnInputListener() {
             @Override
             public void onComplete(String input) {
                 //checkPassword(input);
-
                 verifyKeystore(input);
             }
 
@@ -150,6 +148,7 @@ public class Password30PFragment extends BaseDialogFragment {
     //校验当前Keystore
     private void verifyCurrentKeystore(String inputPwd){
         BHWallet wallet = BHUserManager.getInstance().getCurrentBhWallet();
+        //LogUtils.d("Password30PFragment==>:","wallet.password=="+wallet.password);
         if(TextUtils.isEmpty(wallet.password)){
             walletViewModel.verifyKeystore(this,wallet.keystorePath,inputPwd);
         }else{
@@ -287,7 +286,12 @@ public class Password30PFragment extends BaseDialogFragment {
     private void commonViewClick(View view) {
         if(view.getId()==R.id.btn_sure){
             //再次弹出密码输入框
-            Password30PFragment.showPasswordDialog(mFm,Password30PFragment.class.getName(),passwordClickListener,position,isShow30Password);
+            if(verifyPwdWay==BH_BUSI_TYPE.校验当前账户密码.getIntValue()){
+                Password30PFragment.showPasswordDialog(mFm,Password30PFragment.class.getName(),passwordClickListener,position,isShow30Password);
+            }else{
+                Password30PFragment p30f = Password30PFragment.showPasswordChooseDialog(mFm,passwordClickListener,position,choose_wallet_address);
+                p30f.show(mFm,Password30PFragment.class.getName());
+            }
         }
     }
 

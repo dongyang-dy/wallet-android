@@ -118,6 +118,8 @@ public class SecuritySettingActivity extends BaseActivity implements Password30P
             default:
                 break;
         }
+        LogUtils.d("SecuritySettingManager==>:","==thirty_in_time=="+SecuritySettingManager.getInstance().thirty_in_time);
+
     }
 
 

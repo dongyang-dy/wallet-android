@@ -18,7 +18,7 @@
         android:layout_marginEnd="@dimen/main_margin_right"
         app:cardElevation="0dp"
         app:strokeWidth="2dp"
-        app:strokeColor="@color/transfer_stoke_color"
+        app:strokeColor="@color/global_divider_color"
         app:cardCornerRadius="@dimen/main_radius_conner"
         app:cardForegroundColor="@color/bg_trans"
         app:cardBackgroundColor="@color/app_bg"

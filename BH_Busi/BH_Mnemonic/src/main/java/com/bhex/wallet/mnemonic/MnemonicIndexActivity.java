@@ -6,6 +6,7 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.bhex.tools.constants.BHConstants;
 import com.bhex.wallet.common.base.BaseCacheActivity;
 import com.bhex.wallet.common.config.ARouterConfig;
 import com.bhex.wallet.common.enums.MAKE_WALLET_TYPE;
@@ -50,10 +51,10 @@ public class MnemonicIndexActivity extends BaseCacheActivity {
         if(view.getId()== R.id.btn_generate_wallet){
             ARouter.getInstance()
                     .build(ARouterConfig.TRUSTEESHIP_MNEMONIC_FRIST)
-                    .withInt("way", MAKE_WALLET_TYPE.创建助记词.getWay())
+                    .withInt(BHConstants.WAY, MAKE_WALLET_TYPE.创建助记词.getWay())
                     .navigation();
         }else if(view.getId()== R.id.btn_import_wallet){
-            ARouter.getInstance().build(ARouterConfig.TRUSTEESHIP_IMPORT_INDEX).navigation();
+            ARouter.getInstance().build(ARouterConfig.Trusteeship.Trusteeship_Add_Index).navigation();
         }
 
     }

@@ -35,7 +35,6 @@ public class AnnouncementMF  extends MarqueeFactory<RelativeLayout, Announcement
     @Override
     public RelativeLayout generateMarqueeItemView(AnnouncementItem item) {
         RelativeLayout view = (RelativeLayout) inflater.inflate(R.layout.layout_index_announcement, null);
-        LogUtils.d("AnnouncementMF==>:","item==="+item.text);
         /*CircleView circleView = view.findViewById(R.id.iv_announce_bg);
         AppCompatImageView iv_announce_type = view.findViewById(R.id.iv_announce_type);
         //增加背景

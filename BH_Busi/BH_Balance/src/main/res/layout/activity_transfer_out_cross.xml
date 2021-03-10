@@ -79,6 +79,7 @@
                     />
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_cross_transfer_out_tip"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"

@@ -1,7 +1,10 @@
 package com.bhex.wallet.balance.ui.viewhodler;
 
 import android.text.InputType;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 
 import androidx.appcompat.widget.AppCompatEditText;
@@ -11,6 +14,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bhex.network.utils.ToastUtils;
 import com.bhex.tools.constants.BHConstants;
+import com.bhex.tools.utils.ColorUtil;
 import com.bhex.tools.utils.LogUtils;
 import com.bhex.tools.utils.NumberUtil;
 import com.bhex.tools.utils.RegexUtil;
@@ -54,6 +58,9 @@ public class TransferOutCrossVH {
     public AppCompatTextView tv_fee;
     public AppCompatTextView tv_fee_token;
 
+    //跨链转账提示
+    public AppCompatTextView tv_cross_transfer_out_tip;
+
     //选择币种
     public View layout_select_token;
 
@@ -82,6 +89,7 @@ public class TransferOutCrossVH {
         tv_available_amount = mRootView.findViewById(R.id.tv_available_amount);
         tv_withdraw_fee = mRootView.findViewById(R.id.tv_withdraw_fee);
         tv_withdraw_fee_token = mRootView.findViewById(R.id.tv_withdraw_fee_token);
+        tv_cross_transfer_out_tip = mRootView.findViewById(R.id.tv_cross_transfer_out_tip);
 
         tv_fee = mRootView.findViewById(R.id.tv_fee);
         tv_fee_token = mRootView.findViewById(R.id.tv_fee_token);
@@ -97,6 +105,20 @@ public class TransferOutCrossVH {
 
         //设置输入框键盘类型
         inp_withdraw_amount.setInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_FLAG_DECIMAL);
+
+        //设置提示文本颜色
+        String v_cross_transfer_tips = m_activity.getString(R.string.cross_transfer_out_tips);
+        String v_hightlight_text = m_activity.getString(R.string.cross_transfer_highlight_text);
+        SpannableString spannableString = new SpannableString(v_cross_transfer_tips);
+        int start_index = v_cross_transfer_tips.indexOf(v_hightlight_text);
+        if(start_index>=0){
+            //设置HBC 高亮
+            ForegroundColorSpan colorSpan = new ForegroundColorSpan(ColorUtil.getColor(m_activity,R.color.transfer_highlight_text_color));
+            spannableString.setSpan(colorSpan,start_index ,
+                    start_index+v_hightlight_text.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+            tv_cross_transfer_out_tip.setText(spannableString);
+        }
+
     }
 
     //更新token信息
@@ -125,6 +147,7 @@ public class TransferOutCrossVH {
         //手续费
         tv_fee.setText(BHUserManager.getInstance().getDefaultGasFee().displayFee);
         tv_fee_token.setText(BHConstants.BHT_TOKEN.toUpperCase());
+
 
 
     }

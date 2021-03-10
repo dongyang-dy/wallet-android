@@ -71,20 +71,20 @@ public class BalanceViewHolder {
     //转入
     private void transferInAction(View view) {
         ARouter.getInstance().build(ARouterConfig.Balance.Balance_transfer_in)
-                .withString("symbol", BHConstants.BHT_TOKEN)
-                .withInt("way", BH_BUSI_TYPE.链内转账.getIntValue())
+                .withString(BHConstants.SYMBOL, BHConstants.BHT_TOKEN)
+                .withInt(BHConstants.WAY, BH_BUSI_TYPE.链内转账.getIntValue())
                 .navigation();
     }
 
     //转出
     private void transferOutAction(View view) {
         ARouter.getInstance().build(ARouterConfig.Balance.Balance_transfer_out)
-                .withString("symbol", BHConstants.BHT_TOKEN)
-                .withInt("way", BH_BUSI_TYPE.链内转账.getIntValue())
+                .withString(BHConstants.SYMBOL, BHConstants.BHT_TOKEN)
+                .withInt(BHConstants.WAY, BH_BUSI_TYPE.链内转账.getIntValue())
                 .navigation();
     }
 
-    //转出
+    //委托
     private void entrustAction(View view) {
         ARouter.getInstance().build(ARouterConfig.Validator.Validator_Index)
                 .navigation();
