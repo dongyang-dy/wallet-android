@@ -163,7 +163,7 @@ public class AccountDetailActivity extends BaseActivity {
         }else if(position==BH_BUSI_TYPE.备份私钥.getIntValue()){
 
             ARouter.getInstance().build(ARouterConfig.TRUSTEESHIP_EXPORT_INDEX)
-                    .withString("title",getString(R.string.backup_privatekey))
+                    .withString(BHConstants.TITLE,getString(R.string.backup_privatekey))
                     .withString(BHConstants.INPUT_PASSWORD,password)
                     .withString(BHConstants.WALLET_ADDRESS,chooseWallet.address)
                     .withString("flag", BH_BUSI_TYPE.备份私钥.value)
@@ -171,7 +171,7 @@ public class AccountDetailActivity extends BaseActivity {
         }else if(position==BH_BUSI_TYPE.备份KS.getIntValue()){
             //提醒页
             ARouter.getInstance().build(ARouterConfig.TRUSTEESHIP_EXPORT_INDEX)
-                    .withString("title",getString(R.string.backup_keystore))
+                    .withString(BHConstants.TITLE,getString(R.string.backup_keystore))
                     .withString(BHConstants.WALLET_ADDRESS,chooseWallet.address)
                     .withString(BHConstants.INPUT_PASSWORD,password)
                     .withString("flag",BH_BUSI_TYPE.备份KS.value)

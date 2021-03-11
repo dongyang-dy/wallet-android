@@ -67,7 +67,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="钱包资产"
+        android:text="@string/wallet_asset"
         android:layout_marginTop="10dp"
         android:textColor="@color/global_main_gray_color"
         android:textSize="12sp"
