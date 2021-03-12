@@ -581,5 +581,8 @@
     <string name="add_account">新增账户</string>
     <string name="input_delete_account_hint">确认删除，请输安全密码</string>
     <string name="wallet_asset">钱包资产</string>
+    <string name="hint_input_widthdraw_fee">请输入跨链手续费</string>
+    <string name="i_finish_backup">我已完成备份</string>
+    <string name="copy">复制</string>
 
 </resources>

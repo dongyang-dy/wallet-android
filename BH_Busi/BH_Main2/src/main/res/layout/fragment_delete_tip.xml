@@ -53,6 +53,7 @@
         android:textSize="14sp"
         android:inputType="numberPassword"
         android:hint="@string/input_delete_account_hint"
+        android:layout_marginEnd="4dp"
         />
 
     <View

@@ -154,6 +154,8 @@ public class TransferOutCrossActivity extends BaseActivity {
             @Override
             public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
                 transferOutCrossVH.inp_drawwith_address.setText(result);
+                transferOutCrossVH.inp_drawwith_address.setSelection(result.length());
+                transferOutCrossVH.inp_drawwith_address.requestFocus();
             }
 
             @Override
@@ -199,7 +201,7 @@ public class TransferOutCrossActivity extends BaseActivity {
         //交易手续费
         String feeAmount = transferOutCrossVH.tv_fee.getText().toString();
         //提币手续费
-        String withDrawFeeAmount = transferOutCrossVH.tv_withdraw_fee.getText().toString();
+        String withDrawFeeAmount = transferOutCrossVH.inp_withdraw_fee.getText().toString();
         //创建提币信息
         List<TxReq.TxMsg> tx_msg_list = BHRawTransaction.createwithDrawWMsg(to_address,withDrawAmount,withDrawFeeAmount,
                 transferOutCrossVH.tranferToken.symbol);

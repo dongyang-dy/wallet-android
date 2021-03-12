@@ -88,7 +88,7 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="152dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="24dp"
                 android:layout_marginStart="@dimen/main_padding_left"
                 android:layout_marginTop="16dp"
@@ -97,25 +97,40 @@
                 app:cardCornerRadius="@dimen/main_radius_conner"
                 app:cardElevation="0dp">
 
-
-                <com.bhex.lib.uikit.widget.editor.EditTextWithScrollView
-                    android:id="@+id/et_private_key"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:gravity="top"
-                    android:hint="@string/hint_private_key_input"
-                    android:inputType="textMultiLine"
-                    android:overScrollMode="ifContentScrolls"
-                    android:padding="16dp"
-                    android:singleLine="false"
-                    android:textColor="@color/global_main_text_color"
-                    android:textColorHint="@color/global_input_hint_color"
-                    android:textCursorDrawable="@null"
-                    android:textSize="15sp">
+                    android:layout_height="wrap_content">
 
-                </com.bhex.lib.uikit.widget.editor.EditTextWithScrollView>
+                    <com.bhex.lib.uikit.widget.editor.EditTextWithScrollView
+                        android:id="@+id/et_private_key"
+                        android:layout_width="match_parent"
+                        android:layout_height="152dp"
+                        android:background="@null"
+                        android:gravity="top"
+                        android:hint="@string/hint_private_key_input"
+                        android:inputType="textMultiLine"
+                        android:overScrollMode="ifContentScrolls"
+                        android:padding="16dp"
+                        android:singleLine="false"
+                        android:textColor="@color/global_main_text_color"
+                        android:textColorHint="@color/global_input_hint_color"
+                        android:textCursorDrawable="@null"
+                        android:textSize="15sp"/>
 
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/btn_copy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/copy"
+                        android:textColor="@color/btn_blue_bg_color"
+                        android:layout_below="@+id/et_private_key"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:textSize="12sp"
+                        android:paddingEnd="12dp"
+                        android:paddingBottom="12dp"
+                        />
+                </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
 
@@ -123,7 +138,7 @@
 
     </ScrollView>
 
-    <com.google.android.material.button.MaterialButton
+    <!--<com.google.android.material.button.MaterialButton
         android:id="@+id/btn_copy"
         style="@style/main_material_btn"
         android:layout_width="match_parent"
@@ -140,6 +155,7 @@
         android:textColor="@color/global_button_color"
         app:backgroundTint="@color/global_button_color_bg"
         app:cornerRadius="@dimen/main_radius_conner"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone" />-->
 
 </RelativeLayout>

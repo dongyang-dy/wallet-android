@@ -27,9 +27,13 @@ import com.bhex.wallet.common.config.ARouterConfig;
 import com.bhex.wallet.common.event.CurrencyEvent;
 import com.bhex.wallet.common.event.LanguageEvent;
 import com.bhex.wallet.common.event.NightEvent;
+import com.bhex.wallet.common.manager.BHUserManager;
 import com.bhex.wallet.common.manager.MMKVManager;
+import com.bhex.wallet.common.manager.MainActivityManager;
+import com.bhex.wallet.common.manager.SecuritySettingManager;
 import com.bhex.wallet.common.utils.SafeUilts;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.google.android.material.button.MaterialButton;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -52,6 +56,9 @@ public class SettingActivity extends BaseActivity{
 
     @BindView(R2.id.recycler_setting)
     RecyclerView recycler_setting;
+
+    @BindView(R2.id.btn_logout)
+    MaterialButton btn_logout;
 
     private SettingAdapter mSettingAdapter;
 
@@ -116,8 +123,9 @@ public class SettingActivity extends BaseActivity{
             }
         });
 
-
+        btn_logout.setOnClickListener(this::logOutAction);
     }
+
 
     /**
      * 点击item事件
@@ -136,7 +144,7 @@ public class SettingActivity extends BaseActivity{
                 break;
             case 3:
                 ARouter.getInstance().build(ARouterConfig.My.My_Update_Password)
-                        .withString("title",myItem.title)
+                        .withString(BHConstants.TITLE,myItem.title)
                         .navigation();
                 break;
             case 5:
@@ -175,4 +183,14 @@ public class SettingActivity extends BaseActivity{
         mSettingAdapter.getData().clear();
         mSettingAdapter.addData(mItems);
     }
+
+    private void logOutAction(View view) {
+        SecuritySettingManager.getInstance().request_thirty_in_time(false,"");
+        BHUserManager.getInstance().clear();
+        ARouter.getInstance().build(ARouterConfig.Account.Account_Login_Password).navigation();
+        finish();
+        MainActivityManager.getInstance().mainActivity.finish();
+    }
+
+
 }

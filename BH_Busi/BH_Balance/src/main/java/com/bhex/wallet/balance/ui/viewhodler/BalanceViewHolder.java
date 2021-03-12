@@ -90,4 +90,9 @@ public class BalanceViewHolder {
                 .navigation();
     }
 
+    public void updateWalletName(){
+        currentWallet = BHUserManager.getInstance().getCurrentBhWallet();
+        tv_wallet_name.setText(currentWallet.name);
+    }
+
 }

@@ -150,7 +150,6 @@ public class MainActivity extends BaseActivity<MainPresenter> {
 
     @Subscribe(threadMode= ThreadMode.MAIN)
     public void changeAccount(AccountEvent accountEvent){
-        LogUtils.d("MainActivity===>:","==changeAccount==");
         /*isReset = true;
         mBottomNavigationView.setSelectedItemId(mBottomNavigationView.getMenu().getItem(0).getItemId());
         getPresenter().showIsBackup();

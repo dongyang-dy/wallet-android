@@ -37,7 +37,7 @@ import butterknife.BindView;
 @Route(path = ARouterConfig.TRUSTEESHIP_EXPORT_PRIVATEKEY)
 public class ExportPrivateKeyActivity extends ExportBaseActivity {
 
-    @Autowired(name="title")
+    @Autowired(name=BHConstants.TITLE)
     String title;
 
     @Autowired(name="flag")

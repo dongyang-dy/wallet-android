@@ -14,6 +14,7 @@ import androidx.appcompat.widget.AppCompatEditText;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.bhex.lib.uikit.util.ShapeUtils;
+import com.bhex.lib.uikit.widget.editor.EditTextHelper;
 import com.bhex.lib.uikit.widget.editor.SimpleTextWatcher;
 import com.bhex.network.mvx.base.BaseDialogFragment;
 import com.bhex.network.utils.ToastUtils;
@@ -27,7 +28,7 @@ import com.bhex.wallet.common.config.ARouterConfig;
  * @author gongdongyang
  * 2020-12-5 21:58:18
  */
-@Route(path = ARouterConfig.TRUSTEESHIP_Delete_tip,name="删除提示")
+//@Route(path = ARouterConfig.TRUSTEESHIP_Delete_tip,name="删除提示")
 public class DeleteTipFragment extends BaseDialogFragment {
 
     private DeleteListener mDeleteListener;
@@ -46,6 +47,7 @@ public class DeleteTipFragment extends BaseDialogFragment {
                 ColorUtil.getColor(getContext(),R.color.dialog_fragment_background),
                 true,0);
         mRootView.setBackgroundDrawable(drawable);
+
     }
 
     @Override
@@ -54,6 +56,8 @@ public class DeleteTipFragment extends BaseDialogFragment {
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         AppCompatButton btn_confirm = mRootView.findViewById(R.id.btn_confirm);
         inp_password = mRootView.findViewById(R.id.inp_password);
+        EditTextHelper.getEditTextDeleteIconWrapper(getContext(),inp_password);
+
         btn_confirm.setOnClickListener(v -> {
             /*dismiss();*/
             if(mDeleteListener==null){

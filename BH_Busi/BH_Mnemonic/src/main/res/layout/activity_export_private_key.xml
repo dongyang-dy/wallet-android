@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -14,8 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        >
+        android:layout_below="@+id/toolbar"
+        android:layout_above="@+id/btn_finish">
 
         <com.bhex.lib.uikit.widget.GradientTabLayout
             android:id="@+id/tab"
@@ -48,19 +48,26 @@
 
     </LinearLayout>
 
-    <!--<com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_copy"
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_finish"
+        style="@style/main_material_btn"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:text="@string/next"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="@dimen/main_margin_bottom"
+        android:layout_marginTop="@dimen/main_margin_bottom"
+        android:layout_marginEnd="@dimen/main_margin_bottom"
+        android:layout_marginBottom="@dimen/main_margin_bottom"
         android:enabled="true"
-        android:layout_margin="@dimen/main_margin_bottom"
-        app:cornerRadius="@dimen/main_radius_conner"
-        app:backgroundTint="@color/global_button_color_bg"
+        android:text="@string/i_finish_backup"
+        android:textAllCaps="false"
         android:textColor="@color/global_button_color"
-        style="@style/main_material_btn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />-->
+        app:backgroundTint="@color/global_button_color_bg"
+        app:cornerRadius="@dimen/main_radius_conner"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 
-</LinearLayout>
+</RelativeLayout>

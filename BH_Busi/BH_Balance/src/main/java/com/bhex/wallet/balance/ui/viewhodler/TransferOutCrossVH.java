@@ -51,7 +51,7 @@ public class TransferOutCrossVH {
     //可用
     public AppCompatTextView tv_available_amount;
     //跨链手续费
-    public AppCompatTextView tv_withdraw_fee;
+    public AppCompatEditText inp_withdraw_fee;
 
     public AppCompatTextView tv_withdraw_fee_token;
     //手续费
@@ -87,7 +87,7 @@ public class TransferOutCrossVH {
         inp_withdraw_amount = mRootView.findViewById(R.id.inp_withdraw_amount);
         btn_all = mRootView.findViewById(R.id.btn_all);
         tv_available_amount = mRootView.findViewById(R.id.tv_available_amount);
-        tv_withdraw_fee = mRootView.findViewById(R.id.tv_withdraw_fee);
+        inp_withdraw_fee = mRootView.findViewById(R.id.tv_withdraw_fee);
         tv_withdraw_fee_token = mRootView.findViewById(R.id.tv_withdraw_fee_token);
         tv_cross_transfer_out_tip = mRootView.findViewById(R.id.tv_cross_transfer_out_tip);
 
@@ -105,7 +105,7 @@ public class TransferOutCrossVH {
 
         //设置输入框键盘类型
         inp_withdraw_amount.setInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_FLAG_DECIMAL);
-
+        inp_withdraw_fee.setInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_FLAG_DECIMAL);
         //设置提示文本颜色
         String v_cross_transfer_tips = m_activity.getString(R.string.cross_transfer_out_tips);
         String v_hightlight_text = m_activity.getString(R.string.cross_transfer_highlight_text);
@@ -138,7 +138,7 @@ public class TransferOutCrossVH {
 
         //跨链手续费
         withDrawFeeToken = CacheCenter.getInstance().getSymbolCache().getBHToken(tranferToken.chain);
-        tv_withdraw_fee.setText(tranferToken!=null?tranferToken.withdrawal_fee:"");
+        inp_withdraw_fee.setText(tranferToken!=null?tranferToken.withdrawal_fee:"");
 
         //跨链手续费Token
         //tv_withdraw_fee_token.setText(tranferToken.name.toUpperCase());
@@ -155,7 +155,7 @@ public class TransferOutCrossVH {
     //全部提币
     private void withdrawAllAction(View view) {
 
-        String v_input_withdraw_fee = tv_withdraw_fee.getText().toString();
+        String v_input_withdraw_fee = inp_withdraw_fee.getText().toString();
         //主链币
         if(tranferToken.name.equalsIgnoreCase(tranferToken.chain)){
             String all_count = NumberUtil.sub(String.valueOf(available_amount),v_input_withdraw_fee);
@@ -189,12 +189,25 @@ public class TransferOutCrossVH {
         //请输入正确的数量，且不大于可用余额{n}
         if(!RegexUtil.checkNumeric(v_withdraw_amount) || Double.valueOf(v_withdraw_amount)>available_amount){
             String tip_text = String.format(m_activity.getString(R.string.amount_rule),String.valueOf(available_amount));
+            inp_withdraw_amount.requestFocus();
             ToastUtils.showToast(tip_text);
             return false;
         }
 
         //提币手续费
-        String v_inp_withdraw_fee = tv_withdraw_fee.getText().toString().trim();
+        String v_inp_withdraw_fee = inp_withdraw_fee.getText().toString().trim();
+        if(TextUtils.isEmpty(v_inp_withdraw_fee)){
+            inp_withdraw_fee.requestFocus();
+            ToastUtils.showToast(m_activity.getResources().getString(R.string.please_input_withdraw_fee));
+            return false;
+        }
+
+        if(!RegexUtil.checkNumeric(v_withdraw_amount) || Double.valueOf(v_inp_withdraw_fee)<Double.valueOf(tranferToken.withdrawal_fee)){
+            String tip_text = String.format(m_activity.getString(R.string.crosss_fee_rule),tranferToken.withdrawal_fee);
+            inp_withdraw_fee.requestFocus();
+            ToastUtils.showToast(tip_text);
+            return false;
+        }
 
         //判断提币数量大于可用
         //1. 主链币
@@ -224,6 +237,6 @@ public class TransferOutCrossVH {
 
     //更新跨链提币手续费
     public void updateWithDrawFee() {
-        tv_withdraw_fee.setText(tranferToken!=null?tranferToken.withdrawal_fee:"");
+        inp_withdraw_fee.setText(tranferToken!=null?tranferToken.withdrawal_fee:"");
     }
 }

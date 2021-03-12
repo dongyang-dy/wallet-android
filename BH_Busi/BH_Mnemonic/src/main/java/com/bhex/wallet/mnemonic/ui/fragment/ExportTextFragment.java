@@ -2,6 +2,7 @@ package com.bhex.wallet.mnemonic.ui.fragment;
 
 
 import androidx.appcompat.widget.AppCompatEditText;
+import androidx.appcompat.widget.AppCompatTextView;
 
 import com.bhex.network.app.BaseApplication;
 import com.bhex.wallet.common.base.BaseFragment;
@@ -33,7 +34,7 @@ public class ExportTextFragment extends BaseFragment {
     AppCompatEditText et_private_key;
 
     @BindView(R2.id.btn_copy)
-    MaterialButton btn_copy;
+    AppCompatTextView btn_copy;
 
     BHWallet chooseWallet;
 
@@ -60,10 +61,10 @@ public class ExportTextFragment extends BaseFragment {
         if(BH_BUSI_TYPE.备份私钥.value.equals(flag)){
             //et_private_key.setText(BHUserManager.getInstance().getOriginContext(mCurrentWallet.keystorePath,inptPwd));
             et_private_key.setText(BHWalletHelper.getOriginPK(chooseWallet.keystorePath,inptPwd));
-            btn_copy.setText(getString(R.string.copy_privatekey));
+            //btn_copy.setText(getString(R.string.copy_privatekey));
         }else{
             et_private_key.setText(BHWalletHelper.getOriginKeyStore(chooseWallet.keystorePath));
-            btn_copy.setText(getString(R.string.copy_keystore));
+            //btn_copy.setText(getString(R.string.copy_keystore));
         }
     }
 

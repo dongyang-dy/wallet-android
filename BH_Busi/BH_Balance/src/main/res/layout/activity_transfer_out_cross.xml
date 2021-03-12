@@ -54,10 +54,11 @@
                         android:id="@+id/inp_drawwith_address"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:cursorVisible="true"
                         android:layout_toLeftOf="@+id/btn_scan_address"
                         android:layout_centerVertical="true"
                         android:textColorHint="@color/global_input_hint_color"
-                        android:hint="请粘贴地址或扫描地址二维码"
+                        android:hint="@string/input_address_hint"
                         android:background="@null"
                         android:textSize="14sp"
                         />
@@ -220,17 +221,20 @@
                         android:textSize="15sp"
                         />
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/tv_withdraw_fee"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="@string/place_holder"
+                        android:minWidth="100dp"
+                        android:gravity="center_vertical|right"
                         android:textSize="15sp"
                         android:textColor="@color/global_main_text_color"
                         android:layout_toLeftOf="@+id/tv_withdraw_fee_token"
+                        android:background="@null"
+                        android:button="@null"
                         android:layout_marginEnd="4dp"
                         android:layout_centerVertical="true"
+                        android:hint="@string/hint_input_widthdraw_fee"
                         tools:text="0.00054434"
                         />
 

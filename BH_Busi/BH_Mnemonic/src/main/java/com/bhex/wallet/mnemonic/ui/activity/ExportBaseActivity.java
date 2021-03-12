@@ -18,6 +18,7 @@ import com.bhex.wallet.mnemonic.R;
 import com.bhex.wallet.mnemonic.R2;
 import com.bhex.wallet.mnemonic.ui.fragment.ExportQRFragment;
 import com.bhex.wallet.mnemonic.ui.fragment.ExportTextFragment;
+import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +40,9 @@ public abstract class ExportBaseActivity extends BaseActivity {
 
     @BindView(R2.id.viewPager)
     ViewPager viewPager;
+
+    @BindView(R2.id.btn_finish)
+    MaterialButton btn_finish;
 
     @Override
     protected void initView() {
@@ -80,6 +84,10 @@ public abstract class ExportBaseActivity extends BaseActivity {
         });
 
         tab.setViewPager(viewPager);
+
+        btn_finish.setOnClickListener(v -> {
+            finish();
+        });
     }
 
     protected abstract String getFlag();

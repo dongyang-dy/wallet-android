@@ -117,7 +117,7 @@ public class LockActivity extends BaseCacheActivity<LoginPresenter> implements A
             ARouter.getInstance().build(ARouterConfig.TRUSTEESHIP_IMPORT_INDEX).navigation();
         } else if (view.getId() == R.id.tv_forget_pwd) {
             //ARouterUtil.startActivity(ARouterConfig.TRUSTEESHIP_IMPORT_INDEX);
-            ARouter.getInstance().build(ARouterConfig.TRUSTEESHIP_IMPORT_INDEX)
+            ARouter.getInstance().build(ARouterConfig.Trusteeship.Trusteeship_Add_Index)
                     .navigation();
         } else if (view.getId() == R.id.tv_bh_address) {
             AddressFragment fragment = new AddressFragment();
@@ -126,7 +126,7 @@ public class LockActivity extends BaseCacheActivity<LoginPresenter> implements A
         } else if(view.getId() == R.id.btn_wallet_create){
             ARouterUtil.startActivity(ARouterConfig.TRUSTEESHIP_MNEMONIC_FRIST);
         } else if(view.getId() == R.id.btn_wallet_impot){
-            ARouter.getInstance().build(ARouterConfig.TRUSTEESHIP_IMPORT_INDEX).navigation();
+            ARouter.getInstance().build(ARouterConfig.Trusteeship.Trusteeship_Add_Index).navigation();
         }
     }
 
@@ -155,7 +155,13 @@ public class LockActivity extends BaseCacheActivity<LoginPresenter> implements A
             finish();
         }else{
             //ToastUtils.showToast(getString(R.string.error_password));
-
         }
     }
+
+    /*@Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        System.exit(0);
+    }*/
 }

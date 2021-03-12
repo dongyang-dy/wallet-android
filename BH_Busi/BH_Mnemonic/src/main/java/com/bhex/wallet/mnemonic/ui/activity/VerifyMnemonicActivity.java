@@ -142,8 +142,6 @@ public class VerifyMnemonicActivity extends BaseCacheActivity<VerifyPresenter> {
             aboveMnemonicAdapter.notifyDataSetChanged();
             underMnemonicAdapter.notifyDataSetChanged();
             getPresenter().verifyMnmonic(aboverMnemonicItemList,orginMnemonicItemList,btn_start_bakcup);
-
-
         });
 
     }

@@ -86,7 +86,6 @@ public class InputView extends LinearLayout implements View.OnClickListener {
         mMode = typedArray.getInt(R.styleable.InputView_textType,-1);
         LayoutInflater.from(context).inflate(R.layout.view_input_edittext_layout,
                 this, true);
-        LogUtils.d("InputView===>:","mMode=="+mMode);
         setOrientation(HORIZONTAL);
 
         initView();
@@ -117,7 +116,7 @@ public class InputView extends LinearLayout implements View.OnClickListener {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
                     if(mMode==NUMBERPWDMODE){
-                        mInputEd.setInputType(InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+                        mInputEd.setInputType(InputType.TYPE_NUMBER_VARIATION_PASSWORD|InputType.TYPE_CLASS_NUMBER);
                         mInputEd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                     }else{
                         mInputEd.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
@@ -158,7 +157,7 @@ public class InputView extends LinearLayout implements View.OnClickListener {
                 break;
             case NUMBERPWDMODE:
                 mInputShow.setVisibility(View.VISIBLE);
-                mInputEd.setInputType(InputType.TYPE_CLASS_NUMBER);
+                mInputEd.setInputType(InputType.TYPE_NUMBER_VARIATION_PASSWORD|InputType.TYPE_CLASS_NUMBER);
                 mInputEd.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 mInputEd.setTypeface(Typeface.SANS_SERIF);
                 break;

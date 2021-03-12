@@ -109,18 +109,19 @@
                     app:layout_constraintBottom_toTopOf="@+id/btn_show_qr"
                     />
 
-                <androidx.appcompat.widget.AppCompatButton
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/btn_show_qr"
                     android:layout_width="wrap_content"
-                    android:layout_height="44dp"
+                    android:layout_height="wrap_content"
                     android:layout_below="@+id/iv_hidden"
                     android:button="@null"
-                    style="@style/main_btn_style"
+                    android:textSize="12sp"
+                    android:textColor="@color/btn_blue_bg_color"
                     android:text="@string/show_qr"
                     android:paddingEnd="18dp"
                     android:paddingStart="18dp"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="30dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/iv_hidden"

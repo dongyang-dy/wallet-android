@@ -238,6 +238,14 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
     }
 
     @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(!hidden){
+            balanceViewHolder.updateWalletName();
+        }
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);

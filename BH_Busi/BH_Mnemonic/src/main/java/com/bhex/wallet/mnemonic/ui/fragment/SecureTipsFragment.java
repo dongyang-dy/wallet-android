@@ -79,14 +79,15 @@ public class SecureTipsFragment extends BaseBottomSheetDialog implements View.On
 
     @Override
     public void onClick(View v) {
+        dismissAllowingStateLoss();
 
         if(v.getId()==R.id.btn_at_once){
-            Password30PFragment.showPasswordDialog(getChildFragmentManager(),
+
+            Password30PFragment.showPasswordDialog(getActivity().getSupportFragmentManager(),
                     Password30PFragment.class.getName(),
                     SecureTipsFragment.this,0,false);
             return;
         }
-        dismissAllowingStateLoss();
     }
 
     public static void showDialog(FragmentManager fm, String tag){

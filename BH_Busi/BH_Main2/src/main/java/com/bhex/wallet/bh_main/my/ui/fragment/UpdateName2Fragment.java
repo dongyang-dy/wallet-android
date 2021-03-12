@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.bhex.lib.uikit.util.ShapeUtils;
+import com.bhex.lib.uikit.widget.editor.EditTextHelper;
 import com.bhex.network.base.LoadDataModel;
 import com.bhex.network.base.LoadingStatus;
 import com.bhex.network.mvx.base.BaseDialogFragment;
@@ -58,11 +59,10 @@ public class UpdateName2Fragment extends BaseDialogFragment {
                 ColorUtil.getColor(getContext(),R.color.app_bg),true,0);
         mRootView.setBackgroundDrawable(drawable);
 
-        LogUtils.d("UpdateName2Fragment==>:","bhWallet=="+bhWallet);
         //设置钱包名称
         inp_wallet_name = mRootView.findViewById(R.id.inp_wallet_name);
         inp_wallet_name.setText(bhWallet.getName());
-
+        EditTextHelper.getEditTextDeleteIconWrapper(getContext(),inp_wallet_name);
         //
         mRootView.findViewById(R.id.btn_sure).setOnClickListener(v -> {
             updateUserNameAction();

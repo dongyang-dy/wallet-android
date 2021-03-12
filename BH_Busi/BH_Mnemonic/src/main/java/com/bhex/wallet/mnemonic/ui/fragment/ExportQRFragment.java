@@ -7,6 +7,7 @@ import android.view.View;
 
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.appcompat.widget.AppCompatTextView;
 
 import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.ColorUtil;
@@ -30,7 +31,7 @@ import butterknife.BindView;
 public class ExportQRFragment extends BaseFragment {
 
     @BindView(R2.id.btn_show_qr)
-    AppCompatButton btn_show_qr;
+    AppCompatTextView btn_show_qr;
 
     @BindView(R2.id.iv_hidden)
     AppCompatImageView iv_hidden;

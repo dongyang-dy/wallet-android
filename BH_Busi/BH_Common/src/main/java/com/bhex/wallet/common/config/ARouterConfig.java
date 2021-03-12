@@ -94,7 +94,7 @@ public class ARouterConfig {
     //私钥导出提醒
     public static final String TRUSTEESHIP_EXPORT_INDEX = "/mnemonic/export/index";
 
-    public static final String TRUSTEESHIP_Delete_tip= "/mnemonic/delete_tip";
+    //public static final String TRUSTEESHIP_Delete_tip= "/mnemonic/delete_tip";
     //资产
     public static class Balance{
         //资产搜索

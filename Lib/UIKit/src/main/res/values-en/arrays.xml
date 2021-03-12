@@ -19,6 +19,12 @@
         <!--<item>한국어</item>-->
     </string-array>
 
+    <string-array name="backup_list">
+        <item>@string/backup_nnemonic</item>
+        <item>@string/backup_privatekey</item>
+        <item>@string/backup_keystore</item>
+    </string-array>
+
     <string-array name="my_list_item">
 <!--
         <item>Reset Password</item>

@@ -82,18 +82,20 @@ public class ExportIndexActivity extends BaseActivity {
     private ScreenShotTipsFragment.IKnowListener knowListener = ()->{
         if(flag.equals(BH_BUSI_TYPE.备份私钥.value)){
             ARouter.getInstance().build(ARouterConfig.TRUSTEESHIP_EXPORT_PRIVATEKEY)
-                    .withString("title",title)
+                    .withString(BHConstants.TITLE,title)
                     .withString("flag",flag)
                     .withString(BHConstants.WALLET_ADDRESS,wallet_address)
                     .withString(BHConstants.INPUT_PASSWORD,inputPwd)
                     .navigation();
+            finish();
         }else{
             ARouter.getInstance().build(ARouterConfig.TRUSTEESHIP_EXPORT_KEYSTORE)
-                    .withString("title",title)
+                    .withString(BHConstants.TITLE,title)
                     .withString("flag",flag)
                     .withString(BHConstants.WALLET_ADDRESS,wallet_address)
                     .withString(BHConstants.INPUT_PASSWORD,inputPwd)
                     .navigation();
+            finish();
         }
     };
 
