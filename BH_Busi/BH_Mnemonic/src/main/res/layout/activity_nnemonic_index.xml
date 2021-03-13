@@ -58,6 +58,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/btn_import_wallet"
+
         android:layout_marginBottom="16dp"
         android:text="@string/wallet_create_trusteeship"
         android:background="@drawable/shape_btn_blue"
