@@ -72,7 +72,7 @@ public class SequenceManager {
     //Sequence 自增
     public synchronized void increaseSequence(){
         int i_sequence = sequence.incrementAndGet();
-        LogUtils.d("SequenceManager===>:","increaseSequence=="+i_sequence);
+        //LogUtils.d("SequenceManager===>:","increaseSequence=="+i_sequence);
         String key = SEQUENCE_KEY.concat(BHUserManager.getInstance().getCurrentBhWallet().address);
         MMKVManager.getInstance().mmkv().encode(key,i_sequence);
     }

@@ -501,7 +501,7 @@ public class WalletViewModel extends ViewModel {
             String bh_address = "" ;
             Credentials credentials = BHWalletUtils.verifyKeystore(keyStore,pwd);
             if(credentials!=null){
-                bh_address = BHKey.getBhexUserDpAddress(credentials.getEcKeyPair().getPublicKey());
+                bh_address = BHKey.getBhexUserDpAddress(credentials.getEcKeyPair());
             }
             if(BHWalletHelper.isExistBHWallet(bh_address)){
                 emitter.onNext(BH_BUSI_TYPE.托管单元已存在.value);
@@ -536,7 +536,7 @@ public class WalletViewModel extends ViewModel {
             String bh_address = "" ;
             Credentials credentials = BHWalletUtils.verifyKeystore(keyStore,pwd);
             if(credentials!=null){
-                bh_address = BHKey.getBhexUserDpAddress(credentials.getEcKeyPair().getPublicKey());
+                bh_address = BHKey.getBhexUserDpAddress(credentials.getEcKeyPair());
                 //存储密文
                 BHWallet currentWallet = BHUserManager.getInstance().getCurrentBhWallet();
                 currentWallet.password = MD5.generate(pwd);
@@ -581,7 +581,7 @@ public class WalletViewModel extends ViewModel {
             String bh_address = "" ;
             Credentials credentials = BHWalletUtils.verifyKeystore(keyStore,pwd);
             if(credentials!=null){
-                bh_address = BHKey.getBhexUserDpAddress(credentials.getEcKeyPair().getPublicKey());
+                bh_address = BHKey.getBhexUserDpAddress(credentials.getEcKeyPair());
             }
             emitter.onNext(bh_address);
             emitter.onComplete();

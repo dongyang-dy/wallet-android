@@ -6,10 +6,14 @@ import com.bhex.network.utils.Base64;
 import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.crypto.HexUtils;
 import com.bhex.tools.crypto.Sha256;
+import com.bhex.tools.utils.LogUtils;
 
 import org.bitcoinj.core.ECKey;
 import org.bitcoinj.core.Utils;
+import org.bitcoinj.crypto.BIP38PrivateKey;
 import org.bouncycastle.crypto.digests.RIPEMD160Digest;
+import org.web3j.crypto.Bip39Wallet;
+import org.web3j.crypto.ECKeyPair;
 
 import java.io.ByteArrayOutputStream;
 import java.math.BigInteger;
@@ -135,14 +139,15 @@ public class BHKey {
         return ret;
     }
 
-    public static String getBhexUserDpPubKey(BigInteger publicKey){
+    public static String getBhexUserDpPubKey(ECKeyPair keyPair){
         String result = null;
-        String pubHex = compressPubKey(publicKey);
+        //String pubHex = compressPubKey(publicKey);
+        String pubHex = ECKey.fromPrivate(keyPair.getPrivateKey(),true).getPrivateKeyAsHex();
         String sumHex = BH_PRE_PUB_KEY + pubHex;
         byte[] sumHexByte = HexUtils.toBytes(sumHex);
         try {
             byte[] converted = convertBits(sumHexByte, 8,5,true);
-            result = bech32Encode("hbtcpub".getBytes(), converted);
+            result = bech32Encode("hbcpub".getBytes(), converted);
         } catch (Exception e) {
             Log.w(TAG,"getBHUserDpPubKey Error");
 
@@ -150,9 +155,20 @@ public class BHKey {
         return result;
     }
 
-    public static String getBhexUserDpAddress(BigInteger publicKey){
+   /* public static String getBhexUserDpAddress(BigInteger publicKey){
         //公钥压缩
         String pubKey_compress = compressPubKey(publicKey);
+        //公钥hash
+        byte[] pubKeyHash = pubKeyCompressToHash(pubKey_compress);
+        //base58编码
+        String address = base58Address(pubKeyHash);
+        return address;
+    }*/
+
+    public static String getBhexUserDpAddress(ECKeyPair keyPair){
+        //公钥压缩
+        //String pubKey_compress = compressPubKey(publicKey);
+        String pubKey_compress =  ECKey.fromPrivate(keyPair.getPrivateKey()).getPublicKeyAsHex();
         //公钥hash
         byte[] pubKeyHash = pubKeyCompressToHash(pubKey_compress);
         //base58编码
@@ -181,13 +197,15 @@ public class BHKey {
      * @param pubKey
      * @return
      */
-    public static String compressPubKey(BigInteger pubKey) {
+    /*public static String compressPubKey(BigInteger pubKey) {
         String pubKeyYPrefix = pubKey.testBit(0) ? "03" : "02";
         String pubKeyHex = pubKey.toString(16);
         pubKeyHex = HexUtils.addPreZero(pubKeyHex,PUBLIC_KEY_LENGTH);
         String pubKeyX = pubKeyHex.substring(0, 64);
+        LogUtils.d("BHWalletUtils===>:","compressPubKey=="+(pubKeyYPrefix + pubKeyX));
         return pubKeyYPrefix + pubKeyX;
-    }
+    }*/
+
 
     /**
      * hash 转 base58
@@ -224,7 +242,7 @@ public class BHKey {
 
     public static String  signECDSA(ECKey.ECDSASignature sig){
         byte[] sigData = new byte[64];
-        System.arraycopy(org.bitcoinj.core.Utils.bigIntegerToBytes(sig.r, 32), 0, sigData, 0, 32);
+        System.arraycopy(Utils.bigIntegerToBytes(sig.r, 32), 0, sigData, 0, 32);
         System.arraycopy(Utils.bigIntegerToBytes(sig.s, 32), 0, sigData, 32, 32);
         String base64_signData = Base64.encode(sigData);
         return base64_signData;
