@@ -584,5 +584,11 @@
     <string name="hint_input_widthdraw_fee">请输入跨链手续费</string>
     <string name="i_finish_backup">我已完成备份</string>
     <string name="copy">复制</string>
+    <string name="add_address_book">添加钱包地址</string>
+    <string name="create_address">新建地址</string>
+    <string name="remark_optional">备注（选填）</string>
+    <string name="choose_address_type">选择地址类型</string>
+    <string name="empty_address">暂无地址</string>
+
 
 </resources>

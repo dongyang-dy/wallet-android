@@ -37,17 +37,21 @@
             android:background="@color/v_line_divider_color"
             />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/tv_wallet_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:maxLines="1"
             android:layout_toRightOf="@+id/tv_wallet_name"
             android:layout_marginStart="17dp"
             android:textColor="@color/global_main_gray_color"
-            android:textSize="12sp"
             android:gravity="center_vertical"
             android:layout_centerVertical="true"
-            tools:text="HBCu4ser…a4mp6lfo"
+            app:autoSizeTextType="uniform"
+            app:autoSizeMaxTextSize="12sp"
+            app:autoSizeMinTextSize="10sp"
+            app:autoSizeStepGranularity="1sp"
+            tools:text="HBCu4ser…a4mp6lfoa4mp6lfoa4mp6lfoa4mp6lfo"
             android:layout_toLeftOf="@+id/iv_wallet_check"
             android:layout_marginEnd="4dp"
             />

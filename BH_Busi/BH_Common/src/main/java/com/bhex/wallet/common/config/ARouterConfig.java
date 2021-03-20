@@ -114,6 +114,10 @@ public class ARouterConfig {
         public static final String Balance_transcation_detail = "/balance/transcation/detail";
         public static final String Balance_transcation_view = "/balance/transcation/view";
         public static final String Balance_chain_tokens = "/balance/chain/tokens";
+
+        //地址列表
+        public static final String Balance_address_list = "/balance/address/list";
+
     }
 
     public static class Market{

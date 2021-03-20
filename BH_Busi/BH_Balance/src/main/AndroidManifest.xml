@@ -8,7 +8,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".ui.activity.AddAddressActivity"></activity>
+        <activity android:name=".ui.activity.AddressBookListActivity" />
         <activity
             android:name=".ui.activity.ChainTokenActivity"
             android:launchMode="singleTop"
@@ -34,12 +35,11 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateUnchanged|adjustResize|stateHidden" />
-
-        <activity android:name=".ui.activity.TransferOutCrossActivity"
+        <activity
+            android:name=".ui.activity.TransferOutCrossActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateUnchanged|adjustResize|stateHidden"
-            />
+            android:windowSoftInputMode="stateUnchanged|adjustResize|stateHidden" />
         <activity
             android:name=".ui.activity.TransferInActivity"
             android:launchMode="standard"

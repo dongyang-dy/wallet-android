@@ -39,7 +39,9 @@ public class TransferOutVH {
     //接收地址
     public AppCompatEditText inp_transfer_in_address;
     //扫描地址
-    public AppCompatImageView btn_scan_address;
+    public AppCompatImageView btn_address_scan;
+    //地址簿功能
+    public AppCompatImageView btn_address_book;
     //选择token
     public View layout_select_token;
     public AppCompatTextView tv_transfer_token;
@@ -76,7 +78,8 @@ public class TransferOutVH {
         //初始化控件
         tv_transfer_out_address = mRootView.findViewById(R.id.tv_transfer_out_address);
         inp_transfer_in_address = mRootView.findViewById(R.id.inp_transfer_in_address);
-        btn_scan_address = mRootView.findViewById(R.id.btn_scan_address);
+        btn_address_scan = mRootView.findViewById(R.id.btn_address_scan);
+        btn_address_book = mRootView.findViewById(R.id.btn_address_book);
         layout_select_token = mRootView.findViewById(R.id.layout_select_token);
         tv_transfer_token = mRootView.findViewById(R.id.tv_transfer_token);
         inp_transfer_amount = mRootView.findViewById(R.id.inp_transfer_amount);
@@ -87,8 +90,12 @@ public class TransferOutVH {
         tv_transfer_out_tip = mRootView.findViewById(R.id.tv_transfer_out_tip);
 
         //二维码扫描
-        btn_scan_address.setOnClickListener(v -> {
+        btn_address_scan.setOnClickListener(v -> {
             ARouter.getInstance().build(ARouterConfig.Common.commom_scan_qr).navigation(m_activity, BHQrScanActivity.REQUEST_CODE);
+        });
+        //地址簿功能
+        btn_address_book.setOnClickListener(v->{
+
         });
 
         btn_all.setOnClickListener(this::transferAllAction);

@@ -13,6 +13,7 @@ import com.bhex.network.base.LoadDataModel;
 import com.bhex.network.base.viewmodel.CacheAndroidViewModel;
 import com.bhex.network.cache.RxCache;
 import com.bhex.network.cache.data.CacheResult;
+import com.bhex.tools.utils.LogUtils;
 import com.bhex.wallet.common.base.BaseFragment;
 import com.bhex.network.observer.BHBaseObserver;
 import com.bhex.network.utils.JsonUtils;
@@ -23,6 +24,7 @@ import com.bhex.wallet.common.api.BHttpApiInterface;
 import com.bhex.wallet.common.cache.SymbolCache;
 import com.bhex.wallet.common.enums.BH_BUSI_TYPE;
 import com.bhex.wallet.common.manager.BHUserManager;
+import com.bhex.wallet.common.manager.MMKVManager;
 import com.bhex.wallet.common.model.BHPage;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
@@ -81,7 +83,16 @@ public class MessageViewModel extends CacheAndroidViewModel {
 
     }
 
-    public void updateMessageStatus(BaseFragment activity,String id){
+    public void updateMessageStatus(BaseFragment activity,String id,String type){
+        String address = BHUserManager.getInstance().getCurrentBhWallet().address;
+        String key = address+"_"+type+"_"+ BH_BUSI_TYPE.已读消息.value;
+
+        String v_read_msg_id = MMKVManager.getInstance().mmkv().decodeString(key,"");
+        if(!v_read_msg_id.contains(key)){
+            v_read_msg_id = v_read_msg_id.concat(id).concat("|");
+            MMKVManager.getInstance().mmkv().encode(key,v_read_msg_id);
+        }
+
        /* String address = BHUserManager.getInstance().getCurrentBhWallet().address;
 
         BHBaseObserver<JsonObject> observer = new BHBaseObserver<JsonObject>() {

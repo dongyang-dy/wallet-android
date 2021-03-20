@@ -578,6 +578,7 @@
     <string name="hint_input_widthdraw_fee">Please enter cross-chain fee</string>
     <string name="i_finish_backup">我已完成备份</string>
     <string name="copy">复制</string>
+    <string name="add_address_book">添加钱包地址</string>
     <!--<string name="transfer_in2">Receive</string>
     <string name="transfer_out2">Transfer</string>-->
 </resources>

@@ -9,9 +9,11 @@ import androidx.room.RoomDatabase;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.bhex.wallet.common.db.dao.BHAddressBookDao;
 import com.bhex.wallet.common.db.dao.BHTokenDao;
 import com.bhex.wallet.common.db.dao.BHUserTokenDao;
 import com.bhex.wallet.common.db.dao.BHWalletDao;
+import com.bhex.wallet.common.db.entity.BHAddressBook;
 import com.bhex.wallet.common.db.entity.BHUserToken;
 import com.bhex.wallet.common.db.entity.BHWallet;
 import com.bhex.wallet.common.model.BHToken;
@@ -22,7 +24,7 @@ import com.bhex.wallet.common.model.BHToken;
  * Date: 2020/3/4
  * Time: 22:22
  */
-@Database(entities = {BHWallet.class, BHToken.class, BHUserToken.class} , version = 4,exportSchema = false)
+@Database(entities = {BHWallet.class, BHToken.class, BHUserToken.class,BHAddressBook.class} , version = 5,exportSchema = false)
 public abstract  class AppDataBase extends RoomDatabase {
 
     private static final String DB_NAME ="bh_db";
@@ -32,6 +34,7 @@ public abstract  class AppDataBase extends RoomDatabase {
 
     public abstract BHWalletDao bhWalletDao();
     public abstract BHTokenDao  bhTokenDao();
+    public abstract BHAddressBookDao bhAddressBookDao();
     public abstract BHUserTokenDao bhUserTokenDao();
 
     public static AppDataBase getInstance(Application context){
@@ -61,6 +64,7 @@ public abstract  class AppDataBase extends RoomDatabase {
                 .fallbackToDestructiveMigration()
                 .addMigrations(MIGRATION_2_3)
                 .addMigrations(MIGRATION_3_4)
+                .addMigrations(MIGRATION_4_5)
                 .build();
     }
 
@@ -83,6 +87,13 @@ public abstract  class AppDataBase extends RoomDatabase {
             database.execSQL("drop table tab_wallet ");
             database.execSQL("alter table `tab_wallet_bak` rename to  tab_wallet ");
 
+        }
+    };
+
+    static final Migration MIGRATION_4_5 = new Migration(4,5) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            database.execSQL("CREATE TABLE `tab_address_book` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `address` TEXT NOT NULL, `chain` TEXT, `symbol` TEXT,`address_name` TEXT, `address_remark` TEXT);");
         }
     };
 }

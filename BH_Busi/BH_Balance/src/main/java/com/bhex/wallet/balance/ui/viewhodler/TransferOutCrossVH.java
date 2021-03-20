@@ -41,7 +41,9 @@ public class TransferOutCrossVH {
     public AppCompatEditText inp_drawwith_address;
 
     //扫描按钮
-    public AppCompatImageView btn_scan_address;
+    public AppCompatImageView btn_address_scan;
+    //地址簿功能
+    public AppCompatImageView btn_address_book;
     //提币Token
     public AppCompatTextView tv_withdraw_token;
     //提币数量
@@ -82,7 +84,9 @@ public class TransferOutCrossVH {
         this.mRootView = mRootView;
         //初始化布局
         inp_drawwith_address = mRootView.findViewById(R.id.inp_drawwith_address);
-        btn_scan_address = mRootView.findViewById(R.id.btn_scan_address);
+        btn_address_scan = mRootView.findViewById(R.id.btn_address_scan);
+        btn_address_book = mRootView.findViewById(R.id.btn_address_book);
+
         tv_withdraw_token = mRootView.findViewById(R.id.tv_withdraw_token);
         inp_withdraw_amount = mRootView.findViewById(R.id.inp_withdraw_amount);
         btn_all = mRootView.findViewById(R.id.btn_all);
@@ -97,9 +101,10 @@ public class TransferOutCrossVH {
         layout_select_token = mRootView.findViewById(R.id.layout_select_token);
         btn_drawwith_coin  = mRootView.findViewById(R.id.btn_drawwith_coin);
         //二维码扫描
-        btn_scan_address.setOnClickListener(v -> {
+        btn_address_scan.setOnClickListener(v -> {
             ARouter.getInstance().build(ARouterConfig.Common.commom_scan_qr).navigation(m_activity, BHQrScanActivity.REQUEST_CODE);
         });
+
 
         btn_all.setOnClickListener(this::withdrawAllAction);
 

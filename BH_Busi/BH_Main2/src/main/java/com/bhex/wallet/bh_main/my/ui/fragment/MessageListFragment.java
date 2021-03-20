@@ -25,6 +25,7 @@ import com.bhex.lib.uikit.widget.EmptyLayout;
 import com.bhex.lib.uikit.widget.MsgView;
 import com.bhex.network.base.LoadDataModel;
 import com.bhex.network.base.LoadingStatus;
+import com.bhex.tools.constants.BHConstants;
 import com.bhex.wallet.common.base.BaseFragment;
 import com.bhex.tools.utils.LogUtils;
 import com.bhex.wallet.bh_main.R;
@@ -86,7 +87,7 @@ public class MessageListFragment extends BaseFragment implements OnRefreshLoadMo
             mClickPosition = position;
             startActivityForResult(intent,100);
             if(!bhm.read){
-                messageViewModel.updateMessageStatus(this,String.valueOf(bhm.id));
+                messageViewModel.updateMessageStatus(this,String.valueOf(bhm.id),mType);
             }
         });
     }
@@ -107,7 +108,7 @@ public class MessageListFragment extends BaseFragment implements OnRefreshLoadMo
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recycler_message.setLayoutManager(llm);
 
-        messageAdapter = new MessageAdapter(mList);
+        messageAdapter = new MessageAdapter(mList,mType);
         recycler_message.setAdapter(messageAdapter);
 
         refreshLayout.setOnRefreshLoadMoreListener(this);
@@ -161,10 +162,16 @@ public class MessageListFragment extends BaseFragment implements OnRefreshLoadMo
                 mCurrentPage++;
             }
 
+
             if(messageAdapter.getData()==null || messageAdapter.getData().size()==0){
                 empty_layout.showNoData();
             }else{
                 empty_layout.loadSuccess();
+                if(messageAdapter.getData().size()< BHConstants.PAGE_SIZE){
+                    refreshLayout.setEnableLoadMore(false);
+                }else{
+                    refreshLayout.setEnableLoadMore(true);
+                }
             }
             if(page.unread>0){
                 ((MessageActivity)getYActivity()).getTab().showMsg(Integer.valueOf(mType)-1,page.unread);
