@@ -174,6 +174,16 @@ public final class RegexUtil {
 		String regex = "[0-9A-Za-z]{6,10}";
 		return Pattern.matches(regex,str);
 	}
+
+	/**
+	 * 是否字母或数字
+	 * @return
+	 */
+	public static boolean isLetterDigit(String str) {
+		String regex = "^[a-z0-9A-Z]+$";
+		return Pattern.matches(regex, str);
+	}
+
 	/**
 	 * 是否是6位数字
 	 * @return

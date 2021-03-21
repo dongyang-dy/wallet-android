@@ -579,6 +579,11 @@
     <string name="i_finish_backup">我已完成备份</string>
     <string name="copy">复制</string>
     <string name="add_address_book">添加钱包地址</string>
+    <string name="save">Save</string>
+    <string name="save_fail">保存失败</string>
+    <string name="address_book">地址簿</string>
+    <string name="address_verify_error">地址不合法,请重新输入</string>
+    <string name="please_input_name">请输入名称</string>
     <!--<string name="transfer_in2">Receive</string>
     <string name="transfer_out2">Transfer</string>-->
 </resources>

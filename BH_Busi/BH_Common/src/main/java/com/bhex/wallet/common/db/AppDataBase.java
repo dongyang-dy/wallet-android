@@ -93,7 +93,7 @@ public abstract  class AppDataBase extends RoomDatabase {
     static final Migration MIGRATION_4_5 = new Migration(4,5) {
         @Override
         public void migrate(@NonNull SupportSQLiteDatabase database) {
-            database.execSQL("CREATE TABLE `tab_address_book` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `address` TEXT NOT NULL, `chain` TEXT, `symbol` TEXT,`address_name` TEXT, `address_remark` TEXT);");
+            database.execSQL("CREATE TABLE `tab_address_book` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `wallet_address` TEXT, `address` TEXT, `chain` TEXT, `symbol` TEXT, `address_name` TEXT, `address_remark` TEXT);");
         }
     };
 }

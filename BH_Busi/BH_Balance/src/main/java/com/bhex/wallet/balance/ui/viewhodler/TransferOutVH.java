@@ -95,7 +95,8 @@ public class TransferOutVH {
         });
         //地址簿功能
         btn_address_book.setOnClickListener(v->{
-
+            ARouter.getInstance().build(ARouterConfig.Balance.Balance_address_list)
+                    .withString(BHConstants.SYMBOL,tranferToken.symbol).navigation(m_activity, BHQrScanActivity.REQUEST_CODE);
         });
 
         btn_all.setOnClickListener(this::transferAllAction);

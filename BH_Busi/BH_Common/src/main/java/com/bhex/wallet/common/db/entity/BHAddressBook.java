@@ -13,7 +13,10 @@ import androidx.room.PrimaryKey;
 public class BHAddressBook {
     @NonNull
     @PrimaryKey(autoGenerate = true)
-    public int id;
+    public Long id;
+
+    @ColumnInfo(name = "wallet_address")
+    public String wallet_address;
 
     @ColumnInfo(name = "address")
     public String address;

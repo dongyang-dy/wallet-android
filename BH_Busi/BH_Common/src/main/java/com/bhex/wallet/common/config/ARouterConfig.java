@@ -117,7 +117,7 @@ public class ARouterConfig {
 
         //地址列表
         public static final String Balance_address_list = "/balance/address/list";
-
+        public static final String Balance_address_add = "/balance/address/add";
     }
 
     public static class Market{

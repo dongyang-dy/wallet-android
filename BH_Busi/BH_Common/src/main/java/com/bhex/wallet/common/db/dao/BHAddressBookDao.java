@@ -23,8 +23,14 @@ public interface BHAddressBookDao {
     Long insertSingle(BHAddressBook addressBook);
 
     @Query("delete from tab_address_book where id=:p_id")
-    void deleteAddress(int p_id);
+    void deleteAddress(long p_id);
+
+    @Query("SELECT * FROM tab_address_book where wallet_address =:p_wallet_address and chain =:p_chain")
+    List<BHAddressBook> loadAddressBook(String p_wallet_address,String p_chain);
 
     @Query("SELECT * FROM tab_address_book")
     List<BHAddressBook> loadAddressBook();
+
+    @Query("SELECT * FROM tab_address_book where address=:p_address")
+    BHAddressBook existsAddress(String p_address);
 }

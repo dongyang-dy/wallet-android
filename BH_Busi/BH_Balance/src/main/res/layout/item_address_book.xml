@@ -20,6 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp"
+            android:maxLines="1"
             android:textColor="@color/global_main_gray_color"
             tools:text="ETH"/>
 
@@ -30,7 +31,7 @@
             android:textSize="14sp"
             android:layout_marginTop="4dp"
             android:textColor="@color/global_main_text_color"
-            android:text=""
+            android:maxLines="2"
             tools:text="0x873453D2f3032Eb7bb28d3DF3fe65FdbB5c594fF"/>
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -38,6 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp"
+            android:maxLines="2"
             android:layout_marginTop="4dp"
             android:textColor="@color/global_main_gray_color"
             android:text=""

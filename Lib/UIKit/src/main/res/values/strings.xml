@@ -589,6 +589,11 @@
     <string name="remark_optional">备注（选填）</string>
     <string name="choose_address_type">选择地址类型</string>
     <string name="empty_address">暂无地址</string>
+    <string name="save">保存</string>
+    <string name="save_fail">保存失败</string>
+    <string name="address_book">地址簿</string>
+    <string name="address_verify_error">地址不合法,请重新输入</string>
+    <string name="please_input_name">请输入名称</string>
 
 
 </resources>

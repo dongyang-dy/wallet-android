@@ -221,5 +221,6 @@
     <color name="native_token_text_color">#1F5DC1</color>
     <color name="cross_token_text_color">#0A1825</color>
     <color name="transfer_highlight_text_color">#FF922E</color>
+    <color name="menu_red_pressed">#ED3756</color>
 
 </resources>

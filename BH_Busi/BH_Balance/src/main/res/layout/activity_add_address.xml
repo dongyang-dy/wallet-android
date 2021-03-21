@@ -1,24 +1,174 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="@color/page_bg_color"
     tools:context=".ui.activity.AddAddressActivity">
+
 
     <include
         layout="@layout/layout_toolbar"
         />
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="55dp">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/toolbar"
+        android:background="@color/app_bg"
+        >
+        <RelativeLayout
+            android:id="@+id/layout_choose_chain"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            >
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_chain_icon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_centerVertical="true"
+                tools:src="@mipmap/ic_btc"
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_chain_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_centerVertical="true"
+                android:textColor="@color/global_main_text_color"
+                tools:text="ETH"
+                android:layout_marginStart="8dp"
+                android:layout_toEndOf="@+id/iv_chain_icon"
+                />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_gray_arrow"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/global_divider_color"
+            android:layout_marginStart="16dp"
             />
 
-    </RelativeLayout>
-</LinearLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/address"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:textColor="@color/global_main_text_color"
+            android:textSize="15sp"
+            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="18dp"
+            android:paddingBottom="18dp">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/inp_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/layout_action"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/btn_address_scan"
+                android:textColorHint="@color/global_input_hint_color"
+                android:hint="@string/input_address_hint"
+                android:background="@null"
+                android:textSize="14sp"
+                android:maxLines="2"
+                />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/btn_address_scan"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@mipmap/ic_qr"
+                android:layout_gravity="center_vertical"
+                android:layout_alignParentEnd="true"
+                />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/global_divider_color"
+            android:layout_marginStart="16dp"
+            />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/inp_address_name"
+            android:layout_width="match_parent"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:layout_height="56dp"
+            android:layout_toLeftOf="@+id/layout_action"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/btn_address_scan"
+            android:textColorHint="@color/global_input_hint_color"
+            android:hint="名称"
+            android:background="@null"
+            android:textSize="14sp"
+            android:maxLines="2"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/global_divider_color"
+            android:layout_marginStart="16dp"
+            />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/inp_address_remark"
+            android:layout_width="match_parent"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:layout_height="56dp"
+            android:layout_toLeftOf="@+id/layout_action"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/btn_address_scan"
+            android:textColorHint="@color/global_input_hint_color"
+            android:hint="@string/remark_optional"
+            android:background="@null"
+            android:textSize="14sp"
+            android:maxLines="2"
+            />
+
+
+
+
+    </LinearLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_save"
+        style="@style/main_material_btn"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/main_padding_left"
+        android:layout_marginEnd="@dimen/main_padding_right"
+        android:layout_marginBottom="@dimen/main_margin_bottom"
+        android:enabled="true"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:stateListAnimator="@null"
+        android:text="@string/save"
+        app:backgroundTint="@color/global_button_bg_color"
+        app:cornerRadius="6dp" />
+</RelativeLayout>

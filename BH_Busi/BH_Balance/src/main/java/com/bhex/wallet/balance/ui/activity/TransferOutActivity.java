@@ -131,6 +131,11 @@ public class TransferOutActivity extends BaseActivity {
             }else if(resultCode == BHQrScanActivity.REQUEST_IMAGE){
                 getAnalyzeQRCodeResult(data.getData());
             }
+        }else if(requestCode == AddressBookListActivity.REQUEST_ADDRESS){
+            if(resultCode == RESULT_OK){
+                String address  = data.getExtras().getString(AddressBookListActivity.RESULT_DATA);
+                transferOutVH.inp_transfer_in_address.setText(address);
+            }
         }
     }
 
@@ -163,9 +168,8 @@ public class TransferOutActivity extends BaseActivity {
 
     //转账
     private void transferAction(View view) {
-        //隐藏键盘
-        ToolUtils.hintKeyBoard(this);
-
+       //隐藏键盘
+       ToolUtils.hintKeyBoard(this);
        boolean flag= transferOutVH.verifyTransferAction();
        if(!flag){
            return;

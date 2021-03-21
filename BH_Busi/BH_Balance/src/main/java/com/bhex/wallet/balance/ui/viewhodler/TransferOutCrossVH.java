@@ -105,6 +105,12 @@ public class TransferOutCrossVH {
             ARouter.getInstance().build(ARouterConfig.Common.commom_scan_qr).navigation(m_activity, BHQrScanActivity.REQUEST_CODE);
         });
 
+        //地址簿功能
+        btn_address_book.setOnClickListener(v->{
+            ARouter.getInstance().build(ARouterConfig.Balance.Balance_address_list)
+                    .withString(BHConstants.SYMBOL,tranferToken.symbol).navigation(m_activity, BHQrScanActivity.REQUEST_CODE);
+        });
+
 
         btn_all.setOnClickListener(this::withdrawAllAction);
 
