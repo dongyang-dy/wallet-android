@@ -138,14 +138,24 @@ public class TransferOutCrossActivity extends BaseActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         //处理二维码扫描结果
-        if (requestCode == BHQrScanActivity.REQUEST_CODE ) {
-            if(resultCode == RESULT_OK){
-                //处理扫描结果（在界面上显示）
-                String qrCode  = data.getExtras().getString(XQRCode.RESULT_DATA);
-                transferOutCrossVH.inp_drawwith_address.setText(qrCode);
-            }else if(resultCode == BHQrScanActivity.REQUEST_IMAGE){
-                getAnalyzeQRCodeResult(data.getData());
+        try{
+            if (requestCode == BHQrScanActivity.REQUEST_CODE ) {
+                if(resultCode == RESULT_OK){
+                    //处理扫描结果（在界面上显示）
+                    String qrCode  = data.getExtras().getString(XQRCode.RESULT_DATA);
+                    transferOutCrossVH.inp_drawwith_address.setText(qrCode);
+                }else if(resultCode == BHQrScanActivity.REQUEST_IMAGE){
+                    getAnalyzeQRCodeResult(data.getData());
+                }
+            }else if(requestCode == AddressBookListActivity.REQUEST_ADDRESS){
+                if(resultCode == RESULT_OK){
+                    String address  = data.getExtras().getString(AddressBookListActivity.RESULT_DATA);
+                    transferOutCrossVH.inp_drawwith_address.setText(address);
+                    transferOutCrossVH.inp_drawwith_address.setSelection(address.length());
+                }
             }
+        }catch(Exception e){
+            e.printStackTrace();
         }
     }
 

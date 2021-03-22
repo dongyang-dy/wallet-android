@@ -3,8 +3,10 @@ package com.bhex.wallet.balance.ui.activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.appcompat.widget.AppCompatCheckBox;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
@@ -51,8 +53,12 @@ public class AddressBookListActivity extends BaseActivity {
     //public static final int result_address = 100;
     public static final int REQUEST_ADDRESS = 101;
     public static final String RESULT_DATA = "result_data";
+
     @Autowired(name = BHConstants.SYMBOL)
     public String symbol;
+
+    @Autowired(name = "address")
+    public String address;
 
     private BHToken bhToken;
 
@@ -86,7 +92,7 @@ public class AddressBookListActivity extends BaseActivity {
         });
         rec_address_list.setSwipeMenuCreator(swipeMenuCreator);
         rec_address_list.setOnItemMenuClickListener(mMenuItemClickListener);
-        rec_address_list.setAdapter(bookListAdapter = new AddressBookListAdapter(null));
+        rec_address_list.setAdapter(bookListAdapter = new AddressBookListAdapter(null,address));
         empty_layout.showProgess();
     }
 
@@ -140,7 +146,7 @@ public class AddressBookListActivity extends BaseActivity {
     }
 
     class AddressBookListAdapter extends BaseQuickAdapter<BHAddressBook, BaseViewHolder> {
-        public AddressBookListAdapter(@Nullable List<BHAddressBook> data) {
+        public AddressBookListAdapter(@Nullable List<BHAddressBook> data,String address) {
             super(R.layout.item_address_book, data);
         }
 
@@ -149,6 +155,15 @@ public class AddressBookListActivity extends BaseActivity {
             holder.setText(R.id.tv_address_name,addressBook.address_name);
             holder.setText(R.id.tv_address,addressBook.address);
             holder.setText(R.id.tv_address_remark,addressBook.address_remark);
+
+            AppCompatCheckBox ck_address_select = holder.getView(R.id.ck_address_select);
+            if(!address.equals(addressBook.address)){
+                ck_address_select.setChecked(false);
+                ck_address_select.setVisibility(View.GONE);
+            }else{
+                ck_address_select.setChecked(true);
+                ck_address_select.setVisibility(View.VISIBLE);
+            }
         }
     }
 

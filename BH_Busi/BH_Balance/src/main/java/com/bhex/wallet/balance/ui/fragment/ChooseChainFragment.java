@@ -60,7 +60,10 @@ public class ChooseChainFragment extends BaseDialogFragment {
             if(mListener!=null){
                 mListener.chooseChainAction(bhChain.chain);
             }
+            dismissAllowingStateLoss();
+        });
 
+        mRootView.findViewById(R.id.iv_close).setOnClickListener(v -> {
             dismissAllowingStateLoss();
         });
     }

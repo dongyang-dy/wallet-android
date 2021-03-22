@@ -33,13 +33,13 @@
                 android:background="@color/app_bg"
                 android:orientation="vertical">
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingStart="@dimen/main_padding_left"
                     android:paddingEnd="@dimen/main_padding_right"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginBottom="16dp">
+                    android:orientation="vertical"
+                    android:layout_marginTop="24dp">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
@@ -52,20 +52,22 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_transfer_out_address"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
                         android:textColor="@color/global_input_hint_color"
                         android:textSize="12sp"
                         android:text="@string/transfer_address"
+                        android:gravity="center_vertical"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         tools:text="HBCb3Xu5XvbSAi8SM13231p4kEaNNvHtPjSN"
                         />
-                </RelativeLayout>
+                </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_marginStart="16dp"
                     android:background="@color/global_divider_color"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -82,8 +84,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:paddingStart="@dimen/main_padding_left"
-                    android:paddingEnd="@dimen/main_padding_right"
-                    >
+                    android:paddingEnd="@dimen/main_padding_right">
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/inp_transfer_in_address"
@@ -95,6 +96,7 @@
                         android:hint="@string/input_address_hint"
                         android:background="@null"
                         android:textSize="14sp"
+                        android:digits="@string/number_letters"
                         />
 
                     <LinearLayout
@@ -136,6 +138,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_marginStart="16dp"
                     android:background="@color/global_divider_color"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -196,6 +199,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_marginStart="16dp"
                     android:background="@color/global_divider_color"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -245,6 +249,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_marginStart="16dp"
                     android:background="@color/global_divider_color"/>
 
                 <androidx.appcompat.widget.AppCompatTextView

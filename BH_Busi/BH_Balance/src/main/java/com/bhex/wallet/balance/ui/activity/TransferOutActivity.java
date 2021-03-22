@@ -122,21 +122,28 @@ public class TransferOutActivity extends BaseActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        //处理二维码扫描结果
-        if (requestCode == BHQrScanActivity.REQUEST_CODE ) {
-            if(resultCode == RESULT_OK){
-                //处理扫描结果（在界面上显示）
-                String qrCode  = data.getExtras().getString(XQRCode.RESULT_DATA);
-                transferOutVH.inp_transfer_in_address.setText(qrCode);
-            }else if(resultCode == BHQrScanActivity.REQUEST_IMAGE){
-                getAnalyzeQRCodeResult(data.getData());
+        try{
+            //处理二维码扫描结果
+            if (requestCode == BHQrScanActivity.REQUEST_CODE) {
+                if(resultCode == RESULT_OK){
+                    //处理扫描结果（在界面上显示）
+                    String qrCode  = data.getExtras().getString(XQRCode.RESULT_DATA);
+                    transferOutVH.inp_transfer_in_address.setText(qrCode);
+                    transferOutVH.inp_transfer_in_address.setSelection(qrCode.length());
+                }else if(resultCode == BHQrScanActivity.REQUEST_IMAGE){
+                    getAnalyzeQRCodeResult(data.getData());
+                }
+            }else if(requestCode == AddressBookListActivity.REQUEST_ADDRESS){
+                if(resultCode == RESULT_OK){
+                    String address  = data.getExtras().getString(AddressBookListActivity.RESULT_DATA);
+                    transferOutVH.inp_transfer_in_address.setText(address);
+                    transferOutVH.inp_transfer_in_address.setSelection(address.length());
+                }
             }
-        }else if(requestCode == AddressBookListActivity.REQUEST_ADDRESS){
-            if(resultCode == RESULT_OK){
-                String address  = data.getExtras().getString(AddressBookListActivity.RESULT_DATA);
-                transferOutVH.inp_transfer_in_address.setText(address);
-            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
+
     }
 
     private void getAnalyzeQRCodeResult(Uri uri) {

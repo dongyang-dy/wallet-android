@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">HBTC Wallet</string>
+    <string name="number_letters">0123456789abcdefghigklmnopqrstuvwxyzQWERTYUIOPASDFGHJKLZXCVBNM</string>
     <string name="exit_app">再次点击退出应用</string>
 
     <string name="action_done">完成</string>
@@ -535,7 +536,7 @@
     <string name="hbtc_transfer_in_tip">该账户支持HBC，HBTC链上资产以及HBTC链上的跨链托管资产</string>
     <string name="input_receive_address">请输入接收地址</string>
     <string name="input_withdraw_address">请输入提币地址</string>
-
+    <string name="input_enter_address">请输入或粘贴地址</string>
     <!--<string name="cross_transfer_out_tips">提示：\n您正在进行跨链提币,请务必确认提币地址为该链的原生公链地址</string>-->
     <string name="cross_transfer_out_tips">您正在进行跨链提币,请务必确认提币地址为该链的原生公链地址</string>
     <string name="transfer_inner_tips">您正在进行HBTC链内转账,请务必确认接收地址以HBC开头</string>

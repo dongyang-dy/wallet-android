@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">HBTC Wallet</string>
+    <string name="number_letters">0123456789abcdefghigklmnopqrstuvwxyzQWERTYUIOPASDFGHJKLZXCVBNM</string>
     <string name="exit_app">Click again to Logout</string>
 
     <string name="action_done">Completed</string>
@@ -138,7 +139,7 @@
     <string name="cross_chian_trans_out">Cross-chain withdrawal</string>
     <string name="genarate_cross_address">Generate cross-chain address</string>
     <string name="hidden_small_token">Hide small balance</string>
-    <string name="transfer_address">Enter and copy the address</string>
+    <string name="transfer_address">Transfer address</string>
     <string name="transfer_amount">Input Amount</string>
     <string name="crosslink_withdraw_tip">·You are withdrawing tokens across the chains\n·Please ensure that you are using the cross-chain token withdrawal\n·Please ensure that the token withdrawal address is similar to its public chain address</string>
     <string name="linkinner_withdraw_tip">·You are making on-chain transfer\n·Be sure to use the on-chain channel \n·Please do confirm that the token withdrawal address start by "HBC"</string>
@@ -148,7 +149,7 @@
     <string name="crosslink_withdraw_tip_3">·Please ensure that the token withdrawal address is similar to its public chain address</string>
     <string name="linkinner_withdraw_tip_1">·You are making on-chain transfer </string>
     <string name="linkinner_withdraw_tip_2">·Be sure to use the on-chain channel </string>
-    <string name="linkinner_withdraw_tip_3">·Please do confirm that the token withdrawal address start by "HBC"</string>
+    <string name="linkinner_withdraw_tip_3">·Please do confirm that the token withdrawal address start by "6"</string>
     <string name="transfer_fee">Fee</string>
     <string name="withdraw_fee">Cross-chain fee</string>
     <string name="BH_token">HBC</string>
@@ -534,6 +535,7 @@
     <string name="hbtc_transfer_in_tip">This account supports HBC, HRC10 and cross-chain custody assets on HBTC chain</string>
     <string name="input_receive_address">Input transfer-in address</string>
     <string name="input_withdraw_address">Input withdrawal address</string>
+    <string name="input_enter_address">Please enter or paste the address</string>
     <string name="cross_transfer_out_tips">You are withdrawing tokens across the chains.Please ensure that the token withdrawal address is its public chain address</string>
     <string name="transfer_inner_tips">This account supports HBC, HRC10 and cross-chain custody assets on HBTC chain</string>
     <string name="cross_transfer_highlight_text">该链的原生公链地址</string>

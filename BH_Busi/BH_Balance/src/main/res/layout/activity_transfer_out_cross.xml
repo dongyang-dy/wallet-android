@@ -61,6 +61,7 @@
                         android:hint="@string/input_address_hint"
                         android:background="@null"
                         android:textSize="14sp"
+                        android:digits="@string/number_letters"
                         />
 
                     <LinearLayout

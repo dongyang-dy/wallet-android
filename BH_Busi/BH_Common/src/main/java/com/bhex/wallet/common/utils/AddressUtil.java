@@ -42,6 +42,6 @@ public class AddressUtil {
         if (!input.startsWith("HBC")){
             return false;
         }
-        return input.length()==34;
+        return input.length()==36;
     }
 }

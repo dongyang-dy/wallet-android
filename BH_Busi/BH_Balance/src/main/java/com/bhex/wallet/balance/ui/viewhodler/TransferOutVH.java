@@ -95,8 +95,12 @@ public class TransferOutVH {
         });
         //地址簿功能
         btn_address_book.setOnClickListener(v->{
+            String v_inp_transfer_in_address = inp_transfer_in_address.getText().toString().trim();
+
             ARouter.getInstance().build(ARouterConfig.Balance.Balance_address_list)
-                    .withString(BHConstants.SYMBOL,tranferToken.symbol).navigation(m_activity, BHQrScanActivity.REQUEST_CODE);
+                    .withString(BHConstants.SYMBOL,tranferToken.symbol)
+                    .withString("address",v_inp_transfer_in_address)
+                    .navigation(m_activity, BHQrScanActivity.REQUEST_CODE);
         });
 
         btn_all.setOnClickListener(this::transferAllAction);
@@ -168,7 +172,7 @@ public class TransferOutVH {
         //接收地址
         String v_transfer_in_address = inp_transfer_in_address.getText().toString().trim();
         if(TextUtils.isEmpty(v_transfer_in_address)){
-            ToastUtils.showToast(m_activity.getString(R.string.input_receive_address));
+            ToastUtils.showToast(m_activity.getString(R.string.input_enter_address));
             inp_transfer_in_address.requestFocus();
             return false;
         }

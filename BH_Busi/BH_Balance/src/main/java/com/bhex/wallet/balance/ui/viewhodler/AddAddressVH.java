@@ -81,7 +81,7 @@ public class AddAddressVH {
 
         String v_input_address = inp_address.getText().toString().trim();
         if(TextUtils.isEmpty(v_input_address)){
-            ToastUtils.showToast(activity.getString(R.string.input_address_hint));
+            ToastUtils.showToast(activity.getString(R.string.input_enter_address));
             return false;
         }
 

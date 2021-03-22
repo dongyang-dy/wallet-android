@@ -93,7 +93,7 @@ public abstract class NetworkApi implements IEnvironment {
                     .add("dex.hbtcchain.io","sha256/ONUV2iewvbpTvPliXQM1Mol7j9PPZgGYT6/7WhJ0yy0=")
                     .add("dex.hbtcchain.io","sha256/4H6OXny7MqJPbCOTpHyS0fSSUeHk/I5nKbIyuQwnfsA=")
                     .build();
-            //okHttpClientBuilder.certificatePinner(certificatePinner);
+            okHttpClientBuilder.certificatePinner(certificatePinner);
 
             if(BuildConfig.DEBUG){
                 okHttpClientBuilder.addNetworkInterceptor(new StethoInterceptor());

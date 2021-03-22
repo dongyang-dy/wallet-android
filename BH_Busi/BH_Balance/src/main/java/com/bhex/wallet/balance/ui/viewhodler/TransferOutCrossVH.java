@@ -107,8 +107,12 @@ public class TransferOutCrossVH {
 
         //地址簿功能
         btn_address_book.setOnClickListener(v->{
+            String v_inp_drawwith_address = inp_drawwith_address.getText().toString().trim();
+
             ARouter.getInstance().build(ARouterConfig.Balance.Balance_address_list)
-                    .withString(BHConstants.SYMBOL,tranferToken.symbol).navigation(m_activity, BHQrScanActivity.REQUEST_CODE);
+                    .withString(BHConstants.SYMBOL,tranferToken.symbol)
+                    .withString("address",v_inp_drawwith_address)
+                    .navigation(m_activity, BHQrScanActivity.REQUEST_CODE);
         });
 
 
@@ -184,7 +188,7 @@ public class TransferOutCrossVH {
         //提币地址
         String v_withdraw_address = inp_drawwith_address.getText().toString().trim();
         if(TextUtils.isEmpty(v_withdraw_address)){
-            ToastUtils.showToast(m_activity.getResources().getString(R.string.input_withdraw_address));
+            ToastUtils.showToast(m_activity.getResources().getString(R.string.input_enter_address));
             inp_drawwith_address.requestFocus();
             return false;
         }
