@@ -13,6 +13,7 @@ import com.bhex.lib.uikit.widget.InputView;
 import com.bhex.network.base.LoadDataModel;
 import com.bhex.network.base.LoadingStatus;
 import com.bhex.network.utils.ToastUtils;
+import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.ToolUtils;
 import com.bhex.wallet.common.base.BaseCacheActivity;
 import com.bhex.wallet.common.config.ARouterConfig;
@@ -126,7 +127,8 @@ public class LockActivity extends BaseCacheActivity<LoginPresenter> implements A
         } else if(view.getId() == R.id.btn_wallet_create){
             ARouterUtil.startActivity(ARouterConfig.TRUSTEESHIP_MNEMONIC_FRIST);
         } else if(view.getId() == R.id.btn_wallet_impot){
-            ARouter.getInstance().build(ARouterConfig.Trusteeship.Trusteeship_Add_Index).navigation();
+            ARouter.getInstance().build(ARouterConfig.Trusteeship.Trusteeship_Add_Index)
+                    .navigation();
         }
     }
 

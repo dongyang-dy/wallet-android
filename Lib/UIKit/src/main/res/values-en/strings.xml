@@ -57,9 +57,9 @@
     <string name="setup_1_to_3">(Step 1 of 3)</string>
     <string name="setup_2_to_3">(Step 2 of 3)</string>
     <string name="setup_3_to_3">(Step 3 of 3)</string>
-    <string name="set_pwd_tip_1">The password is an important credential to protect the private key and operate assets</string>
-    <string name="set_pwd_tip_2">.HBTC wallet do not store/cache password·</string>
+    <string name="set_pwd_tip_1">·The password is an important credential to protect the private key and operate assets,HBTC wallet do not store/cache password</string>
     <string name="set_pwd_tip_3">·Be sure to keep your password safe</string>
+    <string name="import_pk_tip">·Please enter your private key below which are case sensitive</string>
     <string name="set_pwd_hint">Create wallet password (no less than 8 characters)</string>
     <string name="pwd_index">%1$d Characters</string>
     <string name="pwd_rule_tip">For security purpose, please ensure your password includes:</string>
@@ -67,7 +67,7 @@
     <string name="pwd_rule_tip_2">·A lowercase letter</string>
     <string name="pwd_rule_tip_3">·A number</string>
     <string name="pwd_rule_tip_4">·At least 8 characters</string>
-    <string name="set_username_tip">You are now creating your HBTC Wallet account that provides you with cross-chain asset bridging</string>
+    <string name="set_username_tip">You are now creating your HBTC account that provides you with cross-chain asset bridging</string>
     <string name="tips_secure">Security tips</string>
     <string name="tips_secure_index_1">Mnemonic phrase can be used to:</string>
     <string name="tips_secure_index_2">Restore your wallet</string>
@@ -586,6 +586,8 @@
     <string name="address_book">地址簿</string>
     <string name="address_verify_error">地址不合法,请重新输入</string>
     <string name="please_input_name">请输入名称</string>
+    <string name="verified">Verified</string>
+    <string name="unverified">Unverified</string>
     <!--<string name="transfer_in2">Receive</string>
     <string name="transfer_out2">Transfer</string>-->
 </resources>

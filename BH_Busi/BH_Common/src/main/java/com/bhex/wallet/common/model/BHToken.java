@@ -88,10 +88,13 @@ public class BHToken {
     public String op_cu_systransfer_amount;
     @ColumnInfo(name = "is_native")
     public boolean is_native;
+    @ColumnInfo(name = "is_verified")
+    public boolean is_verified;
     @ColumnInfo(name = "custodian_amount")
     public String custodian_amount;
     @ColumnInfo(name = "logo")
     public String logo;
+
     @Ignore
     public List<String> opcus;
 

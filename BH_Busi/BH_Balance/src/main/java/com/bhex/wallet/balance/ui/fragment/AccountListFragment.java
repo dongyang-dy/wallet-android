@@ -9,6 +9,7 @@ import android.view.Gravity;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.RadioButton;
 
 import androidx.annotation.Nullable;
@@ -16,12 +17,15 @@ import androidx.appcompat.widget.AppCompatCheckBox;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.bhex.lib.uikit.util.ShapeUtils;
 import com.bhex.network.mvx.base.BaseDialogFragment;
+import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.ColorUtil;
 import com.bhex.tools.utils.LogUtils;
 import com.bhex.tools.utils.PixelUtils;
 import com.bhex.wallet.balance.R;
+import com.bhex.wallet.common.config.ARouterConfig;
 import com.bhex.wallet.common.db.entity.BHWallet;
 import com.bhex.wallet.common.helper.BHWalletHelper;
 import com.bhex.wallet.common.manager.BHUserManager;
@@ -82,6 +86,18 @@ public class AccountListFragment extends BaseDialogFragment {
         mRootView.setBackgroundDrawable(drawable);
 
         rcv_account_list = mRootView.findViewById(R.id.rcv_account_list);
+        FrameLayout layout_create_wallet = mRootView.findViewById(R.id.layout_create_wallet);
+        //设置圆角背景
+        drawable = ShapeUtils.getRoundRectDrawable(PixelUtils.dp2px(getContext(),100),
+                Color.parseColor("#1998C1FF"));
+        layout_create_wallet.setBackgroundDrawable(drawable);
+
+        layout_create_wallet.setOnClickListener(v -> {
+            ARouter.getInstance().build(ARouterConfig.Trusteeship.Trusteeship_Add_Index)
+                    .withInt(BHConstants.FLAG,1)
+                    .navigation();
+            dismissAllowingStateLoss();
+        });
     }
 
     @Override
@@ -102,6 +118,9 @@ public class AccountListFragment extends BaseDialogFragment {
             }
             dismiss();
         });
+
+        //
+
     }
 
     public static AccountListFragment getInstance(ChooseAccountListener listener){

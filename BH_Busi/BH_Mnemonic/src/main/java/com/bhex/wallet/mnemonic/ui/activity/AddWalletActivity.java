@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.ColorUtil;
 import com.bhex.wallet.common.base.BaseCacheActivity;
 import com.bhex.wallet.common.config.ARouterConfig;
@@ -40,7 +41,7 @@ import butterknife.BindView;
 )
 public class AddWalletActivity extends BaseCacheActivity<ImportPresenter> {
 
-    @Autowired (name="flag")
+    @Autowired (name= BHConstants.FLAG)
     int flag = 0;
 
     @BindView(R2.id.tv_center_title)

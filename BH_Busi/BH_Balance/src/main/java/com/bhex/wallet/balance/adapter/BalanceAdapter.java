@@ -1,5 +1,6 @@
 package com.bhex.wallet.balance.adapter;
 
+import android.graphics.drawable.GradientDrawable;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,11 +10,14 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.bhex.lib.uikit.util.ShapeUtils;
 import com.bhex.network.base.LoadDataModel;
 import com.bhex.network.base.LoadingStatus;
 import com.bhex.tools.constants.BHConstants;
+import com.bhex.tools.utils.ColorUtil;
 import com.bhex.tools.utils.ImageLoaderUtil;
 import com.bhex.tools.utils.LogUtils;
+import com.bhex.tools.utils.PixelUtils;
 import com.bhex.wallet.balance.R;
 import com.bhex.wallet.balance.helper.BHBalanceHelper;
 import com.bhex.wallet.balance.model.BHTokenItem;
@@ -96,18 +100,26 @@ public class BalanceAdapter extends BaseQuickAdapter<BHTokenItem, BaseViewHolder
         if(bhCoin.name.equalsIgnoreCase(BHConstants.BHT_TOKEN)){
             tv_coin_type.setVisibility(View.GONE);
             tv_coin_type.setBackgroundColor(0);
+        }else if(bhCoin.is_verified){
+            tv_coin_type.setVisibility(View.VISIBLE);
+            tv_coin_type.setText(getContext().getString(R.string.verified));
+            tv_coin_type.setTextColor(ColorUtil.getColor(mActivity,R.color.verify_token_text_color));
+            GradientDrawable drawable = ShapeUtils.getRoundRectDrawable(PixelUtils.dp2px(mActivity,10), ColorUtil.getColor(mActivity,R.color.verify_token_bg_color));
+            tv_coin_type.setBackgroundDrawable(drawable);
         } else if(bhCoin.is_native){
             tv_coin_type.setVisibility(View.VISIBLE);
-            tv_coin_type.setText(R.string.native_token);
-            tv_coin_type.setTextAppearance(getContext(),R.style.token_label_style);
-            //tv_coin_type.setBackgroundResource(R.drawable.shape_20_green);
-            tv_coin_type.setBackgroundDrawable(ContextCompat.getDrawable(getContext(),R.drawable.shape_native_token));
-        }else {
-            tv_coin_type.setVisibility(View.VISIBLE);
-            tv_coin_type.setText(R.string.no_native_token);
-            tv_coin_type.setTextAppearance(getContext(),R.style.token_label_style);
-            tv_coin_type.setBackgroundDrawable(ContextCompat.getDrawable(getContext(),R.drawable.shape_dark20_blue));
+            tv_coin_type.setText(getContext().getString(R.string.native_token));
+            tv_coin_type.setTextColor(ColorUtil.getColor(mActivity,R.color.native_token_text_color));
+            GradientDrawable drawable = ShapeUtils.getRoundRectDrawable(PixelUtils.dp2px(mActivity,10), ColorUtil.getColor(mActivity,R.color.native_token_bg_color));
+            tv_coin_type.setBackgroundDrawable(drawable);
 
+        }
+        else {
+            tv_coin_type.setVisibility(View.VISIBLE);
+            tv_coin_type.setText(getContext().getString(R.string.no_native_token));
+            tv_coin_type.setTextColor(ColorUtil.getColor(mActivity,R.color.cross_token_text_color));
+            GradientDrawable drawable = ShapeUtils.getRoundRectDrawable(PixelUtils.dp2px(mActivity,10), ColorUtil.getColor(mActivity,R.color.cross_token_bg_color));
+            tv_coin_type.setBackgroundDrawable(drawable);
         }
 
     }

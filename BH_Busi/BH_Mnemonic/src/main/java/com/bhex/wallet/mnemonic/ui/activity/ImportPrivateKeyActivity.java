@@ -1,6 +1,9 @@
 package com.bhex.wallet.mnemonic.ui.activity;
 
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -8,20 +11,25 @@ import android.view.Gravity;
 import android.view.View;
 
 import androidx.appcompat.widget.AppCompatEditText;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bhex.lib.uikit.widget.editor.SimpleTextWatcher;
+import com.bhex.lib_qr.XQRCode;
+import com.bhex.lib_qr.util.QRCodeAnalyzeUtils;
 import com.bhex.network.utils.ToastUtils;
 import com.bhex.tools.utils.LogUtils;
 import com.bhex.tools.utils.NavigateUtil;
+import com.bhex.tools.utils.PathUtils;
 import com.bhex.tools.utils.RegexUtil;
 import com.bhex.wallet.common.base.BaseCacheActivity;
 import com.bhex.wallet.common.config.ARouterConfig;
 import com.bhex.wallet.common.enums.BH_BUSI_TYPE;
 import com.bhex.wallet.common.enums.MAKE_WALLET_TYPE;
 import com.bhex.wallet.common.manager.BHUserManager;
+import com.bhex.wallet.common.ui.activity.BHQrScanActivity;
 import com.bhex.wallet.mnemonic.R;
 import com.bhex.wallet.mnemonic.R2;
 
@@ -37,10 +45,12 @@ import butterknife.OnClick;
 @Route(path = ARouterConfig.TRUSTEESHIP_IMPORT_PRIVATEKEY)
 public class ImportPrivateKeyActivity extends BaseCacheActivity {
 
-    @BindView(R2.id.tv_center_title)
-    AppCompatTextView tv_center_title;
+
     @BindView(R2.id.et_private_key)
     AppCompatEditText et_private_key;
+
+    @BindView(R2.id.btn_scan_qr)
+    AppCompatImageView btn_scan_qr;
 
     @BindView(R2.id.btn_next)
     AppCompatTextView btn_next;
@@ -52,12 +62,10 @@ public class ImportPrivateKeyActivity extends BaseCacheActivity {
 
     @Override
     protected void initView() {
-        tv_center_title.setText(getString(R.string.import_private_key));
         et_private_key.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
         et_private_key.setGravity(Gravity.TOP);
         et_private_key.setSingleLine(false);
         et_private_key.setHorizontallyScrolling(false);
-
     }
 
     @Override
@@ -78,6 +86,13 @@ public class ImportPrivateKeyActivity extends BaseCacheActivity {
                 }
             }
         });
+
+        btn_scan_qr.setOnClickListener(this::scanPKAction);
+    }
+
+    //扫描私钥
+    private void scanPKAction(View view) {
+        ARouter.getInstance().build(ARouterConfig.Common.commom_scan_qr).navigation(this, BHQrScanActivity.REQUEST_CODE);
     }
 
     @OnClick({R2.id.btn_next})
@@ -85,6 +100,31 @@ public class ImportPrivateKeyActivity extends BaseCacheActivity {
         if(view.getId()==R.id.btn_next){
             importPrivateKey();
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == BHQrScanActivity.REQUEST_CODE) {
+            String qrCode  = data.getExtras().getString(XQRCode.RESULT_DATA);
+            et_private_key.setText(qrCode);
+            et_private_key.setSelection(qrCode.length());
+        }else if(resultCode == BHQrScanActivity.REQUEST_IMAGE){
+            getAnalyzeQRCodeResult(data.getData());
+        }
+    }
+
+    private void getAnalyzeQRCodeResult(Uri uri) {
+        XQRCode.analyzeQRCode(PathUtils.getFilePathByUri(this, uri), new QRCodeAnalyzeUtils.AnalyzeCallback() {
+            @Override
+            public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
+                et_private_key.setText(result);
+            }
+            @Override
+            public void onAnalyzeFailed() {
+                ToastUtils.showToast(getResources().getString(R.string.encode_qr_fail));
+            }
+        });
     }
 
     /**

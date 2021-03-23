@@ -31,12 +31,13 @@
             android:layout_centerVertical="true"
             android:text="@string/account"/>
 
-        <com.bhex.lib.uikit.widget.layout.XUIFrameLayout
+        <FrameLayout
+            android:id="@+id/layout_create_wallet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:background="#1998C1FF"
-            app:xui_radius="100dp">
+            >
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
@@ -52,7 +53,7 @@
                 android:drawablePadding="4dp"
                 android:gravity="center_vertical"
                 />
-        </com.bhex.lib.uikit.widget.layout.XUIFrameLayout>
+        </FrameLayout>
 
     </RelativeLayout>
 

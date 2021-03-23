@@ -6,15 +6,45 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.ImportPrivateKeyActivity">
 
-    <include
-        layout="@layout/layout_toolbar"
-        />
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/app_bg"
+        app:navigationIcon="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay"
+        app:titleTextAppearance="@style/Toolbar_textsize"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_center_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            style="@style/toolbar_layout_title_style"
+            android:text="@string/import_private_key" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_scan_qr"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center|right"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/ic_qr"
+            android:paddingEnd="15dp"/>
+    </androidx.appcompat.widget.Toolbar>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_tip_index_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/set_pwd_tip_1"
+        android:text="@string/import_pk_tip"
         android:drawablePadding="5dp"
         android:layout_marginLeft="3dp"
         android:lineSpacingExtra="5dp"

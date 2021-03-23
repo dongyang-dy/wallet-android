@@ -44,7 +44,7 @@
         android:visibility="gone"
         />
 
-    <com.google.android.material.button.MaterialButton
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/btn_generate_wallet"
         android:layout_width="match_parent"
         android:layout_marginTop="100dp"
@@ -58,14 +58,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/btn_import_wallet"
-
         android:layout_marginBottom="16dp"
         android:text="@string/wallet_create_trusteeship"
         android:background="@drawable/shape_btn_blue"
         style="@style/main_material_btn"
         />
 
-    <com.google.android.material.button.MaterialButton
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/btn_import_wallet"
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -73,9 +72,7 @@
         android:layout_marginEnd="@dimen/main_padding_left"
         android:insetBottom="0dp"
         android:insetTop="0dp"
-        app:strokeColor="@color/border_button_border_color"
         app:strokeWidth="2dp"
-        app:backgroundTint="@color/border_button_bg_color"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -83,8 +80,7 @@
         app:cornerRadius="@dimen/main_radius_conner"
         android:text="@string/wallet_import_trusteeship"
         android:gravity="center"
-        style="@style/border_btn_text_style"
-        android:textColor="@color/border_button_text_color"
+        style="@style/secondary_button"
         android:layout_marginTop="16dp"
         />
 

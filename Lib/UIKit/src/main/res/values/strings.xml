@@ -59,13 +59,9 @@
     <string name="setup_1_to_3">(第1步，共3步)</string>
     <string name="setup_2_to_3">(第2步，共3步)</string>
     <string name="setup_3_to_3">(第3步，共3步)</string>
-    <string name="set_pwd_tip_1">·安全密码是保护钱包私钥和操作资产的重要凭证</string>
-    <string name="set_pwd_tip_2">·HBTC Wallet钱包不会缓存、上传、存储您的密码</string>
+    <string name="set_pwd_tip_1">·安全密码是保护钱包私钥和操作资产的重要凭证,HBTC钱包不会缓存、上传、存储您的密码</string>
     <string name="set_pwd_tip_3">·请务必妥善保管密码</string>
-
-    <string name="set_pwd_alarm_1">·安全密码是保护钱包私钥和操作资产的重要凭证,非常重要</string>
-    <string name="set_pwd_alarm_2">·HBTC钱包不会缓存，上传，存储您的密码，也无法帮您找回，请务必牢记并妥善保管您的密码.</string>
-
+    <string name="import_pk_tip">·请在下方输入框中输入私钥，并留意大小写</string>
     <!--<string name="set_pwd_hint">请设置钱包密码(不少于8位)</string>-->
     <string name="set_pwd_hint">请设置钱包密码(6位数字)</string>
     <string name="pwd_index">%1$d个字符</string>
@@ -74,7 +70,7 @@
     <string name="pwd_rule_tip_2">·1个小写字母</string>
     <string name="pwd_rule_tip_3">·1个数字</string>
     <string name="pwd_rule_tip_4">·至少8位字符</string>
-    <string name="set_username_tip">您正在创建HBTC Wallet钱包的账户，并将拥有一份跨链钱包</string>
+    <string name="set_username_tip">您正在创建HBTC钱包的账户，并将拥有一份跨链钱包</string>
     <string name="tips_secure">安全提醒</string>
     <string name="tips_secure_index_1">助记词可用于：</string>
     <string name="tips_secure_index_2">恢复钱包下的钱包资产</string>
@@ -595,6 +591,8 @@
     <string name="address_book">地址簿</string>
     <string name="address_verify_error">地址不合法,请重新输入</string>
     <string name="please_input_name">请输入名称</string>
+    <string name="verified">已认证</string>
+    <string name="unverified">未认证</string>
 
 
 </resources>

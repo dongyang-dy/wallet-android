@@ -1,53 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context=".ui.activity.TrusteeshipSecActivity">
 
     <include layout="@layout/layout_toolbar"/>
 
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_index_1"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/dp_40"
-        android:paddingStart="24dp"
-        android:includeFontPadding="false"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        android:text="@string/set_password"
-        android:textColor="@color/global_main_text_color"
-        android:gravity="center"
-        android:textSize="26sp"
-        android:layout_marginTop="8dp"
-        />
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:layout_below="@+id/toolbar"
+        android:layout_above="@+id/keyboard_root">
 
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/toolbar">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_index_1"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+
+            android:includeFontPadding="false"
+            android:paddingStart="24dp"
+            android:text="@string/set_password"
+            android:textColor="@color/global_main_text_color"
+            android:textSize="26sp" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_index_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@+id/tv_index_1"
+        android:layout_toEndOf="@+id/tv_index_1"
         android:text="@string/setup_2_to_3"
         android:includeFontPadding="false"
         android:textColor="@color/global_label_text_color"
         android:layout_marginStart="8dp"
         android:textSize="@dimen/sp_13"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tv_index_1"
+        android:layout_alignBaseline="@+id/tv_index_1"
         />
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingEnd="24dp"
         android:paddingStart="24dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_index_1"
+        android:layout_below="@+id/tv_index_1"
         android:layout_marginTop="8dp"
         >
 
@@ -56,7 +64,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/secondary_tip_text_color"
             android:textSize="@dimen/sp_15"
-            android:text="@string/set_pwd_alarm_1"
+            android:text="@string/set_pwd_tip_1"
             android:drawablePadding="5dp"
             android:layout_marginLeft="3dp"
             android:lineSpacingExtra="5dp"
@@ -67,7 +75,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/secondary_tip_text_color"
             android:textSize="@dimen/sp_15"
-            android:text="@string/set_pwd_alarm_2"
+            android:text="@string/set_pwd_tip_3"
             android:drawablePadding="5dp"
             android:layout_marginLeft="3dp"
             android:lineSpacingExtra="5dp"
@@ -91,6 +99,7 @@
             android:id="@+id/input_password_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
             app:h_vcet_number="6"
             app:h_vcet_width="24dp"
             app:h_vcet_height="24dp"
@@ -99,10 +108,10 @@
             />
 
     </LinearLayout>
-
-
+    </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
     <include
         layout="@layout/layout_keyborad"
         />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
