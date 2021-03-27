@@ -120,11 +120,13 @@ public class ImportKeystoreActivity extends BaseCacheActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == BHQrScanActivity.REQUEST_CODE) {
-            String qrCode  = data.getExtras().getString(XQRCode.RESULT_DATA);
-            et_keystore.setText(qrCode);
-            et_keystore.setSelection(qrCode.length());
-        }else if(resultCode == BHQrScanActivity.REQUEST_IMAGE){
-            getAnalyzeQRCodeResult(data.getData());
+            if(resultCode==RESULT_OK){
+                String qrCode  = data.getExtras().getString(XQRCode.RESULT_DATA);
+                et_keystore.setText(qrCode);
+                et_keystore.setSelection(qrCode.length());
+            }else if(resultCode == BHQrScanActivity.REQUEST_IMAGE){
+                getAnalyzeQRCodeResult(data.getData());
+            }
         }
     }
 

@@ -106,11 +106,13 @@ public class ImportPrivateKeyActivity extends BaseCacheActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == BHQrScanActivity.REQUEST_CODE) {
-            String qrCode  = data.getExtras().getString(XQRCode.RESULT_DATA);
-            et_private_key.setText(qrCode);
-            et_private_key.setSelection(qrCode.length());
-        }else if(resultCode == BHQrScanActivity.REQUEST_IMAGE){
-            getAnalyzeQRCodeResult(data.getData());
+            if(requestCode==RESULT_OK){
+                String qrCode  = data.getExtras().getString(XQRCode.RESULT_DATA);
+                et_private_key.setText(qrCode);
+                et_private_key.setSelection(qrCode.length());
+            }else if(resultCode == BHQrScanActivity.REQUEST_IMAGE){
+                getAnalyzeQRCodeResult(data.getData());
+            }
         }
     }
 
