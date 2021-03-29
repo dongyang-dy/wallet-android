@@ -23,6 +23,7 @@ import com.bhex.wallet.common.event.AccountEvent;
 import com.bhex.wallet.common.event.LanguageEvent;
 import com.bhex.wallet.common.event.NightEvent;
 import com.bhex.wallet.common.manager.AppStatusManager;
+import com.bhex.wallet.common.manager.CurrencyManager;
 import com.bhex.wallet.common.manager.MainActivityManager;
 import com.bhex.wallet.common.manager.SequenceManager;
 import com.bhex.wallet.common.viewmodel.BalanceViewModel;
@@ -68,6 +69,7 @@ public class MainActivity extends BaseActivity<MainPresenter> {
     protected void initView() {
         ARouter.getInstance().inject(this);
         MainActivityManager._instance.mainActivity = this;
+        CurrencyManager.getInstance().init(this);
         SequenceManager.getInstance().initSequence();
         RefreshLayoutManager.init();
         TRANSCATION_BUSI_TYPE.init(this);

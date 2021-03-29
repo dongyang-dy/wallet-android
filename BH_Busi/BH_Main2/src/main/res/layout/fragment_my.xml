@@ -88,14 +88,18 @@
                     app:layout_constraintEnd_toStartOf="@+id/layout_index_1"
                     app:xui_radius="@dimen/main_radius_conner">
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
+                    <com.bhex.lib.uikit.widget.text.AutoFitTextView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/iv_token_release"
+                        android:layout_marginEnd="10dp"
                         android:text="@string/transcation_record"
                         android:textColor="@color/global_main_text_color"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="16dp"
-                        android:textSize="15sp"/>
+                        android:maxLines="1"
+                        android:textSize="15sp"
+                        />
 
 
                     <androidx.appcompat.widget.AppCompatImageView
@@ -125,8 +129,10 @@
 
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/iv_account_manager"
+                        android:layout_marginEnd="10dp"
                         android:text="@string/trustship_manager"
                         android:textColor="@color/global_main_text_color"
                         android:layout_centerVertical="true"
@@ -134,6 +140,7 @@
                         android:textSize="15sp"/>
 
                     <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_account_manager"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@mipmap/ic_account_manager"

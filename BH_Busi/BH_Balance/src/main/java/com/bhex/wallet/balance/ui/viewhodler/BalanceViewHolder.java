@@ -62,7 +62,7 @@ public class BalanceViewHolder {
         iv_wallet_qr = viewHolder.findViewById(R.id.iv_wallet_qr);
         //添加钱包
         viewHolder.findViewById(R.id.iv_add_wallet).setOnClickListener(v->{
-            ARouter.getInstance().build(ARouterConfig.Trusteeship.Trusteeship_Add_Index).withInt("flag",1).navigation();
+            ARouter.getInstance().build(ARouterConfig.Trusteeship.Trusteeship_Add_Index).withInt(BHConstants.FLAG,1).navigation();
         });
 
 

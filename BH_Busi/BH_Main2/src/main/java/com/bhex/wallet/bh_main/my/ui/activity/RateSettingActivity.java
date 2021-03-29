@@ -73,24 +73,13 @@ public class RateSettingActivity extends BaseActivity<RatePresenter> {
         //currencyArray = getResources().getStringArray(R.array.Currency_list);
 
         currencyItemList = mPresenter.getAllCurrency(this);
-
         tv_center_title.setText(title);
-
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        recycler_rate.setLayoutManager(llm);
-
-        mRateAdapter = new RateAdapter(R.layout.item_rate,currencyItemList);
-
+        mRateAdapter = new RateAdapter(currencyItemList);
         recycler_rate.setAdapter(mRateAdapter);
-
         RecycleViewExtDivider ItemDecoration = new RecycleViewExtDivider(
                 this,LinearLayoutManager.VERTICAL,
                 PixelUtils.dp2px(this,32),0,
-
                 ColorUtil.getColor(this,R.color.global_divider_color));
-
-
         recycler_rate.addItemDecoration(ItemDecoration);
     }
 

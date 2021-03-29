@@ -89,7 +89,8 @@ public class ExceptionEngin {
             return apiException1;
         }
 
-        if (throwable instanceof com.google.gson.JsonParseException || throwable instanceof org.json.JSONException || throwable instanceof android.net.ParseException) {
+        if (throwable instanceof com.google.gson.JsonParseException || throwable instanceof org.json.JSONException
+                || throwable instanceof android.net.ParseException || throwable instanceof  com.fasterxml.jackson.core.JsonParseException) {
             ApiException apiException = new ApiException(throwable, 1001);
             apiException.setDisplayMessage(BaseApplication.getInstance().getString(R.string.json_parse_error));
             return apiException;
@@ -132,7 +133,7 @@ public class ExceptionEngin {
         }
         if (throwable instanceof java.io.IOException) {
             ApiException apiException = new ApiException(throwable, 1004);
-            apiException.setDisplayMessage(BaseApplication.getInstance().getString(R.string.error_network_later_try));
+            apiException.setDisplayMessage(BaseApplication.getInstance().getString(R.string.error_process));
             return apiException;
         }
 

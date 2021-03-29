@@ -19,6 +19,7 @@
     <string name="auth_info_faild">当前登录信息过期,请重新登录</string>
     <string name="error_network_later_try">网络异常，请稍后再试</string>
     <string name="traffic_network_later_try">网络拥堵，请稍后再试</string>
+    <string name="error_process">处理异常</string>
     <string name="error_network_time_out">请求超时</string>
     <string name="keystore_or_pwd_nomatch">KeyStore或密码不匹配</string>
     <string name="app_account_language">语言</string>

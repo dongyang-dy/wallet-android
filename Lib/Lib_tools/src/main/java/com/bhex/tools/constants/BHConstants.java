@@ -103,7 +103,7 @@ public class BHConstants {
     public static final String WAY = "way";
     public static final String URL = "url";
     public static final String FLAG = "flag";
-
+    public static final String BHCHAIN = "bhChain";
     public static final int PRIVATE_KEY_LENGTH = 64;
 
     public static final int PUBLIC_KEY_LENGTH = 128;

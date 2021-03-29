@@ -156,7 +156,7 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
         mChainAdapter.setOnItemClickListener((adapter, view, position) -> {
             BHChain bhChain =  mChainAdapter.getData().get(position);
             ARouter.getInstance().build(ARouterConfig.Balance.Balance_chain_tokens)
-                    .withObject("bhChain",bhChain)
+                    .withObject(BHConstants.BHCHAIN,bhChain)
                     .withString(BHConstants.TITLE,BHConstants.BHT_TOKEN)
                     .navigation();
         });

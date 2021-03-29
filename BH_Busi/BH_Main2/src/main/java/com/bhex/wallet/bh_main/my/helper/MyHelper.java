@@ -20,6 +20,7 @@ import com.bhex.wallet.common.db.entity.BHWallet;
 import com.bhex.wallet.common.enums.CURRENCY_TYPE;
 import com.bhex.wallet.common.enums.MAKE_WALLET_TYPE;
 import com.bhex.wallet.common.manager.BHUserManager;
+import com.bhex.wallet.common.manager.CurrencyManager;
 import com.bhex.wallet.common.manager.MMKVManager;
 import com.bhex.wallet.common.model.AccountInfo;
 import com.bhex.wallet.common.model.BHBalance;
@@ -89,8 +90,8 @@ public class MyHelper {
         myItems.get(0).rightTxt = langArray[selectIndex-1];
         //语言
         CURRENCY_TYPE.initCurrency(context);
-        String currency_name = MMKVManager.getInstance().mmkv().decodeString(BHConstants.CURRENCY_USED,CURRENCY_TYPE.USD.shortName);
-
+        //String currency_name = MMKVManager.getInstance().mmkv().decodeString(BHConstants.CURRENCY_USED,CURRENCY_TYPE.USD.shortName);
+        String currency_name = CurrencyManager.getInstance().loadCurrency(context);
         myItems.get(1).rightTxt = CURRENCY_TYPE.getValue(currency_name).name+"("+CURRENCY_TYPE.getValue(currency_name)+")";
 
         //

@@ -478,6 +478,7 @@
     <string name="click_make_cross_address">Click to generate cross-chain address</string>
     <string name="fingerprint_verify">TouchID login</string>
     <string name="traffic_network_later_try" translatable="false">Network congestion, please try again late</string>
+    <string name="error_process">Exception handling</string>
     <string name="exchage_rate">Rate </string>
     <string name="exxternal_link_txid">Cross-chain TXID</string>
     <string name="friend_tips">Tips:</string>

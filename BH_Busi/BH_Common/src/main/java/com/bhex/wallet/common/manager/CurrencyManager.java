@@ -4,6 +4,8 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.bhex.tools.constants.BHConstants;
+import com.bhex.tools.language.LocalManageUtil;
+import com.bhex.tools.utils.LogUtils;
 import com.bhex.tools.utils.NumberUtil;
 import com.bhex.wallet.common.cache.CacheCenter;
 import com.bhex.wallet.common.cache.RatesCache;
@@ -13,6 +15,7 @@ import com.bhex.wallet.common.model.BHToken;
 
 import java.math.RoundingMode;
 import java.text.NumberFormat;
+import java.util.Locale;
 
 /**
  * Created by BHEX.
@@ -47,13 +50,28 @@ public class CurrencyManager {
         return _instance;
     }
 
-    public String loadCurrency(Context context){
-        //mCurrency = "cny";
+    public void init(Context context){
+        mCurrency = MMKVManager.getInstance().mmkv().decodeString(BHConstants.CURRENCY_USED);
         if(TextUtils.isEmpty(mCurrency)){
+            Locale locale = LocalManageUtil.getSetLanguageLocale(context);
+            if(locale.getLanguage().contains("zh")){
+                MMKVManager.getInstance().mmkv().encode(BHConstants.CURRENCY_USED,CURRENCY_TYPE.CNY.shortName);
+                mCurrency =  CURRENCY_TYPE.CNY.shortName;
+            }else{
+                MMKVManager.getInstance().mmkv().encode(BHConstants.CURRENCY_USED,CURRENCY_TYPE.USD.shortName);
+                mCurrency =  CURRENCY_TYPE.USD.shortName;
+            }
+        }
+    }
+
+    public String loadCurrency(Context context){
+        if(TextUtils.isEmpty(mCurrency)){
+            //获取语言
             mCurrency = MMKVManager.getInstance().mmkv().decodeString(BHConstants.CURRENCY_USED, CURRENCY_TYPE.USD.shortName);
         }
         return mCurrency;
     }
+
 
     public String getCurrencyRateDecription(Context context, String symbol){
         RatesCache ratesCache = CacheCenter.getInstance().getRatesCache();

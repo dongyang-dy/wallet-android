@@ -20,8 +20,8 @@ import java.util.List;
  */
 public class RateAdapter extends BaseQuickAdapter<CurrencyItem, BaseViewHolder> {
 
-    public RateAdapter(int layoutResId, @Nullable List<CurrencyItem> data) {
-        super(layoutResId, data);
+    public RateAdapter(@Nullable List<CurrencyItem> data) {
+        super(R.layout.item_rate, data);
     }
 
     @Override

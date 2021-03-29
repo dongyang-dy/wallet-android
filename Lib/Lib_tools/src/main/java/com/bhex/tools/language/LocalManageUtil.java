@@ -33,7 +33,6 @@ public class LocalManageUtil {
 
     @TargetApi(Build.VERSION_CODES.N)
     private static Context createConfigurationResources(Context context, String language) {
-        LogUtils.d("LocalManager===>:","language=="+language);
         Resources resources = context.getResources();
         Configuration configuration = resources.getConfiguration();
         DisplayMetrics dm = resources.getDisplayMetrics();
@@ -52,7 +51,7 @@ public class LocalManageUtil {
         return context;
     }
 
-    public static void applyLanguage(Context context, String newLanguage) {
+    /*public static void applyLanguage(Context context, String newLanguage) {
         Resources resources = context.getResources();
         Configuration configuration = resources.getConfiguration();
         Locale locale = new Locale(newLanguage);
@@ -65,7 +64,7 @@ public class LocalManageUtil {
             DisplayMetrics dm = resources.getDisplayMetrics();
             resources.updateConfiguration(configuration, dm);
         }
-    }
+    }*/
 
     /**
      * 获取选择的语言
@@ -89,12 +88,6 @@ public class LocalManageUtil {
 
     public static int getSetLanguageLocaleIndex(Context context) {
         int selectIndex = LocalSPUtil.getInstance(context).getSelectLanguage();
-        /*if(selectIndex==0){
-            Locale locale = getSystemLocale(context);
-
-        }else{
-            return selectIndex;
-        }*/
         if(selectIndex==-1){
            Locale locale =  getSystemLocale(context);
            if(locale.getLanguage().contains("zh")){

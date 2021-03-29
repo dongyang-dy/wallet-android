@@ -19,6 +19,7 @@ import com.bhex.wallet.bh_main.my.adapter.LanguageAdapter;
 import com.bhex.wallet.bh_main.my.model.LanguageItem;
 import com.bhex.wallet.common.config.ARouterConfig;
 import com.bhex.wallet.common.event.LanguageEvent;
+import com.bhex.wallet.common.manager.CurrencyManager;
 import com.bhex.wallet.common.utils.LanguageConstants;
 
 import org.greenrobot.eventbus.EventBus;
