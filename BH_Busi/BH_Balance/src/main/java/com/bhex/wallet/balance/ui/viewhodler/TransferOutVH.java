@@ -181,7 +181,7 @@ public class TransferOutVH {
         String current_address = bhWallet.getAddress();
         if(!v_transfer_in_address.toUpperCase().startsWith(BHConstants.BHT_TOKEN.toUpperCase())
                 || current_address.equalsIgnoreCase(v_transfer_in_address)){
-            ToastUtils.showToast(m_activity.getString(R.string.error_transfer_address));
+            ToastUtils.showToast(m_activity.getString(R.string.address_error));
             inp_transfer_in_address.requestFocus();
             return false;
         }

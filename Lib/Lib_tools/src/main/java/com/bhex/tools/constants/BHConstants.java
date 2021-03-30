@@ -108,8 +108,8 @@ public class BHConstants {
 
     public static final int PUBLIC_KEY_LENGTH = 128;
 
-    public static final String API_BASE_URL = "https://explorer.hbtcchain.io/";
-    public static final String MARKET_URL = "https://dex.hbtcchain.io";
-    //public static final String API_BASE_URL = "http://hbtc.yym.plus/";
-    //public static final String MARKET_URL = "http://swap.yym.plus";
+    //public static final String API_BASE_URL = "https://explorer.hbtcchain.io/";
+    //public static final String MARKET_URL = "https://dex.hbtcchain.io";
+    public static final String API_BASE_URL = "http://hbtc.yym.plus/";
+    public static final String MARKET_URL = "http://swap.yym.plus";
 }

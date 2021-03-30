@@ -230,6 +230,7 @@
     <string name="encode_qr_fail">解析二维码失败</string>
     <string name="link_outter_address_error">跨链地址错误</string>
     <string name="withdraw_address_error">提币地址错误</string>
+    <string name="address_error">地址错误</string>
     <string name="input_withdraw_amount">请输入提币数量</string>
     <string name="please_input_gas_fee">请输入手续费</string>
     <string name="error_input_gas_fes">手续费输入错误</string>
@@ -322,8 +323,8 @@
     <string name="trusteeship_exist">账户已存在</string>
     <string name="please_input_gasfee">请输入交易手续费</string>
     <string name="please_input_withdraw_fee">请输入提币手续费</string>
-    <string name="not_available_amount">没有可用余额</string>
-    <string name="not_available_gasfee">没有足够手续费</string>
+    <string name="not_available_amount">余额不足</string>
+    <string name="not_available_gasfee">手续费不足</string>
     <string name="please_transfer_amount">请输入转账数量</string>
     <string name="error_transfer_address">转账地址错误</string>
     <string name="error_transfer_amout_more_available">转账数量大于可用余额</string>

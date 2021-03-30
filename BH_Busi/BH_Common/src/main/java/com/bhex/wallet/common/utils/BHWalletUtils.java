@@ -3,6 +3,7 @@ package com.bhex.wallet.common.utils;
 import android.text.TextUtils;
 
 import com.bhex.network.utils.JsonUtils;
+import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.crypto.CryptoUtil;
 
 import com.bhex.tools.utils.LogUtils;
@@ -222,20 +223,20 @@ public class BHWalletUtils {
             String bh_adress = BHKey.getBhexUserDpAddress(keyPair);
             walletFile.setAddress(bh_adress);
             //生成bench32地址
-            String bh_bech_pubkey = BHKey.getBhexUserDpPubKey(keyPair);
+
+            String bh_pubkey =  Numeric.toHexStringNoPrefixZeroPadded(keyPair.getPublicKey(), BHConstants.PUBLIC_KEY_LENGTH);
             //keystore存储
             //加密助记词
             if(!ToolUtils.checkListIsEmpty(mnemonics)){
                 String encMnemonic = HWallet.加密_M(convertMnemonicList(mnemonics),pwd,walletFile);
                 walletFile.encMnemonic = encMnemonic;
             }
-
             String raw_json = JsonUtils.toJson(walletFile);
             //私钥加密
             String encryptPK = CryptoUtil.encryptPK(keyPair.getPrivateKey(),pwd);
             bhWallet.setName(walletName);
             bhWallet.setAddress(bh_adress);
-            bhWallet.setPublicKey(bh_bech_pubkey);
+            bhWallet.setPublicKey(bh_pubkey);
             bhWallet.setPrivateKey(encryptPK);
             bhWallet.setKeystorePath(raw_json);
             bhWallet.setPassword(MD5.generate(pwd));

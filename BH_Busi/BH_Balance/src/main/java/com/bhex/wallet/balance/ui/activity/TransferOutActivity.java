@@ -151,6 +151,7 @@ public class TransferOutActivity extends BaseActivity {
             @Override
             public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
                 transferOutVH.inp_transfer_in_address.setText(result);
+                transferOutVH.inp_transfer_in_address.setSelection(result.length());
             }
 
             @Override

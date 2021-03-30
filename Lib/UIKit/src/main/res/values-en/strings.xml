@@ -229,6 +229,7 @@
     <string name="encode_qr_fail">Failed to parse QR code</string>
     <string name="link_outter_address_error">Invalid Cross-chain addresses</string>
     <string name="withdraw_address_error">Invalid Withdrawal address</string>
+    <string name="address_error">Invalid address</string>
     <string name="input_withdraw_amount">Input amount</string>
     <string name="please_input_gas_fee">Fee</string>
     <string name="error_input_gas_fes">Invalid Gasfee</string>
