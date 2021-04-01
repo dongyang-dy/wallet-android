@@ -173,6 +173,7 @@ public class TokenMapCache extends BaseCache {
         BHBaseObserver observer = new BHBaseObserver<GasFee>() {
             @Override
             protected void onSuccess(GasFee gasFee) {
+                LogUtils.d("TokenMapCache===>:","==gasFee.fee="+gasFee.fee+"=gasFee.gas="+gasFee.gas);
                 BHUserManager.getInstance().gasFee = new GasFee(gasFee.fee,gasFee.gas);
             }
 

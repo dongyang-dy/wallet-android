@@ -268,7 +268,7 @@ public class TransactionViewModel extends AndroidViewModel implements LifecycleO
             protected void onSuccess(JsonObject jsonObject) {
                 super.onSuccess(jsonObject);
                 //添加pendding交易
-                SequenceManager.getInstance().increaseSequence();
+                //SequenceManager.getInstance().increaseSequence();
                 LoadDataModel lmd = new LoadDataModel(ExceptionEngin.OK,jsonObject.toString());
                 lmd.loadingStatus = LoadingStatus.SUCCESS;
                 mutableLiveData.postValue(lmd);
@@ -291,7 +291,7 @@ public class TransactionViewModel extends AndroidViewModel implements LifecycleO
                         return null;
                     }
 
-                    String v_sequence = SequenceManager.getInstance().getSequence(accountInfo.sequence);
+                    //String v_sequence = SequenceManager.getInstance().getSequence(accountInfo.sequence);
                     /*activity.runOnUiThread(()->{
                         String key = SequenceManager.getInstance().SEQUENCE_KEY.concat(
                                 BHUserManager.getInstance().getCurrentBhWallet().address
@@ -302,7 +302,7 @@ public class TransactionViewModel extends AndroidViewModel implements LifecycleO
                     LogUtils.d("TransactionViewModel==>:","v_sequence=="+v_sequence);*/
 
                     BHSendTranscation bhSendTranscation = BHTransactionManager.createSendTranscation(password,
-                            v_sequence,feeAmount,txMsgList);
+                            accountInfo.sequence,feeAmount,txMsgList);
 
                     String body = JsonUtils.toJson(bhSendTranscation);
                     LogUtils.d("TransactionViewModel==>:","body=="+body);
@@ -322,7 +322,7 @@ public class TransactionViewModel extends AndroidViewModel implements LifecycleO
                 super.onSuccess(jsonObject);
                 //ToastUtils.showToast("==create_dex_transcation==");
                 //SequenceManager.getInstance().putPeddingTranscation(jsonObject);
-                SequenceManager.getInstance().increaseSequence();
+                //SequenceManager.getInstance().increaseSequence();
                 LoadDataModel lmd = new LoadDataModel(ExceptionEngin.OK,"");
                 lmd.loadingStatus = LoadingStatus.SUCCESS;
                 lmd.setData(jsonObject.toString());
@@ -346,11 +346,11 @@ public class TransactionViewModel extends AndroidViewModel implements LifecycleO
                     if(TextUtils.isEmpty(accountInfo.sequence)){
                         return null;
                     }
-                    String v_sequence = SequenceManager.getInstance().getSequence(accountInfo.sequence);
-                    LogUtils.d("TransactionViewModel==>:",accountInfo.sequence+"==sequence=="+v_sequence);
+                    //String v_sequence = SequenceManager.getInstance().getSequence(accountInfo.sequence);
+                    //LogUtils.d("TransactionViewModel==>:",accountInfo.sequence+"==sequence=="+v_sequence);
                     BHSendTranscation bhSendTranscation =
                             BHTransactionManager.create_dex_transcation(type,json,
-                                    v_sequence, data);
+                                    accountInfo.sequence, data);
                     String body = JsonUtils.toJson(bhSendTranscation);
                     RequestBody txBody = HUtils.createJson(body);
                     return BHttpApi.getService(BHttpApiInterface.class).sendTransaction(txBody);
