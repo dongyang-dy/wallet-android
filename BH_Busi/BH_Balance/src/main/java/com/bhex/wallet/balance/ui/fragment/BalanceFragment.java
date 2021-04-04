@@ -1,9 +1,14 @@
 package com.bhex.wallet.balance.ui.fragment;
 
+import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -257,5 +262,18 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
             refreshLayout.finishRefresh();
             refreshCount=0;
         }
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        LogUtils.d("test===","fr===onCreateView");
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        LogUtils.d("test===","fr===onResume");
     }
 }

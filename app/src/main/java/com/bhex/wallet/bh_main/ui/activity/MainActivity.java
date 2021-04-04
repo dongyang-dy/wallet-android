@@ -139,6 +139,12 @@ public class MainActivity extends BaseActivity<MainPresenter> {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        LogUtils.d("test===","Activity===onreusme");
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
