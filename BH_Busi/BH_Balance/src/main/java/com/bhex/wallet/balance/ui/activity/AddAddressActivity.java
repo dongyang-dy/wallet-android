@@ -118,25 +118,6 @@ public class AddAddressActivity extends BaseActivity {
         });
     }
 
-
-
-    public static boolean validAddress(String address,boolean flag) {
-        try {
-            NetworkParameters networkParameters = null;
-            if (flag)
-                networkParameters = MainNetParams.get();
-            else
-                networkParameters = TestNet3Params.get();
-            Address address00 = Address.fromString(networkParameters, address);
-            if (address00 != null)
-                return true;
-            else
-                return false;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
     //保存地址
     private void saveAddressAction(View view) {
         boolean flag = addAddressVH.verifyInputAction(bhChainToken.chain);
@@ -159,7 +140,7 @@ public class AddAddressActivity extends BaseActivity {
     private void updateStatus(LoadDataModel<Long> ldm) {
         if(ldm.getLoadingStatus()== LoadingStatus.SUCCESS){
             if(ldm.getData()>0){
-                ToastUtils.showToast("地址已存在");
+                ToastUtils.showToast(getString(R.string.address_exists));
             }else{
                 ToastUtils.showToast(getString(R.string.save_success));
                 finish();

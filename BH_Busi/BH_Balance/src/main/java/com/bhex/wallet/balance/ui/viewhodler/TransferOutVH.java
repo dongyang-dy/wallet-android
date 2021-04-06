@@ -28,6 +28,7 @@ import com.bhex.wallet.common.manager.BHUserManager;
 import com.bhex.wallet.common.model.BHBalance;
 import com.bhex.wallet.common.model.BHToken;
 import com.bhex.wallet.common.ui.activity.BHQrScanActivity;
+import com.bhex.wallet.common.utils.AddressUtil;
 import com.google.android.material.button.MaterialButton;
 
 public class TransferOutVH {
@@ -179,8 +180,14 @@ public class TransferOutVH {
         //当前钱包地址
         BHWallet bhWallet = BHUserManager.getInstance().getCurrentBhWallet();
         String current_address = bhWallet.getAddress();
-        if(!v_transfer_in_address.toUpperCase().startsWith(BHConstants.BHT_TOKEN.toUpperCase())
-                || current_address.equalsIgnoreCase(v_transfer_in_address)){
+        if(current_address.equalsIgnoreCase(v_transfer_in_address)){
+            ToastUtils.showToast(m_activity.getString(R.string.address_error));
+            inp_transfer_in_address.requestFocus();
+            return false;
+        }
+
+        boolean flag  = AddressUtil.validHbcAddress(v_transfer_in_address);
+        if(!flag){
             ToastUtils.showToast(m_activity.getString(R.string.address_error));
             inp_transfer_in_address.requestFocus();
             return false;

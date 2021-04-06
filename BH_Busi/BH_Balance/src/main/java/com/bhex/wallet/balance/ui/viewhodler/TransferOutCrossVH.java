@@ -27,6 +27,7 @@ import com.bhex.wallet.common.manager.BHUserManager;
 import com.bhex.wallet.common.model.BHBalance;
 import com.bhex.wallet.common.model.BHToken;
 import com.bhex.wallet.common.ui.activity.BHQrScanActivity;
+import com.bhex.wallet.common.utils.AddressUtil;
 import com.google.android.material.button.MaterialButton;
 
 /**
@@ -111,7 +112,7 @@ public class TransferOutCrossVH {
 
             ARouter.getInstance().build(ARouterConfig.Balance.Balance_address_list)
                     .withString(BHConstants.SYMBOL,tranferToken.symbol)
-                    .withString("address",v_inp_drawwith_address)
+                    .withString(BHConstants.ADDRESS,v_inp_drawwith_address)
                     .navigation(m_activity, BHQrScanActivity.REQUEST_CODE);
         });
 
@@ -190,6 +191,28 @@ public class TransferOutCrossVH {
         if(TextUtils.isEmpty(v_withdraw_address)){
             ToastUtils.showToast(m_activity.getResources().getString(R.string.input_enter_address));
             inp_drawwith_address.requestFocus();
+            return false;
+        }
+
+        //检验地址合法性
+        //1. 判断是否数字或字母
+        if(!RegexUtil.isLetterDigit(v_withdraw_address)){
+            ToastUtils.showToast(m_activity.getString(R.string.address_verify_error));
+            return false;
+        }
+
+        boolean flag = true;
+        //地址检测
+        if(tranferBalance.chain.equals("btc")){
+            flag = AddressUtil.validBtcAddress(v_withdraw_address);
+        }
+
+        if(tranferBalance.chain.equals("eth")){
+            flag = AddressUtil.validEthAddress(v_withdraw_address);
+        }
+
+        if(!flag){
+            ToastUtils.showToast(m_activity.getString(R.string.address_verify_error));
             return false;
         }
 
