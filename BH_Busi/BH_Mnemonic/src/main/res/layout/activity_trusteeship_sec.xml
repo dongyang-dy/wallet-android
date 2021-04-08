@@ -6,112 +6,111 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.TrusteeshipSecActivity">
 
-    <include layout="@layout/layout_toolbar"/>
+    <include layout="@layout/layout_toolbar" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
+        android:layout_above="@+id/keyboard_root"
         android:layout_below="@+id/toolbar"
-        android:layout_above="@+id/keyboard_root">
+        android:layout_marginBottom="30dp">
 
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@+id/toolbar">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_index_1"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dp_40"
-            android:layout_marginTop="8dp"
-            android:gravity="center"
-
-            android:includeFontPadding="false"
-            android:paddingStart="24dp"
-            android:text="@string/set_password"
-            android:textColor="@color/global_main_text_color"
-            android:textSize="26sp" />
-
-
-        <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_index_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/tv_index_1"
-        android:text="@string/setup_2_to_3"
-        android:includeFontPadding="false"
-        android:textColor="@color/global_label_text_color"
-        android:layout_marginStart="8dp"
-        android:textSize="@dimen/sp_13"
-        android:layout_alignBaseline="@+id/tv_index_1"
-        />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingEnd="24dp"
-        android:paddingStart="24dp"
-        android:layout_below="@+id/tv_index_1"
-        android:layout_marginTop="8dp"
-        >
-
-        <androidx.appcompat.widget.AppCompatTextView
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/secondary_tip_text_color"
-            android:textSize="@dimen/sp_15"
-            android:text="@string/set_pwd_tip_1"
-            android:drawablePadding="5dp"
-            android:layout_marginLeft="3dp"
-            android:lineSpacingExtra="5dp"
-            />
+            android:layout_below="@+id/toolbar"
+            android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/secondary_tip_text_color"
-            android:textSize="@dimen/sp_15"
-            android:text="@string/set_pwd_tip_3"
-            android:drawablePadding="5dp"
-            android:layout_marginLeft="3dp"
-            android:lineSpacingExtra="5dp"
-            android:layout_marginTop="3dp"
-            />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_index_1"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_40"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:paddingStart="16dp"
+                android:text="@string/set_password"
+                android:textColor="@color/global_main_text_color"
+                android:textSize="26sp" />
 
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_index_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/tv_index_1"
+                android:layout_marginStart="8dp"
+                android:layout_toEndOf="@+id/tv_index_1"
+                android:includeFontPadding="false"
+                android:text="@string/setup_2_to_3"
+                android:textColor="@color/global_main_gray_color"
+                android:textSize="12sp" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/sp_15"
-            android:layout_marginTop="24dp"
-            android:gravity="center_horizontal"
-            android:textColor="@color/global_secondary_text_color"
-            android:layout_marginBottom="4dp"
-            android:text="@string/number_password"
-            />
-        
-        <com.bhex.lib.uikit.widget.keyborad.PasswordInputView
-            android:id="@+id/input_password_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            app:h_vcet_number="6"
-            app:h_vcet_width="24dp"
-            app:h_vcet_height="24dp"
-            app:h_vcet_pwd_radius="12dp"
-            app:h_vcet_custom_keyborad="true"
-            />
 
-    </LinearLayout>
-    </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_index_1"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:lineSpacingExtra="5dp"
+                    android:text="@string/set_pwd_tip_1"
+                    android:textColor="@color/global_secondary_text_color"
+                    android:textSize="12sp"
+
+                    />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:lineSpacingExtra="5dp"
+                    android:text="@string/set_pwd_tip_3"
+                    android:textColor="@color/global_secondary_text_color"
+                    android:textSize="12sp" />
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/global_divider_color" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="4dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/number_password"
+                    android:textColor="@color/global_secondary_text_color"
+                    android:textSize="@dimen/sp_16" />
+
+                <com.bhex.lib.uikit.widget.keyborad.PasswordInputView
+                    android:id="@+id/input_password_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="24dp"
+                    app:h_vcet_custom_keyborad="true"
+                    app:h_vcet_height="24dp"
+                    app:h_vcet_number="6"
+                    app:h_vcet_pwd_radius="12dp"
+                    app:h_vcet_width="24dp" />
+
+            </LinearLayout>
+        </RelativeLayout>
     </androidx.core.widget.NestedScrollView>
-    <include
-        layout="@layout/layout_keyborad"
-        />
+
+    <include layout="@layout/layout_keyborad" />
 
 </RelativeLayout>

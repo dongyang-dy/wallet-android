@@ -26,8 +26,8 @@ public class AboveMnemonicAdapter extends BaseQuickAdapter<MnemonicItem, BaseVie
 
     private List<MnemonicItem> mOriginList;
 
-    public AboveMnemonicAdapter(int layoutResId, @Nullable List<MnemonicItem> data,@Nullable List<MnemonicItem> originList) {
-        super(layoutResId, data);
+    public AboveMnemonicAdapter(@Nullable List<MnemonicItem> data,@Nullable List<MnemonicItem> originList) {
+        super(R.layout.item_mnemonic_above, data);
         mOriginList = originList;
     }
 
@@ -51,9 +51,12 @@ public class AboveMnemonicAdapter extends BaseQuickAdapter<MnemonicItem, BaseVie
         MnemonicItem originItem = mOriginList.get(position);
         if(!TextUtils.isEmpty(memonicItem.getWord()) && !originItem.getWord().equals(memonicItem.getWord())){
             mnemonicTextView.getBtnDelete().setVisibility(View.VISIBLE);
+            mnemonicTextView.getTextWordView().setTextColor(ContextCompat.getColor(getContext(),R.color.alarm_highlight_text_color));
+        }else{
+            mnemonicTextView.getBtnDelete().setVisibility(View.INVISIBLE);
+            mnemonicTextView.getTextWordView().setTextColor(ContextCompat.getColor(getContext(),R.color.global_main_text_color));
         }
         mnemonicTextView.getTextWordView().setText(memonicItem.getWord());
         mnemonicTextView.getTextWordIndexView().setText(memonicItem.getIndex()+"");
-        mnemonicTextView.getTextWordView().setTextColor(ContextCompat.getColor(getContext(),R.color.global_main_text_color));
     }
 }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_root"
     android:layout_width="match_parent"
     android:layout_height="56dp"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/global_input_background">
+    android:background="@color/card_bg_color">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/text_word_index"
@@ -28,7 +28,7 @@
         android:layout_centerInParent="true"
         android:gravity="center"
         android:textColor="@color/global_main_text_color"
-        android:textSize="18sp"
+        android:textSize="14sp"
         tools:text="abcd"
         />
 

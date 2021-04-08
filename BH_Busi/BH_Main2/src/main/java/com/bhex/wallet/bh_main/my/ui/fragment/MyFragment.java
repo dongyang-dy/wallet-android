@@ -29,6 +29,7 @@ import com.bhex.wallet.common.enums.BH_BUSI_URL;
 import com.bhex.wallet.common.helper.BHWalletHelper;
 import com.bhex.wallet.common.manager.BHUserManager;
 import com.bhex.wallet.common.model.BHPage;
+import com.bhex.wallet.common.utils.BHTestUtil;
 
 import java.util.List;
 
@@ -131,6 +132,10 @@ public class MyFragment extends BaseFragment  {
                 BHPage<BHMessage> page =  (BHPage<BHMessage>)ldm.getData();
                 mMyAdapter.changeMessageCount(page.unread);
             }
+        });
+
+        mRootView.findViewById(R.id.iv_default_man).setOnClickListener(v -> {
+            BHTestUtil.助记词到地址(getYActivity());
         });
     }
 

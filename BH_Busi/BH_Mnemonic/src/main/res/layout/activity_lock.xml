@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
             android:textSize="14sp"
-            android:textColor="@color/global_secondary_text_color"
+            android:textColor="@color/global_main_text_color"
             android:text="@string/wallet_password"
             />
 
@@ -138,7 +138,7 @@
         android:layout_marginEnd="@dimen/main_padding_right"
         app:layout_constraintTop_toBottomOf="@+id/layout_login"
         app:layout_constraintStart_toStartOf="parent"
-        android:textSize="15sp"
+        android:textSize="14sp"
         android:textColor="@color/label_button_text_color"
         android:text="@string/forget_password"
         tools:text="@string/forget_password"/>

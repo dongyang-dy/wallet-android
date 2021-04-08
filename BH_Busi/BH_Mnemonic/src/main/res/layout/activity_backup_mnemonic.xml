@@ -22,8 +22,8 @@
             android:layout_gravity="center"
             android:gravity="center"
             style="@style/toolbar_layout_title_style"
-            android:text="@string/backup_nnemonic"
-            tools:text="@string/backup_nnemonic" />
+            android:text="@string/backup_mnemonic"
+            tools:text="@string/backup_mnemonic" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -48,11 +48,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_please_sure"
-        android:text="@string/backup_nnemonic_tips"
+        android:text="@string/backup_mnemonic_tips"
         android:layout_marginStart="@dimen/main_padding_left"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="@dimen/main_padding_right"
-        style="@style/main_text_tips_style"
+        android:textSize="14sp"
+        android:textColor="@color/secondary_tip_text_color"
         />
 
 
@@ -63,10 +64,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_tips"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="3"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="24dp"
         android:overScrollMode="never"
+        tools:itemCount="20"
+        tools:listitem="@layout/item_mnemonic"
         >
 
 

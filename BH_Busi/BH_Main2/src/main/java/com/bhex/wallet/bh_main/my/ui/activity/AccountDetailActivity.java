@@ -98,7 +98,7 @@ public class AccountDetailActivity extends BaseActivity {
                         .withString(BHConstants.TITLE,item.title)
                         .withString(BHConstants.WALLET_ADDRESS,chooseWallet.getAddress())
                         .navigation();
-            } else if(item.title.equals(getString(R.string.backup_nnemonic))){
+            } else if(item.title.equals(getString(R.string.backup_mnemonic))){
                 Password30PFragment fragment  = Password30PFragment.showPasswordChooseDialog(
                         getSupportFragmentManager(),this::passwordListener, BH_BUSI_TYPE.备份助记词.getIntValue(),wallet_address);
                 fragment.show(getSupportFragmentManager(),Password30PFragment.class.getName());

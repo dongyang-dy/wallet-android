@@ -40,7 +40,7 @@ public class ExportPrivateKeyActivity extends ExportBaseActivity {
     @Autowired(name=BHConstants.TITLE)
     String title;
 
-    @Autowired(name="flag")
+    @Autowired(name=BHConstants.FLAG)
     String flag;
 
     @Autowired(name="inputPwd")

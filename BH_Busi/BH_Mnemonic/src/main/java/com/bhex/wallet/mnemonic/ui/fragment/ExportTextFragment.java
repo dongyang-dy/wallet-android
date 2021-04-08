@@ -28,7 +28,7 @@ import butterknife.BindView;
  */
 public class ExportTextFragment extends BaseFragment {
 
-    public static final String KEY_FLAG = "flag";
+    public static final String KEY_FLAG = BHConstants.FLAG;
 
     @BindView(R2.id.et_private_key)
     AppCompatEditText et_private_key;

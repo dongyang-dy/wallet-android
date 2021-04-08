@@ -28,7 +28,7 @@
         android:layout_centerInParent="true"
         android:gravity="center"
         android:textColor="@color/global_main_text_color"
-        android:textSize="18sp"
+        android:textSize="14sp"
         tools:text="abcd"
         />
 

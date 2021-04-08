@@ -44,14 +44,13 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/sp_15"
-            android:textColor="@color/global_tip_text_color"
             android:layout_gravity="center"
-            android:text="@string/screenshot_tip_1"
-            android:textStyle="normal"
             android:layout_marginStart="@dimen/main_margin_left"
             android:layout_marginEnd="@dimen/main_margin_right"
-            />
+            android:text="@string/screenshot_tip_1"
+            android:textColor="@color/global_tip_text_color"
+            android:textSize="14sp"
+            android:textStyle="normal" />
 
 
         <androidx.appcompat.widget.AppCompatTextView

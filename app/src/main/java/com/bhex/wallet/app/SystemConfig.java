@@ -9,8 +9,7 @@ import com.bhex.network.exception.ApiException;
 import com.bhex.network.exception.ExceptionEngin;
 import com.bhex.network.receiver.NetWorkStatusChangeReceiver;
 import com.bhex.network.utils.ToastUtils;
-import com.bhex.tools.utils.LogUtils;
-import com.bhex.wallet.BuildConfig;
+import com.bhex.tools.BuildConfig;
 import com.bhex.wallet.base.BHNetwork;
 import com.bhex.wallet.common.cache.CacheCenter;
 import com.bhex.wallet.common.model.BHPhoneInfo;
@@ -63,11 +62,11 @@ public class SystemConfig  {
         });
         //异常处理
         if(BuildConfig.DEBUG){
-            /*Stetho.initialize(
+             Stetho.initialize(
                     Stetho.newInitializerBuilder(BaseApplication.getInstance())
                             .enableDumpapp(Stetho.defaultDumperPluginsProvider(BaseApplication.getInstance()))
-                            .build());*/
-            Stetho.initializeWithDefaults(BaseApplication.getInstance());
+                            .build());
+            //Stetho.initializeWithDefaults(BaseApplication.getInstance());
         }
 
         NetworkApi.init(new BHNetwork(BaseApplication.getInstance()));

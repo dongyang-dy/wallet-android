@@ -14,8 +14,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="196dp"
-        >
+        android:layout_marginTop="196dp">
+
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="wrap_content"
@@ -36,14 +36,6 @@
     </LinearLayout>
 
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:visibility="gone"
-        />
-
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/btn_generate_wallet"
         android:layout_width="match_parent"
@@ -62,6 +54,7 @@
         android:text="@string/wallet_create_trusteeship"
         android:background="@drawable/shape_btn_blue"
         style="@style/main_material_btn"
+        android:textSize="15sp"
         />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -81,7 +74,8 @@
         android:text="@string/wallet_import_trusteeship"
         android:gravity="center"
         style="@style/secondary_button"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
+        android:textSize="15sp"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

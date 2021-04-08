@@ -96,8 +96,8 @@
     <string name="hint_import_way">Please choose the import approach</string>
     <string name="import_keystore">Import KeyStore</string>
     <string name="string_import">Import</string>
-    <string name="bh_register_agreement">I have hereby read, understood and agree 《HBTC Wallet Service Agreement》</string>
-    <string name="bh_register_agreement_sub">HBTC Wallet Service Agreement</string>
+    <string name="bh_register_agreement">I have hereby read, understood and agree 《Service Agreement》</string>
+    <string name="bh_register_agreement_sub">《Service Agreement》</string>
     <string name="copy_address">Copy address</string>
     <string name="transfer_in">Receive</string>
     <string name="draw_coin">Withdraw</string>
@@ -438,7 +438,7 @@
     <string name="update_content">Update</string>
     <string name="find_new_version">New Version Found</string>
     <string name="import_ks_tip_1">·Copy HBTC wallet Keystore file contents</string>
-    <string name="import_ks_tip_2">· paste into the “Keystore” input box below</string>
+    <string name="import_ks_tip_2">·paste into the “Keystore” input box below</string>
     <string name="app_up_to_minute_version">Latest version already</string>
     <string name="app_loading_now">Downloading</string>
     <string name="deleted">Deleted</string>

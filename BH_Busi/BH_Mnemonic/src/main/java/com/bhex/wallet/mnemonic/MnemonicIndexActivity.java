@@ -2,7 +2,6 @@ package com.bhex.wallet.mnemonic;
 
 import android.view.View;
 
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatTextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -11,10 +10,6 @@ import com.bhex.tools.constants.BHConstants;
 import com.bhex.wallet.common.base.BaseCacheActivity;
 import com.bhex.wallet.common.config.ARouterConfig;
 import com.bhex.wallet.common.enums.MAKE_WALLET_TYPE;
-import com.bhex.wallet.common.utils.ARouterUtil;
-import com.bhex.wallet.mnemonic.helper.MnemonicDataHelper;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -44,7 +39,7 @@ public class MnemonicIndexActivity extends BaseCacheActivity {
 
     @Override
     protected void addEvent() {
-        //mWords = MnemonicDataHelper.makeMnemonicString();
+
     }
 
     @OnClick({R2.id.btn_generate_wallet,R2.id.btn_import_wallet})

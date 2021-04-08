@@ -27,10 +27,10 @@ import butterknife.BindView;
 @Route(path = ARouterConfig.TRUSTEESHIP_EXPORT_KEYSTORE)
 public class ExportKeyStoreActivity extends ExportBaseActivity {
 
-    @Autowired(name="title")
+    @Autowired(name=BHConstants.TITLE)
     String title;
 
-    @Autowired(name="flag")
+    @Autowired(name=BHConstants.FLAG)
     String flag;
 
     @Autowired(name="inputPwd")

@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="@dimen/dp_40"
         android:includeFontPadding="false"
-        android:paddingStart="24dp"
+        android:paddingStart="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         android:text="@string/set_name"
@@ -32,8 +32,8 @@
         app:layout_constraintStart_toEndOf="@+id/tv_index_1"
         android:text="@string/setup_1_to_3"
         android:includeFontPadding="false"
-        android:textColor="@color/global_label_text_color"
-        android:textSize="@dimen/sp_13"
+        android:textColor="@color/global_main_gray_color"
+        android:textSize="12sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/tv_index_1"
         />
 
@@ -41,19 +41,20 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingEnd="24dp"
-        android:paddingStart="24dp"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_index_1"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="24dp"
         >
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/global_label_text_color"
-            android:textSize="@dimen/sp_15"
+            android:textColor="@color/global_secondary_text_color"
+            android:textSize="@dimen/sp_14"
             android:text="@string/set_username_tip"
             android:drawablePadding="5dp"
             android:layout_marginLeft="3dp"
@@ -63,20 +64,36 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/sp_15"
-            android:textColor="@color/global_secondary_text_color"
+            android:textSize="@dimen/sp_14"
+            android:textColor="@color/global_main_text_color"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="8dp"
             android:text="@string/wallet_name"
             />
 
-        <com.bhex.lib.uikit.widget.InputView
-            android:id="@+id/inp_wallet_name"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:editable="true"
-            app:hint="@string/character_1_to_20"
-            app:textType="normal" />
+            android:layout_height="48dp"
+            android:background="@drawable/shape_input_corner">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/inp_wallet_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:textCursorDrawable="@null"
+                android:textColor="@color/global_input_text_color"
+                android:textColorHint="@color/global_input_hint_color"
+                android:singleLine="true"
+                android:textSize="@dimen/sp_14"
+                android:layout_gravity="center_vertical|left"
+                android:paddingStart="10dp"
+                android:paddingEnd="50dp"
+                android:hint="@string/character_1_to_20"
+                />
+
+        </FrameLayout>
+
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_wallet_name_count"

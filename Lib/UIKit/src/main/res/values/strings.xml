@@ -58,8 +58,8 @@
     <string name="setup_1_to_3">(第1步，共3步)</string>
     <string name="setup_2_to_3">(第2步，共3步)</string>
     <string name="setup_3_to_3">(第3步，共3步)</string>
-    <string name="set_pwd_tip_1">·安全密码是保护钱包私钥和操作资产的重要凭证,HBTC钱包不会缓存、上传、存储您的密码</string>
-    <string name="set_pwd_tip_3">·请务必妥善保管密码</string>
+    <string name="set_pwd_tip_1">安全密码是保护钱包私钥和操作资产的重要凭证,HBTC钱包不会缓存、上传、存储您的密码</string>
+    <string name="set_pwd_tip_3">请务必妥善保管密码</string>
     <string name="import_pk_tip">·请在下方输入框中输入私钥，并留意大小写</string>
     <string name="set_pwd_hint">请设置钱包密码(6位数字)</string>
     <string name="pwd_index">%1$d个字符</string>
@@ -96,8 +96,8 @@
     <string name="hint_import_way">请选择导入方式</string>
     <string name="import_keystore">导入Keystore</string>
     <string name="string_import">导入</string>
-    <string name="bh_register_agreement">我已阅读并同意《HBTC Wallet服务协议》</string>
-    <string name="bh_register_agreement_sub">HBTC Wallet服务协议</string>
+    <string name="bh_register_agreement">我已阅读并同意《服务协议》</string>
+    <string name="bh_register_agreement_sub">《服务协议》</string>
     <string name="copy_address">复制地址</string>
     <string name="transfer_in">收款</string>
     <string name="draw_coin">提币</string>
@@ -437,7 +437,8 @@
     <string name="no_profit">暂无收益</string>
     <string name="update_content">更新内容</string>
     <string name="find_new_version">发现新版本</string>
-    <string name="import_ks_tip_1">·复制粘贴 HBTC wallet 钱包 Keystore 文件内容</string>
+    <!--<string name="import_ks_tip_1">·复制粘贴 HBTC钱包Keystore文件内容</string>-->
+    <string name="import_ks_tip_1">请复制粘贴HBTC钱包Keystore文件内容至下方输入框内或通过扫描Keystore内容生成的二维码录入</string>
     <string name="import_ks_tip_2">·粘贴至下方“Keystore”输入框</string>
     <string name="app_up_to_minute_version">已更新至最新版本</string>
     <string name="app_loading_now">正在后台下载</string>

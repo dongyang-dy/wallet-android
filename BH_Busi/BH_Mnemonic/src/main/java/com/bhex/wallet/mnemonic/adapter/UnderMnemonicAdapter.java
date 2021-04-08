@@ -21,8 +21,8 @@ import java.util.List;
  */
 public class UnderMnemonicAdapter extends BaseQuickAdapter<MnemonicItem, BaseViewHolder> {
 
-    public UnderMnemonicAdapter(int layoutResId, @Nullable List<MnemonicItem> data) {
-        super(layoutResId, data);
+    public UnderMnemonicAdapter( @Nullable List<MnemonicItem> data) {
+        super(R.layout.item_mnemonic, data);
     }
 
     @Override

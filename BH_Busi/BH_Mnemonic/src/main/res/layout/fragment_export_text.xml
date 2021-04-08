@@ -8,7 +8,6 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btn_copy"
         android:layout_alignParentTop="true"
         android:fillViewport="true">
 
@@ -26,7 +25,7 @@
                 android:layout_marginTop="24dp"
                 android:text="@string/backup_text_tip_1"
                 android:textColor="@color/global_main_text_color"
-                android:textSize="17sp" />
+                android:textSize="16sp" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
@@ -36,7 +35,7 @@
                 android:layout_marginEnd="@dimen/page_margin_start"
                 android:text="@string/backup_text_tip_2"
                 android:textColor="@color/secondary_tip_text_color"
-                android:textSize="15sp" />
+                android:textSize="14sp" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
@@ -45,7 +44,7 @@
                 android:layout_marginTop="12dp"
                 android:text="@string/backup_text_tip_3"
                 android:textColor="@color/global_main_text_color"
-                android:textSize="17sp" />
+                android:textSize="16sp" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
@@ -55,7 +54,7 @@
                 android:layout_marginEnd="@dimen/page_margin_start"
                 android:text="@string/backup_text_tip_4"
                 android:textColor="@color/secondary_tip_text_color"
-                android:textSize="15sp" />
+                android:textSize="14sp" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
@@ -65,7 +64,7 @@
                 android:layout_marginEnd="@dimen/page_margin_start"
                 android:text="@string/backup_text_tip_5"
                 android:textColor="@color/secondary_tip_text_color"
-                android:textSize="15sp" />
+                android:textSize="14sp" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
@@ -74,7 +73,7 @@
                 android:layout_marginTop="12dp"
                 android:text="@string/backup_text_tip_7"
                 android:textColor="@color/global_main_text_color"
-                android:textSize="17sp" />
+                android:textSize="16sp" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
@@ -84,54 +83,50 @@
                 android:layout_marginEnd="@dimen/page_margin_start"
                 android:text="@string/backup_text_tip_6"
                 android:textColor="@color/secondary_tip_text_color"
-                android:textSize="15sp" />
+                android:textSize="14sp" />
 
-            <androidx.cardview.widget.CardView
+
+            <com.bhex.lib.uikit.widget.layout.XUIRelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="24dp"
                 android:layout_marginStart="@dimen/main_padding_left"
                 android:layout_marginTop="16dp"
-                android:orientation="vertical"
-                app:cardBackgroundColor="@color/global_input_background"
+                android:background="@color/card_bg_color"
                 app:cardCornerRadius="@dimen/main_radius_conner"
-                app:cardElevation="0dp">
+                app:xui_borderColor="@color/global_input_stroke"
+                app:xui_borderWidth="1dp"
+                app:xui_radius="@dimen/input_radius_conner">
 
-                <RelativeLayout
+                <com.bhex.lib.uikit.widget.editor.EditTextWithScrollView
+                    android:id="@+id/et_private_key"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="152dp"
+                    android:background="@null"
+                    android:gravity="top"
+                    android:hint="@string/hint_private_key_input"
+                    android:inputType="textMultiLine"
+                    android:overScrollMode="ifContentScrolls"
+                    android:padding="16dp"
+                    android:singleLine="false"
+                    android:textColor="@color/global_main_text_color"
+                    android:textColorHint="@color/global_input_hint_color"
+                    android:textCursorDrawable="@null"
+                    android:textSize="15sp" />
 
-                    <com.bhex.lib.uikit.widget.editor.EditTextWithScrollView
-                        android:id="@+id/et_private_key"
-                        android:layout_width="match_parent"
-                        android:layout_height="152dp"
-                        android:background="@null"
-                        android:gravity="top"
-                        android:hint="@string/hint_private_key_input"
-                        android:inputType="textMultiLine"
-                        android:overScrollMode="ifContentScrolls"
-                        android:padding="16dp"
-                        android:singleLine="false"
-                        android:textColor="@color/global_main_text_color"
-                        android:textColorHint="@color/global_input_hint_color"
-                        android:textCursorDrawable="@null"
-                        android:textSize="15sp"/>
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/btn_copy"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/copy"
-                        android:textColor="@color/btn_blue_bg_color"
-                        android:layout_below="@+id/et_private_key"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentBottom="true"
-                        android:textSize="12sp"
-                        android:paddingEnd="12dp"
-                        android:paddingBottom="12dp"
-                        />
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/btn_copy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/et_private_key"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:paddingEnd="12dp"
+                    android:paddingBottom="12dp"
+                    android:text="@string/copy"
+                    android:textColor="@color/btn_blue_bg_color"
+                    android:textSize="12sp" />
+            </com.bhex.lib.uikit.widget.layout.XUIRelativeLayout>
 
 
         </LinearLayout>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
     <!--全局的色值-->
     <!--分割线颜色-->
 <!--    <color name="global_divider_color">#F4F7FF</color>-->
@@ -13,15 +14,16 @@
     <color name="global_main_text_color">#0A1825</color>
 
     <!--二级文字颜色-->
-    <color name="global_secondary_text_color">#475563</color>
-
+    <!--<color name="global_secondary_text_color">#475563</color>-->
+    <color name="global_secondary_text_color">#696A6F</color>
     <!--标签文字颜色-->
-    <color name="global_label_text_color">#6E8196</color>
+    <color name="global_label_text_color">#8F9298</color>
 
     <!--tips-->
     <color name="global_tip_text_color">#475563</color>
     <!--tips-->
-    <color name="secondary_tip_text_color">#6E8196</color>
+    <!--<color name="secondary_tip_text_color">#6E8196</color>-->
+    <color name="secondary_tip_text_color">#8F9298</color>
 
     <color name="blue_bg_tip_text_color">#77ffffff</color>
 
@@ -49,12 +51,13 @@
     <!--<color name="global_input_profix_text_color">#6E8196</color>-->
 
     <!--输入框背景色-->
-    <color name="global_input_background">#F9F9FB</color>
+    <color name="global_input_background">#FFFFFF</color>
+    <color name="global_input_stroke">#F3F3F3</color>
 
     <!--服务协议字色-->
     <color name="service_agreement_text_color">#0A1825</color>
 
-    <color name="theme_toolbar_title">@color/global_main_text_color</color>
+    <color name="theme_toolbar_title">@color/black</color>
     <color name="accent_color">#3375E0</color>
     <color name="checkbox_text_color">#6E8196</color>
     <color name="checkbox_checked_text_color">#3375E0</color>
@@ -63,7 +66,8 @@
     <color name="app_bg">#ffffffff</color>
 
     <!--app次级背景色-->
-    <color name="app_default_bg">#F9F9FB</color>
+    <!--<color name="app_default_bg">#F9F9FB</color>-->
+    <color name="app_default_bg">#F7F8FB</color>
     <color name="card_bg">#FFFFFF</color>
 
     <!--app蓝色背景色-->
@@ -82,27 +86,27 @@
     <!--币种图标颜色-->
     <color name="token_icon_color">#3E3A50</color>
 
-    <color name="global_button_enable_false_bg">#E7ECF4</color>
-    <color name="global_button_enable_false_text">#FFFFFF</color>
+    <color name="global_button_enable_false_bg">#F3F3F3</color>
+    <color name="global_button_enable_false_text">#C7D3E4</color>
 
-    <color name="global_button_press_bg">#3375E0</color>
+    <color name="global_button_press_bg">#3369E9</color>
 
-    <color name="global_button_bg_color">#3375E0</color>
+    <color name="global_button_bg_color">#3369E9</color>
 
     <color name="global_button_text_color">#FFFFFF</color>
 
-    <color name="label_button_text_color">#3375E0</color>
+    <color name="label_button_text_color">#3369E9</color>
     <!--次级蓝底按钮-->
-    <color name="secondary_button_bg_color">#B0BFDB</color>
+    <color name="secondary_button_bg_color">#9FB5DC</color>
 
     <!--透明底蓝边按钮-->
     <color name="border_button_bg_color">#FFFFFF</color>
     <color name="border_button_text_color">#3375E0</color>
-    <color name="border_button_border_color">#3375E0</color>
+    <color name="border_button_border_color">#3369E9</color>
 
 
-    <color name="indicator_start_color">#3375E0</color>
-    <color name="indicator_end_color">#003375E0</color>
+    <color name="indicator_start_color">#3369E9</color>
+    <color name="indicator_end_color">#003369E9</color>
 
     <!--dialog背景色-->
     <color name="dialog_fragment_background">#FFFFFF</color>

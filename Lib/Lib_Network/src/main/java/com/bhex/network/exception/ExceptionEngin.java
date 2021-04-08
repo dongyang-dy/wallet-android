@@ -140,6 +140,7 @@ public class ExceptionEngin {
         if(throwable instanceof io.reactivex.exceptions.OnErrorNotImplementedException){
             ApiException apiException = new ApiException(throwable, 1006);
             apiException.setDisplayMessage(BaseApplication.getInstance().getString(R.string.traffic_network_later_try));
+            //apiException.setDisplayMessage(BaseApplication.getInstance().getString(R.string.error_process));
             return apiException;
         }
 

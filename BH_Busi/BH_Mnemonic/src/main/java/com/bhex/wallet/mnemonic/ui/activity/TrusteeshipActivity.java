@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.View;
 
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -14,6 +15,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bhex.lib.uikit.widget.InputView;
 import com.bhex.lib.uikit.widget.editor.SimpleTextWatcher;
+import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.NavigateUtil;
 import com.bhex.wallet.common.base.BaseCacheActivity;
 import com.bhex.wallet.common.config.ARouterConfig;
@@ -40,14 +42,14 @@ public class TrusteeshipActivity extends BaseCacheActivity<TrusteeshipPresenter>
     @Autowired(name="isForgetPwd")
     int isForgetPwd = 0;
 
-    @Autowired(name = "way")
+    @Autowired(name = BHConstants.WAY)
     int mWay;
 
     @BindView(R2.id.btn_next)
     AppCompatButton btn_next;
 
     @BindView(R2.id.inp_wallet_name)
-    InputView inp_wallet_name;
+    AppCompatEditText inp_wallet_name;
 
     @BindView(R2.id.tv_center_title)
     AppCompatTextView tv_center_title;
@@ -69,25 +71,24 @@ public class TrusteeshipActivity extends BaseCacheActivity<TrusteeshipPresenter>
     protected void initView() {
         ARouter.getInstance().inject(this);
         mPresenter.setToolBarTitle(mWay);
-        inp_wallet_name.getEditText().setInputType(InputType.TYPE_CLASS_TEXT);
-        //inp_wallet_name.getEditText().setText("Bluehelix Wallet");
+        inp_wallet_name.setInputType(InputType.TYPE_CLASS_TEXT);
     }
 
     @Override
     protected void addEvent() {
         walletViewModel = ViewModelProviders.of(this).get(WalletViewModel.class);
-        inp_wallet_name.addTextWatch(new SimpleTextWatcher(){
+        inp_wallet_name.addTextChangedListener(new SimpleTextWatcher(){
             @Override
             public void afterTextChanged(Editable s) {
                 super.afterTextChanged(s);
-                if(!TextUtils.isEmpty(inp_wallet_name.getInputString())){
+                if(!TextUtils.isEmpty(inp_wallet_name.getText().toString().trim())){
                     btn_next.setBackgroundResource(R.drawable.btn_bg_blue_6_corner);
                     btn_next.setEnabled(true);
                 }else{
                     btn_next.setBackgroundResource(R.drawable.btn_disabled_gray);
                     btn_next.setEnabled(false);
                 }
-                int count = inp_wallet_name.getInputString().length();
+                int count = inp_wallet_name.getText().toString().trim().length();
                 tv_wallet_name_count.setText(String.format(getString(R.string.pwd_index), count));
 
             }
@@ -100,8 +101,7 @@ public class TrusteeshipActivity extends BaseCacheActivity<TrusteeshipPresenter>
     public void onViewClicked(View view) {
         if(view.getId()==R.id.btn_next){
             //设置钱包用户名
-            BHUserManager.getInstance().getCreateWalletParams().name = inp_wallet_name.getInputString();
-            //NavigateUtil.startActivity(this,TrusteeshipSecActivity.class);
+            BHUserManager.getInstance().getCreateWalletParams().name = inp_wallet_name.getText().toString().trim();
             ARouter.getInstance()
                     .build(ARouterConfig.TRUSTEESHIP_MNEMONIC_SECOND)
                     .withInt("way",mWay)

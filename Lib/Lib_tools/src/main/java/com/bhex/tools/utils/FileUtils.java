@@ -47,6 +47,25 @@ public class FileUtils {
         return sb.toString();
     }
 
+    public static String loadStringByAssets$$(Context context,String fileName) {
+
+        StringBuilder sb = new StringBuilder();
+
+        try{
+            AssetManager am = context.getAssets();
+
+            BufferedReader bf = new BufferedReader(new InputStreamReader(am.open(fileName)));
+            String line;
+            while ((line = bf.readLine()) != null) {
+                sb.append(line).append(";");
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return sb.toString();
+    }
+
     //图片保存
     public static boolean saveImageToGallery(Context context, Bitmap bitmap, String fileName){
         //存储路径

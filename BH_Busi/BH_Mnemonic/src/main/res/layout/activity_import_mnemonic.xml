@@ -40,10 +40,9 @@
         android:drawablePadding="5dp"
         android:layout_marginLeft="3dp"
         android:lineSpacingExtra="5dp"
-        style="@style/main_text_tips_style"
+        android:textColor="@color/global_secondary_text_color"
+        android:textSize="14sp"
         />
-
-
 
     <LinearLayout
         android:id="@+id/layout_index_1"
@@ -56,7 +55,7 @@
         android:layout_marginStart="@dimen/main_padding_left"
         android:layout_marginEnd="@dimen/main_padding_right"
         app:layout_constraintTop_toBottomOf="@+id/import_mnemonic_tips"
-        android:background="@color/global_input_background">
+        android:background="@color/card_bg_color">
 
 
        <androidx.appcompat.widget.AppCompatEditText
@@ -74,16 +73,13 @@
             android:inputType="text"
             android:layout_marginBottom="30dp"
             android:textCursorDrawable="@null"
-            tools:text="sniff float  talent walk search mad boat away fossil sleep dune">
+            />
 
-        </androidx.appcompat.widget.AppCompatEditText>
-        
+
         <com.bhex.lib.uikit.widget.MnemonicInputView
             android:id="@+id/input_mnemonic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-
-
 
     </LinearLayout>
 

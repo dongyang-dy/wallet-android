@@ -16,6 +16,7 @@ import com.bhex.lib.uikit.widget.editor.SimpleTextWatcher;
 import com.bhex.lib.uikit.widget.keyborad.PasswordInputView;
 import com.bhex.lib.uikit.widget.keyborad.PasswordKeyBoardView;
 import com.bhex.network.utils.ToastUtils;
+import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.LogUtils;
 import com.bhex.tools.utils.NavigateUtil;
 import com.bhex.tools.utils.RegexUtil;
@@ -42,7 +43,7 @@ public class TrusteeshipSecActivity extends BaseCacheActivity<TrusteeshipPresent
     PasswordInputView mPasswordInputView;
     PasswordKeyBoardView mPasswordKeyboardView;
 
-    @Autowired(name = "way")
+    @Autowired(name = BHConstants.WAY)
     int mWay;
 
     @Override

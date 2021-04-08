@@ -26,10 +26,10 @@ import butterknife.BindView;
 @Route(path = ARouterConfig.TRUSTEESHIP_EXPORT_INDEX, name = "私钥导出提醒")
 public class ExportIndexActivity extends BaseActivity {
 
-    @Autowired(name = "title")
+    @Autowired(name = BHConstants.TITLE)
     String title;
 
-    @Autowired(name = "flag")
+    @Autowired(name = BHConstants.FLAG)
     String flag;
 
     @Autowired(name = BHConstants.WALLET_ADDRESS)

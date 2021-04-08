@@ -84,7 +84,6 @@ public class VerifyMnemonicActivity extends BaseCacheActivity<VerifyPresenter> {
     protected void initView() {
         ARouter.getInstance().inject(this);
 
-
         orginMnemonicItemList = MnemonicDataHelper.makeMnemonic(inputPwd,wallet_address);
         underMnemonicItemList = MnemonicDataHelper.makeNewMnemonicList(orginMnemonicItemList);
 
@@ -97,7 +96,7 @@ public class VerifyMnemonicActivity extends BaseCacheActivity<VerifyPresenter> {
 
         recycler_mnemonic_under.setLayoutManager(layoutManager);
 
-        underMnemonicAdapter = new UnderMnemonicAdapter(R.layout.item_mnemonic,underMnemonicItemList);
+        underMnemonicAdapter = new UnderMnemonicAdapter(underMnemonicItemList);
         recycler_mnemonic_under.setAdapter(underMnemonicAdapter);
 
         underMnemonicAdapter.setOnItemClickListener((adapter, view, position) -> {
@@ -122,7 +121,7 @@ public class VerifyMnemonicActivity extends BaseCacheActivity<VerifyPresenter> {
         recycler_mnemonic_above.setLayoutManager(unlayoutManager);
         recycler_mnemonic_above.addItemDecoration(new GridLayoutItemDecoration(this,R.drawable.item_divider));
 
-        aboveMnemonicAdapter = new AboveMnemonicAdapter(R.layout.item_mnemonic_above,aboverMnemonicItemList,orginMnemonicItemList);
+        aboveMnemonicAdapter = new AboveMnemonicAdapter(aboverMnemonicItemList,orginMnemonicItemList);
         recycler_mnemonic_above.setAdapter(aboveMnemonicAdapter);
 
         aboveMnemonicAdapter.setOnItemClickListener((adapter, view, position) -> {

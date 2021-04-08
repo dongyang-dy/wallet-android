@@ -74,8 +74,6 @@ public class HWallet {
         byte[] cipherText = performCipherOperation(
                 Cipher.ENCRYPT_MODE, iv, encryptKey, privateKeyBytes);
 
-        LogUtils.d("HLWallet===>","=1==cipherText==="+Arrays.toString(cipherText));
-
         byte[] mac = generateMac(derivedKey, cipherText);
 
         //

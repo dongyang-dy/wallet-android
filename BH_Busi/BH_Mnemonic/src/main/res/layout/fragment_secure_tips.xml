@@ -19,11 +19,9 @@
         app:layout_constraintTop_toTopOf="parent"
         android:gravity="center"
         android:layout_marginTop="24dp"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:text="@string/tips_secure"
-        android:textColor="@color/global_main_text_color"
-        />
-
+        android:textColor="@color/global_main_text_color"/>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_close"
@@ -80,7 +78,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="20dp"
-            android:textColor="@color/global_tip_text_color"
+            android:textColor="@color/global_secondary_text_color"
             android:textSize="14sp"
             android:text="@string/tips_secure_index_2"
             android:drawableLeft="@drawable/ic_dot_blue"
@@ -92,7 +90,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/global_tip_text_color"
+            android:textColor="@color/global_secondary_text_color"
             android:textSize="14sp"
             android:text="@string/tips_secure_index_3"
             android:drawableLeft="@drawable/ic_dot_blue"
@@ -104,7 +102,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/global_tip_text_color"
+            android:textColor="@color/global_secondary_text_color"
             android:textSize="14sp"
             android:text="@string/tips_secure_index_4"
             android:drawableLeft="@drawable/ic_dot_blue"
@@ -116,7 +114,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/global_tip_text_color"
+            android:textColor="@color/global_secondary_text_color"
             android:textSize="14sp"
             android:text="@string/tips_secure_index_5"
             android:layout_marginLeft="3dp"

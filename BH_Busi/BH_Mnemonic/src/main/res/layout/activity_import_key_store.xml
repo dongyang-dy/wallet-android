@@ -29,7 +29,7 @@
             android:gravity="center"
             android:layout_centerInParent="true"
             style="@style/toolbar_layout_title_style"
-            android:text="@string/import_private_key" />
+            android:text="@string/import_keystore" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/btn_scan_qr"
@@ -62,7 +62,8 @@
             android:drawablePadding="5dp"
             android:layout_marginLeft="3dp"
             android:lineSpacingExtra="5dp"
-            style="@style/main_text_tips_style"
+            android:textSize="12sp"
+            android:textColor="@color/global_secondary_text_color"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
@@ -71,27 +72,10 @@
             android:layout_marginStart="@dimen/main_padding_left"
             />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_tip_index_2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/import_ks_tip_2"
-            android:drawablePadding="5dp"
-            android:layout_marginLeft="3dp"
-            android:lineSpacingExtra="5dp"
-            style="@style/main_text_tips_style"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar"
-            android:layout_marginEnd="@dimen/main_padding_right"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="@dimen/main_padding_left"
-            />
-
-        <LinearLayout
+        <com.bhex.lib.uikit.widget.layout.XUILinearLayout
             android:id="@+id/layout_index_1"
             android:layout_width="match_parent"
-            android:layout_height="230dp"
+            android:layout_height="150dp"
             android:orientation="vertical"
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -99,7 +83,11 @@
             android:layout_marginStart="@dimen/main_padding_left"
             android:layout_marginEnd="@dimen/main_padding_right"
             app:layout_constraintTop_toBottomOf="@+id/import_mnemonic_tips"
-            android:background="@color/global_input_background">
+            android:background="@color/global_input_background"
+            app:xui_borderWidth="1dp"
+            app:xui_borderColor="@color/global_input_stroke"
+            app:xui_radius="@dimen/input_radius_conner"
+            >
 
             <com.bhex.lib.uikit.widget.editor.EditTextWithScrollView
                 android:id="@+id/et_keystore"
@@ -125,17 +113,17 @@
                 >
 
             </com.bhex.lib.uikit.widget.editor.EditTextWithScrollView>
-        </LinearLayout>
+        </com.bhex.lib.uikit.widget.layout.XUILinearLayout>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="15sp"
             android:layout_marginStart="@dimen/main_margin_left"
-            android:layout_marginTop="80dp"
-            android:textColor="@color/global_secondary_text_color"
+            android:layout_marginTop="32dp"
+            android:textColor="@color/global_main_text_color"
             android:layout_marginBottom="8dp"
-            android:text="@string/password"
+            android:text="@string/wallet_password"
             />
 
         <com.bhex.lib.uikit.widget.InputView

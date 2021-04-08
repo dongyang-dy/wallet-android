@@ -48,7 +48,8 @@
         android:drawablePadding="5dp"
         android:layout_marginLeft="3dp"
         android:lineSpacingExtra="5dp"
-        style="@style/main_text_tips_style"
+        android:textColor="@color/global_secondary_text_color"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
@@ -59,7 +60,7 @@
 
 
 
-    <LinearLayout
+    <com.bhex.lib.uikit.widget.layout.XUILinearLayout
         android:id="@+id/layout_index_2"
         android:layout_width="0dp"
         android:layout_height="150dp"
@@ -71,6 +72,9 @@
         android:layout_marginStart="@dimen/main_padding_left"
         android:layout_marginTop="16dp"
         android:background="@color/global_input_background"
+        app:xui_borderColor="@color/global_input_stroke"
+        app:xui_radius="@dimen/input_radius_conner"
+        app:xui_borderWidth="1dp"
         >
 
 
@@ -96,7 +100,7 @@
 
         </androidx.appcompat.widget.AppCompatEditText>
 
-    </LinearLayout>
+    </com.bhex.lib.uikit.widget.layout.XUILinearLayout>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/btn_next"

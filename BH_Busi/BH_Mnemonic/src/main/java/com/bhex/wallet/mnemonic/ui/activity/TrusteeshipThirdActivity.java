@@ -1,8 +1,6 @@
 package com.bhex.wallet.mnemonic.ui.activity;
 
-import android.text.Editable;
 import android.text.SpannableString;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -14,8 +12,6 @@ import androidx.lifecycle.ViewModelProviders;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.bhex.lib.uikit.widget.InputView;
-import com.bhex.lib.uikit.widget.editor.SimpleTextWatcher;
 import com.bhex.lib.uikit.widget.keyborad.PasswordInputView;
 import com.bhex.lib.uikit.widget.keyborad.PasswordKeyBoardView;
 import com.bhex.network.base.LoadingStatus;

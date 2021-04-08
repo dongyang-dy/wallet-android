@@ -73,7 +73,6 @@ public class BackupMnemonicActivity extends BaseCacheActivity {
     @Override
     protected void initView() {
         ARouter.getInstance().inject(this);
-        LogUtils.d("BackupMnemonicActivity==>:","mGotoTarget=="+mGotoTarget);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
     }
 
@@ -81,7 +80,7 @@ public class BackupMnemonicActivity extends BaseCacheActivity {
     protected void addEvent() {
         mnemonicItemList = MnemonicDataHelper.makeMnemonic(inputPwd,wallet_address);
 
-        mnemonicAdapter = new MnemonicAdapter(R.layout.item_mnemonic,mnemonicItemList);
+        mnemonicAdapter = new MnemonicAdapter(mnemonicItemList);
 
         GridLayoutManager layoutManager = new GridLayoutManager(this,3);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);

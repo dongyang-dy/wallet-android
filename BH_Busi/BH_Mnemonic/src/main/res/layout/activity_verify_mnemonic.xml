@@ -22,8 +22,8 @@
             android:layout_gravity="center"
             android:gravity="center"
             style="@style/toolbar_layout_title_style"
-            android:text="@string/verify_nnemonic"
-            tools:text="@string/verify_nnemonic" />
+            android:text="@string/verify_mnemonic"
+            tools:text="@string/verify_mnemonic" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -39,7 +39,8 @@
         android:paddingEnd="@dimen/main_padding_right"
         android:layout_marginTop="8dp"
         android:text="@string/verify_mnemonices_tip"
-        style="@style/main_text_tips_style"
+        android:textSize="15sp"
+        android:textColor="@color/global_secondary_text_color"
         />
 
     <LinearLayout
@@ -64,6 +65,10 @@
             android:minHeight="196dp"
             android:overScrollMode="never"
             android:background="@drawable/frame_light_gray_corner"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="3"
+            tools:itemCount="12"
+            tools:listitem="@layout/item_mnemonic_above"
             />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -72,6 +77,10 @@
             android:layout_height="wrap_content"
             android:overScrollMode="never"
             android:layout_marginTop="20dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="3"
+            tools:itemCount="12"
+            tools:listitem="@layout/item_mnemonic"
             />
 
     </LinearLayout>

@@ -50,7 +50,8 @@ public abstract class BHBaseObserver<T>  implements Observer<T> {
     protected abstract void onSuccess(T t);
 
     protected  void onFailure(int code, String errorMsg){
-        if (this.isNeedShowtoast && code != 1000){
+        //if (this.isNeedShowtoast && code != 1000){
+        if (this.isNeedShowtoast){
             ToastUtils.showToast(errorMsg);
         }
     }

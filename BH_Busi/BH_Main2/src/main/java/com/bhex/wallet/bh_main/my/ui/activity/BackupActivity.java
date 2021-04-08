@@ -65,7 +65,7 @@ public class BackupActivity extends BaseActivity {
     protected void addEvent() {
         adapter.setOnItemClickListener((adapter1, view, position) -> {
             MyItem item =  adapter.getData().get(position);
-            if(item.title.equals(getString(R.string.backup_nnemonic))){
+            if(item.title.equals(getString(R.string.backup_mnemonic))){
                 Password30PFragment.showPasswordDialog(getSupportFragmentManager(),Password30PFragment.class.getName(),
                         this::passwordListener,BH_BUSI_TYPE.备份助记词.getIntValue(),false);
             }else if(item.title.equals(getString(R.string.backup_keystore))){
@@ -75,20 +75,6 @@ public class BackupActivity extends BaseActivity {
                 Password30PFragment.showPasswordDialog(getSupportFragmentManager(),Password30PFragment.class.getName(),
                         this::passwordListener,BH_BUSI_TYPE.备份私钥.getIntValue(),false);
             }
-            /*switch (position){
-                case 0:
-                    Password30PFragment.showPasswordDialog(getSupportFragmentManager(),Password30PFragment.class.getName(),
-                            this::passwordListener,BH_BUSI_TYPE.备份助记词.getIntValue(),false);
-                    break;
-                case 1:
-                    Password30PFragment.showPasswordDialog(getSupportFragmentManager(),Password30PFragment.class.getName(),
-                            this::passwordListener,BH_BUSI_TYPE.备份KS.getIntValue(),false);
-                    break;
-                case 2:
-                    Password30PFragment.showPasswordDialog(getSupportFragmentManager(),Password30PFragment.class.getName(),
-                            this::passwordListener,BH_BUSI_TYPE.备份私钥.getIntValue(),false);
-                    break;
-            }*/
         });
     }
 
@@ -117,18 +103,18 @@ public class BackupActivity extends BaseActivity {
         }else if(position==BH_BUSI_TYPE.备份私钥.getIntValue()){
 
             ARouter.getInstance().build(ARouterConfig.TRUSTEESHIP_EXPORT_INDEX)
-                    .withString("title",getString(R.string.backup_privatekey))
+                    .withString(BHConstants.TITLE,getString(R.string.backup_privatekey))
                     .withString(BHConstants.INPUT_PASSWORD,password)
                     .withString(BHConstants.WALLET_ADDRESS,wallet.address)
-                    .withString("flag", BH_BUSI_TYPE.备份私钥.value)
+                    .withString(BHConstants.FLAG, BH_BUSI_TYPE.备份私钥.value)
                     .navigation();
         }else if(position==BH_BUSI_TYPE.备份KS.getIntValue()){
             //提醒页
             ARouter.getInstance().build(ARouterConfig.TRUSTEESHIP_EXPORT_INDEX)
-                    .withString("title",getString(R.string.backup_keystore))
+                    .withString(BHConstants.TITLE,getString(R.string.backup_keystore))
                     .withString(BHConstants.WALLET_ADDRESS,wallet.address)
                     .withString(BHConstants.INPUT_PASSWORD,password)
-                    .withString("flag",BH_BUSI_TYPE.备份KS.value)
+                    .withString(BHConstants.FLAG,BH_BUSI_TYPE.备份KS.value)
                     .navigation();
         }
     }
