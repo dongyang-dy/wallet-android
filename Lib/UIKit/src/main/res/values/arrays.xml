@@ -13,14 +13,17 @@
     <string name="backup_privatekey">备份私钥</string>
     <string name="helper_center">帮助中心</string>
     <string name="string_notice">公告</string>
+    <string name="language">语言</string>
+    <string name="invoice_currency">计价货币</string>
+    <string name="finger_touch">指纹识别</string>
+
     <string-array name="app_language_type">
         <item>简体中文</item>
         <item>English</item>
-        <!--<item>한국어</item>-->
     </string-array>
 
     <string-array name="backup_list">
-        <item>@string/backup_nnemonic</item>
+        <item>@string/backup_mnemonic</item>
         <item>@string/backup_privatekey</item>
         <item>@string/backup_keystore</item>
     </string-array>
@@ -30,16 +33,8 @@
         <item>@string/safe_setting</item>
         <item>@string/string_fingerprint_identify</item>
     </string-array>
+
     <string-array name="my_list_item">
-        <!--
-                <item>修改安全密码</item>
-        -->
-        <!--<item>备份助记词</item>
-        <item>备份私钥</item>
-        <item>备份Keystore</item>-->
-        <!--
-                <item>治理提案</item>
-        -->
         <item>@string/account_securtiy</item>
         <item>@string/backup_export</item>
         <item>@string/string_notice</item>
@@ -47,16 +42,11 @@
         <item>@string/setting</item>
         <item>@string/helper_center</item>
         <item>@string/about_us</item>
-        <!--<item>版本号</item>-->
     </string-array>
 
     <string-array name="set_list_item">
-        <item>语言</item>
-        <item>计价货币</item>
-        <!--<item>暗色模式</item>-->
-        <!--<item>修改安全密码</item>
-        <item>@string/string_fingerprint_identify</item>
-        <item>@string/safe_setting</item>-->
+        <item>@string/language</item>
+        <item>@string/invoice_currency</item>
     </string-array>
 
     <string-array name="security_list">
@@ -73,7 +63,7 @@
     </string-array>
 
     <string-array name="Recongition_list">
-        <item>指纹识别</item>
+        <item>@string/finger_touch</item>
     </string-array>
 
     <string-array name="Message_type">
@@ -84,13 +74,13 @@
     </string-array>
 
     <string-array name="Cross_operator_list">
-        <item>跨链充币</item>
-        <item>跨链提币</item>
+        <item>@string/cross_chian_trans_in</item>
+        <item>@string/cross_chian_trans_out</item>
     </string-array>
 
     <string-array name="Exchnge_operator_list">
-        <item>兑换</item>
-        <item>交易</item>
+        <item>@string/tab_change_title</item>
+        <item>@string/tab_trade</item>
     </string-array>
 
     <string-array name="add_function_list">
@@ -98,7 +88,6 @@
         <item>@string/import_keystore</item>
         <item>@string/import_private_key</item>
         <item>@string/create_wallet_account</item>
-        <!--<item>한국어</item>-->
     </string-array>
 
     <string-array name="about_us_list">
@@ -110,7 +99,7 @@
     <string-array name="account_detail_list">
         <item>@string/update_name</item>
         <item>@string/reset_security_pwd</item>
-        <item>@string/backup_nnemonic</item>
+        <item>@string/backup_mnemonic</item>
         <item>@string/backup_privatekey</item>
         <item>@string/backup_keystore</item>
         <item>@string/delete_wallet</item>

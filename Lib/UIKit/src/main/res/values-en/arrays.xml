@@ -13,36 +13,28 @@
     <string name="backup_privatekey">Backup private key</string>
     <string name="helper_center">Help Center</string>
     <string name="string_notice">Notice</string>
+    <string name="language">Language</string>
+    <string name="invoice_currency">Currency</string>
+    <string name="finger_touch">Touch ID</string>
+
     <string-array name="app_language_type">
         <item>简体中文</item>
         <item>English</item>
-        <!--<item>한국어</item>-->
     </string-array>
 
     <string-array name="backup_list">
-        <item>@string/backup_nnemonic</item>
+        <item>@string/backup_mnemonic</item>
         <item>@string/backup_privatekey</item>
         <item>@string/backup_keystore</item>
     </string-array>
 
-    <string-array name="my_list_item">
-<!--
-        <item>Reset Password</item>
--->
-        <!--<item>Backup mnemonic phrase</item>
-        <item>Backup private key</item>
-        <item>Backup Keystore</item>
-        &lt;!&ndash;
-                <item>Proposals</item>
-        &ndash;&gt;
-        <item>Notice</item>
-        <item>Help Center</item>
-        <item>@string/about_us</item>
-        <item>Settings</item>-->
-<!--
-        <item>Version</item>
--->
+    <string-array name="account_securtiy_list">
+        <item>@string/trustship_manager</item>
+        <item>@string/safe_setting</item>
+        <item>@string/string_fingerprint_identify</item>
+    </string-array>
 
+    <string-array name="my_list_item">
         <item>@string/account_securtiy</item>
         <item>@string/backup_export</item>
         <item>@string/string_notice</item>
@@ -53,12 +45,13 @@
     </string-array>
 
     <string-array name="set_list_item">
-        <item>Language</item>
-        <item>Currency</item>
-        <!--<item>Night mode</item>
-        <item>Reset Password</item>
-        <item>Touch ID</item>
-        <item>Security settings</item>-->
+        <item>@string/language</item>
+        <item>@string/invoice_currency</item>
+    </string-array>
+
+    <string-array name="security_list">
+        <item>Password is required for each transaction</item>
+        <item>Password is required for each transaction(by default)</item>
     </string-array>
 
     <string-array name="Currency_list">
@@ -70,12 +63,7 @@
     </string-array>
 
     <string-array name="Recongition_list">
-        <item>Touch ID</item>
-    </string-array>
-
-    <string-array name="security_list">
-        <item>Password is required for each transaction</item>
-        <item>Password is required for each transaction(by default)</item>
+        <item>@string/finger_touch</item>
     </string-array>
 
     <string-array name="Message_type">
@@ -86,13 +74,35 @@
     </string-array>
 
     <string-array name="Cross_operator_list">
-        <item>Cross-chain deposit</item>
-        <item>Cross-chain withdrawal</item>
+        <item>@string/cross_chian_trans_in</item>
+        <item>@string/cross_chian_trans_out</item>
     </string-array>
 
     <string-array name="Exchnge_operator_list">
-        <item>Swap</item>
-        <item>Trade</item>
+        <item>@string/tab_change_title</item>
+        <item>@string/tab_trade</item>
+    </string-array>
+
+    <string-array name="add_function_list">
+        <item>@string/import_mnemonic</item>
+        <item>@string/import_keystore</item>
+        <item>@string/import_private_key</item>
+        <item>@string/create_wallet_account</item>
+    </string-array>
+
+    <string-array name="about_us_list">
+        <item>@string/version_logs</item>
+        <item>@string/check_update</item>
+        <item>@string/contact_us</item>
+    </string-array>
+
+    <string-array name="account_detail_list">
+        <item>@string/update_name</item>
+        <item>@string/reset_security_pwd</item>
+        <item>@string/backup_mnemonic</item>
+        <item>@string/backup_privatekey</item>
+        <item>@string/backup_keystore</item>
+        <item>@string/delete_wallet</item>
     </string-array>
 
 </resources>
