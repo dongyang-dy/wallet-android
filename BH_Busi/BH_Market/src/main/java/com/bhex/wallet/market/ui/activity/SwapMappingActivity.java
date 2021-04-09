@@ -99,7 +99,7 @@ public class SwapMappingActivity extends BaseActivity
         tv_center_title.setText(getString(R.string.mapping_swap));
 
         GradientDrawable drawable = ShapeUtils.getRoundRectDrawable(PixelUtils.dp2px(this,4),
-                ColorUtil.getColor(this,R.color.global_input_background));
+                ColorUtil.getColor(this,R.color.secondary_input_background));
         layout_coin.setBackground(drawable);
 
         layout_target.setBackground(drawable);

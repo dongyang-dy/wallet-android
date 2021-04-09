@@ -53,6 +53,7 @@
     <!--输入框背景色-->
     <color name="global_input_background">#FFFFFF</color>
     <color name="global_input_stroke">#F3F3F3</color>
+    <color name="secondary_input_background">#F9F9FB</color>
 
     <!--服务协议字色-->
     <color name="service_agreement_text_color">#0A1825</color>
