@@ -31,7 +31,7 @@ public class TransferInActivity extends BaseActivity {
     @BindView(R2.id.tv_center_title)
     AppCompatTextView tv_center_title;
 
-    BHToken mSymbolToken;
+    //BHToken mSymbolToken;
 
     public TransferInVH mTransferInVH;
     @Override

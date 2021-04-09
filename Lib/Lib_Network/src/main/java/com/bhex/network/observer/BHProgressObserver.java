@@ -78,8 +78,8 @@ public abstract class BHProgressObserver<T> extends BHBaseObserver<T> {
         }
         loadingDialog.setMessage(this.loadingText);
         loadingDialog.show();
-        //loadingDialog.setCanceledOnTouchOutside();
-
+        loadingDialog.setCanceledOnTouchOutside(false);
+        loadingDialog.setCancelable(false);
         ProgressBar progressBar = loadingDialog.findViewById(android.R.id.progress);
         progressBar.getIndeterminateDrawable().setColorFilter(context.getResources().getColor(R.color.progress_color), PorterDuff.Mode.SRC_IN);
     }

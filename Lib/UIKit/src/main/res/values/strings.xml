@@ -491,7 +491,7 @@
     <string name="add_token">添加币种</string>
     <string name="swap_to">兑换成</string>
     <string name="search_input_token_name">更多币种请输入名称检索</string>
-    <string name="no_password_in_30m">30分钟免密</string>
+    <string name="no_password_in_30m">30分钟内免密输入</string>
     <string name="json_parse_error">解析错误</string>
     <string name="password_no_match">KeyStore或密码不匹配</string>
     <string name="finish">完成</string>

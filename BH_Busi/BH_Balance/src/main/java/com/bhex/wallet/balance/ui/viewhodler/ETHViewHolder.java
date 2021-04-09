@@ -101,8 +101,8 @@ public class ETHViewHolder {
             layout_token_address_make.setOnClickListener(v->{
                 ARouter.getInstance()
                         .build(ARouterConfig.Balance.Balance_cross_address)
-                        .withString("chain",mBhChain.chain)
-                        .withString("symbol",symbol).navigation();
+                        .withString(BHConstants.CHAIN,mBhChain.chain)
+                        .withString(BHConstants.SYMBOL,symbol).navigation();
             });
             layout_token_address.setVisibility(View.GONE);
             layout_token_address_make.setVisibility(View.VISIBLE);

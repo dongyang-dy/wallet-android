@@ -134,9 +134,9 @@ public class MyFragment extends BaseFragment  {
             }
         });
 
-        mRootView.findViewById(R.id.iv_default_man).setOnClickListener(v -> {
+        /*mRootView.findViewById(R.id.iv_default_man).setOnClickListener(v -> {
             BHTestUtil.助记词到地址(getYActivity());
-        });
+        });*/
     }
 
 

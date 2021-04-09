@@ -36,9 +36,9 @@
             android:layout_height="match_parent"
             android:layout_gravity="right"
             android:gravity="right|center_vertical"
-            style="@style/toolbar_layout_title_style"
             android:text="@string/token_detail"
-            android:textSize="15sp"
+            android:textColor="@color/global_main_text_color"
+            android:textSize="14sp"
             android:paddingRight="16dp"
             android:background="?android:selectableItemBackground"
             />

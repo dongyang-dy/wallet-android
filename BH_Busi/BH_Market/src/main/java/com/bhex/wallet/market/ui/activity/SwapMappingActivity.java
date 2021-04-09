@@ -54,7 +54,7 @@ public class SwapMappingActivity extends BaseActivity
         implements Password30PFragment.PasswordClickListener,
         ChooseTokenFragment.ChooseTokenListener {
 
-    @Autowired(name = "symbol")
+    @Autowired(name = BHConstants.SYMBOL)
     String mSymbol;
 
     @BindView(R2.id.tv_center_title)

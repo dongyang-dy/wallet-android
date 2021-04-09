@@ -58,7 +58,7 @@ public class ExchangeCoinActivity extends BaseActivity
     private BHBalance mBhtBalance;
     private BHBalance mTokenBalance;
 
-    @Autowired(name = "symbol")
+    @Autowired(name = BHConstants.SYMBOL)
     String mSymbol;
     @BindView(R2.id.tv_center_title)
     AppCompatTextView tv_center_title;

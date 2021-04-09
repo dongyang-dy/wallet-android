@@ -95,15 +95,73 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_alignTop="@+id/layout_bottom"
-        android:background="@color/global_divider_color" />
+        android:background="@color/global_divider_color"
+        android:visibility="invisible" />
 
     <LinearLayout
         android:id="@+id/layout_bottom"
         android:layout_width="match_parent"
         android:layout_height="48dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal">
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/btn_item1"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/deposit"
+            android:textSize="15sp"
+            style="@style/main_btn_style"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/btn_item2"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/transfer"
+            android:textSize="15sp"
+            android:layout_marginStart="8dp"
+            style="@style/main_btn_style"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/btn_item3"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/mapping"
+            android:textSize="15sp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/btn_border_blue"
+            android:textColor="@color/border_button_text_color"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/btn_item4"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/tab_trade"
+            android:textSize="15sp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/btn_border_blue"
+            android:textColor="@color/border_button_text_color"
+            />
+
+        <!--
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/btn_swap"
             android:layout_width="80dp"
@@ -139,7 +197,7 @@
             android:gravity="center"
             android:text="@string/transfer_in"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="16sp" />-->
 
 
     </LinearLayout>

@@ -9,6 +9,8 @@ import com.bhex.network.app.BaseApplication;
 import org.json.JSONObject;
 import org.web3j.crypto.CipherException;
 
+import java.io.IOException;
+
 import okhttp3.ResponseBody;
 import retrofit2.HttpException;
 
@@ -84,9 +86,9 @@ public class ExceptionEngin {
 
         if (throwable instanceof ServerException) {
             ServerException serverException = (ServerException)throwable;
-            ApiException apiException1 = new ApiException(serverException, serverException.getCode());
-            apiException1.setDisplayMessage(serverException.getMsg());
-            return apiException1;
+            ApiException apiException = new ApiException(serverException, serverException.getCode());
+            apiException.setDisplayMessage(serverException.getMsg());
+            return apiException;
         }
 
         if (throwable instanceof com.google.gson.JsonParseException || throwable instanceof org.json.JSONException
@@ -127,20 +129,20 @@ public class ExceptionEngin {
         if(throwable instanceof CipherException){
             ApiException apiException = new ApiException(throwable, 1005);
             StringBuilder sb = new StringBuilder();
-            sb.append(BaseApplication.getInstance().getString(R.string.error_oldpassword));
+            sb.append(BaseApplication.getInstance().getString(R.string.error_password));
             apiException.setDisplayMessage(sb.toString());
-            return apiException;
-        }
-        if (throwable instanceof java.io.IOException) {
-            ApiException apiException = new ApiException(throwable, 1004);
-            apiException.setDisplayMessage(BaseApplication.getInstance().getString(R.string.error_process));
             return apiException;
         }
 
         if(throwable instanceof io.reactivex.exceptions.OnErrorNotImplementedException){
             ApiException apiException = new ApiException(throwable, 1006);
-            apiException.setDisplayMessage(BaseApplication.getInstance().getString(R.string.traffic_network_later_try));
-            //apiException.setDisplayMessage(BaseApplication.getInstance().getString(R.string.error_process));
+            apiException.setDisplayMessage(BaseApplication.getInstance().getString(R.string.error_process));
+            return apiException;
+        }
+
+        if (throwable instanceof Exception) {
+            ApiException apiException = new ApiException(throwable, 1004);
+            apiException.setDisplayMessage(BaseApplication.getInstance().getString(R.string.error_process));
             return apiException;
         }
 

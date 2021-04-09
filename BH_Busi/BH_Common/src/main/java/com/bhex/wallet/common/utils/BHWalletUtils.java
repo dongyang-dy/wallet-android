@@ -172,14 +172,9 @@ public class BHWalletUtils {
      * @return
      */
     public static Credentials verifyKeystore(String keyStore,String pwd) throws CipherException,IOException{
-        //String bh_address = null;
-
         HWalletFile walletFile = objectMapper.readValue(keyStore, HWalletFile.class);
-
         Credentials credentials = Credentials.create(HWallet.decrypt(pwd, walletFile));
-
         if(credentials!=null){
-
             return credentials;
         }else{
             return null;

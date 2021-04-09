@@ -14,6 +14,7 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bhex.lib.uikit.widget.InputView;
+import com.bhex.lib.uikit.widget.editor.EditTextHelper;
 import com.bhex.lib.uikit.widget.editor.SimpleTextWatcher;
 import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.NavigateUtil;
@@ -70,6 +71,8 @@ public class TrusteeshipActivity extends BaseCacheActivity<TrusteeshipPresenter>
     @Override
     protected void initView() {
         ARouter.getInstance().inject(this);
+        EditTextHelper.getEditTextDeleteIconWrapper(this,inp_wallet_name);
+
         mPresenter.setToolBarTitle(mWay);
         inp_wallet_name.setInputType(InputType.TYPE_CLASS_TEXT);
     }

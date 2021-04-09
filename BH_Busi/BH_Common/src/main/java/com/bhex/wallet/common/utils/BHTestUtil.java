@@ -50,6 +50,8 @@ public class BHTestUtil {
                 return;
             }
 
+            //int i = 5/0;
+
             for(int i=0;i<list.size();i++){
                 String itemStr = list.get(i);
                 //

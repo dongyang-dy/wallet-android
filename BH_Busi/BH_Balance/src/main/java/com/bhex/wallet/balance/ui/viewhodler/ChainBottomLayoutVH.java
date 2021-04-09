@@ -34,13 +34,13 @@ public class ChainBottomLayoutVH {
 
     public View mRootView;
 
-    /*MaterialButton btn_item1;
-    MaterialButton btn_item2;
-    MaterialButton btn_item3;
-    MaterialButton btn_item4;*/
-    AppCompatTextView btn_swap;
+    AppCompatTextView btn_item1;
+    AppCompatTextView btn_item2;
+    AppCompatTextView btn_item3;
+    AppCompatTextView btn_item4;
+    /*AppCompatTextView btn_swap;
     AppCompatTextView btn_transfer_in;
-    AppCompatTextView btn_transfer_out;
+    AppCompatTextView btn_transfer_out;*/
 
     private String mChain;
     private String mSymbol;
@@ -49,31 +49,44 @@ public class ChainBottomLayoutVH {
         this.mRootView = mRootView;
         this.mChain = chain;
         this.mSymbol = sybmol;
-        btn_swap = mRootView.findViewById(R.id.btn_swap);
-        btn_transfer_in = mRootView.findViewById(R.id.btn_transfer_in);
-        btn_transfer_out = mRootView.findViewById(R.id.btn_transfer_out);
-
-        btn_swap.setOnClickListener(this::onSwapAction);
-        btn_transfer_in.setOnClickListener(this::onTransferInAction);
-        btn_transfer_out.setOnClickListener(this::onTransferOutAction);
+        btn_item1 = mRootView.findViewById(R.id.btn_item1);
+        btn_item2 = mRootView.findViewById(R.id.btn_item2);
+        btn_item3 = mRootView.findViewById(R.id.btn_item3);
+        btn_item4 = mRootView.findViewById(R.id.btn_item4);
+        //btn_transfer_in = mRootView.findViewById(R.id.btn_transfer_in);
+        //btn_transfer_out = mRootView.findViewById(R.id.btn_transfer_out);
+        //btn_swap.setOnClickListener(this::onSwapAction);
+        //btn_transfer_in.setOnClickListener(this::onTransferInAction);
+        //btn_transfer_out.setOnClickListener(this::onTransferOutAction);
+        btn_item1.setOnClickListener(this::onTransferInAction);
+        btn_item2.setOnClickListener(this::onTransferOutAction);
+        btn_item3.setOnClickListener(this::onSwapAction);
+        btn_item4.setOnClickListener(this::onTradeAction);
     }
 
 
 
     public void initContentView() {
         if(mChain.toLowerCase().equals(BHConstants.BHT_TOKEN)){
-            btn_transfer_in.setText(activity.getResources().getString(R.string.transfer_in));
-            btn_transfer_out.setText(activity.getResources().getString(R.string.transfer));
+            btn_item1.setText(activity.getResources().getString(R.string.transfer_in));
+            btn_item2.setText(activity.getResources().getString(R.string.transfer));
+            btn_item3.setVisibility(View.GONE);
         }else {
-            btn_transfer_in.setText(activity.getResources().getString(R.string.cross_deposit0));
-            btn_transfer_out.setText(activity.getResources().getString(R.string.cross_withdraw0));
+            btn_item1.setText(activity.getResources().getString(R.string.cross_deposit0));
+            btn_item2.setText(activity.getResources().getString(R.string.cross_withdraw0));
         }
-
-
     }
 
-    //兑换
+    //映射
     private void onSwapAction(View view) {
+        ARouter.getInstance()
+                .build(ARouterConfig.Market_swap_mapping)
+                .withString(BHConstants.SYMBOL,mSymbol)
+                .navigation();
+    }
+
+    //交易
+    private void onTradeAction(View view) {
         Postcard postcard =  ARouter.getInstance()
                 .build(ARouterConfig.Main.main_mainindex)
                 .withString("go_token",mSymbol)
@@ -90,7 +103,7 @@ public class ChainBottomLayoutVH {
     private void onTransferInAction(View view){
         if(mChain.toLowerCase().equals(BHConstants.BHT_TOKEN)){
             ARouter.getInstance().build(ARouterConfig.Balance.Balance_transfer_in)
-                    .withString("symbol", mSymbol)
+                    .withString(BHConstants.SYMBOL, mSymbol)
                     .navigation();
         }else{
             //判断是否有链外地址
@@ -98,11 +111,11 @@ public class ChainBottomLayoutVH {
             if(TextUtils.isEmpty(balance.external_address)){
                 ARouter.getInstance()
                         .build(ARouterConfig.Balance.Balance_cross_address)
-                        .withString("chain",mChain)
-                        .withString("symbol",mSymbol).navigation();
+                        .withString(BHConstants.CHAIN,mChain)
+                        .withString(BHConstants.SYMBOL,mSymbol).navigation();
             }else{
                 ARouter.getInstance().build(ARouterConfig.Balance.Balance_transfer_in_cross)
-                        .withString("symbol", mSymbol)
+                        .withString(BHConstants.SYMBOL, mSymbol)
                         .navigation();
             }
         }
@@ -112,11 +125,11 @@ public class ChainBottomLayoutVH {
     private void onTransferOutAction(View view){
         if(mChain.toLowerCase().equals(BHConstants.BHT_TOKEN)){
             ARouter.getInstance().build(ARouterConfig.Balance.Balance_transfer_out)
-                    .withString("symbol", mSymbol)
+                    .withString(BHConstants.SYMBOL, mSymbol)
                     .navigation();
         }else {
             ARouter.getInstance().build(ARouterConfig.Balance.Balance_transfer_out_cross)
-                    .withString("symbol", mSymbol)
+                    .withString(BHConstants.SYMBOL, mSymbol)
                     .navigation();
         }
     }

@@ -78,24 +78,21 @@ public class ChainTokenActivity extends BaseActivity<BalancePresenter> implement
     public String title;
 
     BHBalance mBalance;
-
     //@BindView(R2.id.layout_index_1)
     @BindView(R2.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
-    //@BindView(R2.id.tv_center_title)
-    AppCompatTextView tv_center_title;
     @BindView(R2.id.rcv_token_list)
     RecyclerView rcv_token_list;
     @BindView(R2.id.empty_layout)
     EmptyLayout empty_layout;
 
+    AppCompatTextView tv_center_title;
 
     private BalanceAdapter mBalanceAdapter;
     private ETHViewHolder mETHViewHolder;
 
     private BalanceViewModel mBalanceViewModel;
     private ChainTokenViewModel mChainTokenViewModel;
-    //public TransactionViewModel mTransactionViewModel;
 
     private List<BHTokenItem> mTokenList;
     private int defRefreshCount1 = 0;
@@ -166,7 +163,6 @@ public class ChainTokenActivity extends BaseActivity<BalancePresenter> implement
             finishRefresh();
         });
 
-
         mBalanceAdapter.setOnItemClickListener((adapter, view, position) -> {
             BHTokenItem bhTokenItem = mBalanceAdapter.getData().get(position);
             BHBalance bhBalance = BHBalanceHelper.getBHBalanceFromAccount(bhTokenItem.symbol);
@@ -182,7 +178,7 @@ public class ChainTokenActivity extends BaseActivity<BalancePresenter> implement
         findViewById(R.id.tv_add_token).setOnClickListener(v -> {
             ARouter.getInstance()
                     .build(ARouterConfig.Balance.Balance_Search)
-                    .withString("chain",mBalance.chain)
+                    .withString(BHConstants.CHAIN,mBalance.chain)
                     .navigation();
         });
     }

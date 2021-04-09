@@ -161,7 +161,7 @@ public class FingerLoginActivity extends BaseActivity  implements AddressFragmen
     };
 
     public void showAuthenticationSucceeded(FingerprintManagerCompat.AuthenticationResult result) {
-        ToastUtils.showToast(getResources().getString(R.string.verify_pass));
+        //ToastUtils.showToast(getResources().getString(R.string.verify_pass));
         //NavigateUtil.startMainActivity(this);
         ARouter.getInstance().build(ARouterConfig.Main.main_mainindex).navigation();
         finish();
