@@ -74,7 +74,7 @@ public class TrusteeshipActivity extends BaseCacheActivity<TrusteeshipPresenter>
         EditTextHelper.getEditTextDeleteIconWrapper(this,inp_wallet_name);
 
         mPresenter.setToolBarTitle(mWay);
-        inp_wallet_name.setInputType(InputType.TYPE_CLASS_TEXT);
+        //inp_wallet_name.setInputType(InputType.TYPE_CLASS_TEXT);
     }
 
     @Override

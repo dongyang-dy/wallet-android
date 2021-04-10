@@ -16,6 +16,17 @@
        android:layout_marginTop="24dp"
        />
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_close"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/tv_title"
+        android:layout_alignBottom="@+id/tv_title"
+        android:paddingEnd="16dp"
+        />
+
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_tip_content"
@@ -28,6 +39,32 @@
         android:textColor="@color/global_tip_text_color"
         android:layout_below="@+id/tv_title"
         android:layout_marginTop="24dp"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_tip_content_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/cross_link_transfer_tips_2"
+        android:textSize="14sp"
+        android:textColor="@color/global_tip_text_color"
+        android:layout_below="@+id/tv_tip_content"
+        android:layout_marginTop="8dp"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_tip_content_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/cross_link_transfer_tips_3"
+        android:textSize="14sp"
+        android:textColor="@color/global_tip_text_color"
+        android:layout_below="@+id/tv_tip_content_2"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="24dp"
         />
 
@@ -36,7 +73,7 @@
         android:layout_width="match_parent"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:layout_below="@+id/tv_tip_content"
+        android:layout_below="@+id/tv_tip_content_3"
         android:layout_marginEnd="@dimen/main_padding_right"
         android:layout_marginStart="@dimen/main_padding_left"
         style="@style/main_btn_style"

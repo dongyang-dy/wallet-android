@@ -116,7 +116,7 @@ public class TrusteeshipPresenter extends BasePresenter {
         AppCompatButton btn = getActivity().findViewById(R.id.btn_create);
         //int way = BHUserManager.getInstance().getTmpBhWallet().way;
         if(way== MAKE_WALLET_TYPE.创建助记词.getWay()){
-            btn.setText(getActivity().getResources().getString(R.string.wallet_create_trusteeship));
+            btn.setText(getActivity().getResources().getString(R.string.wallet_create));
         }else if(way== MAKE_WALLET_TYPE.导入助记词.getWay()){
             btn.setText(getActivity().getResources().getString(R.string.import_mnemonic));
         }else if(way== MAKE_WALLET_TYPE.PK.getWay()){

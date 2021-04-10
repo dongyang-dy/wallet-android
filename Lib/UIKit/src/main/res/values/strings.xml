@@ -446,8 +446,10 @@
     <string name="please_input_memo_or_tag">请输入 memo or tag</string>
     <string name="meno_or_tag">备注(请输入memo or tag)</string>
     <string name="cross_link_transfer_tips">提示：充值非主链代币需要HBTC Chain账户拥有一定的对应主链代币作为归集手续费才可以入账。</string>
-    <string name="cross_link_transfer_tips_1">充值非主链代币，需要账户拥有一定数额的对应主链代币作为归集手续费才可以入账</string>
-
+    <!--<string name="cross_link_transfer_tips_1">充值非主链代币，需要账户拥有一定数额的对应主链代币作为归集手续费才可以入账</string>-->
+    <string name="cross_link_transfer_tips_1">最小充值数量：单次充值该币种不能低于该币种最小充值数量，否则无法入账和找回.</string>
+    <string name="cross_link_transfer_tips_2">入账费用：充值该代币，需要该账户拥有该代币对应的主链代币作为跨链入账费用才可以入账.</string>
+    <string name="cross_link_transfer_tips_3">提现费用：提现该代币，需要该账户拥有该代币对应的主链代币作为跨链提现费用才可以提现.</string>
     <string name="native_token_list">原生代币列表</string>
     <string name="native_token_test_list">原生代币列表</string>
     <string name="cross_chain_token_list">跨链代币列表</string>

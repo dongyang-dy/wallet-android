@@ -42,6 +42,10 @@ public class DepositTipsFragment extends BaseBottomSheetDialog {
             dismiss();
         });
 
+        mRootView.findViewById(R.id.iv_close).setOnClickListener(v -> {
+            dismiss();
+        });
+
     }
 
     public static DepositTipsFragment newInstance(){

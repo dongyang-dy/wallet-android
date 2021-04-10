@@ -116,8 +116,14 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:text="@string/deposit"
-            android:textSize="15sp"
-            style="@style/main_btn_style"
+            android:paddingEnd="5dp"
+            android:paddingStart="5dp"
+            android:background="@drawable/btn_bg_selector"
+            android:textColor="@color/btn_text_color_selector"
+            android:autoSizeTextType="uniform"
+            android:maxLines="1"
+            android:autoSizeMinTextSize="12sp"
+            android:autoSizeMaxTextSize="15sp"
             />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -128,9 +134,15 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:text="@string/transfer"
-            android:textSize="15sp"
+            android:paddingEnd="5dp"
+            android:paddingStart="5dp"
             android:layout_marginStart="8dp"
-            style="@style/main_btn_style"
+            android:background="@drawable/btn_bg_selector"
+            android:textColor="@color/btn_text_color_selector"
+            android:autoSizeTextType="uniform"
+            android:maxLines="1"
+            android:autoSizeMinTextSize="12sp"
+            android:autoSizeMaxTextSize="15sp"
             />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -142,6 +154,9 @@
             android:gravity="center"
             android:text="@string/mapping"
             android:textSize="15sp"
+            android:paddingEnd="5dp"
+            android:paddingStart="5dp"
+            android:maxLines="1"
             android:layout_marginStart="8dp"
             android:background="@drawable/btn_border_blue"
             android:textColor="@color/border_button_text_color"
@@ -156,50 +171,13 @@
             android:gravity="center"
             android:text="@string/tab_trade"
             android:textSize="15sp"
+            android:paddingEnd="5dp"
+            android:paddingStart="5dp"
+            android:maxLines="1"
             android:layout_marginStart="8dp"
             android:background="@drawable/btn_border_blue"
             android:textColor="@color/border_button_text_color"
             />
-
-        <!--
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/btn_swap"
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:drawableTop="@mipmap/ic_swap"
-            android:gravity="center"
-            android:paddingTop="7dp"
-            android:text="@string/swap"
-            android:textColor="@color/text_black_color"
-            android:textSize="10sp" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/btn_transfer_in"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:background="@color/btn_gray_bg_color"
-            android:gravity="center"
-            android:text="@string/transfer"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
-
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/btn_transfer_out"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:background="@color/btn_blue_bg_color"
-            android:gravity="center"
-            android:text="@string/transfer_in"
-            android:textColor="@color/white"
-            android:textSize="16sp" />-->
-
-
     </LinearLayout>
 
 </RelativeLayout>

@@ -85,6 +85,8 @@
                 android:textColor="@color/global_input_text_color"
                 android:textColorHint="@color/global_input_hint_color"
                 android:singleLine="true"
+                android:maxLines="1"
+                android:inputType="text"
                 android:textSize="@dimen/sp_14"
                 android:layout_gravity="center_vertical|left"
                 android:paddingStart="10dp"

@@ -7,6 +7,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.bhex.tools.constants.BHConstants;
 import com.bhex.wallet.balance.R;
 import com.bhex.wallet.balance.R2;
 import com.bhex.wallet.balance.ui.fragment.ChooseTokenFragment;
@@ -27,7 +28,7 @@ import butterknife.BindView;
 @Route(path = ARouterConfig.Balance.Balance_transfer_in_cross, name = "跨链充值")
 public class TransferInCrossActivity extends BaseActivity {
 
-    @Autowired(name="symbol")
+    @Autowired(name= BHConstants.SYMBOL)
     String  symbol;
 
     BHToken bhToken;

@@ -49,25 +49,21 @@ import butterknife.OnClick;
 public class TrusteeshipThirdActivity extends BaseCacheActivity<TrusteeshipPresenter>
         implements GlobalTipsFragment.GlobalOnClickListenter {
 
-    WalletViewModel walletViewModel;
-
     @BindView(R2.id.ck_agreement)
     AppCompatCheckBox ck_agreement;
-
     @BindView(R2.id.tv_agreement)
     AppCompatTextView tv_agreement;
-
     @BindView(R2.id.btn_create)
     AppCompatButton btn_create;
+    @Autowired(name = BHConstants.PASSWORD)
+    String mOldPwd;
+    @Autowired(name = BHConstants.WAY)
+    int mWay;
 
     PasswordInputView mPasswordInputView;
     PasswordKeyBoardView mPasswordKeyboardView;
 
-    @Autowired(name = "password")
-    String mOldPwd;
-
-    @Autowired(name = "way")
-    int mWay;
+    WalletViewModel walletViewModel;
 
     @Override
     protected int getLayoutId() {
@@ -77,7 +73,6 @@ public class TrusteeshipThirdActivity extends BaseCacheActivity<TrusteeshipPrese
     @Override
     protected void initView() {
         ARouter.getInstance().inject(this);
-
         mPresenter.setToolBarTitle(mWay);
         mPresenter.setButtonTitle(mWay);
         SpannableString highlightText = StringUtils.highlight(this,

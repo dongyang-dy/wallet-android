@@ -105,6 +105,7 @@ public class BHConstants {
     public static final String FLAG = "flag";
     public static final String BHCHAIN = "bhChain";
     public static final String ADDRESS = "address";
+    public static final String PASSWORD = "password";
 
     public static final int PRIVATE_KEY_LENGTH = 64;
 

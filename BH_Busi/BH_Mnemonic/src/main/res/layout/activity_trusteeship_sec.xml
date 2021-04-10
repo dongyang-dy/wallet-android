@@ -90,7 +90,7 @@
                     android:layout_marginTop="24dp"
                     android:layout_marginBottom="4dp"
                     android:gravity="center_horizontal"
-                    android:text="@string/number_password"
+                    android:text="@string/please_number_password"
                     android:textColor="@color/global_secondary_text_color"
                     android:textSize="@dimen/sp_16" />
 
