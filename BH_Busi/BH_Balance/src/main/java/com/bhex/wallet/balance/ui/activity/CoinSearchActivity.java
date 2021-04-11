@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.ColorUtil;
 import com.bhex.tools.utils.PixelUtils;
 import com.bhex.lib.uikit.widget.EmptyLayout;
@@ -62,7 +63,7 @@ public class CoinSearchActivity extends BaseActivity implements OnRefreshListene
     @BindView(R2.id.empty_layout)
     EmptyLayout empty_layout;
 
-    @Autowired(name="chain")
+    @Autowired(name= BHConstants.CHAIN)
     public String mChain;
 
     CoinSearchAdapter mCoinSearchAdapter;

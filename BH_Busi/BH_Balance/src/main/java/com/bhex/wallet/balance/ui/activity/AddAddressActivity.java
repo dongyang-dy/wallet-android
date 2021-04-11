@@ -97,7 +97,11 @@ public class AddAddressActivity extends BaseActivity {
             if(resultCode == RESULT_OK){
                 //处理扫描结果（在界面上显示）
                 String qrCode  = data.getExtras().getString(XQRCode.RESULT_DATA);
+                if(TextUtils.isEmpty(qrCode)){
+                    return;
+                }
                 addAddressVH.inp_address.setText(qrCode);
+                addAddressVH.inp_address.setSelection(qrCode.length());
             }else if(resultCode == BHQrScanActivity.REQUEST_IMAGE){
                 getAnalyzeQRCodeResult(data.getData());
             }
@@ -108,7 +112,11 @@ public class AddAddressActivity extends BaseActivity {
         XQRCode.analyzeQRCode(PathUtils.getFilePathByUri(this, uri), new QRCodeAnalyzeUtils.AnalyzeCallback() {
             @Override
             public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
+                if(TextUtils.isEmpty(result)){
+                    return;
+                }
                 addAddressVH.inp_address.setText(result);
+                addAddressVH.inp_address.setSelection(result.length());
             }
 
             @Override

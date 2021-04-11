@@ -16,6 +16,7 @@ import com.bhex.lib.uikit.widget.InputView;
 import com.bhex.lib.uikit.widget.editor.SimpleTextWatcher;
 import com.bhex.lib.uikit.widget.keyborad.PasswordKeyBoardView;
 import com.bhex.network.base.LoadingStatus;
+import com.bhex.tools.constants.BHConstants;
 import com.bhex.wallet.common.base.BaseActivity;
 import com.bhex.network.utils.ToastUtils;
 import com.bhex.tools.utils.ToolUtils;
@@ -39,7 +40,7 @@ import butterknife.OnClick;
 
 @Route(path= ARouterConfig.My.My_Update_Password)
 public class UpdatePasswordActivity extends BaseActivity<MyPresenter>{
-    @Autowired(name="title")
+    @Autowired(name= BHConstants.TITLE)
     String title;
     @Autowired(name="wallet_address")
     String wallet_address;

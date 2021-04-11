@@ -10,7 +10,9 @@ import com.alibaba.android.arouter.core.LogisticsCenter;
 import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bhex.lib.uikit.widget.balance.CoinBottomBtn;
+import com.bhex.network.utils.ToastUtils;
 import com.bhex.tools.constants.BHConstants;
+import com.bhex.tools.utils.ToolUtils;
 import com.bhex.wallet.balance.R;
 import com.bhex.wallet.balance.helper.BHBalanceHelper;
 import com.bhex.wallet.balance.ui.activity.ChainTokenActivity;
@@ -18,6 +20,7 @@ import com.bhex.wallet.common.cache.CacheCenter;
 import com.bhex.wallet.common.config.ARouterConfig;
 import com.bhex.wallet.common.enums.BH_BUSI_TYPE;
 import com.bhex.wallet.common.event.RequestTokenEvent;
+import com.bhex.wallet.common.manager.SequenceManager;
 import com.bhex.wallet.common.model.BHBalance;
 import com.bhex.wallet.common.model.BHTokenMapping;
 import com.google.android.material.button.MaterialButton;
@@ -105,19 +108,24 @@ public class ChainBottomLayoutVH {
             ARouter.getInstance().build(ARouterConfig.Balance.Balance_transfer_in)
                     .withString(BHConstants.SYMBOL, mSymbol)
                     .navigation();
+            return;
+        }
+
+        //判断是否有链外地址
+        BHBalance balance = BHBalanceHelper.getBHBalanceFromAccount(mSymbol);
+        if(!TextUtils.isEmpty(balance.external_address)){
+
+            ARouter.getInstance().build(ARouterConfig.Balance.Balance_transfer_in_cross)
+                    .withString(BHConstants.SYMBOL, mSymbol)
+                    .navigation();
+        }else if(!TextUtils.isEmpty(SequenceManager.getInstance().getAddressStatus())){
+            ToastUtils.showToast(activity.getString(R.string.cross_address_generatoring));
+            return;
         }else{
-            //判断是否有链外地址
-            BHBalance balance = BHBalanceHelper.getBHBalanceFromAccount(mSymbol);
-            if(TextUtils.isEmpty(balance.external_address)){
-                ARouter.getInstance()
-                        .build(ARouterConfig.Balance.Balance_cross_address)
-                        .withString(BHConstants.CHAIN,mChain)
-                        .withString(BHConstants.SYMBOL,mSymbol).navigation();
-            }else{
-                ARouter.getInstance().build(ARouterConfig.Balance.Balance_transfer_in_cross)
-                        .withString(BHConstants.SYMBOL, mSymbol)
-                        .navigation();
-            }
+            ARouter.getInstance()
+                    .build(ARouterConfig.Balance.Balance_cross_address)
+                    .withString(BHConstants.CHAIN,mChain)
+                    .withString(BHConstants.SYMBOL,mSymbol).navigation();
         }
     }
 

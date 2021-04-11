@@ -5,29 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/page_bg_color"
     tools:context=".my.ui.activity.SecuritySettingActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="@drawable/ic_back"
-        app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay"
-        app:titleTextAppearance="@style/Toolbar_textsize">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_center_title"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center"
-            style="@style/toolbar_layout_title_style"
-            android:text="@string/setting"
-            tools:text="@string/setting" />
-
-    </androidx.appcompat.widget.Toolbar>
+    <include
+        layout="@layout/layout_toolbar"
+        />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="match_parent"
@@ -37,21 +20,22 @@
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:textColor="@color/light_text"
-        android:background="@color/global_input_background"
         android:text="@string/set_pwd_period"
         />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcy_choose_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingEnd="16dp"
         android:paddingStart="16dp"
-        android:paddingTop="10dp"
+        android:layout_marginTop="20dp"
         android:paddingBottom="10dp"
         android:textColor="@color/light_text"
         android:text="@string/security_setting_tips"

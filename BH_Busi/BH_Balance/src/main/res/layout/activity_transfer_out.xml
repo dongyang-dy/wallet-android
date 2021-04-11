@@ -151,6 +151,10 @@
                     android:textColor="@color/global_main_gray_color"
                     android:paddingStart="@dimen/main_padding_left"
                     android:paddingEnd="@dimen/main_padding_right"
+                    android:drawableLeft="@mipmap/ic_light"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical"
+                    android:drawablePadding="3dp"
                     android:text="@string/transfer_inner_tips"
                     />
 

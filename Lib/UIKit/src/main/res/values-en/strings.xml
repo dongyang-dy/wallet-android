@@ -470,8 +470,10 @@
     <string name="exchage_rate">Rate </string>
     <string name="exxternal_link_txid">Cross-chain TXID</string>
     <string name="friend_tips">Tips:</string>
-    <string name="string_deposit_threshold">%1$sMinimum deposit amount: %2$s</string>
-    <string name="string_deposit_enter_fee">Cross-chain deposit fee %1$s</string>
+    <!--<string name="string_deposit_threshold">%1$sMinimum deposit amount: %2$s</string>-->
+    <!--<string name="string_deposit_enter_fee">Cross-chain deposit fee %1$s</string>-->
+    <string name="string_deposit_threshold">最低充值额度</string>
+    <string name="string_deposit_enter_fee">Cross-chain deposit fee</string>
     <string name="set_pwd_period">Set password expiration：</string>
     <string name="string_deposit_threshold_2">Tips：minimum deposit amount</string>
     <string name="string_apply_success">Claimed</string>

@@ -111,6 +111,7 @@ public class BalanceViewModel extends CacheAndroidViewModel implements Lifecycle
             @Override
             protected void onSuccess(JsonObject jsonObject) {
                 //super.onSuccess(jsonObject);
+                LogUtils.d("BalanceViewModel===T>:","jsonObject=="+jsonObject.toString());
                 AccountInfo accountInfo = JsonUtils.fromJson(jsonObject.toString(),AccountInfo.class);
                 LoadDataModel ldm = new LoadDataModel(accountInfo);
                 if(accountInfo!=null){
@@ -121,6 +122,7 @@ public class BalanceViewModel extends CacheAndroidViewModel implements Lifecycle
             @Override
             protected void onFailure(int code, String errorMsg) {
                 super.onFailure(code, errorMsg);
+                LogUtils.d("BalanceViewModel===T>:","onFailure==");
                 LoadDataModel ldm = new LoadDataModel(LoadingStatus.ERROR,"");
                 accountLiveData.setValue(ldm);
             }
@@ -139,7 +141,7 @@ public class BalanceViewModel extends CacheAndroidViewModel implements Lifecycle
         Type type = (new TypeToken<List<BHRates>>() {}).getType();
         String balacne_list = BHUserManager.getInstance().getSymbolList();
         balacne_list = balacne_list.replace("_",",").toUpperCase();
-        
+        //LogUtils.d("RatesCache====T=>:","==onSuccess=="+balacne_list);
         RequestBody body = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("symbols",balacne_list).build();
@@ -154,6 +156,7 @@ public class BalanceViewModel extends CacheAndroidViewModel implements Lifecycle
                         if(ToolUtils.checkListIsEmpty(ratelist)){
                             return;
                         }
+
                         RatesCache.getInstance().getRatesMap().clear();
                         for (BHRates rate:ratelist){
                             RatesCache.getInstance().getRatesMap().put(rate.getToken().toLowerCase(),rate.getRates());
@@ -162,6 +165,7 @@ public class BalanceViewModel extends CacheAndroidViewModel implements Lifecycle
 
                     @Override
                     protected void onFailure(int code, String errorMsg) {
+                        LogUtils.d("RatesCache====T=>:","==onFailure==");
                         super.onFailure(code, errorMsg);
                     }
                 });

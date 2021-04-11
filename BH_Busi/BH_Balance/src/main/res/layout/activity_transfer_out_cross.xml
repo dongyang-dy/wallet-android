@@ -116,6 +116,10 @@
                     android:layout_marginBottom="16dp"
                     android:paddingStart="@dimen/main_padding_left"
                     android:paddingEnd="@dimen/main_padding_right"
+                    android:drawableLeft="@mipmap/ic_light"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical"
+                    android:drawablePadding="3dp"
                     android:text="@string/cross_transfer_out_tips"
                     />
 
@@ -241,12 +245,15 @@
                     >
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="match_parent"
+                        android:id="@+id/tv_withdraw_fee_label"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/withdraw_fee"
                         android:textColor="@color/global_main_text_color"
                         android:textSize="15sp"
+                        android:drawableEnd="@mipmap/ic_help"
+                        android:drawablePadding="5dp"
                         />
 
                     <androidx.appcompat.widget.AppCompatEditText

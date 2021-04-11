@@ -473,8 +473,10 @@
     <string name="exchage_rate">汇率</string>
     <string name="exxternal_link_txid">外链TXID</string>
     <string name="friend_tips">温馨提示:</string>
-    <string name="string_deposit_threshold">%1$s最小充值数量: %2$s</string>
-    <string name="string_deposit_enter_fee">跨链充值入账费: %1$s</string>
+    <!--<string name="string_deposit_threshold">%1$s最小充值数量: %2$s</string>-->
+    <!--<string name="string_deposit_enter_fee">跨链充值入账费: %1$s</string>-->
+    <string name="string_deposit_threshold">最低充值额度</string>
+    <string name="string_deposit_enter_fee">跨链充值入账费</string>
     <string name="set_pwd_period">设置密码有效期：</string>
     <string name="string_deposit_threshold_2">温馨提示：最小充值数量</string>
     <string name="string_apply_success">领取成功</string>

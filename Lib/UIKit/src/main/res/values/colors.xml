@@ -65,6 +65,7 @@
 
     <!--app背景色-->
     <color name="app_bg">#ffffffff</color>
+    <color name="tool_bar_bg">#ffffffff</color>
 
     <!--app次级背景色-->
     <!--<color name="app_default_bg">#F9F9FB</color>-->

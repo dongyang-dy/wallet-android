@@ -20,6 +20,7 @@ import com.bhex.tools.utils.NumberUtil;
 import com.bhex.tools.utils.RegexUtil;
 import com.bhex.wallet.balance.R;
 import com.bhex.wallet.balance.helper.BHBalanceHelper;
+import com.bhex.wallet.balance.ui.fragment.DepositTipsFragment;
 import com.bhex.wallet.common.base.BaseActivity;
 import com.bhex.wallet.common.cache.CacheCenter;
 import com.bhex.wallet.common.config.ARouterConfig;
@@ -80,6 +81,8 @@ public class TransferOutCrossVH {
     //可以提币或转账数量
     public double available_amount;
 
+    public AppCompatTextView tv_withdraw_fee_label;
+
     public TransferOutCrossVH(BaseActivity m_activity, View mRootView) {
         this.m_activity = m_activity;
         this.mRootView = mRootView;
@@ -95,6 +98,7 @@ public class TransferOutCrossVH {
         inp_withdraw_fee = mRootView.findViewById(R.id.tv_withdraw_fee);
         tv_withdraw_fee_token = mRootView.findViewById(R.id.tv_withdraw_fee_token);
         tv_cross_transfer_out_tip = mRootView.findViewById(R.id.tv_cross_transfer_out_tip);
+        tv_withdraw_fee_label = mRootView.findViewById(R.id.tv_withdraw_fee_label);
 
         tv_fee = mRootView.findViewById(R.id.tv_fee);
         tv_fee_token = mRootView.findViewById(R.id.tv_fee_token);
@@ -134,6 +138,10 @@ public class TransferOutCrossVH {
                     start_index+v_hightlight_text.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
             tv_cross_transfer_out_tip.setText(spannableString);
         }
+
+        tv_withdraw_fee_label.setOnClickListener(v -> {
+            DepositTipsFragment.newInstance().show(m_activity.getSupportFragmentManager(),DepositTipsFragment.class.getName());
+        });
 
     }
 

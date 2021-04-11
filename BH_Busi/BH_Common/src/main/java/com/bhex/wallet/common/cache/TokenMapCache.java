@@ -2,6 +2,7 @@ package com.bhex.wallet.common.cache;
 
 import android.text.TextUtils;
 
+import com.bhex.network.RetryWithDelay;
 import com.bhex.network.RxSchedulersHelper;
 import com.bhex.network.app.BaseApplication;
 import com.bhex.network.cache.RxCache;
@@ -83,9 +84,7 @@ public class TokenMapCache extends BaseCache {
     }
 
     private synchronized void loadTokenMapping() {
-
         Type type = (new TypeToken<JsonObject>() {}).getType();
-
         BHttpApi.getService(BHttpApiInterface.class).loadTokenMappings()
                 .compose(RxSchedulersHelper.io_main())
                 .compose(RxCache.getDefault().transformObservable(CACHE_TOKENMAP_KEY, type,getCacheStrategy()))
@@ -96,6 +95,7 @@ public class TokenMapCache extends BaseCache {
                         if(!JsonUtils.isHasMember(jsonObject,"items")){
                             return;
                         }
+                        //LogUtils.d("TokenMapCache====>:","==jsonObject=="+jsonObject.toString());
                         List<BHTokenMapping> tokens = JsonUtils.getListFromJson(jsonObject.toString(),"items", BHTokenMapping.class);
                         //缓存所有的token
                         if(ToolUtils.checkListIsEmpty(tokens)){
@@ -138,6 +138,7 @@ public class TokenMapCache extends BaseCache {
                     @Override
                     protected void onFailure(int code, String errorMsg) {
                         super.onFailure(code, errorMsg);
+                        //LogUtils.d("TokenMapCache====>:","==errorMsg=="+errorMsg);
                     }
                 });
     }
@@ -145,12 +146,12 @@ public class TokenMapCache extends BaseCache {
     public synchronized void loadChain() {
         BHBaseObserver observer = new BHBaseObserver<JsonArray>() {
             @Override
-            protected void onSuccess(JsonArray jsonObject) {
-                if(TextUtils.isEmpty(jsonObject.toString())){
+            protected void onSuccess(JsonArray jsonArray) {
+                if(TextUtils.isEmpty(jsonArray.toString())){
                     return;
                 }
 
-                List<BHChain> chains = JsonUtils.getListFromJson(jsonObject.toString(),BHChain.class);
+                List<BHChain> chains = JsonUtils.getListFromJson(jsonArray.toString(),BHChain.class);
                 mChains = chains;
             }
 
@@ -161,11 +162,12 @@ public class TokenMapCache extends BaseCache {
 
         };
 
-        Type type = (new TypeToken<JsonObject>() {}).getType();
+        Type type = (new TypeToken<JsonArray>() {}).getType();
         BHttpApi.getService(BHttpApiInterface.class).loadChain()
                 .compose(RxSchedulersHelper.io_main())
                 .compose(RxCache.getDefault().transformObservable(CACHE_CHAIN_KEY, type,getCacheStrategy()))
                 .map(new CacheResult.MapFunc())
+                //.retryWhen(new RetryWithDelay())
                 .subscribe(observer);
     }
 
@@ -173,7 +175,6 @@ public class TokenMapCache extends BaseCache {
         BHBaseObserver observer = new BHBaseObserver<GasFee>() {
             @Override
             protected void onSuccess(GasFee gasFee) {
-                LogUtils.d("TokenMapCache===>:","==gasFee.fee="+gasFee.fee+"=gasFee.gas="+gasFee.gas);
                 BHUserManager.getInstance().gasFee = new GasFee(gasFee.fee,gasFee.gas);
             }
 
@@ -188,7 +189,7 @@ public class TokenMapCache extends BaseCache {
         BHttpApi.getService(BHttpApiInterface.class).queryGasfee()
                 .compose(RxSchedulersHelper.io_main())
                 .compose(RxCache.getDefault().transformObservable(CACHE_GASFEE_KEY, type,getCacheStrategy()))
-                .map(new CacheResult.MapFunc())
+                .map(new CacheResult.MapFunc<GasFee>())
                 .subscribe(observer);
     }
 

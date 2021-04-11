@@ -7,6 +7,7 @@ import com.bhex.network.app.BaseApplication;
 import com.bhex.network.cache.RxCache;
 import com.bhex.network.cache.data.CacheResult;
 import com.bhex.network.cache.stategy.CacheStrategy;
+import com.bhex.tools.utils.ToolUtils;
 import com.bhex.wallet.common.base.BaseActivity;
 import com.bhex.network.observer.BHBaseObserver;
 import com.bhex.network.observer.SimpleObserver;
@@ -89,9 +90,10 @@ public class RatesCache extends BaseCache {
                 .subscribe(new BHBaseObserver<List<BHRates>>(false) {
                     @Override
                     protected void onSuccess(List<BHRates> ratelist) {
-                        if(ratelist==null || ratelist.size()==0){
+                        if(ToolUtils.checkListIsEmpty(ratelist)){
                             return;
                         }
+
                         RatesCache.getInstance().getRatesMap().clear();
                         StreamSupport.stream(ratelist).forEach(rate->{
                             RatesCache.getInstance().getRatesMap().put(rate.getToken().toLowerCase(),rate.getRates());
@@ -100,6 +102,7 @@ public class RatesCache extends BaseCache {
 
                     @Override
                     protected void onFailure(int code, String errorMsg) {
+
                         super.onFailure(code, errorMsg);
                     }
                 });

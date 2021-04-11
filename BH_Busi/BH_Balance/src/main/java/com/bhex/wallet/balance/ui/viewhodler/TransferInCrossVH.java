@@ -68,7 +68,7 @@ public class TransferInCrossVH {
     //最小充值数量
     public AppCompatTextView tv_min_deposit_amount;
     //充值入账数量
-    public AppCompatTextView tv_deposit_collect;
+    public AppCompatTextView tv_deposit_collect_amount;
     public TransferInCrossVH(TransferInCrossActivity activity, View view, String  symbol) {
         this.mActivity = activity;
         this.view = view;
@@ -84,7 +84,7 @@ public class TransferInCrossVH {
         tv_token_address = view.findViewById(R.id.tv_token_address);
 
         tv_min_deposit_amount = view.findViewById(R.id.tv_min_deposit_amount);
-        tv_deposit_collect = view.findViewById(R.id.tv_deposit_collect);
+        tv_deposit_collect_amount = view.findViewById(R.id.tv_deposit_collect_amount);
 
         //设置按钮为圆角
         GradientDrawable btn_save_drawable = ShapeUtils.getRoundRectDrawable(PixelUtils.dp2px(activity,100),
@@ -110,10 +110,17 @@ public class TransferInCrossVH {
         });
 
         //入账费用提示
-        view.findViewById(R.id.iv_help).setOnClickListener(v->{
+        /*view.findViewById(R.id.iv_help).setOnClickListener(v->{
+            DepositTipsFragment.newInstance().show(mActivity.getSupportFragmentManager(),DepositTipsFragment.class.getName());
+        });*/
+
+        view.findViewById(R.id.tv_min_deposit).setOnClickListener(v->{
             DepositTipsFragment.newInstance().show(mActivity.getSupportFragmentManager(),DepositTipsFragment.class.getName());
         });
 
+        view.findViewById(R.id.tv_deposit_collect).setOnClickListener(v->{
+            DepositTipsFragment.newInstance().show(mActivity.getSupportFragmentManager(),DepositTipsFragment.class.getName());
+        });
     }
 
     public void updateTokenInfo(String  symbol){
@@ -134,14 +141,16 @@ public class TransferInCrossVH {
         tv_token_address.setText(chainBalance.external_address);
 
         //最小充值数量
-        String v_amount_str =  String.format(mActivity.getString(R.string.string_deposit_threshold),
-                token.name.toUpperCase(),token.deposit_threshold+" "+token.name.toUpperCase());
+        /*String v_amount_str =  String.format(mActivity.getString(R.string.string_deposit_threshold),
+                token.name.toUpperCase(),token.deposit_threshold+" "+token.name.toUpperCase());*/
+        String v_amount_str = token.deposit_threshold+" "+token.name.toUpperCase();
         tv_min_deposit_amount.setText(v_amount_str);
 
         //充值归集费
-        String v_amount_str2 =  String.format(mActivity.getString(R.string.string_deposit_enter_fee),
-                token.collect_fee+" "+token.chain.toUpperCase());
-        tv_deposit_collect.setText(v_amount_str2);
+        /*String v_amount_str2 =  String.format(mActivity.getString(R.string.string_deposit_enter_fee),
+                token.collect_fee+" "+token.chain.toUpperCase());*/
+        String v_amount_str2 = token.collect_fee+" "+token.chain.toUpperCase();
+        tv_deposit_collect_amount.setText(v_amount_str2);
     }
 
     //保存二维码

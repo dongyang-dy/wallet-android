@@ -216,7 +216,7 @@
     </style>
 
     <style name="bt_theme_blue" parent="@android:style/Widget.Material.Button.Borderless">
-        <item name="android:textSize">17sp</item>
+        <item name="android:textSize">15sp</item>
         <item name="android:textColor">@color/border_button_text_color</item>
         <item name="android:background">@drawable/btn_stroke_blue</item>
         <item name="android:layout_height">42dip</item>
