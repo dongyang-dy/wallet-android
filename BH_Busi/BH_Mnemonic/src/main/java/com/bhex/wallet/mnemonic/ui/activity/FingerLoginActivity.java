@@ -52,6 +52,9 @@ public class FingerLoginActivity extends BaseActivity  implements AddressFragmen
     @BindView(R2.id.tv_password_verify)
     AppCompatTextView tv_password_verify;
 
+    @BindView(R2.id.tv_finger_error)
+    AppCompatTextView tv_finger_error;
+
     FingerprintManagerCompat manager;
     KeyguardManager mKeyManager;
 
@@ -61,6 +64,7 @@ public class FingerLoginActivity extends BaseActivity  implements AddressFragmen
     private WalletViewModel walletVM;
 
     CancellationSignal mCancellationSignal;
+
 
     @Override
     protected int getLayoutId() {
@@ -236,7 +240,9 @@ public class FingerLoginActivity extends BaseActivity  implements AddressFragmen
     }
 
     private void showError(CharSequence error) {
-        ToastUtils.showToast(error+"");
+        //ToastUtils.showToast(error+"");
+        tv_finger_error.setText(error);
+        tv_finger_error.setVisibility(View.VISIBLE);
     }
 
     @Override
