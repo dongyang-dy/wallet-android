@@ -91,13 +91,12 @@ public class AddAddressVH {
             return false;
         }
 
-        boolean flag = false;
         //检测地址是否数字或字母
         if(!RegexUtil.isLetterDigit(v_input_address)){
             ToastUtils.showToast(activity.getString(R.string.address_verify_error));
             return false;
         }
-
+        boolean flag = true;
         //地址检测
         if(bhChainToken.chain.equals("btc")){
            flag = AddressUtil.validBtcAddress(v_input_address);

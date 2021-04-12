@@ -29,7 +29,7 @@
         app:layout_constraintBottom_toTopOf="@+id/tv_token_amount"
         android:layout_marginStart="20dp"
         android:textColor="@color/global_main_text_color"
-        android:textSize="17sp"
+        android:textSize="16sp"
         app:layout_constraintVertical_chainStyle="packed"
         tools:text="BTC"/>
 
@@ -42,7 +42,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_token_name"
         app:layout_constraintBottom_toBottomOf="parent"
         android:textColor="@color/global_label_text_color"
-        android:textSize="13sp"
+        android:textSize="12sp"
         tools:text="余额：1.12345678"/>
 
     <androidx.appcompat.widget.AppCompatImageView
