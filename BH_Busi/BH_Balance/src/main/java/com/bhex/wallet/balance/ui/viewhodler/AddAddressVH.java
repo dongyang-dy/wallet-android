@@ -88,12 +88,15 @@ public class AddAddressVH {
         String v_input_name = inp_address_name.getText().toString().trim();
         if(TextUtils.isEmpty(v_input_name)){
             ToastUtils.showToast(activity.getString(R.string.please_input_name));
+            inp_address_name.requestFocus();
             return false;
         }
 
         //检测地址是否数字或字母
         if(!RegexUtil.isLetterDigit(v_input_address)){
             ToastUtils.showToast(activity.getString(R.string.address_verify_error));
+            inp_address.setSelection(v_input_address.length());
+            inp_address.requestFocus();
             return false;
         }
         boolean flag = true;
@@ -112,6 +115,8 @@ public class AddAddressVH {
 
         if(!flag){
             ToastUtils.showToast(activity.getString(R.string.address_verify_error));
+            inp_address.setSelection(v_input_address.length());
+            inp_address.requestFocus();
             return false;
         }
 

@@ -144,6 +144,8 @@ public class TransferOutCrossActivity extends BaseActivity {
                     //处理扫描结果（在界面上显示）
                     String qrCode  = data.getExtras().getString(XQRCode.RESULT_DATA);
                     transferOutCrossVH.inp_drawwith_address.setText(qrCode);
+                    transferOutCrossVH.inp_drawwith_address.setSelection(qrCode.length());
+                    transferOutCrossVH.inp_drawwith_address.requestFocus();
                 }else if(resultCode == BHQrScanActivity.REQUEST_IMAGE){
                     getAnalyzeQRCodeResult(data.getData());
                 }
@@ -152,6 +154,7 @@ public class TransferOutCrossActivity extends BaseActivity {
                     String address  = data.getExtras().getString(AddressBookListActivity.RESULT_DATA);
                     transferOutCrossVH.inp_drawwith_address.setText(address);
                     transferOutCrossVH.inp_drawwith_address.setSelection(address.length());
+                    transferOutCrossVH.inp_drawwith_address.requestFocus();
                 }
             }
         }catch(Exception e){

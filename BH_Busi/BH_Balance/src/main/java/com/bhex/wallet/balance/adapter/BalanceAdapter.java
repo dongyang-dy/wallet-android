@@ -110,15 +110,14 @@ public class BalanceAdapter extends BaseQuickAdapter<BHTokenItem, BaseViewHolder
             tv_coin_type.setVisibility(View.VISIBLE);
             tv_coin_type.setText(getContext().getString(R.string.native_token));
             tv_coin_type.setTextColor(ColorUtil.getColor(mActivity,R.color.native_token_text_color));
-            GradientDrawable drawable = ShapeUtils.getRoundRectDrawable(PixelUtils.dp2px(mActivity,10), ColorUtil.getColor(mActivity,R.color.native_token_bg_color));
+            GradientDrawable drawable = ShapeUtils.getRoundRectDrawable(PixelUtils.dp2px(mActivity,10), ColorUtil.getColor(mActivity,R.color.label_token_bg_color));
             tv_coin_type.setBackgroundDrawable(drawable);
 
-        }
-        else {
+        } else {
             tv_coin_type.setVisibility(View.VISIBLE);
             tv_coin_type.setText(getContext().getString(R.string.no_native_token));
             tv_coin_type.setTextColor(ColorUtil.getColor(mActivity,R.color.cross_token_text_color));
-            GradientDrawable drawable = ShapeUtils.getRoundRectDrawable(PixelUtils.dp2px(mActivity,10), ColorUtil.getColor(mActivity,R.color.cross_token_bg_color));
+            GradientDrawable drawable = ShapeUtils.getRoundRectDrawable(PixelUtils.dp2px(mActivity,10), ColorUtil.getColor(mActivity,R.color.label_token_bg_color));
             tv_coin_type.setBackgroundDrawable(drawable);
         }
 

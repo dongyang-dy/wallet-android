@@ -20,6 +20,7 @@ import com.bhex.tools.utils.NumberUtil;
 import com.bhex.tools.utils.RegexUtil;
 import com.bhex.wallet.balance.R;
 import com.bhex.wallet.balance.helper.BHBalanceHelper;
+import com.bhex.wallet.balance.ui.activity.AddressBookListActivity;
 import com.bhex.wallet.balance.ui.fragment.DepositTipsFragment;
 import com.bhex.wallet.common.base.BaseActivity;
 import com.bhex.wallet.common.cache.CacheCenter;
@@ -117,7 +118,7 @@ public class TransferOutCrossVH {
             ARouter.getInstance().build(ARouterConfig.Balance.Balance_address_list)
                     .withString(BHConstants.SYMBOL,tranferToken.symbol)
                     .withString(BHConstants.ADDRESS,v_inp_drawwith_address)
-                    .navigation(m_activity, BHQrScanActivity.REQUEST_CODE);
+                    .navigation(m_activity, AddressBookListActivity.REQUEST_ADDRESS);
         });
 
 
