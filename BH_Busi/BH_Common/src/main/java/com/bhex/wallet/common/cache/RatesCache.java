@@ -79,7 +79,6 @@ public class RatesCache extends BaseCache {
         Type type = (new TypeToken<List<BHRates>>() {}).getType();
         String balacne_list = BHUserManager.getInstance().getSymbolList();
         balacne_list = balacne_list.replace("_",",").toUpperCase();
-
         RequestBody txBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("symbols",balacne_list).build();

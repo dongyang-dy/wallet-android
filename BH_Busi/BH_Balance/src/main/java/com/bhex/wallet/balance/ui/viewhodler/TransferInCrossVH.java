@@ -115,11 +115,13 @@ public class TransferInCrossVH {
         });*/
 
         view.findViewById(R.id.tv_min_deposit).setOnClickListener(v->{
-            DepositTipsFragment.newInstance().show(mActivity.getSupportFragmentManager(),DepositTipsFragment.class.getName());
+            DepositTipsFragment.newInstance(mActivity.getString(R.string.cross_min_deposit_count_tips))
+                    .show(mActivity.getSupportFragmentManager(),DepositTipsFragment.class.getName());
         });
 
         view.findViewById(R.id.tv_deposit_collect).setOnClickListener(v->{
-            DepositTipsFragment.newInstance().show(mActivity.getSupportFragmentManager(),DepositTipsFragment.class.getName());
+            DepositTipsFragment.newInstance(mActivity.getString(R.string.cross_collect_deposit_tips))
+                    .show(mActivity.getSupportFragmentManager(),DepositTipsFragment.class.getName());
         });
     }
 

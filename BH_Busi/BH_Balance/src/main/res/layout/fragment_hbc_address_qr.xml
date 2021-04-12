@@ -76,7 +76,7 @@
         tools:text="HBCxasrgkbkdsvssdvbkewkhksnsafasfds"
         />
 
-    <com.google.android.material.button.MaterialButton
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/btn_copy_address"
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -84,10 +84,9 @@
         android:insetBottom="0dp"
         android:stateListAnimator="@null"
         android:layout_marginBottom="@dimen/main_margin_bottom"
-        style="@style/main_material_btn"
         android:textSize="15sp"
         android:enabled="true"
-        app:backgroundTint="@color/global_button_bg_color"
+        style="@style/main_btn_style"
         android:layout_marginTop="16dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"

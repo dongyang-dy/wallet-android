@@ -34,14 +34,15 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/cross_link_transfer_tips_1"
+        tools:text="@string/cross_min_deposit_count_tips"
         android:textSize="14sp"
         android:textColor="@color/global_tip_text_color"
         android:layout_below="@+id/tv_title"
         android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
         />
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <!--<androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_tip_content_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -66,14 +67,14 @@
         android:layout_below="@+id/tv_tip_content_2"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="24dp"
-        />
+        />-->
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/btn_i_know"
         android:layout_width="match_parent"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:layout_below="@+id/tv_tip_content_3"
+        android:layout_below="@+id/tv_tip_content"
         android:layout_marginEnd="@dimen/main_padding_right"
         android:layout_marginStart="@dimen/main_padding_left"
         style="@style/main_btn_style"

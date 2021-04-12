@@ -29,7 +29,6 @@
             style="@style/toolbar_layout_title_style"
             android:text="@string/message_center"
             android:drawablePadding="5dp"
-            android:drawableRight="@mipmap/ic_message_clear"
             tools:text="@string/wallet_create_trusteeship" />
 
     </androidx.appcompat.widget.Toolbar>

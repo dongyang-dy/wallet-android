@@ -5,8 +5,10 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +25,7 @@ import com.bhex.wallet.balance.R;
  * 2020-12-23 15:55:06
  */
 public class DepositTipsFragment extends BaseBottomSheetDialog {
+    private String mTipCotent;
 
     @Override
     public int getLayout() {
@@ -46,10 +49,16 @@ public class DepositTipsFragment extends BaseBottomSheetDialog {
             dismiss();
         });
 
+        AppCompatTextView tv_tip_content = mRootView.findViewById(R.id.tv_tip_content);
+        if(!TextUtils.isEmpty(mTipCotent)){
+            tv_tip_content.setText(mTipCotent);
+        }
+
     }
 
-    public static DepositTipsFragment newInstance(){
+    public static DepositTipsFragment newInstance(String msg){
         DepositTipsFragment fragment = new DepositTipsFragment();
+        fragment.mTipCotent = msg;
         return  fragment;
     }
 

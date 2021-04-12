@@ -69,7 +69,7 @@ public class MainActivity extends BaseActivity<MainPresenter> {
     protected void initView() {
         ARouter.getInstance().inject(this);
         MainActivityManager._instance.mainActivity = this;
-        CurrencyManager.getInstance().init(this);
+        //CurrencyManager.getInstance().init(this);
         SequenceManager.getInstance().initSequence();
         RefreshLayoutManager.init();
         TRANSCATION_BUSI_TYPE.init(this);

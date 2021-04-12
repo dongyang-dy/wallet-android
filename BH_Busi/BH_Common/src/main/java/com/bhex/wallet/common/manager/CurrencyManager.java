@@ -27,7 +27,7 @@ public class CurrencyManager {
 
     private static CurrencyManager _instance;
 
-    private String mCurrency;
+    private String mCurrency ;
 
     private NumberFormat currencyFormat = NumberFormat.getInstance();
 
@@ -50,7 +50,7 @@ public class CurrencyManager {
         return _instance;
     }
 
-    public void init(Context context){
+    /*public void init(Context context){
         mCurrency = MMKVManager.getInstance().mmkv().decodeString(BHConstants.CURRENCY_USED);
         if(TextUtils.isEmpty(mCurrency)){
             Locale locale = LocalManageUtil.getSetLanguageLocale(context);
@@ -62,7 +62,7 @@ public class CurrencyManager {
                 mCurrency =  CURRENCY_TYPE.USD.shortName;
             }
         }
-    }
+    }*/
 
     public String loadCurrency(Context context){
         if(TextUtils.isEmpty(mCurrency)){
@@ -78,6 +78,7 @@ public class CurrencyManager {
         if(ratesCache==null){
             return CURRENCY_TYPE.valueOf(CurrencyManager.getInstance().loadCurrency(context).toUpperCase()).character+"0";
         }
+
 
         BHRates.RatesBean ratesBean = ratesCache.getBHRate(symbol.toLowerCase());
 

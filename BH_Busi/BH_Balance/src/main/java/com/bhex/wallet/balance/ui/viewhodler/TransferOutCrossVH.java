@@ -140,7 +140,8 @@ public class TransferOutCrossVH {
         }
 
         tv_withdraw_fee_label.setOnClickListener(v -> {
-            DepositTipsFragment.newInstance().show(m_activity.getSupportFragmentManager(),DepositTipsFragment.class.getName());
+            DepositTipsFragment.newInstance(m_activity.getString(R.string.cross_withdraw_tips))
+                    .show(m_activity.getSupportFragmentManager(),DepositTipsFragment.class.getName());
         });
 
     }
