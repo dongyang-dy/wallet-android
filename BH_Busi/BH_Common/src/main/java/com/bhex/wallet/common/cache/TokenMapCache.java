@@ -150,9 +150,10 @@ public class TokenMapCache extends BaseCache {
                 if(TextUtils.isEmpty(jsonArray.toString())){
                     return;
                 }
-
+                LogUtils.d("TOkenMapCache===>:","jsonArray=="+jsonArray.toString());
                 List<BHChain> chains = JsonUtils.getListFromJson(jsonArray.toString(),BHChain.class);
                 mChains = chains;
+                MMKVManager.getInstance().mmkv().encode(CACHE_TOKENMAP_KEY,jsonArray.toString());
             }
 
             @Override
@@ -207,6 +208,16 @@ public class TokenMapCache extends BaseCache {
         if(!ToolUtils.checkListIsEmpty(mChains)){
             return mChains;
         }
+
+        LogUtils.d("TOkenMapCache===>:","getLoadChains==null==");
+
+        String jsonArray = MMKVManager.getInstance().mmkv().decodeString(CACHE_TOKENMAP_KEY);
+        if(!TextUtils.isEmpty(jsonArray)){
+            List<BHChain> chains = JsonUtils.getListFromJson(jsonArray.toString(),BHChain.class);
+            mChains = chains;
+            return mChains;
+        }
+
         String[] chain_list = BHUserManager.getInstance().getUserBalanceList().split("_");
         String[] default_chain_name = BaseApplication.getInstance().getResources().getStringArray(R.array.default_chain_name);
 
