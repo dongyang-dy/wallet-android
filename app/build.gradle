@@ -259,9 +259,9 @@ dependencies {
     //implementation 'androidx.work:work-runtime-ktx:2.3.1'
     //api "androidx.work:work-runtime:$work_version"
 
-    /*implementation project(path: ':Lib_Network')
-    implementation project(path: ':Lib_Tools')
-    implementation project(path: ':UIKit')*/
+    //bugly
+    implementation 'com.tencent.bugly:crashreport:latest.release'
+
     implementation project(path: ':BH_Common')
     implementation project(path: ':BH_Market')
     implementation project(path: ':BH_Mnemonic')

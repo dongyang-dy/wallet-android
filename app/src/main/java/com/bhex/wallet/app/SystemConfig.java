@@ -14,6 +14,7 @@ import com.bhex.wallet.base.BHNetwork;
 import com.bhex.wallet.common.cache.CacheCenter;
 import com.bhex.wallet.common.model.BHPhoneInfo;
 import com.facebook.stetho.Stetho;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.mmkv.MMKV;
 
 import java.io.File;
@@ -60,6 +61,8 @@ public class SystemConfig  {
             ApiException apiException = ExceptionEngin.handleException(throwable);
             ToastUtils.showToast(apiException.getDisplayMessage());
         });
+        //bugly
+        CrashReport.initCrashReport(BaseApplication.getInstance(), "7f44a89de4", false);
         //异常处理
         if(BuildConfig.DEBUG){
              Stetho.initialize(
