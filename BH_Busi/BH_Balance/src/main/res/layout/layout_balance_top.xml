@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_balance_top"
     android:layout_width="match_parent"
-    android:layout_height="372dp"
+    android:layout_height="387dp"
     android:background="@mipmap/bg_balance_index"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
@@ -64,6 +64,7 @@
             android:layout_centerVertical="true"
             android:gravity="center_vertical"
             android:textStyle="bold"
+            android:textSize="18sp"
             tools:text="Acicii"/>
 
 
@@ -79,7 +80,7 @@
 
     <com.bhex.lib.uikit.widget.layout.XUILinearLayout
         android:layout_width="match_parent"
-        android:layout_height="205dp"
+        android:layout_height="215dp"
         android:layout_marginStart="18dp"
         android:layout_marginEnd="18dp"
         android:layout_marginTop="16dp"
@@ -91,8 +92,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="30dp"
-            android:layout_marginStart="46dp"
-            >
+            android:layout_marginStart="46dp">
+
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_wallet_address"
@@ -117,7 +118,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="22dp"
             android:textSize="14sp"
             android:text="@string/all_asset"
             android:textColor="@color/white_60"
@@ -127,9 +128,11 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_asset"
             android:layout_width="wrap_content"
-            android:layout_height="36sp"
+            android:layout_height="36dp"
             android:textSize="30sp"
             android:textStyle="bold"
+            android:layout_marginTop="4dp"
+            android:gravity="center_vertical"
             android:includeFontPadding="false"
             android:layout_marginStart="35dp"
             android:textColor="@color/white"

@@ -5,18 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/page_bg_color"
     tools:context=".ui.activity.AddWalletActivity">
 
     <include
         layout="@layout/layout_toolbar"
         />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingStart="24dp"
         android:paddingEnd="24dp"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
+
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
@@ -37,8 +39,8 @@
             android:paddingStart="16dp"
             android:paddingEnd="10dp"
             app:xui_borderWidth="1dp"
-            app:xui_borderColor="@color/border_button_border_color"
-            app:xui_radius="6dp">
+
+            app:xui_radius="12dp">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="48dp"
@@ -59,7 +61,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="23dp"
                     android:text="@string/import_mnemonic"
-                    android:textSize="17sp"
+                    android:textSize="16sp"
                     android:gravity="center_vertical"
                     android:textColor="@color/global_main_text_color"/>
 
@@ -69,7 +71,7 @@
                     android:text="@string/import_mnemonic_subtitle"
                     android:textSize="13sp"
                     android:gravity="center_vertical"
-                    android:textColor="@color/global_third_text_color"/>
+                    android:textColor="@color/global_main_text_color"/>
             </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -92,11 +94,8 @@
             android:paddingBottom="16dp"
             android:paddingStart="16dp"
             android:paddingEnd="10dp"
-            app:xui_radius="6dp"
-            app:xui_borderWidth="1dp"
-            app:xui_borderColor="@color/border_button_border_color"
-            >
-
+            app:xui_radius="12dp"
+            app:xui_borderWidth="1dp">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="48dp"
@@ -117,7 +116,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="23dp"
                     android:text="@string/import_keystore"
-                    android:textSize="17sp"
+                    android:textSize="16sp"
                     android:gravity="center_vertical"
                     android:textColor="@color/global_main_text_color"/>
 
@@ -127,7 +126,7 @@
                     android:text="@string/import_keystore_subtitle"
                     android:textSize="13sp"
                     android:gravity="center_vertical"
-                    android:textColor="@color/global_third_text_color"/>
+                    android:textColor="@color/global_main_text_color"/>
             </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -151,10 +150,8 @@
             android:paddingTop="16dp"
             android:paddingEnd="10dp"
             android:paddingBottom="16dp"
-            app:xui_radius="6dp"
-            app:xui_borderWidth="1dp"
-            app:xui_borderColor="@color/border_button_border_color"
-            >
+            app:xui_radius="6dp">
+
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="48dp"
@@ -177,14 +174,14 @@
                     android:gravity="center_vertical"
                     android:text="@string/import_private_key"
                     android:textColor="@color/global_main_text_color"
-                    android:textSize="17sp" />
+                    android:textSize="16sp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="19dp"
                     android:gravity="center_vertical"
                     android:text="@string/import_pk_subtitle"
-                    android:textColor="@color/global_third_text_color"
+                    android:textColor="@color/global_main_text_color"
                     android:textSize="13sp" />
             </LinearLayout>
 
@@ -221,10 +218,8 @@
                 android:paddingBottom="16dp"
                 android:paddingStart="16dp"
                 android:paddingEnd="10dp"
-                app:xui_radius="6dp"
-                app:xui_borderWidth="1dp"
-                app:xui_borderColor="@color/border_button_border_color"
-                >
+                app:xui_radius="12dp"
+                app:xui_borderWidth="1dp">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="48dp"
@@ -235,7 +230,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="23dp"
                     android:text="@string/create_wallet_account"
-                    android:textSize="17sp"
+                    android:textSize="16sp"
                     android:gravity="center_vertical"
                     android:layout_centerVertical="true"
                     android:textColor="@color/global_main_text_color"

@@ -214,15 +214,20 @@ public class SequenceManager {
     public void removeAddressStatus(AccountInfo accountInfo) {
         if(ToolUtils.checkListIsEmpty(accountInfo.assets)){
             GENARATOR_KEY_VALUE = "";
+            return;
+        }
+
+        if(TextUtils.isEmpty(GENARATOR_KEY_VALUE)){
+            return;
         }
 
         for(AccountInfo.AssetsBean assetsBean:accountInfo.assets){
-
             BHToken bhToken = SymbolCache.getInstance().getBHToken(assetsBean.symbol);
-            if(!TextUtils.isEmpty(assetsBean.external_address)
+            if(bhToken!=null && !TextUtils.isEmpty(assetsBean.external_address)
                     && GENARATOR_KEY_VALUE.endsWith(bhToken.chain)){
                 GENARATOR_KEY_VALUE="";
-                MMKVManager.getInstance().mmkv().encode(GENARATOR_KEY,GENARATOR_KEY_VALUE);
+                //MMKVManager.getInstance().mmkv().encode(GENARATOR_KEY,GENARATOR_KEY_VALUE);
+                MMKVManager.getInstance().mmkv().remove(GENARATOR_KEY);
             }
         }
     }
