@@ -22,6 +22,7 @@
     <dimen name="main_line_spacing_extra" tools:override="true">3dp</dimen>
     <dimen name="main_radius_conner" tools:override="true">6dp</dimen>
     <dimen name="main_border_width" tools:override="true">1dp</dimen>
+    <dimen name="middle_radius_conner" tools:override="true">12dp</dimen>
     <dimen name="main_large_radius_conner" tools:override="true">16dp</dimen>
 
     <!--

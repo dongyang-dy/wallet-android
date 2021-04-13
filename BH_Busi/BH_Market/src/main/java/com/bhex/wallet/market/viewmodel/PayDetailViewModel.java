@@ -10,6 +10,7 @@ import com.bhex.network.app.BaseApplication;
 import com.bhex.network.base.LoadDataModel;
 import com.bhex.network.observer.BHProgressObserver;
 import com.bhex.network.utils.JsonUtils;
+import com.bhex.tools.utils.LogUtils;
 import com.bhex.wallet.common.api.BHttpApi;
 import com.bhex.wallet.common.api.BHttpApiInterface;
 import com.bhex.wallet.common.cache.SymbolCache;
@@ -40,6 +41,7 @@ public class PayDetailViewModel extends ViewModel {
         StreamSupport.stream(symbol_list).forEach(v->{
             tokens.append(v).append(",");
         });
+
 
         BHProgressObserver<JsonObject> bpo = new BHProgressObserver<JsonObject>(fragment.getContext()) {
             @Override

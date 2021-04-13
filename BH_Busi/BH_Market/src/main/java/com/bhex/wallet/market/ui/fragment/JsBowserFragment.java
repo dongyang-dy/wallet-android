@@ -4,6 +4,7 @@ import android.webkit.WebView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.bhex.network.utils.JsonUtils;
+import com.bhex.tools.utils.LogUtils;
 import com.bhex.wallet.common.browse.BaseBowserFragment;
 import com.bhex.wallet.common.browse.wv.WVJBWebViewClient;
 import com.bhex.wallet.common.manager.BHUserManager;
@@ -41,6 +42,7 @@ public abstract class JsBowserFragment extends BaseBowserFragment {
                 if(data==null){
                     return;
                 }
+                //LogUtils.d("JsBowserFragment====>","sign=="+data.toString());
                 H5Sign h5Sign = JsonUtils.fromJson(data.toString(), H5Sign.class);
                 PayDetailFragment.newInstance().showDialog(getChildFragmentManager(),PayDetailFragment.class.getSimpleName(),h5Sign);
                 callbackMaps.put(h5Sign.type,callback);

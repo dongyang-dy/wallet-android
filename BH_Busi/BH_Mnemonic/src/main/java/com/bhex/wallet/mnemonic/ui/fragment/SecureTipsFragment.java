@@ -65,7 +65,7 @@ public class SecureTipsFragment extends BaseBottomSheetDialog implements View.On
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        GradientDrawable drawable = ShapeUtils.getRoundRectTopDrawable(PixelUtils.dp2px(getContext(),6), ColorUtil.getColor(getContext(),R.color.app_bg),true,0);
+        GradientDrawable drawable = ShapeUtils.getRoundRectTopDrawable((int)view.getResources().getDimension(R.dimen.main_radius_conner), ColorUtil.getColor(getContext(),R.color.app_bg),true,0);
         mRootView.setBackground(drawable);
 
         btn_at_once = mRootView.findViewById(R.id.btn_at_once);

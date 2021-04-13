@@ -81,7 +81,7 @@ public class AccountListFragment extends BaseDialogFragment {
     protected void initView() {
         super.initView();
         //设置圆角背景
-        GradientDrawable drawable = ShapeUtils.getRoundRectTopDrawable((int)getResources().getDimension(R.dimen.main_large_radius_conner),
+        GradientDrawable drawable = ShapeUtils.getRoundRectTopDrawable((int)getResources().getDimension(R.dimen.main_radius_conner),
                 ColorUtil.getColor(getContext(),R.color.app_bg),true,0);
         mRootView.setBackgroundDrawable(drawable);
 

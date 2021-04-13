@@ -28,6 +28,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_language"
+        tools:itemCount="2"
         />
 
     <androidx.appcompat.widget.AppCompatTextView

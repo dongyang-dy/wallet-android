@@ -86,10 +86,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
-                    android:layout_marginBottom="4dp"
                     android:gravity="center"
                     android:text="@string/confirm_number_password"
-                    android:textColor="@color/global_secondary_text_color"
+                    android:textColor="@color/global_main_text_color"
                     android:textSize="@dimen/sp_15" />
 
                 <com.bhex.lib.uikit.widget.keyborad.PasswordInputView
@@ -100,10 +99,11 @@
                     android:layout_marginTop="24dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginEnd="24dp"
-                    app:h_vcet_height="24dp"
+                    app:h_vcet_height="20dp"
                     app:h_vcet_number="6"
-                    app:h_vcet_pwd_radius="12dp"
-                    app:h_vcet_width="24dp" />
+                    app:h_vcet_divider="24dp"
+                    app:h_vcet_pwd_radius="10dp"
+                    app:h_vcet_width="20dp" />
 
                 <RelativeLayout
                     android:layout_width="wrap_content"

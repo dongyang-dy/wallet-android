@@ -91,7 +91,7 @@
                     android:layout_marginBottom="4dp"
                     android:gravity="center_horizontal"
                     android:text="@string/please_number_password"
-                    android:textColor="@color/global_secondary_text_color"
+                    android:textColor="@color/global_main_text_color"
                     android:textSize="@dimen/sp_16" />
 
                 <com.bhex.lib.uikit.widget.keyborad.PasswordInputView
@@ -102,10 +102,11 @@
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="24dp"
                     app:h_vcet_custom_keyborad="true"
-                    app:h_vcet_height="24dp"
+                    app:h_vcet_height="20dp"
                     app:h_vcet_number="6"
-                    app:h_vcet_pwd_radius="12dp"
-                    app:h_vcet_width="24dp" />
+                    app:h_vcet_divider="24dp"
+                    app:h_vcet_pwd_radius="10dp"
+                    app:h_vcet_width="20dp" />
 
             </LinearLayout>
         </RelativeLayout>

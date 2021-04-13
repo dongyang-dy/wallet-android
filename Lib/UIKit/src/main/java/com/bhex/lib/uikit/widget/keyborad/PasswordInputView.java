@@ -55,7 +55,7 @@ public class PasswordInputView extends RelativeLayout {
 
     private boolean is_border;
     //
-    private boolean is_custom_keyborad;
+    //private boolean is_custom_keyborad;
 
     public PasswordTextView[] mPasswordTextViews;
     //
@@ -84,8 +84,8 @@ public class PasswordInputView extends RelativeLayout {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.PasswordInputView, defStyleAttr, 0);
         input_count = typedArray.getInteger(R.styleable.PasswordInputView_h_vcet_number, 4);
         mPwdRadius = typedArray.getDimensionPixelSize(R.styleable.PasswordInputView_h_vcet_pwd_radius, PixelUtils.dp2px(context,5));
-        input_width = typedArray.getDimensionPixelSize(R.styleable.PasswordInputView_h_vcet_width, PixelUtils.dp2px(context,48));
-        input_height = typedArray.getDimensionPixelSize(R.styleable.PasswordInputView_h_vcet_height, PixelUtils.dp2px(context,48));
+        input_width = typedArray.getDimensionPixelSize(R.styleable.PasswordInputView_h_vcet_width, PixelUtils.dp2px(context,20));
+        input_height = typedArray.getDimensionPixelSize(R.styleable.PasswordInputView_h_vcet_height, PixelUtils.dp2px(context,20));
         input_divider = typedArray.getDimensionPixelSize(R.styleable.PasswordInputView_h_vcet_divider, PixelUtils.dp2px(context,8));
 
         input_border_normal_color  = typedArray.getColor(R.styleable.PasswordInputView_input_border_normal_color,
@@ -96,7 +96,7 @@ public class PasswordInputView extends RelativeLayout {
 
         is_border = typedArray.getBoolean(R.styleable.PasswordInputView_h_vcet_is_border, false);
 
-        is_custom_keyborad = typedArray.getBoolean(R.styleable.PasswordInputView_h_vcet_custom_keyborad, false);
+        //is_custom_keyborad = typedArray.getBoolean(R.styleable.PasswordInputView_h_vcet_custom_keyborad, false);
         typedArray.recycle();
         initUI();
     }
@@ -132,7 +132,7 @@ public class PasswordInputView extends RelativeLayout {
         );
 
         //input_width = (float)((mWidth-(input_count-1)*input_divider))/input_count;
-        input_divider = (float) (mWidth-input_count*input_width)/(input_count-1);
+        //input_divider = (float) (mWidth-input_count*input_width)/(input_count-1);
         m_input_content.setCursorVisible(false);
         //m_input_content.setEnabled(!is_custom_keyborad);
 
@@ -145,7 +145,6 @@ public class PasswordInputView extends RelativeLayout {
             pwdTextView.is_border = is_border;
             pwdTextView.mRadius = mPwdRadius;
 
-            pwdTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
             pwdTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
             pwdTextView.input_border_focus_color = input_border_focus_color;
             pwdTextView.input_border_normal_color = input_border_normal_color;
