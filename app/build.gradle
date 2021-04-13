@@ -249,8 +249,8 @@ dependencies {
     //debugImplementation 'com.github.markzhai:blockcanary-android:1.5.0'
     //releaseImplementation 'com.github.markzhai:blockcanary-no-op:1.5.0'
 
-    implementation 'com.alibaba:arouter-api:1.4.1'
-    annotationProcessor 'com.alibaba:arouter-compiler:1.2.1'
+    implementation 'com.alibaba:arouter-api:1.5.1'
+    annotationProcessor 'com.alibaba:arouter-compiler:1.5.1'
 
     /*implementation ('androidx.work:work-runtime:2.1.0'){
         exclude group: 'com.google.guava', module: 'listenablefuture'

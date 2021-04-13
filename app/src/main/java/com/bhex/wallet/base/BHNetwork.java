@@ -1,6 +1,7 @@
 package com.bhex.wallet.base;
 
 import android.app.Application;
+import android.content.pm.PackageInfo;
 
 import com.bhex.network.BuildConfig;
 import com.bhex.network.base.INetworkRequiredInfo;
@@ -19,12 +20,24 @@ public class BHNetwork implements INetworkRequiredInfo {
 
     @Override
     public String getAppVersionName() {
-        return BuildConfig.VERSION_NAME;
+        try{
+            PackageInfo pInfo = mApplication.getPackageManager().getPackageInfo(mApplication.getPackageName(), 0);
+            return  pInfo.versionName;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return "1.0.0";
     }
 
     @Override
     public String getAppVersionCode() {
-        return String.valueOf(BuildConfig.VERSION_CODE);
+        try{
+            PackageInfo pInfo = mApplication.getPackageManager().getPackageInfo(mApplication.getPackageName(), 0);
+            return String.valueOf( pInfo.versionCode);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return "100";
     }
 
     @Override

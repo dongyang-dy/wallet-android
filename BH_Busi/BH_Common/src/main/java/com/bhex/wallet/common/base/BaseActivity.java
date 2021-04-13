@@ -98,23 +98,6 @@ public abstract class BaseActivity<T extends IPresenter> extends AppCompatActivi
 
 
     protected  void setStatusColor(){
-        /*if(!isNight()){
-            if(getStatusColorValue()== BHConstants.STATUS_COLOR_WHITE){
-                ImmersionBar.with(this).statusBarColor(R.color.app_bg).statusBarDarkFont(true).barColor(R.color.app_bg).navigationBarDarkIcon(true).fitsSystemWindows(true).init();
-            }else if(getStatusColorValue()== BHConstants.STATUS_COLOR_BLUE){
-                ImmersionBar.with(this).statusBarColor(R.color.status_bar_bg_blue).statusBarDarkFont(false).navigationBarDarkIcon(true).fitsSystemWindows(true).init();
-            }else if(getStatusColorValue()== BHConstants.STATUS_COLOR_TRANS){
-                ImmersionBar.with(this).transparentStatusBar().statusBarDarkFont(true).navigationBarDarkIcon(true).init();
-            }
-        }else{
-            if(getStatusColorValue()== BHConstants.STATUS_COLOR_WHITE){
-                ImmersionBar.with(this).statusBarColor(R.color.app_bg).statusBarDarkFont(false).barColor(R.color.app_bg).navigationBarDarkIcon(true).fitsSystemWindows(true).init();
-            }else if(getStatusColorValue()== BHConstants.STATUS_COLOR_BLUE){
-                ImmersionBar.with(this).statusBarColor(R.color.status_bar_bg_blue).statusBarDarkFont(false).navigationBarDarkIcon(true).fitsSystemWindows(true).init();
-            }else if(getStatusColorValue()== BHConstants.STATUS_COLOR_TRANS){
-                ImmersionBar.with(this).transparentStatusBar().statusBarDarkFont(true).navigationBarDarkIcon(true).init();
-            }
-        }*/
         if(!isNight()){
             ImmersionBar.with(this).statusBarColor(R.color.app_bg).statusBarDarkFont(true).barColor(R.color.app_bg).navigationBarDarkIcon(true).fitsSystemWindows(true).init();
         }else{

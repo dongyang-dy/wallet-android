@@ -49,13 +49,13 @@ public class BHQrScanActivity extends BaseActivity {
     public static final int REQUEST_IMAGE = 112;
 
 
-    @BindView(R2.id.tv_center_title)
+    //@BindView(R2.id.tv_center_title)
     AppCompatTextView tv_center_title;
 
-    @BindView(R2.id.tv_album)
+    //@BindView(R2.id.tv_album)
     AppCompatTextView tv_album;
 
-    @BindView(R2.id.iv_back)
+    //@BindView(R2.id.iv_back)
     AppCompatImageView iv_back;
 
     @Override
@@ -71,6 +71,10 @@ public class BHQrScanActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        tv_center_title = findViewById(R.id.tv_center_title);
+        tv_album = findViewById(R.id.tv_album);
+        iv_back = findViewById(R.id.tv_album);
+
         tv_center_title.setText(getResources().getString(R.string.qr_code));
         ImmersionBar.with(this).statusBarColor(com.bhex.network.R.color.status_bar_bg_blue)
                 .statusBarDarkFont(false)

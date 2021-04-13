@@ -68,12 +68,12 @@ dependencies {
 
     implementation 'androidx.core:core-ktx:1.2.0'
 
-    implementation 'com.jakewharton:butterknife:10.2.0'
+    implementation 'com.jakewharton:butterknife:10.2.3'
     //annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
-    kapt 'com.jakewharton:butterknife-compiler:10.2.0'
+    kapt 'com.jakewharton:butterknife-compiler:10.2.3'
 
-    implementation 'com.alibaba:arouter-api:1.4.1'
-    kapt 'com.alibaba:arouter-compiler:1.2.1'
+    implementation 'com.alibaba:arouter-api:1.5.1'
+    kapt 'com.alibaba:arouter-compiler:1.5.1'
     //annotationProcessor 'com.alibaba:arouter-compiler:1.2.1'
     //implementation"androidx.room:room-runtime:$room_version"
 
