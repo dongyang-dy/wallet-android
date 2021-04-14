@@ -100,7 +100,7 @@ public class PayDetailHelper {
         PayDetailItem item3 = new PayDetailItem(context.getString(R.string.payment_address), v_流动性_Entitiy.from);
         list.add(item3);
 
-        PayDetailItem item4 = new PayDetailItem(context.getString(R.string.gas_fee), BHUserManager.getInstance().getDefaultGasFee().displayFee + BHConstants.BHT_TOKEN.toUpperCase());
+        PayDetailItem item4 = new PayDetailItem(context.getString(R.string.gas_fee), BHUserManager.getInstance().getDefaultGasFee().displayFee + "  " + BHConstants.BHT_TOKEN.toUpperCase());
         list.add(item4);
         return list;
     }
@@ -139,7 +139,7 @@ public class PayDetailHelper {
         if(bhToken_a!=null){
             double amount_in = NumberUtil.divide(v_兑换_Entitiy.amount_in, Math.pow(10, bhToken_a.decimals) + "",bhToken_a.decimals);
             //String amount_int_info = NumberUtil.toPlainString(amount_in).concat(v_兑换_Entitiy.swap_path.get(0).toUpperCase());
-            String amount_int_info = NumberUtil.toPlainString(amount_in).concat(bhToken_a.name.toUpperCase());
+            String amount_int_info = NumberUtil.toPlainString(amount_in).concat(" ").concat(bhToken_a.name.toUpperCase());
             PayDetailItem item1 = new PayDetailItem(context.getString(R.string.payment_amount),amount_int_info);
             list.add(item1);
         }
@@ -148,7 +148,7 @@ public class PayDetailHelper {
         PayDetailItem item2 = new PayDetailItem(context.getString(R.string.payment_address), v_兑换_Entitiy.from);
         list.add(item2);
         
-        PayDetailItem item3 = new PayDetailItem(context.getString(R.string.gas_fee), BHUserManager.getInstance().getDefaultGasFee().displayFee + BHConstants.BHT_TOKEN.toUpperCase());
+        PayDetailItem item3 = new PayDetailItem(context.getString(R.string.gas_fee), BHUserManager.getInstance().getDefaultGasFee().displayFee + "  " + BHConstants.BHT_TOKEN.toUpperCase());
         list.add(item3);
         return list;
     }
@@ -187,7 +187,7 @@ public class PayDetailHelper {
         if(bhToken_a!=null){
             double max_amount_in = NumberUtil.divide(v_兑换_输出确定_Entity.max_amount_in, Math.pow(10, bhToken_a.decimals) + "",bhToken_a.decimals);
             //String max_amount_in_info = NumberUtil.toPlainString(max_amount_in).concat(v_兑换_输出确定_Entity.swap_path.get(0).toUpperCase());
-            String max_amount_in_info = NumberUtil.toPlainString(max_amount_in).concat(bhToken_a.name.toUpperCase());
+            String max_amount_in_info = NumberUtil.toPlainString(max_amount_in).concat(" ").concat(bhToken_a.name.toUpperCase());
             PayDetailItem item1 = new PayDetailItem(context.getString(R.string.payment_amount),max_amount_in_info);
             list.add(item1);
         }
@@ -196,7 +196,7 @@ public class PayDetailHelper {
         PayDetailItem item2 = new PayDetailItem(context.getString(R.string.payment_address), v_兑换_输出确定_Entity.from);
         list.add(item2);
 
-        PayDetailItem item3 = new PayDetailItem(context.getString(R.string.gas_fee), BHUserManager.getInstance().getDefaultGasFee().displayFee + BHConstants.BHT_TOKEN.toUpperCase());
+        PayDetailItem item3 = new PayDetailItem(context.getString(R.string.gas_fee), BHUserManager.getInstance().getDefaultGasFee().displayFee + "  " + BHConstants.BHT_TOKEN.toUpperCase());
         list.add(item3);
 
         return list;
@@ -239,7 +239,7 @@ public class PayDetailHelper {
         PayDetailItem item2 = new PayDetailItem(context.getString(R.string.payment_address), v_移除流动性_Entitiy.from);
         list.add(item2);
 
-        PayDetailItem item3 = new PayDetailItem(context.getString(R.string.gas_fee), BHUserManager.getInstance().getDefaultGasFee().displayFee + BHConstants.BHT_TOKEN.toUpperCase());
+        PayDetailItem item3 = new PayDetailItem(context.getString(R.string.gas_fee), BHUserManager.getInstance().getDefaultGasFee().displayFee + "  " + BHConstants.BHT_TOKEN.toUpperCase());
         list.add(item3);
         return list;
     }
