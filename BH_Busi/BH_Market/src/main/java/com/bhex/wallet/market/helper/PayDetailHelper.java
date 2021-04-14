@@ -85,7 +85,7 @@ public class PayDetailHelper {
         BHToken bhToken_a = CacheCenter.getInstance().getSymbolCache().getBHToken(v_流动性_Entitiy.token_a);
         if (RegexUtil.checkNumeric(v_流动性_Entitiy.min_token_a_amount) && bhToken_a!=null) {
             double min_token_a_amount = NumberUtil.divide(v_流动性_Entitiy.min_token_a_amount, Math.pow(10, bhToken_a.decimals) + "",bhToken_a.decimals);
-            PayDetailItem item1 = new PayDetailItem(context.getString(R.string.pay_token), NumberUtil.toPlainString(min_token_a_amount) + "  " + v_流动性_Entitiy.token_a.toUpperCase());
+            PayDetailItem item1 = new PayDetailItem(context.getString(R.string.pay_token), NumberUtil.toPlainString(min_token_a_amount) + "  " + bhToken_a.name.toUpperCase());
             list.add(item1);
         }
 
@@ -93,7 +93,7 @@ public class PayDetailHelper {
 
         if (RegexUtil.checkNumeric(v_流动性_Entitiy.min_token_b_amount) && bhToken_b!=null) {
             double min_token_b_amount = NumberUtil.divide(v_流动性_Entitiy.min_token_b_amount, Math.pow(10, bhToken_b.decimals) + "",bhToken_b.decimals);
-            PayDetailItem item2 = new PayDetailItem(context.getString(R.string.pay_token), NumberUtil.toPlainString(min_token_b_amount) + "  " + v_流动性_Entitiy.token_b.toUpperCase());
+            PayDetailItem item2 = new PayDetailItem(context.getString(R.string.pay_token), NumberUtil.toPlainString(min_token_b_amount) + "  " + bhToken_b.name.toUpperCase());
             list.add(item2);
         }
 
@@ -138,7 +138,8 @@ public class PayDetailHelper {
 
         if(bhToken_a!=null){
             double amount_in = NumberUtil.divide(v_兑换_Entitiy.amount_in, Math.pow(10, bhToken_a.decimals) + "",bhToken_a.decimals);
-            String amount_int_info = NumberUtil.toPlainString(amount_in).concat(v_兑换_Entitiy.swap_path.get(0).toUpperCase());
+            //String amount_int_info = NumberUtil.toPlainString(amount_in).concat(v_兑换_Entitiy.swap_path.get(0).toUpperCase());
+            String amount_int_info = NumberUtil.toPlainString(amount_in).concat(bhToken_a.name.toUpperCase());
             PayDetailItem item1 = new PayDetailItem(context.getString(R.string.payment_amount),amount_int_info);
             list.add(item1);
         }
@@ -185,7 +186,8 @@ public class PayDetailHelper {
 
         if(bhToken_a!=null){
             double max_amount_in = NumberUtil.divide(v_兑换_输出确定_Entity.max_amount_in, Math.pow(10, bhToken_a.decimals) + "",bhToken_a.decimals);
-            String max_amount_in_info = NumberUtil.toPlainString(max_amount_in).concat(v_兑换_输出确定_Entity.swap_path.get(0).toUpperCase());
+            //String max_amount_in_info = NumberUtil.toPlainString(max_amount_in).concat(v_兑换_输出确定_Entity.swap_path.get(0).toUpperCase());
+            String max_amount_in_info = NumberUtil.toPlainString(max_amount_in).concat(bhToken_a.name.toUpperCase());
             PayDetailItem item1 = new PayDetailItem(context.getString(R.string.payment_amount),max_amount_in_info);
             list.add(item1);
         }

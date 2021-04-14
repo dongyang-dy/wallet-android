@@ -94,7 +94,8 @@
             <com.bhex.lib.uikit.widget.viewpager.CustomViewPager
                 android:id="@+id/viewPager"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                />
         </LinearLayout>
     </com.bhex.lib.uikit.widget.viewpager.ObservableScrollView>
 
