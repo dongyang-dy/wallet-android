@@ -39,7 +39,7 @@ public class DexTokenDetailActivity extends TokenDetailActivity {
 
     @Autowired(name = BHConstants.SYMBOL)
     String symbol;
-    @Autowired(name = "chain")
+    @Autowired(name = BHConstants.CHAIN)
     String chain;
 
     @OnClick({R2.id.btn_item1, R2.id.btn_item2,R2.id.btn_item3, R2.id.btn_item4})

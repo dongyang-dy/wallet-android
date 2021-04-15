@@ -91,27 +91,27 @@ public class TransactionHelper {
                 || bean.type.equalsIgnoreCase(TRANSCATION_BUSI_TYPE.跨链提币.getType()) ){
             if(txo.ibc_status==1||txo.ibc_status==2){
                 statusLabel = context.getResources().getString(R.string.processing);
-                tv_status.setTextColor(ContextCompat.getColor(context,R.color.color_orange));
-                tv_status.setBackgroundColor(ContextCompat.getColor(context,R.color.color_20_orange));
+                tv_status.setTextColor(ContextCompat.getColor(context,R.color.global_main_gray_color));
+                //tv_status.setBackgroundColor(ContextCompat.getColor(context,R.color.color_20_orange));
 
             }else if(txo.ibc_status==3){
                 statusLabel = context.getResources().getString(R.string.fail);
                 tv_status.setTextColor(ContextCompat.getColor(context,R.color.color_red));
-                tv_status.setBackgroundColor(ContextCompat.getColor(context,R.color.color_20_red));
+                //tv_status.setBackgroundColor(ContextCompat.getColor(context,R.color.color_20_red));
             }else if(txo.ibc_status==4){
                 statusLabel = context.getResources().getString(R.string.success);
                 tv_status.setTextColor(ContextCompat.getColor(context,R.color.color_green));
-                tv_status.setBackgroundColor(ContextCompat.getColor(context,R.color.color_20_green));
+                //tv_status.setBackgroundColor(ContextCompat.getColor(context,R.color.color_20_green));
             }
         }else{
             if(status){
                 statusLabel = context.getResources().getString(R.string.success);
                 tv_status.setTextColor(ContextCompat.getColor(context,R.color.color_green));
-                tv_status.setBackgroundColor(ContextCompat.getColor(context,R.color.color_20_green));
+                //tv_status.setBackgroundColor(ContextCompat.getColor(context,R.color.color_20_green));
             }else{
                 statusLabel = context.getResources().getString(R.string.fail);
                 tv_status.setTextColor(ContextCompat.getColor(context,R.color.color_red));
-                tv_status.setBackgroundColor(ContextCompat.getColor(context,R.color.color_20_red));
+                //tv_status.setBackgroundColor(ContextCompat.getColor(context,R.color.color_20_red));
             }
         }
         tv_status.setText(statusLabel);
@@ -129,7 +129,7 @@ public class TransactionHelper {
                 || bean.type.equalsIgnoreCase(TRANSCATION_BUSI_TYPE.跨链提币.getType()) ){
             if(txo.ibc_status==1||txo.ibc_status==2){
                 statusLabel = context.getResources().getString(R.string.processing);
-                tv_status.setTextColor(ContextCompat.getColor(context,R.color.color_orange));
+                tv_status.setTextColor(ContextCompat.getColor(context,R.color.global_main_gray_color));
             }else if(txo.ibc_status==3){
                 statusLabel = context.getResources().getString(R.string.fail);
                 tv_status.setTextColor(ContextCompat.getColor(context,R.color.color_red));
@@ -172,7 +172,7 @@ public class TransactionHelper {
         ARouter.getInstance().build(ARouterConfig.Balance.Balance_transcation_view)
                 //.withObject("txo",txOrderItem)
                 .withString("transactionId",txOrderItem.hash)
-                .withString("symbol",mSymbol)
+                .withString(BHConstants.SYMBOL,mSymbol)
                 .navigation();
     }
 

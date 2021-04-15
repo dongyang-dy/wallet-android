@@ -8,6 +8,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bhex.network.base.LoadDataModel;
 import com.bhex.network.base.LoadingStatus;
+import com.bhex.tools.constants.BHConstants;
 import com.bhex.wallet.balance.R;
 import com.bhex.wallet.balance.R2;
 import com.bhex.wallet.balance.adapter.TranscationAdapter;
@@ -33,7 +34,7 @@ public class TranscationViewActivity extends TxBaseActivity {
 
     @Autowired(name = "transactionId")
     public String transactionId;
-    @Autowired(name = "symbol")
+    @Autowired(name = BHConstants.SYMBOL)
     public String mSymbol;
 
     @BindView(R2.id.refreshLayout)

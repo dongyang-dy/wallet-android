@@ -5,12 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="20dp"
-    android:paddingBottom="20dp"
+    android:paddingTop="14dp"
+    android:paddingBottom="14dp"
     android:paddingStart="@dimen/page_margin_start"
     android:paddingEnd="@dimen/page_margin_start"
-    android:background="?android:selectableItemBackground"
-    >
+    android:background="?android:selectableItemBackground">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_tx_type"
@@ -22,13 +21,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="转账"
-        android:textSize="17sp"
+        android:textSize="14sp"
         app:autoSizeTextType="uniform"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeMaxTextSize="17sp"
         app:autoSizeStepGranularity="2sp"
         />
 
+    <!--
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_tx_status"
         android:layout_width="wrap_content"
@@ -40,22 +40,20 @@
         app:layout_constraintTop_toTopOf="@+id/tv_tx_type"
         style="@style/tx_status_success"
         tools:text="成功"
-        />
+        />-->
 
-    <com.bhex.lib.uikit.widget.CustomTextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_tx_time"
         android:layout_width="wrap_content"
         android:layout_height="22dp"
-        android:textSize="13sp"
+        android:textSize="12sp"
         android:gravity="bottom"
         android:textColor="@color/global_label_text_color"
         app:layout_constraintStart_toStartOf="@+id/tv_tx_type"
         app:layout_constraintTop_toBottomOf="@+id/tv_tx_type"
-        tools:text="2020-4-10 16:54:28"
-        />
+        tools:text="2020-4-10 16:54:28" />
 
-
-    <com.bhex.lib.uikit.widget.CustomTextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_tx_amount"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -63,10 +61,20 @@
         android:gravity="center_vertical"
         android:textColor="@color/global_main_text_color"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_tx_type"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="@+id/tv_tx_type"
-        tools:text="10000.00"
-        />
+        tools:text="10000.00"/>
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_tx_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:gravity="center"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_tx_time"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_tx_time"
+        tools:text="成功"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
