@@ -583,7 +583,7 @@
     <string name="save">保存</string>
     <string name="save_fail">保存失败</string>
     <string name="address_book">地址簿</string>
-    <string name="address_verify_error">地址不合法,请重新输入</string>
+    <string name="address_verify_error">地址无效,请重新输入</string>
     <string name="please_input_name">请输入名称</string>
     <string name="verified">已认证</string>
     <string name="unverified">未认证</string>
