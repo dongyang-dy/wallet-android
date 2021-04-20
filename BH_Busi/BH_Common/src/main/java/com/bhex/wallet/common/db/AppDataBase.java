@@ -24,7 +24,7 @@ import com.bhex.wallet.common.model.BHToken;
  * Date: 2020/3/4
  * Time: 22:22
  */
-@Database(entities = {BHWallet.class, BHToken.class, BHUserToken.class,BHAddressBook.class} , version = 1,exportSchema = false)
+@Database(entities = {BHWallet.class, BHToken.class, BHUserToken.class,BHAddressBook.class} , version = 5,exportSchema = false)
 public abstract  class AppDataBase extends RoomDatabase {
 
     private static final String DB_NAME ="bh_db";

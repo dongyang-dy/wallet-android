@@ -46,7 +46,6 @@
         android:layout_marginStart="@dimen/main_padding_left"
         android:layout_marginEnd="@dimen/main_padding_left"
         app:backgroundTint="@color/global_button_bg_color"
-        app:cornerRadius="@dimen/main_radius_conner"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/btn_import_wallet"

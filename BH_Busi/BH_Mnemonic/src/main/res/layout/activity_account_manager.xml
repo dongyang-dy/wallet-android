@@ -57,8 +57,8 @@
         app:backgroundTint="@color/border_button_bg_color"
         app:strokeWidth="1dp"
         app:strokeColor="@color/border_button_border_color"
-        app:cornerRadius="@dimen/main_radius_conner"
         style="@style/main_material_btn"
+        app:cornerRadius="@dimen/main_radius_conner"
         android:text="@string/wallet_import_trusteeship"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

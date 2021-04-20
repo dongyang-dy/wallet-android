@@ -13,7 +13,7 @@ android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     buildToolsVersion rootProject.ext.android.buildToolsVersion
     defaultConfig {
-        applicationId "com.hbtc.wallet"
+        applicationId "com.bluehelix.wallet"
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.android.versionCode
@@ -191,7 +191,7 @@ android {
 
     productFlavors {
         bh_wallet {
-            applicationId "com.hbtc.wallet"
+            applicationId "com.bluehelix.wallet"
             manifestPlaceholders = [APPLICATION_ID: application_id]
             //resConfigs("en","xxhdpi")
         }
