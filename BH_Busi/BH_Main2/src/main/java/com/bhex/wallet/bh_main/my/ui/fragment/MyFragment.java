@@ -117,6 +117,13 @@ public class MyFragment extends BaseFragment  {
             ToolUtils.copyText(mCurrentWallet.getAddress(),getYActivity());
             ToastUtils.showToast(getResources().getString(R.string.copyed));
         });
+
+        //复制公钥
+        mRootView.findViewById(R.id.btn_copy).setOnLongClickListener(v -> {
+            ToolUtils.copyText(mCurrentWallet.publicKey,getYActivity());
+            ToastUtils.showToast(getResources().getString(R.string.public_key_copy));
+            return true;
+        });
         //跳转交易记录
         mRootView.findViewById(R.id.layout_index_0).setOnClickListener(v->{
             ARouter.getInstance().build(ARouterConfig.Market.market_webview).withString("url",getTranscationUrl()).navigation();

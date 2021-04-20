@@ -1,6 +1,7 @@
 package com.bhex.wallet.balance.ui.viewhodler;
 
 import android.graphics.Color;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -24,6 +25,7 @@ import com.bhex.wallet.common.base.BaseActivity;
 import com.bhex.wallet.common.cache.CacheCenter;
 import com.bhex.wallet.common.config.ARouterConfig;
 import com.bhex.wallet.common.db.entity.BHWallet;
+import com.bhex.wallet.common.filter.DecimalDigitsInputFilter;
 import com.bhex.wallet.common.manager.BHUserManager;
 import com.bhex.wallet.common.model.BHBalance;
 import com.bhex.wallet.common.model.BHToken;
@@ -90,6 +92,8 @@ public class TransferOutVH {
         btn_transfer = mRootView.findViewById(R.id.btn_transfer);
         tv_transfer_out_tip = mRootView.findViewById(R.id.tv_transfer_out_tip);
 
+        //转账
+
         //二维码扫描
         btn_address_scan.setOnClickListener(v -> {
             ARouter.getInstance().build(ARouterConfig.Common.commom_scan_qr).navigation(m_activity, BHQrScanActivity.REQUEST_CODE);
@@ -107,7 +111,8 @@ public class TransferOutVH {
         btn_all.setOnClickListener(this::transferAllAction);
 
         //设置输入框键盘类型
-        //inp_transfer_amount.setInputType(InputType.Te|InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        inp_transfer_amount.setInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        inp_transfer_amount.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(BHConstants.BHT_DEFAULT_DECIMAL+1)});
 
         //设置提示文本颜色
         String v_transfer_inner_tips = activity.getString(R.string.transfer_inner_tips);

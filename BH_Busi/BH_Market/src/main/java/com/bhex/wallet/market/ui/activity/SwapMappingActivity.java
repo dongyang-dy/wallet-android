@@ -96,7 +96,7 @@ public class SwapMappingActivity extends BaseActivity
     @Override
     protected void initView() {
         ARouter.getInstance().inject(this);
-        tv_center_title.setText(getString(R.string.mapping_swap));
+        tv_center_title.setText(getString(R.string.mapping));
 
         GradientDrawable drawable = ShapeUtils.getRoundRectDrawable(PixelUtils.dp2px(this,4),
                 ColorUtil.getColor(this,R.color.secondary_input_background));

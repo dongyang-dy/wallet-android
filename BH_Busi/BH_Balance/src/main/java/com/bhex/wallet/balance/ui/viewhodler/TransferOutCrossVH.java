@@ -1,5 +1,6 @@
 package com.bhex.wallet.balance.ui.viewhodler;
 
+import android.text.InputFilter;
 import android.text.InputType;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -25,6 +26,7 @@ import com.bhex.wallet.balance.ui.fragment.DepositTipsFragment;
 import com.bhex.wallet.common.base.BaseActivity;
 import com.bhex.wallet.common.cache.CacheCenter;
 import com.bhex.wallet.common.config.ARouterConfig;
+import com.bhex.wallet.common.filter.DecimalDigitsInputFilter;
 import com.bhex.wallet.common.manager.BHUserManager;
 import com.bhex.wallet.common.model.BHBalance;
 import com.bhex.wallet.common.model.BHToken;
@@ -127,6 +129,9 @@ public class TransferOutCrossVH {
         //设置输入框键盘类型
         inp_withdraw_amount.setInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_FLAG_DECIMAL);
         inp_withdraw_fee.setInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        inp_withdraw_amount.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(BHConstants.BHT_DEFAULT_DECIMAL+1)});
+
+
         //设置提示文本颜色
         String v_cross_transfer_tips = m_activity.getString(R.string.cross_transfer_out_tips);
         String v_hightlight_text = m_activity.getString(R.string.cross_transfer_highlight_text);

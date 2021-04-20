@@ -98,6 +98,7 @@ public class VerifyMnemonicActivity extends BaseCacheActivity<VerifyPresenter> {
 
         underMnemonicAdapter = new UnderMnemonicAdapter(underMnemonicItemList);
         recycler_mnemonic_under.setAdapter(underMnemonicAdapter);
+        recycler_mnemonic_under.setNestedScrollingEnabled(false);
 
         underMnemonicAdapter.setOnItemClickListener((adapter, view, position) -> {
             MnemonicItem underMnemonicItem =  underMnemonicItemList.get(position);
@@ -120,6 +121,7 @@ public class VerifyMnemonicActivity extends BaseCacheActivity<VerifyPresenter> {
 
         recycler_mnemonic_above.setLayoutManager(unlayoutManager);
         recycler_mnemonic_above.addItemDecoration(new GridLayoutItemDecoration(this,R.drawable.item_divider));
+        recycler_mnemonic_above.setNestedScrollingEnabled(false);
 
         aboveMnemonicAdapter = new AboveMnemonicAdapter(aboverMnemonicItemList,orginMnemonicItemList);
         recycler_mnemonic_above.setAdapter(aboveMnemonicAdapter);

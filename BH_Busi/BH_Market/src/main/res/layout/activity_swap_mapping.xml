@@ -223,7 +223,7 @@
                 android:layout_height="48dp"
                 android:layout_marginTop="24dp"
                 android:background="@drawable/btn_bg_blue_6_corner"
-                android:text="@string/swap"
+                android:text="@string/mapping"
                 android:textColor="@color/white"
                 android:textSize="17sp"
                 android:gravity="center"

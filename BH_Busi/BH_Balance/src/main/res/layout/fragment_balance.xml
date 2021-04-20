@@ -21,7 +21,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
 
                 <include layout="@layout/layout_balance_top" />
 
@@ -63,7 +66,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="36dp"
-                        android:layout_toRightOf="@+id/iv_announce_type" />
+                        android:layout_toRightOf="@+id/iv_announce_type"
+                        android:focusable="false"/>
+
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/iv_announce_close"
@@ -84,6 +89,7 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/item_chain"
                     android:layout_marginBottom="20dp"
+                    android:focusable="false"
                     />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

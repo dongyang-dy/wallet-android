@@ -24,7 +24,7 @@ import com.bhex.wallet.common.model.BHToken;
  * Date: 2020/3/4
  * Time: 22:22
  */
-@Database(entities = {BHWallet.class, BHToken.class, BHUserToken.class,BHAddressBook.class} , version = 5,exportSchema = false)
+@Database(entities = {BHWallet.class, BHToken.class, BHUserToken.class,BHAddressBook.class} , version = 1,exportSchema = false)
 public abstract  class AppDataBase extends RoomDatabase {
 
     private static final String DB_NAME ="bh_db";
@@ -62,13 +62,13 @@ public abstract  class AppDataBase extends RoomDatabase {
         })
                 .allowMainThreadQueries()
                 .fallbackToDestructiveMigration()
-                .addMigrations(MIGRATION_2_3)
-                .addMigrations(MIGRATION_3_4)
-                .addMigrations(MIGRATION_4_5)
+                //.addMigrations(MIGRATION_2_3)
+                //.addMigrations(MIGRATION_3_4)
+                //.addMigrations(MIGRATION_4_5)
                 .build();
     }
 
-    static final Migration MIGRATION_2_3 = new Migration(2, 3) {
+    /*static final Migration MIGRATION_2_3 = new Migration(2, 3) {
         @Override
         public void migrate(@NonNull SupportSQLiteDatabase database) {
             database.execSQL("CREATE TABLE `tab_token` (`p_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `symbol` TEXT, `issuer` TEXT, `chain` TEXT, `type` INTEGER NOT NULL, `is_send_enabled` INTEGER NOT NULL, `is_deposit_enabled` INTEGER NOT NULL, `is_withdrawal_enabled` INTEGER NOT NULL, `decimals` INTEGER NOT NULL, `total_supply` TEXT, `collect_threshold` TEXT, `deposit_threshold` TEXT, `open_fee` TEXT,`collect_fee` TEXT, `sys_open_fee` TEXT, `withdrawal_fee` TEXT, `max_op_cu_number` INTEGER DEFAULT 0, `systransfer_amount` TEXT, `op_cu_systransfer_amount` TEXT, `is_native` INTEGER NOT NULL, `custodian_amount` TEXT, `logo` TEXT);");
@@ -95,5 +95,5 @@ public abstract  class AppDataBase extends RoomDatabase {
         public void migrate(@NonNull SupportSQLiteDatabase database) {
             database.execSQL("CREATE TABLE `tab_address_book` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `wallet_address` TEXT, `address` TEXT, `chain` TEXT, `symbol` TEXT, `address_name` TEXT, `address_remark` TEXT);");
         }
-    };
+    };*/
 }

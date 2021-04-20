@@ -4,8 +4,8 @@
     <string name="contact_us">Contact us</string>
     <string name="check_update">Check for update</string>
     <string name="version_logs">Version log</string>
-    <string name="account_securtiy">账户与安全</string>
-    <string name="backup_export">备份导出</string>
+    <string name="account_securtiy">Account Security</string>
+    <string name="backup_export">Backup and export</string>
     <string name="dark_model">Night mode</string>
     <string name="everytime_need_password">Password is required for each transaction</string>
     <string name="thirty_minute_noneed_paaword">Password is required for each transaction(by default)</string>

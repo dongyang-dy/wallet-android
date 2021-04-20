@@ -1,21 +1,17 @@
 package com.bhex.wallet.balance.ui.viewhodler;
 
-import android.graphics.drawable.GradientDrawable;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.bhex.lib.uikit.util.ShapeUtils;
 import com.bhex.lib.uikit.widget.layout.XUILinearLayout;
 import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.ColorUtil;
 import com.bhex.tools.utils.ImageLoaderUtil;
-import com.bhex.tools.utils.PixelUtils;
 import com.bhex.tools.utils.ViewUtil;
 import com.bhex.wallet.balance.R;
 import com.bhex.wallet.balance.helper.BHBalanceHelper;

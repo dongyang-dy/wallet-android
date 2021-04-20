@@ -92,6 +92,7 @@
     <string name="make_collection">In</string>
     <string name="cancel">Cancel</string>
     <string name="copyed">Copied</string>
+    <string name="public_key_copy">Public key copied</string>
     <string name="wallet_password">Wallet password</string>
     <string name="hint_import_way">Please choose the import approach</string>
     <string name="import_keystore">Import KeyStore</string>
@@ -368,10 +369,10 @@
     <string name="fingerprint_success">Success</string>
     <string name="fingerprint_login">logging in</string>
     <string name="fingerprint_failed">Failed</string>
-    <string name="string_fingerprint_errors_retry">Something went wrong, we couldn—–´—–t verify your Touch ID, please try again</string>
-    <string name="string_no_fingerprint_permission">You—–´—–ve no permission to Touch ID</string>
+    <string name="string_fingerprint_errors_retry">Something went wrong, we couldn\'t verify your Touch ID, please try again</string>
+    <string name="string_no_fingerprint_permission">You\'ve no permission to Touch ID</string>
     <string name="fingerprint_no_hardware">Your device does not support Touch ID</string>
-    <string name="fingerprint_no_lock_screen_pwd">You—–´—–ve not enable your lock screen password</string>
+    <string name="fingerprint_no_lock_screen_pwd">You\'ve not enable your lock screen password</string>
     <string name="fingerprint_create_finger_first_hint">Please set up touch ID under Settings to enable Touch ID verification</string>
     <string name="upgrade_at_once">Upgrade</string>
     <string name="later_again">Later</string>
@@ -446,7 +447,7 @@
     <string name="meno_or_tag">Memo or tag</string>
     <string name="cross_link_transfer_tips">Tip:Ensure a positive balance of mainnet tokens on HBTC Chain account to be used as gasfee</string>
     <!--<string name="cross_link_transfer_tips_1">Ensure a positive balance of  HBC to be used as gas fee</string>-->
-    <string name="cross_min_deposit_count_tips">Any amount less than the minimum deposit amount won—–´—–t be accounted or retrieved</string>
+    <string name="cross_min_deposit_count_tips">Any amount less than the minimum deposit amount won\'t be accounted or retrieved</string>
     <string name="cross_collect_deposit_tips">A certain amount of main chain tokens are required to be accounted as the cross-chain gas fee for depositing non-mainchain tokens</string>
     <string name="cross_withdraw_tips">A certain amount of main chain tokens are required to be credited as the cross-chain gas fee for withdrawing this token</string>
     <string name="native_token_list">Native</string>
@@ -462,7 +463,7 @@
     <string name="reject">Reject</string>
 
     <string name="choose_token">Choose Token</string>
-    <string name="security_setting_tips">When the page has timed out, you´re required to re-enter the password.</string>
+    <string name="security_setting_tips">When the page has timed out, you\'re required to re-enter the password.</string>
     <string name="security_setting_pwd_tips">Password Valid for the next login</string>
     <string name="balance">Balance</string>
     <string name="cross_link_trusteeship_address">Cross-chain custody address</string>
@@ -573,7 +574,7 @@
     <string name="wallet_asset">Wallet assets</string>
     <string name="hint_input_widthdraw_fee">Please enter cross-chain fee</string>
     <string name="i_finish_backup">I have backed up</string>
-    <string name="copy">复制</string>
+    <string name="copy">Copy</string>
     <string name="add_address_book">Add wallet address</string>
     <string name="create_address">Create address</string>
     <string name="remark_optional">Remark (Optional)</string>

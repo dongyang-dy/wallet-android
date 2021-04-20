@@ -105,8 +105,9 @@ public class ImportPrivateKeyActivity extends BaseCacheActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        LogUtils.d("key=======>:","requestCode=="+requestCode);
         if (requestCode == BHQrScanActivity.REQUEST_CODE) {
-            if(requestCode==RESULT_OK){
+            if(resultCode==RESULT_OK){
                 String qrCode  = data.getExtras().getString(XQRCode.RESULT_DATA);
                 et_private_key.setText(qrCode);
                 et_private_key.setSelection(qrCode.length());

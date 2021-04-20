@@ -45,7 +45,7 @@ public class BHConstants {
     public static final String BHT_TOKEN = "hbc";
     public static final String HBTC = "hbtc";
 
-    public static final int BHT_DEFAULT_DECIMAL = 4;
+    public static final int BHT_DEFAULT_DECIMAL = 5;
 
     public static final int PAGE_SIZE = 30;
 
