@@ -75,7 +75,6 @@ public class AccountManagerActivity extends BaseActivity<TrustManagerPresenter>{
 
         balanceViewModel.accountLiveData.observe(MainActivityManager.getInstance().mainActivity,ldm->{
             if(ldm.getLoadingStatus()== LoadingStatus.SUCCESS){
-                //LogUtils.d("AccountManagerAdapter==","address==>:"+ldm.getData().address);
                 accountAdapter.updateAsset(ldm.getData());
             }
         });

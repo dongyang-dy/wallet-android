@@ -114,7 +114,7 @@ public class BalanceViewModel extends CacheAndroidViewModel implements Lifecycle
                 AccountInfo accountInfo = JsonUtils.fromJson(jsonObject.toString(),AccountInfo.class);
                 LoadDataModel ldm = new LoadDataModel(accountInfo);
                 if(accountInfo!=null){
-                    accountLiveData.setValue(ldm);
+                    accountLiveData.postValue(ldm);
                 }
             }
 
@@ -122,14 +122,14 @@ public class BalanceViewModel extends CacheAndroidViewModel implements Lifecycle
             protected void onFailure(int code, String errorMsg) {
                 super.onFailure(code, errorMsg);
                 LoadDataModel ldm = new LoadDataModel(LoadingStatus.ERROR,"");
-                accountLiveData.setValue(ldm);
+                accountLiveData.postValue(ldm);
             }
         };
 
         BHttpApi.getService(BHttpApiInterface.class)
                 .loadAccount(address)
                 .compose(RxSchedulersHelper.io_main())
-                .compose(RxCache.getDefault().transformObservable(cache_key,type,getCacheStrategy(CacheStrategy.cacheAndRemote())))
+                .compose(RxCache.getDefault().transformObservable(cache_key,type,CacheStrategy.cacheAndRemote()))
                 .map(new CacheResult.MapFunc<JsonObject>())
                 .as(AutoDispose.autoDisposable(AndroidLifecycleScopeProvider.from(activity,Lifecycle.Event.ON_DESTROY)))
                 .subscribe(observer);

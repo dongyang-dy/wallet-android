@@ -74,7 +74,6 @@ public class AccountManagerAdapter extends BaseQuickAdapter<BHWalletItem, BaseVi
                 if(item.address.equals(accountInfo.address)){
                     double d_asset = calculateAllTokenPrice(getContext(),accountInfo);
                     String v_asset = CurrencyManager.getInstance().getCurrencyDecription(getContext(),d_asset);
-                    LogUtils.d("AccountManagerAdapter==","v_asset==>:"+v_asset);
                     item.asset = v_asset;
                     notifyDataSetChanged();
                 }
