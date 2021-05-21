@@ -123,7 +123,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:gravity="left|center_vertical"
-                android:text="@string/delegate"
+                android:text="@string/delegating"
                 android:textColor="@color/global_label_text_color"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"

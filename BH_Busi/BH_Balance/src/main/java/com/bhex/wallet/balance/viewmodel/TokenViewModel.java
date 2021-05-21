@@ -1,6 +1,5 @@
 package com.bhex.wallet.balance.viewmodel;
 
-import android.text.TextUtils;
 import android.util.ArrayMap;
 
 import androidx.fragment.app.FragmentActivity;
@@ -16,7 +15,7 @@ import com.bhex.network.observer.BHBaseObserver;
 import com.bhex.network.utils.JsonUtils;
 import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.ToolUtils;
-import com.bhex.wallet.balance.helper.CoinSearchHelper;
+import com.bhex.wallet.balance.helper.TokenHelper;
 import com.bhex.wallet.common.api.BHttpApi;
 import com.bhex.wallet.common.api.BHttpApiInterface;
 import com.bhex.wallet.common.cache.CacheCenter;
@@ -26,16 +25,13 @@ import com.bhex.wallet.common.db.dao.BHTokenDao;
 import com.bhex.wallet.common.manager.MMKVManager;
 import com.bhex.wallet.common.model.BHToken;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.uber.autodispose.AutoDispose;
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider;
 
-import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import io.reactivex.Observable;
-import java8.util.stream.RefStreams;
-import java8.util.stream.Stream;
 
 /**
  * @author gongdongyang
@@ -79,7 +75,7 @@ public class TokenViewModel extends ViewModel {
     }
 
     public  void addOrCancelToken(boolean checked, BHToken bhToken) {
-        ArrayMap<String,BHToken> map_tokens = CacheCenter.getInstance().getSymbolCache().getLocalToken();
+        LinkedHashMap<String,BHToken> map_tokens = CacheCenter.getInstance().getSymbolCache().getLocalToken();
         //添加资产
         if(checked){
             CacheCenter.getInstance().getSymbolCache().addBHToken(bhToken);
@@ -173,7 +169,7 @@ public class TokenViewModel extends ViewModel {
                     SymbolCache.getInstance().putSymbolToMap(coinList,2);
                 }
 
-                List<BHToken> resList = CoinSearchHelper.loadVerifiedToken(chain);
+                List<BHToken> resList = TokenHelper.loadVerifiedToken(chain);
                 //过滤所需要币对
                 //RefStreams.of(coinList).filter(bhTokens -> bhTokens.iterator().next().chain==chain);
                 ldm.setData(resList);
@@ -183,7 +179,7 @@ public class TokenViewModel extends ViewModel {
             @Override
             protected void onFailure(int code, String errorMsg) {
                 super.onFailure(code, errorMsg);
-                List<BHToken> list = CoinSearchHelper.loadVerifiedToken(chain);
+                List<BHToken> list = TokenHelper.loadVerifiedToken(chain);
                 if(ToolUtils.checkListIsEmpty(list)){
                     LoadDataModel ldm = new LoadDataModel(LoadingStatus.ERROR,errorMsg);
                     queryLiveData.postValue(ldm);

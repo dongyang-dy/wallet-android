@@ -4,8 +4,7 @@
     <color name="black">#000000</color>
     <!--全局的色值-->
     <!--分割线颜色-->
-<!--    <color name="global_divider_color">#F4F7FF</color>-->
-    <color name="global_divider_color">#F3F3F3</color>
+    <color name="global_divider_color">#E2E4EA</color>
     <color name="dialog_fragment_divider_color">#F4F7FF</color>
     <color name="grid_divider_color">#E7ECF4</color>
     <color name="dash_divider_color">#ACB5C3</color>
@@ -14,17 +13,20 @@
     <color name="global_main_text_color">#0A1825</color>
 
     <!--二级文字颜色-->
-    <!--<color name="global_secondary_text_color">#475563</color>-->
     <color name="global_secondary_text_color">#696A6F</color>
+
+    <color name="item_main_text_color">#41485D</color>
+
+    <color name="item_gray_text_color">#979CAA</color>
+
     <!--标签文字颜色-->
     <color name="global_label_text_color">#8F9298</color>
 
     <!--tips-->
     <color name="global_tip_text_color">#475563</color>
-    <!--tips-->
-    <!--<color name="secondary_tip_text_color">#6E8196</color>-->
-    <color name="secondary_tip_text_color">#8F9298</color>
 
+    <!--tips-->
+    <color name="secondary_tip_text_color">#8F9298</color>
     <color name="blue_bg_tip_text_color">#77ffffff</color>
 
     <color name="proposal_desc_length_text">#B0BFDB</color>
@@ -73,11 +75,11 @@
     <color name="card_bg">#FFFFFF</color>
 
     <!--app蓝色背景色-->
-    <color name="blue_bg">#3375E0</color>
+    <color name="blue_bg">#3369E9</color>
 
     <!--跨链代币-链内转入-->
     <!--<color name="tranfer_in_inner_bg">#269A99</color>-->
-    <color name="tranfer_in_inner_bg">#3375E0</color>
+    <color name="tranfer_in_inner_bg">#3369E9</color>
 
     <!--跨链代币-链外转入-->
     <!--<color name="tranfer_in_out_bg">#475563</color>-->
@@ -103,7 +105,7 @@
 
     <!--透明底蓝边按钮-->
     <color name="border_button_bg_color">#FFFFFF</color>
-    <color name="border_button_text_color">#3375E0</color>
+    <color name="border_button_text_color">#3369E9</color>
     <color name="border_button_border_color">#3369E9</color>
 
 
@@ -210,7 +212,7 @@
     <!--灰色-->
     <color name="page_bg_color">#F7F8FB</color>
     <color name="item_bg_color">#FFFFFF</color>
-    <color name="global_main_gray_color">#8F9298</color>
+    <color name="global_main_gray_color">#979CAA</color>
     <color name="card_bg_color">#F7F8FB</color>
     <color name="v_line_divider_color">#C7D3E4</color>
     <color name="white_60">#9AFFFFFF</color>

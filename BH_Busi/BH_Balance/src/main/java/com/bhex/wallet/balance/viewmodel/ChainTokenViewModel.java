@@ -1,7 +1,6 @@
 package com.bhex.wallet.balance.viewmodel;
 
 import android.app.Application;
-import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
@@ -13,23 +12,12 @@ import com.bhex.network.base.LoadDataModel;
 import com.bhex.network.observer.BHBaseObserver;
 import com.bhex.network.observer.BHProgressObserver;
 import com.bhex.network.utils.ToastUtils;
-import com.bhex.tools.constants.BHConstants;
-import com.bhex.tools.utils.LogUtils;
-import com.bhex.tools.utils.NumberUtil;
-import com.bhex.tools.utils.ToolUtils;
 import com.bhex.wallet.balance.R;
 import com.bhex.wallet.balance.helper.BHBalanceHelper;
-import com.bhex.wallet.balance.helper.CoinSearchHelper;
 import com.bhex.wallet.balance.model.BHTokenItem;
 import com.bhex.wallet.common.api.BHttpApi;
 import com.bhex.wallet.common.api.BHttpApiInterface;
-import com.bhex.wallet.common.cache.CacheCenter;
-import com.bhex.wallet.common.cache.RatesCache;
-import com.bhex.wallet.common.cache.SymbolCache;
 import com.bhex.wallet.common.manager.BHUserManager;
-import com.bhex.wallet.common.model.AccountInfo;
-import com.bhex.wallet.common.model.BHBalance;
-import com.bhex.wallet.common.model.BHRates;
 import com.bhex.wallet.common.model.BHToken;
 import com.google.gson.JsonObject;
 import com.uber.autodispose.AutoDispose;
@@ -37,9 +25,7 @@ import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableOnSubscribe;

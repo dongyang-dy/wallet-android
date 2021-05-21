@@ -113,7 +113,7 @@ public interface BHttpApiInterface {
 
     //默认币对
     @GET("/api/v1/default_tokens")
-    Observable<JsonArray> loadDefaultToken(@Nullable @Query("chain") String chain);
+    Observable<JsonArray> loadDefaultToken();
 
     //官方认证币对
     @GET("/api/v1/verified_tokens")
@@ -131,7 +131,6 @@ public interface BHttpApiInterface {
     @GET("/api/v1/default_fee")
     Observable<GasFee> queryGasfee();
 
-    //@GET("/api/v1/announcements")
     @GET("/api/v1/announcements")
     Observable<JsonArray>  loadAnnouncement();
 

@@ -54,64 +54,14 @@ public class BalancePresenter extends BasePresenter {
         super(activity);
     }
 
-    /*public List<BHBalance> makeBalanceList(){
-        List<BHBalance> list = new ArrayList<>();
-        BHWallet wallet = BHUserManager.getInstance().getCurrentBhWallet();
-        SymbolCache symbolCache = CacheCenter.getInstance().getSymbolCache();
-        String[] coin_list = BHUserManager.getInstance().getUserBalanceList().split("_");
-        for (int i = 0; i < coin_list.length; i++) {
-            BHBalance bhBalance = BHBalanceHelper.getBHBalanceBySymbol(coin_list[i]);
-            BHToken bhToken = symbolCache.getBHToken(bhBalance.symbol.toLowerCase());
-            if(bhToken!=null){
-                bhBalance.chain = bhToken.chain;
-                bhBalance.logo = bhToken.logo;
-            }
-            if(BHConstants.BHT_TOKEN.equalsIgnoreCase(bhBalance.chain)){
-                //bhBalance.address = wallet.address;
-            }
-            list.add(bhBalance);
-        }
-        return list;
-    }*/
 
-
-    //获取balance位置
-    public  int getIndexByCoin(List<BHBalance> list, BHTokenItem bhCoinItem){
-        int index = -1;
-        for (int i = 0; i < list.size(); i++) {
-            BHBalance balance = list.get(i);
-            if(balance.symbol.equalsIgnoreCase(bhCoinItem.symbol)){
-                return i;
-            }
-        }
-        return index;
-    }
-
-    public  BHBalance getBalanceByCoin(BHTokenItem coinItem){
-        BHBalance balance = new BHBalance(coinItem.resId,coinItem.symbol);
-        //LogUtils.d("BalancePresenter====>:",balance.symbol+"==resId=="+balance.resId);
-        balance.chain = coinItem.chain;
-        balance.logo = coinItem.logo;
-        return balance;
-    }
-
-
-    public List<BHBalance> getBalanceList(List<BHBalance> list,List<BHBalance> res){
-        //List<BHBalance> res = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            res.add(list.get(i));
-
-        }
-        return res;
-    }
 
     /**
      * 计算所有Token价值
      * @return
      */
-    public double calculateAllTokenPrice(Context context,AccountInfo accountInfo, List<BHChain> mOriginBalanceList){
+    public double calculateAllTokenPrice(Context context,AccountInfo accountInfo){
         double allTokenPrice = 0;
-
         List<AccountInfo.AssetsBean> list = accountInfo.assets;
         if(list==null || list.size()==0){
             return allTokenPrice;
@@ -120,13 +70,9 @@ public class BalancePresenter extends BasePresenter {
         for(AccountInfo.AssetsBean bean:list){
             map.put(bean.symbol,bean);
             //计算每一个币种的资产价值
-
             double amount = TextUtils.isEmpty(bean.amount)?0:Double.valueOf(bean.amount);
-
             //法币价值
             double symbolPrice = CurrencyManager.getInstance().getCurrencyRate(context,bean.symbol);
-
-            //LogUtils.d("BalanceFragment==>:","amount==="+bean.getAmount()+"=="+symbolPrice);
             double asset = NumberUtil.mul(String.valueOf(amount),String.valueOf(symbolPrice));
             allTokenPrice = NumberUtil.add(asset,allTokenPrice);
 

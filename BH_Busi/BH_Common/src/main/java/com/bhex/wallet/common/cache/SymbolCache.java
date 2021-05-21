@@ -66,9 +66,9 @@ public class SymbolCache extends BaseCache {
 
     private LinkedHashMap<String, BHToken> symbolMap = new LinkedHashMap();
 
-    private ArrayMap<String,BHToken> defaultTokenList = new ArrayMap<>();
-    private ArrayMap<String,BHToken> localTokenList = new ArrayMap<>();
-    private ArrayMap<String,BHToken> verifiedTokenList = new ArrayMap<>();
+    private LinkedHashMap<String,BHToken> defaultTokenList = new LinkedHashMap<>();
+    private LinkedHashMap<String,BHToken> localTokenList = new LinkedHashMap<>();
+    //private ArrayMap<String,BHToken> verifiedTokenList = new ArrayMap<>();
 
     private BHTokenDao mBhTokenDao = AppDataBase.getInstance(BaseApplication.getInstance()).bhTokenDao();
 
@@ -86,7 +86,7 @@ public class SymbolCache extends BaseCache {
         //请求默认币对
         loadDefaultToken();
         //官方认证
-        loadVerifiedToken();
+        //loadVerifiedToken();
     }
 
 
@@ -99,25 +99,32 @@ public class SymbolCache extends BaseCache {
             for(BHToken item:list){
                 symbolMap.put(item.symbol,item);
             }
+            //LogUtils.d("SymbolCache====>:","size=="+symbolMap.size());
         });
 
     }
 
     private synchronized void loadDefaultToken(){
         Type type = (new TypeToken<JsonArray>() {}).getType();
-        BHttpApi.getService(BHttpApiInterface.class).loadDefaultToken(null)
+        BHttpApi.getService(BHttpApiInterface.class).loadDefaultToken()
                 .compose(RxSchedulersHelper.io_main())
                 .compose(RxCache.getDefault().transformObservable(SymbolCache.CACHE_KEY, type,
-                        getCacheStrategy(CacheStrategy.onlyRemote())))
+                        getCacheStrategy(CacheStrategy.cacheAndRemote())))
                 .map(new CacheResult.MapFunc<>())
-                .retryWhen(new RetryWithDelay())
+                //.retryWhen(new RetryWithDelay())
                 .observeOn(Schedulers.computation())
                 .subscribe(new BHBaseObserver<JsonArray>(false) {
                     @Override
                     protected void onSuccess(JsonArray jsonArray) {
+
                         if(jsonArray==null){
                             return;
                         }
+
+                        if(jsonArray.isJsonNull()){
+                            return;
+                        }
+
                         List<BHToken> coinList = JsonUtils.getListFromJson(jsonArray.toString(), BHToken.class);
                         if(ToolUtils.checkListIsEmpty(coinList)){
                             return;
@@ -130,6 +137,7 @@ public class SymbolCache extends BaseCache {
                     @Override
                     protected void onFailure(int code, String errorMsg) {
                         super.onFailure(code, errorMsg);
+                        LogUtils.d("BalanceAdapter==>","onFailure==");
                     }
                 });
     }
@@ -173,10 +181,9 @@ public class SymbolCache extends BaseCache {
             if(way==BH_BUSI_TYPE.默认币种.getIntValue()){
                 defaultTokenList.put(item.symbol,item);
             }
-
-            if(way==BH_BUSI_TYPE.官方认证.getIntValue()){
+            /*if(way==BH_BUSI_TYPE.官方认证.getIntValue()){
                 verifiedTokenList.put(item.symbol,item);
-            }
+            }*/
         }
         BaseApplication.getInstance().getExecutor().execute(()->{
             mBhTokenDao.insert(coinList);
@@ -195,24 +202,24 @@ public class SymbolCache extends BaseCache {
         symbolMap.put(bhToken.symbol,bhToken);
     }
 
-    public synchronized ArrayMap<String,BHToken> getDefaultTokenList(){
+    public synchronized LinkedHashMap<String,BHToken> getDefaultTokenList(){
         return defaultTokenList;
     }
 
-    public synchronized ArrayMap<String,BHToken> getLocalToken(){
-        //LogUtils.d("SymbolCache==>:","defaultTokenList=="+defaultTokenList.size());
+    public synchronized LinkedHashMap<String,BHToken> getLocalToken(){
         localTokenList.putAll(defaultTokenList);
 
         String default_symbol = MMKVManager.getInstance().mmkv().decodeString(BHConstants.SYMBOL_DEFAULT_KEY);
         if(TextUtils.isEmpty(default_symbol)){
             return localTokenList;
         }
+
         //保存本地
         String []a_default_symbol = default_symbol.split("_");
         if(a_default_symbol.length==0){
             return localTokenList;
         }
-        //defaultTokenList.clear();
+
         for(int i= 0;i<a_default_symbol.length;i++){
             BHToken bhToken = symbolMap.get(a_default_symbol[i]);
             if(bhToken==null){
@@ -239,17 +246,12 @@ public class SymbolCache extends BaseCache {
                 localTokenList.remove(bhToken.symbol);
             }
         });
-        /*StringBuffer sb = new StringBuffer();
-        for (Map.Entry<String,BHToken> entry : localTokenList.entrySet()) {
-            sb.append(entry.getValue()).append(",");
-        }*/
+
 
         return localTokenList;
     }
 
-    public synchronized ArrayMap<String,BHToken> getVerifiedToken(){
-        return verifiedTokenList;
-    }
+
 
     public synchronized int getDecimals(String symbol){
         if(symbolMap.get(symbol)!=null){

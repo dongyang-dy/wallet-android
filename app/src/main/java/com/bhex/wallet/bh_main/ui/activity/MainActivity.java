@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -13,7 +12,6 @@ import com.bhex.lib.uikit.RefreshLayoutManager;
 import com.bhex.lib.uikit.util.BottomNavigationViewUtil;
 import com.bhex.network.utils.ToastUtils;
 import com.bhex.tools.utils.LogUtils;
-import com.bhex.tools.utils.ToolUtils;
 import com.bhex.wallet.R;
 import com.bhex.wallet.bh_main.persenter.MainPresenter;
 import com.bhex.wallet.common.base.BaseActivity;
@@ -23,13 +21,11 @@ import com.bhex.wallet.common.event.AccountEvent;
 import com.bhex.wallet.common.event.LanguageEvent;
 import com.bhex.wallet.common.event.NightEvent;
 import com.bhex.wallet.common.manager.AppStatusManager;
-import com.bhex.wallet.common.manager.CurrencyManager;
 import com.bhex.wallet.common.manager.MainActivityManager;
 import com.bhex.wallet.common.manager.SequenceManager;
 import com.bhex.wallet.common.viewmodel.BalanceViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.gyf.immersionbar.ImmersionBar;
-import com.tencent.bugly.crashreport.CrashReport;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -136,7 +132,7 @@ public class MainActivity extends BaseActivity<MainPresenter> {
     @Override
     protected void onResume() {
         super.onResume();
-        LogUtils.d("test===","Activity===onreusme");
+        //LogUtils.d("test===","Activity===onreusme");
     }
 
     @Override

@@ -2,7 +2,6 @@ package com.bhex.wallet.balance.ui.activity;
 
 import android.text.Editable;
 import android.text.TextUtils;
-import android.util.ArrayMap;
 import android.view.inputmethod.EditorInfo;
 import android.widget.CheckedTextView;
 import android.widget.TextView;
@@ -30,16 +29,14 @@ import com.bhex.tools.utils.ToolUtils;
 import com.bhex.wallet.balance.R;
 import com.bhex.wallet.balance.R2;
 import com.bhex.wallet.balance.adapter.CoinSearchAdapter;
-import com.bhex.wallet.balance.helper.CoinSearchHelper;
+import com.bhex.wallet.balance.helper.TokenHelper;
 import com.bhex.wallet.balance.viewmodel.TokenViewModel;
-import com.bhex.wallet.common.cache.SymbolCache;
 import com.bhex.wallet.common.config.ARouterConfig;
 import com.bhex.wallet.common.model.BHToken;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -63,8 +60,8 @@ public class CoinSearchActivity extends BaseActivity implements OnRefreshListene
     @BindView(R2.id.empty_layout)
     EmptyLayout empty_layout;
 
-    @Autowired(name= BHConstants.CHAIN)
-    public String mChain;
+    /*@Autowired(name= BHConstants.CHAIN)
+    public String mChain;*/
 
     CoinSearchAdapter mCoinSearchAdapter;
 
@@ -82,7 +79,7 @@ public class CoinSearchActivity extends BaseActivity implements OnRefreshListene
         tv_center_title.setText(getResources().getString(R.string.add_coin));
         ARouter.getInstance().inject(this);
 
-        mTokenList = CoinSearchHelper.loadVerifiedToken(mChain);
+        //mTokenList = TokenHelper.loadVerifiedToken(mChain);
 
 
         recycler_coin.setAdapter(mCoinSearchAdapter = new CoinSearchAdapter(mTokenList));
@@ -156,7 +153,7 @@ public class CoinSearchActivity extends BaseActivity implements OnRefreshListene
                 return;
 
             }
-            mTokenList = CoinSearchHelper.loadVerifiedToken(mChain);
+            mTokenList = TokenHelper.loadVerifiedToken(null);
             if(ToolUtils.checkListIsEmpty(mTokenList)){
                 empty_layout.showNoData();
             }else {
@@ -185,7 +182,7 @@ public class CoinSearchActivity extends BaseActivity implements OnRefreshListene
             mCoinSearchAdapter.getData().clear();
             mCoinSearchAdapter.notifyDataSetChanged();
             empty_layout.showProgess();
-            mTokenViewModel.search_token(this,search_key.toLowerCase(),mChain);
+            mTokenViewModel.search_token(this,search_key.toLowerCase(),null);
         }
     }
 
@@ -195,9 +192,9 @@ public class CoinSearchActivity extends BaseActivity implements OnRefreshListene
         String search_key = ed_search_content.getText().toString().trim();
         //empty_layout.showProgess();
         if(!TextUtils.isEmpty(search_key)){
-            mTokenViewModel.search_token(this,search_key.toLowerCase(),mChain);
+            mTokenViewModel.search_token(this,search_key.toLowerCase(),null);
         }else{
-            mTokenViewModel.loadVerifiedToken(this,mChain);
+            mTokenViewModel.loadVerifiedToken(this,null);
         }
     }
 }

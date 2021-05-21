@@ -7,6 +7,8 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverter;
+import androidx.room.TypeConverters;
 
 import java.util.List;
 
@@ -17,13 +19,14 @@ import java.util.List;
  * Time: 18:02
  */
 @Entity(tableName = "tab_token",indices = {@Index(value = {"symbol"},unique = true)})
+@TypeConverters(BHTokenConverter.class)
 public class BHToken {
 
 
     /**
      * symbol : btc
      * issuer :
-     * chain : btc
+     * chain : btcd
      * type : 1
      * is_send_enabled : true
      * is_deposit_enabled : true
@@ -94,7 +97,20 @@ public class BHToken {
     public String custodian_amount;
     @ColumnInfo(name = "logo")
     public String logo;
+    @ColumnInfo(name = "introduction")
+    public String introduction;
+    @ColumnInfo(name = "is_mapping_token")
+    public boolean is_mapping_token;
+    @ColumnInfo(name = "mapping_info")
+    public String mapping_info;
+    @ColumnInfo(name = "max_withdrawal_amount")
+    public String max_withdrawal_amount;
+    @ColumnInfo(name = "mapping_symbol")
+    public String mapping_symbol;
 
+    @ColumnInfo(name = "uni_tokens")
+    public List<BHToken> uni_tokens;
+    //uni_tokens
     @Ignore
     public List<String> opcus;
 

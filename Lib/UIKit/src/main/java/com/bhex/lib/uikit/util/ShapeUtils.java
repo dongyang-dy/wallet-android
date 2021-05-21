@@ -27,7 +27,6 @@ public class ShapeUtils {
         drawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
         drawable.setShape(GradientDrawable.RECTANGLE);
         drawable.setColor(color );
-        //drawable.setStroke(isFill ? 0 : strokeWidth, color);
         return drawable;
     }
 

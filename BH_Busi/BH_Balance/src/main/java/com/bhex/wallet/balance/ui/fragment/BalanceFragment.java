@@ -1,5 +1,6 @@
 package com.bhex.wallet.balance.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -9,9 +10,12 @@ import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alibaba.android.arouter.core.LogisticsCenter;
+import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bhex.lib.uikit.widget.text.marqueen.MarqueeFactory;
 import com.bhex.lib.uikit.widget.text.marqueen.MarqueeView;
@@ -23,9 +27,14 @@ import com.bhex.tools.utils.LogUtils;
 import com.bhex.tools.utils.NavigateUtil;
 import com.bhex.wallet.balance.R;
 import com.bhex.wallet.balance.adapter.AnnouncementMF;
+import com.bhex.wallet.balance.adapter.BalanceAdapter;
 import com.bhex.wallet.balance.adapter.ChainAdapter;
+import com.bhex.wallet.balance.adapter.HBalanceAdapter;
 import com.bhex.wallet.balance.enums.BUSI_ANNOUNCE_TYPE;
+import com.bhex.wallet.balance.helper.BHBalanceHelper;
+import com.bhex.wallet.balance.helper.TokenHelper;
 import com.bhex.wallet.balance.model.AnnouncementItem;
+import com.bhex.wallet.balance.model.BHTokenItem;
 import com.bhex.wallet.balance.presenter.BalancePresenter;
 import com.bhex.wallet.balance.ui.viewhodler.BalanceViewHolder;
 import com.bhex.wallet.balance.viewmodel.AnnouncementViewModel;
@@ -41,7 +50,9 @@ import com.bhex.wallet.common.manager.BHUserManager;
 import com.bhex.wallet.common.manager.CurrencyManager;
 import com.bhex.wallet.common.manager.MainActivityManager;
 import com.bhex.wallet.common.manager.SecuritySettingManager;
+import com.bhex.wallet.common.model.BHBalance;
 import com.bhex.wallet.common.model.BHChain;
+import com.bhex.wallet.common.model.BHToken;
 import com.bhex.wallet.common.utils.LiveDataBus;
 import com.bhex.wallet.common.viewmodel.BalanceViewModel;
 import com.bhex.wallet.common.viewmodel.WalletViewModel;
@@ -59,21 +70,27 @@ import java.util.List;
  * 2020-3-12
  */
 public class BalanceFragment extends BaseFragment<BalancePresenter> {
-
     private SmartRefreshLayout refreshLayout;
-
-    BalanceViewHolder balanceViewHolder;
-    WalletViewModel walletViewModel;
+    //顶部卡片
+    private BalanceViewHolder balanceViewHolder;
     //公告
     private MarqueeView marquee_announce;
     private MarqueeFactory<RelativeLayout, AnnouncementItem> marqueeFactory;
+    //公告
     private AnnouncementViewModel announcementViewModel;
+    //钱包
+    private WalletViewModel walletViewModel;
     //资产
     private BalanceViewModel balanceViewModel;
-    //所有链
-    private List<BHChain> mChainList;
-    private RecyclerView rcv_chain;
-    private ChainAdapter mChainAdapter;
+
+    //资产列表
+    private RecyclerView rec_balance;
+    private HBalanceAdapter balanceAdapter;
+
+    //
+    private List<BHToken> bhTokens;
+
+    private boolean isOpenEye = true;
 
     @Override
     public int getLayoutId() {
@@ -82,14 +99,10 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
 
     @Override
     protected void initView() {
-        EventBus.getDefault().register(this);
         refreshLayout = mRootView.findViewById(R.id.refreshLayout);
         balanceViewHolder = new BalanceViewHolder(getYActivity(),mRootView.findViewById(R.id.layout_balance_top));
-        rcv_chain = mRootView.findViewById(R.id.rcv_chain);
-        //获取所有链
-        mChainList = CacheCenter.getInstance().getTokenMapCache().getLoadChains();
-        rcv_chain.setAdapter(mChainAdapter = new ChainAdapter(mChainList));
 
+        //通知公告
         marquee_announce = mRootView.findViewById(R.id.marquee_announce);
         marqueeFactory = new AnnouncementMF(getContext(),null);
 
@@ -109,75 +122,52 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
             }
         });
 
-        //钱包
-        walletViewModel = ViewModelProviders.of(this).get(WalletViewModel.class);
-        walletViewModel.mutableLiveData.observe(this,ldm->{
-            updateWalletStatus(ldm);
-        });
+        //
+        bhTokens = BHBalanceHelper.loadDefaultToken();
+        rec_balance = mRootView.findViewById(R.id.rcv_balance);
+        balanceAdapter = new HBalanceAdapter(bhTokens);
+        rec_balance.setAdapter(balanceAdapter);
+    }
+
+    @Override
+    protected void addEvent() {
+
         //自动刷新
-        refreshLayout.setOnRefreshListener(refreshLayout1 -> {
+        refreshLayout.setOnRefreshListener(refreshLayout -> {
             balanceViewModel.getAccountInfo(getYActivity(), CacheStrategy.cacheAndRemote());
             announcementViewModel.loadAnnouncement(getYActivity());
             TokenMapCache.getInstance().loadChain();
         });
         refreshLayout.autoRefresh();
-    }
 
+        balanceViewHolder.iv_open_eye.setOnClickListener(this::isOpenEyeAction);
 
-    @Override
-    protected void initPresenter() {
-        mPresenter = new BalancePresenter(getYActivity());
-    }
-
-    @Override
-    protected void addEvent() {
-        //
-        announcementViewModel.loadAnnouncement(getYActivity());
-        marqueeFactory.setOnItemClickListener((view, holder) -> {
-            //holder.getData().
-            if(!TextUtils.isEmpty(holder.getData().jump_url)){
-                ARouter.getInstance()
-                        .build(ARouterConfig.Market.market_webview)
-                        .withString(BHConstants.URL,holder.getData().jump_url)
-                        .navigation();
-            }
-        });
-
-        //选择钱包
-        balanceViewHolder.tv_wallet_name.setOnClickListener(v -> {
-
-            AccountListFragment.getInstance(BalanceFragment.this::chooseAccountAction).show(getChildFragmentManager(),
-                    AccountListFragment.class.getName());
-        });
-
-        //钱包二维展示
+        //钱包二维码展示
         balanceViewHolder.iv_wallet_qr.setOnClickListener(v->{
             HbcAddressQrFragment.getInstance().show(getChildFragmentManager(),
                     HbcAddressQrFragment.class.getName());
         });
 
-        //链点击事件
-        mChainAdapter.setOnItemClickListener((adapter, view, position) -> {
-            BHChain bhChain =  mChainAdapter.getData().get(position);
-            ARouter.getInstance().build(ARouterConfig.Balance.Balance_chain_tokens)
-                    .withObject(BHConstants.BHCHAIN,bhChain)
-                    .withString(BHConstants.TITLE,BHConstants.BHT_TOKEN)
-                    .navigation();
+        //币种搜索
+        AppCompatImageView iv_token_search = mRootView.findViewById(R.id.iv_token_search);
+        iv_token_search.setOnClickListener(v -> {
+            ARouter.getInstance().build(ARouterConfig.Balance.Balance_Search).navigation();
         });
 
-        //账户管理
-        mRootView.findViewById(R.id.btn_account_manager).setOnClickListener(v -> {
-            ARouter.getInstance().build(ARouterConfig.ACCOUNT_MANAGER_PAGE).navigation();
+        balanceAdapter.setOnItemClickListener((adapter, view, position) -> {
+            BHToken bhTokenItem = balanceAdapter.getData().get(position);
+            Postcard postcard = ARouter.getInstance().build(ARouterConfig.Balance.Balance_Token_Detail)
+                    .withString(BHConstants.SYMBOL,bhTokenItem.symbol);
+            LogisticsCenter.completion(postcard);
+            Intent intent = new Intent(getYActivity(), postcard.getDestination());
+            intent.putExtras(postcard.getExtras());
+            startActivity(intent);
         });
+    }
 
-
-        mRootView.findViewById(R.id.iv_announce_close).setOnClickListener(v->{
-            //关闭通知
-            mRootView.findViewById(R.id.layout_announce).setVisibility(View.GONE);
-            //
-            MarqueeView marqueeView = mRootView.findViewById(R.id.marquee_announce);
-            marqueeView.stopFlipping();
-        });
+    @Override
+    protected void initPresenter() {
+        mPresenter = new BalancePresenter(getYActivity());
     }
 
     //更新公告
@@ -198,62 +188,17 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
         if(BHUserManager.getInstance().getAccountInfo()==null){
             return;
         }
-        double allTokenAssets = mPresenter.calculateAllTokenPrice(getYActivity(),BHUserManager.getInstance().getAccountInfo(),mChainList);
-        String allTokenAssetsText = CurrencyManager.getInstance().getCurrencyDecription(getYActivity(),allTokenAssets);
-        balanceViewHolder.tv_asset.setText(allTokenAssetsText);
-        mPresenter.setTextFristSamll(balanceViewHolder.tv_asset,allTokenAssetsText);
 
+
+        balanceViewHolder.updateAsset(isOpenEye);
         //更新列表资产
-        mChainAdapter.notifyDataSetChanged();
+        balanceAdapter.setOpenEye(isOpenEye);
     }
 
-    //切换账户--事件
-    private void chooseAccountAction(BHWallet chooseWallet){
-        chooseWallet.isDefault = BH_BUSI_TYPE.默认托管单元.getIntValue();
-        BHUserManager.getInstance().setCurrentBhWallet(chooseWallet);
-        //请显示的资产
-        BHUserManager.getInstance().setAccountInfo(null);
-        mChainAdapter.notifyDataSetChanged();
-        getActivity().recreate();
-        walletViewModel.updateWallet(MainActivityManager.getInstance().mainActivity,chooseWallet,chooseWallet.id,
-                BH_BUSI_TYPE.默认托管单元.getIntValue(),false);
-        balanceViewModel.getAccountInfo(MainActivityManager.getInstance().mainActivity,CacheStrategy.cacheAndRemote());
-        //取消定时
-        SecuritySettingManager.getInstance().request_thirty_in_time(false,"");
-    }
-
-    private void updateWalletStatus(LoadDataModel ldm) {
-        if(ldm.getLoadingStatus()==LoadDataModel.SUCCESS){
-
-        }
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void changeAccount(AccountEvent walletEvent){
-        //当前钱包用户
-        //balanceViewModel.c = BHUserManager.getInstance().getCurrentBhWallet();
-        //AssetHelper.proccessAddress(tv_address,bhWallet.getAddress());
-        //清空原始用户资产
-        balanceViewHolder.tv_asset.setText("");
-        mChainAdapter.notifyDataSetChanged();
-        //取消定时
-        SecuritySettingManager.getInstance().request_thirty_in_time(false,"");
-        //更新资产
-        balanceViewModel.getAccountInfo(getYActivity(),CacheStrategy.cacheAndRemote());
-    }
-
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if(!hidden){
-            balanceViewHolder.updateWalletName();
-        }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
+    //是否显示资产
+    private void isOpenEyeAction(View view) {
+        isOpenEye = !isOpenEye;
+        updateAssets();
     }
 
     int refreshCount = 0;
@@ -262,18 +207,5 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
             refreshLayout.finishRefresh();
             refreshCount=0;
         }
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        LogUtils.d("test===","fr===onCreateView");
-        return super.onCreateView(inflater, container, savedInstanceState);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        LogUtils.d("test===","fr===onResume");
     }
 }

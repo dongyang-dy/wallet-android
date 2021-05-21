@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HBTC Wallet</string>
+    <string name="app_name">BHEX Wallet</string>
     <string name="number_letters">0123456789abcdefghigklmnopqrstuvwxyzQWERTYUIOPASDFGHJKLZXCVBNM</string>
     <string name="exit_app">Click again to Logout</string>
 
@@ -37,7 +37,8 @@
     <string name="tab_balance_title">Asset</string>
     <string name="tab_validator">Proposer</string>
     <string name="tab_market">Market</string>
-    <string name="tab_trade">Trade</string>
+    <string name="tab_trade">HDEX</string>
+    <string name="trade">Trade</string>
 
     <string name="tab_change_title">Swap</string>
     <string name="tab_order_title">Order</string>
@@ -58,7 +59,7 @@
     <string name="setup_1_to_3">(Step 1 of 3)</string>
     <string name="setup_2_to_3">(Step 2 of 3)</string>
     <string name="setup_3_to_3">(Step 3 of 3)</string>
-    <string name="set_pwd_tip_1">·The password is an important credential to protect the private key and operate assets,HBTC wallet do not store/cache password</string>
+    <string name="set_pwd_tip_1">·The password is an important credential to protect the private key and operate assets,BHEX wallet do not store/cache password</string>
     <string name="set_pwd_tip_3">·Be sure to keep your password safe</string>
     <string name="import_pk_tip">·Please enter your private key below which are case sensitive</string>
     <string name="set_pwd_hint">Create wallet password (no less than 8 characters)</string>
@@ -68,7 +69,7 @@
     <string name="pwd_rule_tip_2">·A lowercase letter</string>
     <string name="pwd_rule_tip_3">·A number</string>
     <string name="pwd_rule_tip_4">·At least 8 characters</string>
-    <string name="set_username_tip">You are now creating your HBTC account that provides you with cross-chain asset bridging</string>
+    <string name="set_username_tip">You are now creating your BHEX account that provides you with cross-chain asset bridging</string>
     <string name="tips_secure">Security tips</string>
     <string name="tips_secure_index_1">Mnemonic phrase can be used to:</string>
     <string name="tips_secure_index_2">Restore your wallet</string>
@@ -101,7 +102,7 @@
     <string name="bh_register_agreement_sub">《Service Agreement》</string>
     <string name="copy_address">Copy address</string>
     <string name="transfer_in">Receive</string>
-    <string name="draw_coin">Withdraw</string>
+    <!--<string name="draw_coin">Withdraw</string>-->
     <string name="hint_input_copy_address">Please enter or paste the address</string>
     <string name="draw_coin_count">Input Amount</string>
     <string name="hint_withdraw_minAmount">Minimum withdrawal amount %1$s%2$d</string>
@@ -127,7 +128,7 @@
     <string name="success">Success</string>
     <string name="fail">Failed</string>
     <string name="processing">Processing</string>
-    <string name="add_coin">Add new asset</string>
+<!--    <string name="add_coin">Add new asset</string>-->
     <string name="available">Available</string>
     <string name="reload_data">Reload</string>
     <string name="hold_amount">Current balance</string>
@@ -287,7 +288,7 @@
     <string name="check_proposal_title">Please enter the title of the proposal</string>
     <string name="check_proposal_desc">Please enter a description of the proposal</string>
     <string name="text_proposal">Text</string>
-    <string name="delegate">Delegating</string>
+    <string name="delegating">Delegating</string>
     <string name="unbonding">Undelegating</string>
     <string name="claimed_reward">Claimed reward</string>
 
@@ -438,14 +439,14 @@
     <string name="no_profit">No profit</string>
     <string name="update_content">Update</string>
     <string name="find_new_version">New Version Found</string>
-    <string name="import_ks_tip_1">·Copy HBTC wallet Keystore file contents</string>
+    <string name="import_ks_tip_1">·Copy BHEX wallet Keystore file contents</string>
     <string name="import_ks_tip_2">·paste into the “Keystore” input box below</string>
     <string name="app_up_to_minute_version">Latest version already</string>
     <string name="app_loading_now">Downloading</string>
     <string name="deleted">Deleted</string>
     <string name="please_input_memo_or_tag">Please input memo or tag</string>
     <string name="meno_or_tag">Memo or tag</string>
-    <string name="cross_link_transfer_tips">Tip:Ensure a positive balance of mainnet tokens on HBTC Chain account to be used as gasfee</string>
+    <string name="cross_link_transfer_tips">Tip:Ensure a positive balance of mainnet tokens on BHEX Chain account to be used as gasfee</string>
     <!--<string name="cross_link_transfer_tips_1">Ensure a positive balance of  HBC to be used as gas fee</string>-->
     <string name="cross_min_deposit_count_tips">Any amount less than the minimum deposit amount won\'t be accounted or retrieved</string>
     <string name="cross_collect_deposit_tips">A certain amount of main chain tokens are required to be accounted as the cross-chain gas fee for depositing non-mainchain tokens</string>
@@ -513,7 +514,7 @@
     <string name="generate_address_fee">Create cross-chain address fee%1$s</string>
     <string name="save_pictrue">Save image</string>
     <string name="switch_cross_link_address">Switch cross-chain custody address</string>
-    <string name="switch_hbtc_address">Switch HBTC chain address</string>
+    <string name="switch_hbtc_address">Switch BHEX chain address</string>
     <string name="hbtc_chain_address">HBTCchain address</string>
     <string name="transcation_record">Trade history</string>
     <string name="trusteeship_node">Custody node</string>
@@ -527,7 +528,7 @@
     <string name="string_transfer_in_address">Transfer-in address</string>
     <string name="select_withdraw_token">token to be withdrawn</string>
     <string name="deposit_token">Token to be deposited</string>
-    <string name="hbtc_transfer_in_tip">This account supports HBC, HRC10 and cross-chain custody assets on HBTC chain</string>
+    <!--<string name="hbtc_transfer_in_tip">This account supports HBC, HRC10 and cross-chain custody assets on BHEX chain</string>-->
     <string name="input_receive_address">Input transfer-in address</string>
     <string name="input_withdraw_address">Input withdrawal address</string>
     <string name="input_enter_address">Please enter or paste the address</string>

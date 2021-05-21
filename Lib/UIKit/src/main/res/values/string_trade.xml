@@ -16,7 +16,7 @@
     <string name="other">其它</string>
 
     <array name="default_chain_name">
-        <item>HBTC Chain Testnet</item>
+        <item>BHEX Chain Testnet</item>
         <item>Bitcoin</item>
         <item>Ethereum</item>
         <item>Tron</item>

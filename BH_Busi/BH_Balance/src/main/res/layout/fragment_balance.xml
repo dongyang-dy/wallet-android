@@ -28,26 +28,13 @@
 
                 <include layout="@layout/layout_balance_top" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/btn_account_manager"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_marginEnd="16dp"
-                    android:paddingEnd="12dp"
-                    android:text="@string/trustship_manager"
-                    android:textColor="@color/global_main_text_color"
-                    android:textSize="13sp"
-                    android:gravity="center_vertical"
-                    />
-
                 <com.bhex.lib.uikit.widget.layout.XUIRelativeLayout
                     android:id="@+id/layout_announce"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="19dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="18dp"
                     android:layout_marginBottom="16dp"
                     android:background="@color/card_bg"
                     app:xui_radius="12dp">
@@ -81,8 +68,41 @@
 
                 </com.bhex.lib.uikit.widget.layout.XUIRelativeLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@color/white">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp">
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tab_balance_title"
+                        android:layout_centerVertical="true"
+                        android:textColor="#979CAA"
+                        android:textSize="14sp"
+                        />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_token_search"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/ic_add_token"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"/>
+
+
+                </RelativeLayout>
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rcv_chain"
+                    android:id="@+id/rcv_balance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:overScrollMode="never"
@@ -91,6 +111,7 @@
                     android:layout_marginBottom="20dp"
                     android:focusable="false"
                     />
+            </LinearLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>

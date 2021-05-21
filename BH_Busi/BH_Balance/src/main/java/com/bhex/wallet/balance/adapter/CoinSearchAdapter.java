@@ -4,10 +4,8 @@ import androidx.appcompat.widget.AppCompatCheckedTextView;
 import androidx.appcompat.widget.AppCompatImageView;
 
 import com.bhex.tools.utils.ImageLoaderUtil;
-import com.bhex.tools.utils.LogUtils;
 import com.bhex.wallet.balance.R;
-import com.bhex.wallet.balance.helper.CoinSearchHelper;
-import com.bhex.wallet.balance.model.BHTokenItem;
+import com.bhex.wallet.balance.helper.TokenHelper;
 import com.bhex.wallet.common.model.BHToken;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
@@ -43,7 +41,7 @@ public class CoinSearchAdapter extends BaseQuickAdapter<BHToken, BaseViewHolder>
         ImageLoaderUtil.loadImageView(getContext(),coin.logo,iv_coin_ic,R.mipmap.ic_default_coin);
 
         //判断是否在官方列表存在
-        boolean flag = CoinSearchHelper.isExistDefaultToken(coin.symbol);
+        boolean flag = TokenHelper.isExistDefaultToken(coin.symbol);
         ck.setChecked(flag);
     }
 }

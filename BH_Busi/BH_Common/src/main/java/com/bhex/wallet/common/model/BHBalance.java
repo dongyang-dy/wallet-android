@@ -10,6 +10,7 @@ import androidx.room.Ignore;
  */
 public class BHBalance {
     public int resId;
+
     public String name;
     //币种
     public String symbol;
@@ -35,8 +36,6 @@ public class BHBalance {
     public boolean enable_sendtx;
 
     public String frozen_amount;
-
-    //public int isHasToken;
 
     public int index;
 

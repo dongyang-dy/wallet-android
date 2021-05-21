@@ -1,16 +1,24 @@
 package com.bhex.wallet.balance.helper;
 
 import android.content.Context;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.AbsoluteSizeSpan;
+import android.text.style.ForegroundColorSpan;
 import android.util.ArrayMap;
 import android.util.Log;
 
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.appcompat.widget.AppCompatTextView;
 
+import com.bhex.network.app.BaseApplication;
 import com.bhex.tools.constants.BHConstants;
+import com.bhex.tools.utils.ColorUtil;
 import com.bhex.tools.utils.ImageLoaderUtil;
 import com.bhex.tools.utils.LogUtils;
 import com.bhex.tools.utils.NumberUtil;
+import com.bhex.tools.utils.PixelUtils;
 import com.bhex.tools.utils.ToolUtils;
 import com.bhex.wallet.balance.R;
 import com.bhex.wallet.common.base.BaseActivity;
@@ -28,6 +36,7 @@ import com.bhex.wallet.common.model.BHToken;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -39,7 +48,7 @@ import java.util.Map;
  */
 public class BHBalanceHelper {
 
-    public static BHBalance getBHBalanceBySymbol(String symbol){
+    /*public static BHBalance getBHBalanceBySymbol(String symbol){
         BHBalance item = new BHBalance();
         if(symbol.equalsIgnoreCase(BHConstants.BHT_TOKEN)){
             item.resId = R.mipmap.ic_token;
@@ -56,7 +65,7 @@ public class BHBalanceHelper {
         }
         item.symbol = symbol;
         return item;
-    }
+    }*/
 
 
     /**
@@ -148,7 +157,7 @@ public class BHBalanceHelper {
     }
 
     public static List<BHToken> loadBalanceByChain(String chainName){
-        ArrayMap<String,BHToken> map_tokens =  CacheCenter.getInstance().getSymbolCache().getLocalToken();
+        LinkedHashMap<String,BHToken> map_tokens =  CacheCenter.getInstance().getSymbolCache().getLocalToken();
         List<BHToken> res = new ArrayList<>();
         for (ArrayMap.Entry<String,BHToken> entry:map_tokens.entrySet()){
             if(!entry.getValue().chain.equalsIgnoreCase(chainName)){
@@ -163,7 +172,7 @@ public class BHBalanceHelper {
     public static List<BHToken> loadTokenList(String symbol,String flag){
         BHToken chainToken =  CacheCenter.getInstance().getSymbolCache().getBHToken(symbol);
         //flag 1 非hbc链功能
-        ArrayMap<String,BHToken> map_tokens =  CacheCenter.getInstance().getSymbolCache().getLocalToken();
+        LinkedHashMap<String,BHToken> map_tokens =  CacheCenter.getInstance().getSymbolCache().getLocalToken();
         List<BHToken> res = new ArrayList<>();
         for (ArrayMap.Entry<String,BHToken> entry:map_tokens.entrySet()){
             if(flag.equals(BH_BUSI_TYPE.跨链转账.value)){
@@ -217,6 +226,56 @@ public class BHBalanceHelper {
         return res;
     }
 
+    /**
+     * 计算所有Token价值
+     * @return
+     */
+    public static double calculateAllTokenPrice(Context context,AccountInfo accountInfo){
+        double allTokenPrice = 0;
+        List<AccountInfo.AssetsBean> list = accountInfo.assets;
+        if(list==null || list.size()==0){
+            return allTokenPrice;
+        }
+        Map<String,AccountInfo.AssetsBean> map = new HashMap<>();
+        for(AccountInfo.AssetsBean bean:list){
+            map.put(bean.symbol,bean);
+            //计算每一个币种的资产价值
+            double amount = TextUtils.isEmpty(bean.amount)?0:Double.valueOf(bean.amount);
+            //法币价值
+            double symbolPrice = CurrencyManager.getInstance().getCurrencyRate(context,bean.symbol);
+            double asset = NumberUtil.mul(String.valueOf(amount),String.valueOf(symbolPrice));
+            allTokenPrice = NumberUtil.add(asset,allTokenPrice);
+
+        }
+        return allTokenPrice;
+    }
+
+
+    public static void setTextFristSamll(Context context,AppCompatTextView tv_asset, String allTokenAssetsText) {
+
+        SpannableString spanStr = new SpannableString(allTokenAssetsText);
+        spanStr.setSpan(new AbsoluteSizeSpan(PixelUtils.dp2px(context,16)), 0, 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        spanStr.setSpan(new ForegroundColorSpan(ColorUtil.getColor(BaseApplication.getInstance(),R.color.white_60)), 0 ,1,Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        tv_asset.setText(spanStr);
+        tv_asset.setTag(R.id.tag_first,allTokenAssetsText);
+    }
+
+    public static List<BHToken> loadDefaultToken() {
+        LinkedHashMap<String,BHToken> default_tokens = CacheCenter.getInstance().getSymbolCache().getDefaultTokenList();
+        List<BHToken> res = new ArrayList<>();
+
+        if(default_tokens.isEmpty()){
+            return res;
+        }
+
+        for(ArrayMap.Entry<String,BHToken> item : default_tokens.entrySet()){
+            if(!item.getValue().chain.equalsIgnoreCase(BHConstants.BHT_TOKEN)){
+                continue;
+            }
+            res.add(item.getValue());
+        }
+        return res;
+    }
 
 
 

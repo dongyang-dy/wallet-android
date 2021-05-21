@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HBTC Wallet</string>
+    <string name="app_name">BHEX Wallet</string>
     <string name="number_letters">0123456789abcdefghigklmnopqrstuvwxyzQWERTYUIOPASDFGHJKLZXCVBNM</string>
     <string name="exit_app">再次点击退出应用</string>
 
@@ -37,7 +37,8 @@
     <string name="tab_balance_title">资产</string>
     <string name="tab_validator">验证人</string>
     <string name="tab_market">市场</string>
-    <string name="tab_trade">交易</string>
+    <string name="tab_trade">HDEX</string>
+    <string name="trade">交易</string>
 
     <string name="tab_change_title">兑换</string>
     <string name="tab_order_title">订单</string>
@@ -101,7 +102,7 @@
     <string name="bh_register_agreement_sub">《服务协议》</string>
     <string name="copy_address">复制地址</string>
     <string name="transfer_in">收款</string>
-    <string name="draw_coin">提币</string>
+    <string name="draw_coin">提现</string>
     <string name="hint_input_copy_address">输入或粘贴地址</string>
     <string name="draw_coin_count">提币数量</string>
     <string name="hint_withdraw_minAmount">最小提币数量%1$s%2$d</string>
@@ -127,7 +128,7 @@
     <string name="success">成功</string>
     <string name="fail">失败</string>
     <string name="processing">处理中</string>
-    <string name="add_coin">添加新资产</string>
+    <string name="add_coin">添加币种管理</string>
     <string name="available">可用</string>
     <string name="reload_data">重新加载</string>
     <string name="hold_amount">当前持有</string>
@@ -287,7 +288,7 @@
     <string name="check_proposal_title">请输入提案标题</string>
     <string name="check_proposal_desc">请输入提案描述</string>
     <string name="text_proposal">文本提案</string>
-    <string name="delegate">委托中</string>
+    <string name="delegating">委托中</string>
     <string name="unbonding">赎回中</string>
     <string name="claimed_reward">已收益</string>
 
@@ -514,8 +515,8 @@
     <string name="generate_address_fee">生成跨链地址手续费%1$s</string>
     <string name="save_pictrue">保存图片</string>
     <string name="switch_cross_link_address">切换跨链托管地址</string>
-    <string name="switch_hbtc_address">切换HBTC链地址</string>
-    <string name="hbtc_chain_address">HBTC链地址</string>
+    <string name="switch_hbtc_address">切换BHEX Chain地址</string>
+    <string name="hbtc_chain_address">BHEX Chain地址</string>
     <string name="transcation_record">交易记录</string>
     <string name="trusteeship_node">托管节点</string>
     <string name="common_node">共识节点</string>
@@ -528,12 +529,12 @@
     <string name="string_transfer_in_address">接收地址</string>
     <string name="select_withdraw_token">选择提币币种</string>
     <string name="deposit_token">充值币种</string>
-    <string name="hbtc_transfer_in_tip">该账户支持HBC，HBTC链上资产以及HBTC链上的跨链托管资产</string>
+    <string name="hbtc_transfer_in_tip">该账户地址支持HBC，BHEX Chain上资产以及各托管资产的收款</string>
     <string name="input_receive_address">请输入接收地址</string>
     <string name="input_withdraw_address">请输入提币地址</string>
     <string name="input_enter_address">请输入或粘贴地址</string>
     <string name="cross_transfer_out_tips">您正在进行跨链提币,请务必确认提币地址为该链的原生公链地址</string>
-    <string name="transfer_inner_tips">您正在进行HBTC链内转账,请务必确认接收地址以HBC开头</string>
+    <string name="transfer_inner_tips">您正在进行BHEX链内转账,请务必确认接收地址以HBC开头</string>
     <string name="cross_transfer_highlight_text">该链的原生公链地址</string>
 
     <string name="confrim_create">确认创建</string>

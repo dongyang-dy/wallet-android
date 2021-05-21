@@ -120,7 +120,7 @@ public class ValidatorIndexActivity extends BaseActivity<AssetPresenter> {
 
         mBhWallet = BHUserManager.getInstance().getCurrentBhWallet();
 
-        tv_center_title.setText(getResources().getString(R.string.delegate));
+        tv_center_title.setText(getResources().getString(R.string.delegating));
         tv_wallet_name.setText(mBhWallet.name);
         //tv_available_label.setText(getString(R.string.available)+BHConstants.BHT_TOKEN.toUpperCase());
         tv_available_label.setText(getString(R.string.available));

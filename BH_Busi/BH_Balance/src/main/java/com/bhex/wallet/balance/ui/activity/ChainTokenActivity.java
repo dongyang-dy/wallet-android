@@ -70,7 +70,6 @@ import butterknife.BindView;
  */
 @Route(path = ARouterConfig.Balance.Balance_chain_tokens, name = "链下Token")
 public class ChainTokenActivity extends BaseActivity<BalancePresenter> implements OnRefreshListener {
-
     @Autowired (name = "bhChain")
     public BHChain bhChain;
 

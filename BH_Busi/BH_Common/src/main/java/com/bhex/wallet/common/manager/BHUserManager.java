@@ -25,6 +25,7 @@ import org.web3j.protocol.ObjectMapperFactory;
 import org.web3j.utils.Numeric;
 
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import java8.util.stream.StreamSupport;
@@ -163,7 +164,7 @@ public class BHUserManager {
 
     public synchronized String getSymbolList(){
         StringBuffer sb = new StringBuffer("");
-        ArrayMap<String,BHToken> map_tokens = SymbolCache.getInstance().getLocalToken();
+        LinkedHashMap<String,BHToken> map_tokens = SymbolCache.getInstance().getLocalToken();
         for(ArrayMap.Entry<String,BHToken> item:map_tokens.entrySet()){
             sb.append(item.getValue().symbol.toUpperCase()).append(",");
         }

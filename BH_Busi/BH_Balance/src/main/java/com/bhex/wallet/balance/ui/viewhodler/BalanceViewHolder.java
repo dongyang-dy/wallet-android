@@ -9,6 +9,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bhex.tools.constants.BHConstants;
 import com.bhex.wallet.balance.R;
+import com.bhex.wallet.balance.helper.BHBalanceHelper;
 import com.bhex.wallet.balance.ui.fragment.AccountListFragment;
 import com.bhex.wallet.balance.ui.fragment.HbcAddressQrFragment;
 import com.bhex.wallet.common.base.BaseActivity;
@@ -17,6 +18,7 @@ import com.bhex.wallet.common.db.entity.BHWallet;
 import com.bhex.wallet.common.enums.BH_BUSI_TYPE;
 import com.bhex.wallet.common.helper.BHWalletHelper;
 import com.bhex.wallet.common.manager.BHUserManager;
+import com.bhex.wallet.common.manager.CurrencyManager;
 
 /**
  * @author gongdongyang
@@ -37,6 +39,8 @@ public class BalanceViewHolder {
     public AppCompatTextView tv_asset;
     //钱包二维码地址展示
     public AppCompatImageView iv_wallet_qr;
+    //是否隐藏资产
+    public AppCompatImageView iv_open_eye;
 
     public BalanceViewHolder(BaseActivity mContext, View viewHolder) {
         this.mContext = mContext;
@@ -53,19 +57,18 @@ public class BalanceViewHolder {
         //资产
         tv_asset = viewHolder.findViewById(R.id.tv_asset);
         //转入
-        viewHolder.findViewById(R.id.iv_transfer_in).setOnClickListener(this::transferInAction);
+        viewHolder.findViewById(R.id.tv_transfer_in).setOnClickListener(this::transferInAction);
         //转出
-        viewHolder.findViewById(R.id.iv_transfer_out).setOnClickListener(this::transferOutAction);
+        viewHolder.findViewById(R.id.tv_transfer_out).setOnClickListener(this::transferOutAction);
         //转出
-        viewHolder.findViewById(R.id.iv_entrust).setOnClickListener(this::entrustAction);
+        viewHolder.findViewById(R.id.tv_entrust).setOnClickListener(this::entrustAction);
         //钱包二维码地址展示
         iv_wallet_qr = viewHolder.findViewById(R.id.iv_wallet_qr);
         //添加钱包
         viewHolder.findViewById(R.id.iv_add_wallet).setOnClickListener(v->{
             ARouter.getInstance().build(ARouterConfig.Trusteeship.Trusteeship_Add_Index).withInt(BHConstants.FLAG,1).navigation();
         });
-
-
+        iv_open_eye = viewHolder.findViewById(R.id.iv_open_eye);
     }
 
     //转入
@@ -90,9 +93,20 @@ public class BalanceViewHolder {
                 .navigation();
     }
 
+
     public void updateWalletName(){
         currentWallet = BHUserManager.getInstance().getCurrentBhWallet();
         tv_wallet_name.setText(currentWallet.name);
     }
 
+    public void updateAsset(boolean isOpenEye) {
+        double allTokenAssets = BHBalanceHelper.calculateAllTokenPrice(mContext,BHUserManager.getInstance().getAccountInfo());
+        String allTokenAssetsText = CurrencyManager.getInstance().getCurrencyDecription(mContext,allTokenAssets);
+        if(isOpenEye){
+            tv_asset.setText(allTokenAssetsText);
+        }else{
+            tv_asset.setText("***");
+        }
+        //BHBalanceHelper.setTextFristSamll(mContext,tv_asset,allTokenAssetsText);
+    }
 }
