@@ -291,16 +291,6 @@ public class TransactionViewModel extends AndroidViewModel implements LifecycleO
                         return null;
                     }
 
-                    //String v_sequence = SequenceManager.getInstance().getSequence(accountInfo.sequence);
-                    /*activity.runOnUiThread(()->{
-                        String key = SequenceManager.getInstance().SEQUENCE_KEY.concat(
-                                BHUserManager.getInstance().getCurrentBhWallet().address
-                        );
-                        int local_sequence =  MMKVManager.getInstance().mmkv().decodeInt(key,0);
-                        ToastUtils.showToast("v_sequence=="+v_sequence+"==本地_sequence=="+local_sequence);
-                    });
-                    LogUtils.d("TransactionViewModel==>:","v_sequence=="+v_sequence);*/
-
                     BHSendTranscation bhSendTranscation = BHTransactionManager.createSendTranscation(password,
                             accountInfo.sequence,feeAmount,txMsgList);
 
@@ -320,9 +310,6 @@ public class TransactionViewModel extends AndroidViewModel implements LifecycleO
             @Override
             protected void onSuccess(JsonObject jsonObject) {
                 super.onSuccess(jsonObject);
-                //ToastUtils.showToast("==create_dex_transcation==");
-                //SequenceManager.getInstance().putPeddingTranscation(jsonObject);
-                //SequenceManager.getInstance().increaseSequence();
                 LoadDataModel lmd = new LoadDataModel(ExceptionEngin.OK,"");
                 lmd.loadingStatus = LoadingStatus.SUCCESS;
                 lmd.setData(jsonObject.toString());

@@ -92,9 +92,10 @@ public class MainActivity extends BaseActivity<MainPresenter> {
                     getPresenter().goBalanceFragment();
                     return true;
                 case R.id.tab_validator:
-                    mCurrentCheckId = 1;
-                    getPresenter().goMarketFragment();
-                    return true;
+                    //mCurrentCheckId = 1;
+                    ARouter.getInstance().build(ARouterConfig.Market.market_hdex).navigation();
+                    //getPresenter().goMarketFragment();
+                    return false;
                 /*case R.id.tab_proposals:
                     mCurrentCheckId = 2;
                     getPresenter().goProposalFragment();

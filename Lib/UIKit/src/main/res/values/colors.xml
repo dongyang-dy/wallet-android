@@ -19,6 +19,8 @@
 
     <color name="item_gray_text_color">#979CAA</color>
 
+    <color name="item_label_text_color">#6C7486</color>
+
     <!--标签文字颜色-->
     <color name="global_label_text_color">#8F9298</color>
 
@@ -238,5 +240,8 @@
     <color name="verify_token_bg_color">#2B51D372</color>
     <color name="transfer_highlight_text_color">#FF922E</color>
     <color name="menu_red_pressed">#ED3756</color>
+
+    <color name="stroke_touch_color">#3369E9</color>
+    <color name="stroke_normal_color">#C7D3E4</color>
 
 </resources>

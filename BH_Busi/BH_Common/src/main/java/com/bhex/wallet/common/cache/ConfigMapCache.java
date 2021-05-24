@@ -2,14 +2,12 @@ package com.bhex.wallet.common.cache;
 
 import android.text.TextUtils;
 
-import com.bhex.network.RetryWithDelay;
 import com.bhex.network.RxSchedulersHelper;
 import com.bhex.network.app.BaseApplication;
 import com.bhex.network.cache.RxCache;
 import com.bhex.network.cache.data.CacheResult;
 import com.bhex.network.observer.BHBaseObserver;
 import com.bhex.network.utils.JsonUtils;
-import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.LogUtils;
 import com.bhex.tools.utils.ToolUtils;
 import com.bhex.wallet.common.R;
@@ -17,12 +15,10 @@ import com.bhex.wallet.common.api.BHttpApi;
 import com.bhex.wallet.common.api.BHttpApiInterface;
 import com.bhex.wallet.common.manager.BHUserManager;
 import com.bhex.wallet.common.manager.MMKVManager;
-import com.bhex.wallet.common.model.BHBalance;
 import com.bhex.wallet.common.model.BHChain;
 import com.bhex.wallet.common.model.BHToken;
 import com.bhex.wallet.common.model.BHTokenMapping;
 import com.bhex.wallet.common.model.GasFee;
-import com.fasterxml.jackson.databind.ser.Serializers;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
@@ -30,13 +26,9 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 import java8.util.stream.IntStreams;
 import java8.util.stream.RefStreams;
@@ -46,29 +38,29 @@ import java8.util.stream.StreamSupport;
  * @author gongdongyang
  * 2020-10-10 14:15:35
  */
-public class TokenMapCache extends BaseCache {
+public class ConfigMapCache extends BaseCache {
 
-    private static final String TAG = TokenMapCache.class.getSimpleName();
+    private static final String TAG = ConfigMapCache.class.getSimpleName();
 
     public static final String CACHE_TOKENMAP_KEY = "TokenMappingCache";
     public static final String CACHE_CHAIN_KEY = "TokenChainCache";
     public static final String CACHE_GASFEE_KEY = "GasFeeCache";
 
     private List<BHTokenMapping> mTokenMappings = new ArrayList<>();
-    private List<BHChain> mChains = new ArrayList<>();
+    private LinkedHashMap<String,BHChain> mChainMap = new LinkedHashMap<>();
     public Map<String,BHToken> mTokens = new HashMap<String,BHToken>();
 
-    private static volatile TokenMapCache _instance;
+    private static volatile ConfigMapCache _instance;
 
-    private TokenMapCache(){
+    private ConfigMapCache(){
 
     }
 
-    public static TokenMapCache getInstance(){
+    public static ConfigMapCache getInstance(){
         if(_instance==null){
-            synchronized (TokenMapCache.class){
+            synchronized (ConfigMapCache.class){
                 if(_instance==null){
-                    _instance = new TokenMapCache();
+                    _instance = new ConfigMapCache();
                 }
             }
         }
@@ -147,12 +139,14 @@ public class TokenMapCache extends BaseCache {
         BHBaseObserver observer = new BHBaseObserver<JsonArray>() {
             @Override
             protected void onSuccess(JsonArray jsonArray) {
-                if(TextUtils.isEmpty(jsonArray.toString())){
+                if(TextUtils.isEmpty(jsonArray.toString()) || jsonArray.isJsonNull()){
                     return;
                 }
-                LogUtils.d("TOkenMapCache===>:","jsonArray=="+jsonArray.toString());
                 List<BHChain> chains = JsonUtils.getListFromJson(jsonArray.toString(),BHChain.class);
-                mChains = chains;
+                if(ToolUtils.checkListIsEmpty(chains)){
+                    return;
+                }
+
                 MMKVManager.getInstance().mmkv().encode(CACHE_TOKENMAP_KEY,jsonArray.toString());
             }
 
@@ -204,34 +198,29 @@ public class TokenMapCache extends BaseCache {
         return res;
     }
 
-    public synchronized List<BHChain> getLoadChains(){
-        if(!ToolUtils.checkListIsEmpty(mChains)){
-            return mChains;
+    public synchronized LinkedHashMap<String,BHChain> getAllChains(){
+        if(!ToolUtils.checkMapEmpty(mChainMap)){
+            return mChainMap;
         }
 
-        LogUtils.d("TOkenMapCache===>:","getLoadChains==null==");
 
         String jsonArray = MMKVManager.getInstance().mmkv().decodeString(CACHE_TOKENMAP_KEY);
-        if(!TextUtils.isEmpty(jsonArray)){
-            List<BHChain> chains = JsonUtils.getListFromJson(jsonArray.toString(),BHChain.class);
-            mChains = chains;
-            return mChains;
+        if(!TextUtils.isEmpty(jsonArray) ){
+            List<BHChain> chains = JsonUtils.getListFromJson(jsonArray,BHChain.class);
+            StreamSupport.stream(chains).forEach(chain -> {
+                mChainMap.put(chain.chain,chain);
+            });
+            return mChainMap;
         }
 
         String[] chain_list = BHUserManager.getInstance().getUserBalanceList().split("_");
         String[] default_chain_name = BaseApplication.getInstance().getResources().getStringArray(R.array.default_chain_name);
 
         IntStreams.range(0,chain_list.length).forEach(value -> {
-            if(chain_list[value]!=null && chain_list[value].equalsIgnoreCase("btc")){
-                BHChain bhChain = new BHChain(chain_list[value],default_chain_name[value]);
-                bhChain.single_coin = true;
-                mChains.add(bhChain);
-            }else{
-                BHChain bhChain = new BHChain(chain_list[value],default_chain_name[value]);
-                mChains.add(bhChain);
-            }
+            BHChain bhChain = new BHChain(chain_list[value],default_chain_name[value]);
+            mChainMap.put(bhChain.chain,bhChain);
         });
-        return mChains;
+        return mChainMap;
     }
 
     public synchronized BHTokenMapping getTokenMappingOne(String symbol){

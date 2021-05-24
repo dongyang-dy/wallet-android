@@ -1,15 +1,9 @@
 package com.bhex.wallet.balance.ui.fragment;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,44 +17,23 @@ import com.bhex.network.base.LoadDataModel;
 import com.bhex.network.base.LoadingStatus;
 import com.bhex.network.cache.stategy.CacheStrategy;
 import com.bhex.tools.constants.BHConstants;
-import com.bhex.tools.utils.LogUtils;
-import com.bhex.tools.utils.NavigateUtil;
 import com.bhex.wallet.balance.R;
 import com.bhex.wallet.balance.adapter.AnnouncementMF;
-import com.bhex.wallet.balance.adapter.BalanceAdapter;
-import com.bhex.wallet.balance.adapter.ChainAdapter;
 import com.bhex.wallet.balance.adapter.HBalanceAdapter;
-import com.bhex.wallet.balance.enums.BUSI_ANNOUNCE_TYPE;
 import com.bhex.wallet.balance.helper.BHBalanceHelper;
-import com.bhex.wallet.balance.helper.TokenHelper;
 import com.bhex.wallet.balance.model.AnnouncementItem;
-import com.bhex.wallet.balance.model.BHTokenItem;
 import com.bhex.wallet.balance.presenter.BalancePresenter;
 import com.bhex.wallet.balance.ui.viewhodler.BalanceViewHolder;
 import com.bhex.wallet.balance.viewmodel.AnnouncementViewModel;
-import com.bhex.wallet.common.ActivityCache;
 import com.bhex.wallet.common.base.BaseFragment;
-import com.bhex.wallet.common.cache.CacheCenter;
-import com.bhex.wallet.common.cache.TokenMapCache;
+import com.bhex.wallet.common.cache.ConfigMapCache;
 import com.bhex.wallet.common.config.ARouterConfig;
-import com.bhex.wallet.common.db.entity.BHWallet;
-import com.bhex.wallet.common.enums.BH_BUSI_TYPE;
-import com.bhex.wallet.common.event.AccountEvent;
 import com.bhex.wallet.common.manager.BHUserManager;
-import com.bhex.wallet.common.manager.CurrencyManager;
-import com.bhex.wallet.common.manager.MainActivityManager;
-import com.bhex.wallet.common.manager.SecuritySettingManager;
-import com.bhex.wallet.common.model.BHBalance;
-import com.bhex.wallet.common.model.BHChain;
 import com.bhex.wallet.common.model.BHToken;
 import com.bhex.wallet.common.utils.LiveDataBus;
 import com.bhex.wallet.common.viewmodel.BalanceViewModel;
 import com.bhex.wallet.common.viewmodel.WalletViewModel;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -136,7 +109,7 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
         refreshLayout.setOnRefreshListener(refreshLayout -> {
             balanceViewModel.getAccountInfo(getYActivity(), CacheStrategy.cacheAndRemote());
             announcementViewModel.loadAnnouncement(getYActivity());
-            TokenMapCache.getInstance().loadChain();
+            ConfigMapCache.getInstance().loadChain();
         });
         refreshLayout.autoRefresh();
 

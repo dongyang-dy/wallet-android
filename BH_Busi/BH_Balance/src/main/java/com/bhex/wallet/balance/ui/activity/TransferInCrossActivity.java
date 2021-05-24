@@ -16,6 +16,7 @@ import com.bhex.wallet.common.base.BaseActivity;
 import com.bhex.wallet.common.cache.SymbolCache;
 import com.bhex.wallet.common.config.ARouterConfig;
 import com.bhex.wallet.common.enums.BH_BUSI_TYPE;
+import com.bhex.wallet.common.model.BHChain;
 import com.bhex.wallet.common.model.BHToken;
 import com.gyf.immersionbar.ImmersionBar;
 
@@ -60,20 +61,17 @@ public class TransferInCrossActivity extends BaseActivity {
                 .navigationBarDarkIcon(true)
                 .fitsSystemWindows(true).init();
 
-
         //获取对应Token
         bhToken = SymbolCache.getInstance().getBHToken(symbol);
-
         transferCrossVH = new TransferInCrossVH(this,findViewById(R.id.root_view),symbol);
         transferCrossVH.updateTokenInfo(symbol);
-
-
     }
 
     @Override
     protected void addEvent() {
         //选择币种
         findViewById(R.id.layout_select_token).setOnClickListener(this::chooseTokenAction);
+
     }
 
     //选择币种

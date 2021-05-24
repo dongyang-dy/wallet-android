@@ -3,6 +3,7 @@ package com.bhex.wallet.balance.ui.activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -154,7 +155,14 @@ public class AddressBookListActivity extends BaseActivity {
         protected void convert(@NotNull BaseViewHolder holder, BHAddressBook addressBook) {
             holder.setText(R.id.tv_address_name,addressBook.address_name);
             holder.setText(R.id.tv_address,addressBook.address);
-            holder.setText(R.id.tv_address_remark,addressBook.address_remark);
+
+            if(TextUtils.isEmpty(addressBook.address_remark)){
+                holder.setGone(R.id.tv_address_remark,true);
+            }else{
+                holder.setVisible(R.id.tv_address_remark,true);
+                holder.setText(R.id.tv_address_remark,addressBook.address_remark);
+            }
+
 
             AppCompatCheckBox ck_address_select = holder.getView(R.id.ck_address_select);
             if(!address.equals(addressBook.address)){

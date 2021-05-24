@@ -23,319 +23,394 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/page_bg_color"
             android:overScrollMode="never">
-
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/app_bg"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
                 android:orientation="vertical">
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <RelativeLayout
+                    android:id="@+id/layout_select_token"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="@dimen/main_padding_left"
-                    android:paddingEnd="@dimen/main_padding_right"
-                    android:textColor="@color/global_main_text_color"
-                    android:textSize="15sp"
-                    android:text="@string/draw_coin_address"
-                    android:paddingTop="24dp"/>
+                    android:layout_height="48dp"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:background="@drawable/input_bg_stroke">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/withdraw_token"
+                        android:textSize="14sp"
+                        android:textColor="@color/item_label_text_color"
+                        android:layout_centerVertical="true"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal" >
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/iv_token_icon"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center_vertical"
+                            tools:src="@mipmap/ic_btc"
+                            />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_withdraw_token"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="6dp"
+                            android:layout_marginEnd="6dp"
+                            android:layout_gravity="center_vertical"
+                            android:textColor="@color/global_main_text_color"
+                            android:textSize="14sp"
+                            tools:text="BTC"
+                            />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@mipmap/ic_arrow_a"
+                            />
+                    </LinearLayout>
+
+                </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/layout_select_chain"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:paddingStart="@dimen/main_padding_left"
-                    android:paddingEnd="@dimen/main_padding_right"
-                    >
+                    android:layout_height="48dp"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/input_bg_stroke">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/chain_type"
+                        android:textSize="14sp"
+                        android:textColor="@color/item_label_text_color"
+                        android:layout_centerVertical="true"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal" >
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/iv_chain_icon"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center_vertical"
+                            tools:src="@mipmap/ic_btc"
+                            />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_chain_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="6dp"
+                            android:layout_marginEnd="6dp"
+                            android:layout_gravity="center_vertical"
+                            android:textColor="@color/global_main_text_color"
+                            android:textSize="14sp"
+                            tools:text="BTC"
+                            />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@mipmap/ic_arrow_a"
+                            />
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:paddingTop="14dp"
+                    android:paddingBottom="14dp"
+                    android:layout_marginTop="24dp"
+                    android:orientation="vertical"
+                    android:background="@drawable/input_bg_stroke">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:textColor="@color/item_label_text_color"
+                            android:textSize="14sp"
+                            android:text="@string/draw_coin_address"
+                            />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:orientation="horizontal" >
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/btn_address_scan"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_gravity="center_vertical"
+                                android:src="@mipmap/ic_addrss_scan"/>
+
+                            <View
+                                android:layout_width="1dp"
+                                android:layout_height="16dp"
+                                android:layout_marginStart="6dp"
+                                android:layout_marginEnd="6dp"
+                                android:layout_gravity="center_vertical"
+                                android:background="#E2E4EA"
+                                />
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/btn_address_book"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_gravity="center_vertical"
+                                android:src="@mipmap/ic_book"
+                                />
+                        </LinearLayout>
+
+                    </RelativeLayout>
 
                     <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/inp_drawwith_address"
+                        android:id="@+id/inp_withdraw_address"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
                         android:cursorVisible="true"
-                        android:layout_toLeftOf="@+id/layout_action"
                         android:layout_centerVertical="true"
                         android:textColorHint="@color/global_input_hint_color"
                         android:hint="@string/input_address_hint"
                         android:background="@null"
                         android:textSize="14sp"
                         android:digits="@string/number_letters"
+                        tools:text="0x873453D2f3032Eb7bb28d3DF3fe65FdbB5c594fF"
                         />
 
-                    <LinearLayout
-                        android:id="@+id/layout_action"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        >
 
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/btn_address_scan"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@mipmap/ic_qr"
-                            android:layout_gravity="center_vertical"
-                            />
-
-                        <View
-                            android:layout_width="1dp"
-                            android:layout_height="16dp"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginEnd="8dp"
-                            android:layout_gravity="center_vertical"
-                            android:background="@color/global_divider_color"/>
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/btn_address_book"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@mipmap/ic_book"
-                            android:layout_gravity="center_vertical"
-                            />
-
-                    </LinearLayout>
-                </RelativeLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/global_divider_color"
-                    />
+                </LinearLayout>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_cross_transfer_out_tip"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="16dp"
-                    android:paddingStart="@dimen/main_padding_left"
-                    android:paddingEnd="@dimen/main_padding_right"
-                    android:drawableLeft="@mipmap/ic_light"
+                    android:layout_marginTop="8dp"
                     android:gravity="center_vertical"
                     android:layout_gravity="center_vertical"
                     android:drawablePadding="3dp"
+                    android:textSize="12sp"
+                    android:textColor="@color/global_main_gray_color"
                     android:text="@string/cross_transfer_out_tips"
                     />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="8dp"
-                    android:background="@color/global_divider_color"
-                    />
-                
-                <RelativeLayout
-                    android:id="@+id/layout_select_token"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:layout_marginTop="8dp"
-                    android:paddingStart="@dimen/main_padding_left"
-                    android:paddingEnd="@dimen/main_padding_right">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/global_main_text_color"
-                        android:text="@string/select_withdraw_token"
-                        android:textSize="15sp"
-                        android:layout_centerVertical="true"/>
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_withdraw_token"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/global_main_text_color"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="24dp"
-                        android:textSize="15sp"
-                        tools:text="BTC"/>
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@mipmap/ic_gray_arrow"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentEnd="true"
-                        />
-                </RelativeLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/global_divider_color"/>
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/global_main_text_color"
-                    android:text="@string/draw_coin_count"
-                    android:textSize="15sp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    />
-
-
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:paddingStart="@dimen/main_padding_left"
-                    android:paddingEnd="@dimen/main_padding_right"
-                    >
+                    android:layout_height="48dp"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/input_bg_stroke">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_withdraw_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:textSize="12sp"
+                        android:textColor="@color/item_label_text_color"
+                        android:text="@string/draw_coin_count"/>
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/inp_withdraw_amount"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_toLeftOf="@+id/btn_all"
-                        android:layout_centerVertical="true"
-                        android:textColorHint="@color/global_input_hint_color"
-                        android:hint="@string/input_withdraw_amount"
+                        android:layout_height="wrap_content"
                         android:background="@null"
+                        android:gravity="right"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_centerVertical="true"
+                        android:hint="@string/please_input_amount"
+                        android:layout_toRightOf="@+id/tv_withdraw_label"
+                        android:layout_toLeftOf="@+id/tv_withdraw_unit"
+                        android:textColorHint="@color/global_main_gray_color"
                         android:textSize="14sp"
+                        />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_withdraw_unit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:textSize="12sp"
+                        android:textColor="@color/global_main_text_color"
+                        android:text="@string/place_holder"
+                        tools:text="BTC"/>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_available_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/available"
+                        android:layout_marginEnd="8dp"
+                        android:textSize="12sp"
+                        android:textColor="@color/global_main_gray_color"
                         />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/btn_all"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="@string/all"
-                        android:textSize="14sp"
-                        android:textColor="@color/highlight_text_color"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentEnd="true"
-                        />
-                </RelativeLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/global_divider_color"/>
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_available_amount"
-                    android:layout_width="match_parent"
-                    android:layout_height="44dp"
-                    android:text="@string/available"
-                    android:gravity="center_vertical"
-                    android:textSize="12sp"
-                    android:textColor="@color/global_input_profix_text_color"
-                    android:paddingStart="@dimen/main_padding_left"
-                    tools:text="可用: 0 BTC"
-                    />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="8dp"
-                    android:background="@color/global_divider_color"
-                    />
-
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:paddingStart="@dimen/main_padding_left"
-                    android:paddingEnd="@dimen/main_padding_right"
-                    >
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_withdraw_fee_label"
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:text="@string/withdraw_fee"
-                        android:textColor="@color/global_main_text_color"
-                        android:textSize="15sp"
-                        android:drawableEnd="@mipmap/ic_help"
-                        android:drawablePadding="5dp"
-                        />
-
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/tv_withdraw_fee"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:minWidth="100dp"
-                        android:gravity="center_vertical|right"
-                        android:textSize="15sp"
-                        android:textColor="@color/global_main_text_color"
-                        android:layout_toLeftOf="@+id/tv_withdraw_fee_token"
-                        android:background="@null"
-                        android:button="@null"
-                        android:layout_marginEnd="4dp"
-                        android:layout_centerVertical="true"
-                        android:hint="@string/hint_input_widthdraw_fee"
-                        tools:text="0.00054434"
-                        />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_withdraw_fee_token"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
                         android:text="@string/all"
-                        android:textSize="15sp"
-                        android:textColor="@color/global_main_gray_color"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentEnd="true"
-                        tools:text="BTC"
+                        android:textSize="13sp"
+                        android:textColor="@color/highlight_text_color"
                         />
-                </RelativeLayout>
 
-                <View
+                </LinearLayout>
+
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="8dp"
-                    android:background="@color/global_divider_color"
-                    />
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:paddingTop="16dp"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:background="@color/card_bg_color">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:paddingStart="@dimen/main_padding_left"
-                    android:paddingEnd="@dimen/main_padding_right"
-                    >
-
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:text="@string/fee"
-                        android:textColor="@color/global_main_text_color"
-                        android:textSize="15sp"
-                        />
+                        >
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_fee"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="@string/place_holder"
-                        android:textSize="15sp"
-                        android:textColor="@color/global_main_text_color"
-                        android:layout_toLeftOf="@+id/tv_fee_token"
-                        android:layout_marginEnd="4dp"
-                        android:layout_centerVertical="true"
-                        tools:text="0.00054434"
-                        />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="@string/fee"
+                            android:textColor="@color/item_label_text_color"
+                            android:textSize="14sp"
+                            android:drawablePadding="5dp"/>
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_fee_token"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="@string/all"
-                        android:textSize="15sp"
-                        android:textColor="@color/global_main_gray_color"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentEnd="true"
-                        tools:text="BTC"
-                        />
-                </RelativeLayout>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_fee"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/place_holder"
+                            android:textSize="15sp"
+                            android:textColor="@color/global_main_text_color"
+                            android:layout_toLeftOf="@+id/tv_fee_token"
+                            android:layout_marginEnd="4dp"
+                            android:layout_centerVertical="true"
+                            tools:text="0.00054434"/>
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_fee_token"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:textSize="15sp"
+                            android:textColor="@color/global_main_gray_color"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentEnd="true"
+                            tools:text="BTC"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp">
+
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_withdraw_fee_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="@string/withdraw_fee"
+                            android:textColor="@color/item_label_text_color"
+                            android:textSize="14sp"
+                            android:drawableEnd="@mipmap/ic_help"
+                            android:drawablePadding="5dp"
+                            />
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/tv_withdraw_fee"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:minWidth="100dp"
+                            android:gravity="center_vertical|right"
+                            android:textSize="15sp"
+                            android:textColor="@color/global_main_text_color"
+                            android:layout_toLeftOf="@+id/tv_withdraw_fee_token"
+                            android:background="@null"
+                            android:button="@null"
+                            android:layout_marginEnd="4dp"
+                            android:layout_centerVertical="true"
+                            tools:text="0.00054434"
+                            />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_withdraw_fee_token"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:textSize="15sp"
+                            android:textColor="@color/global_main_gray_color"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentEnd="true"
+                            tools:text="BTC"
+                            />
+                    </RelativeLayout>
+
+
+
+
+                </LinearLayout>
+
             </LinearLayout>
 
 
@@ -355,7 +430,7 @@
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:stateListAnimator="@null"
-        android:text="@string/draw_coin"
+        android:text="@string/confrim_withdraw"
         app:backgroundTint="@color/global_button_bg_color"
         app:cornerRadius="6dp" />
 </RelativeLayout>

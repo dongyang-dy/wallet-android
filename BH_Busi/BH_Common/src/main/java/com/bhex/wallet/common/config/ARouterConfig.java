@@ -124,6 +124,8 @@ public class ARouterConfig {
         public static final String market_dex = "/market/dex";
         public static final String market_webview = "/market/webview";
         public static final String market_fragment_webview = "/market/fragment/webview";
+        public static final String market_hdex = "/market/hdex";
+
     }
 
 

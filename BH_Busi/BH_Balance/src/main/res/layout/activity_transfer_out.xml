@@ -24,72 +24,135 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/page_bg_color"
             android:overScrollMode="never">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/app_bg"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
                 android:orientation="vertical">
 
-                <LinearLayout
+                <RelativeLayout
+                    android:id="@+id/layout_select_token"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="@dimen/main_padding_left"
-                    android:paddingEnd="@dimen/main_padding_right"
-                    android:orientation="vertical"
-                    android:layout_marginTop="24dp">
+                    android:layout_height="48dp"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:background="@drawable/input_bg_stroke">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/global_main_text_color"
-                        android:textSize="15sp"
-                        android:text="@string/transfer_address"
+                        android:text="@string/transfer_token"
+                        android:textSize="14sp"
+                        android:textColor="@color/item_label_text_color"
                         android:layout_centerVertical="true"
                         />
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_transfer_out_address"
-                        android:layout_width="match_parent"
-                        android:layout_height="56dp"
-                        android:textColor="@color/global_input_hint_color"
-                        android:textSize="12sp"
-                        android:text="@string/transfer_address"
-                        android:gravity="center_vertical"
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        tools:text="HBCb3Xu5XvbSAi8SM13231p4kEaNNvHtPjSN"
-                        />
-                </LinearLayout>
+                        android:orientation="horizontal" >
 
-                <View
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/iv_token_icon"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center_vertical"
+                            tools:src="@mipmap/ic_btc"
+                            />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_transfer_token"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="6dp"
+                            android:layout_marginEnd="6dp"
+                            android:layout_gravity="center_vertical"
+                            android:textColor="@color/global_main_text_color"
+                            android:textSize="14sp"
+                            tools:text="BTC"
+                            />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@mipmap/ic_arrow_a"
+                            />
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="16dp"
-                    android:background="@color/global_divider_color"/>
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/global_main_text_color"
-                    android:text="@string/string_transfer_in_address"
-                    android:textSize="15sp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    />
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:paddingTop="14dp"
+                    android:paddingBottom="14dp"
+                    android:layout_marginTop="24dp"
+                    android:orientation="vertical"
+                    android:background="@drawable/input_bg_stroke">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:paddingStart="@dimen/main_padding_left"
-                    android:paddingEnd="@dimen/main_padding_right">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:textColor="@color/item_label_text_color"
+                            android:textSize="14sp"
+                            android:text="@string/transfer_address"
+                            />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:orientation="horizontal" >
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/btn_scan_address"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_gravity="center_vertical"
+                                android:src="@mipmap/ic_addrss_scan"/>
+
+                            <View
+                                android:layout_width="1dp"
+                                android:layout_height="16dp"
+                                android:layout_marginStart="6dp"
+                                android:layout_marginEnd="6dp"
+                                android:layout_gravity="center_vertical"
+                                android:background="#E2E4EA"
+                                />
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/btn_address_book"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_gravity="center_vertical"
+                                android:src="@mipmap/ic_book"
+                                />
+                        </LinearLayout>
+
+                    </RelativeLayout>
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/inp_transfer_in_address"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:cursorVisible="true"
                         android:layout_toLeftOf="@+id/layout_action"
                         android:layout_centerVertical="true"
                         android:textColorHint="@color/global_input_hint_color"
@@ -97,224 +160,146 @@
                         android:background="@null"
                         android:textSize="14sp"
                         android:digits="@string/number_letters"
+                        tools:text="0x873453D2f3032Eb7bb28d3DF3fe65FdbB5c594fF"
                         />
 
-                    <LinearLayout
-                        android:id="@+id/layout_action"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        >
 
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/btn_address_scan"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@mipmap/ic_qr"
-                            android:layout_gravity="center_vertical"
-                            />
-
-                        <View
-                            android:layout_width="1dp"
-                            android:layout_height="16dp"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginEnd="8dp"
-                            android:layout_gravity="center_vertical"
-                            android:background="@color/global_divider_color"/>
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/btn_address_book"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@mipmap/ic_book"
-                            android:layout_gravity="center_vertical"
-                            />
-
-                    </LinearLayout>
-                </RelativeLayout>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="16dp"
-                    android:background="@color/global_divider_color"/>
+                </LinearLayout>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_transfer_out_tip"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="16dp"
-                    android:textColor="@color/global_main_gray_color"
-                    android:paddingStart="@dimen/main_padding_left"
-                    android:paddingEnd="@dimen/main_padding_right"
-                    android:drawableLeft="@mipmap/ic_light"
+                    android:layout_marginTop="8dp"
                     android:gravity="center_vertical"
                     android:layout_gravity="center_vertical"
                     android:drawablePadding="3dp"
+                    android:textSize="12sp"
+                    android:textColor="@color/global_main_gray_color"
                     android:text="@string/transfer_inner_tips"
                     />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="8dp"
-                    android:background="@color/global_divider_color"
-                    />
-
-                <RelativeLayout
-                    android:id="@+id/layout_select_token"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:layout_marginTop="8dp"
-                    android:paddingStart="@dimen/main_padding_left"
-                    android:paddingEnd="@dimen/main_padding_right">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/global_main_text_color"
-                        android:text="@string/select_transfer_token"
-                        android:textSize="15sp"
-                        android:layout_centerVertical="true"/>
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_transfer_token"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/global_main_text_color"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="24dp"
-                        android:textSize="15sp"
-                        tools:text="HBC"/>
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@mipmap/ic_gray_arrow"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentEnd="true"
-                        />
-                </RelativeLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="16dp"
-                    android:background="@color/global_divider_color"/>
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/global_main_text_color"
-                    android:text="@string/transfer_amount"
-                    android:textSize="15sp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    />
-
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:paddingStart="@dimen/main_padding_left"
-                    android:paddingEnd="@dimen/main_padding_right"
-                    >
+                    android:layout_height="48dp"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/input_bg_stroke">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_transfer_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:textSize="14sp"
+                        android:textColor="@color/item_label_text_color"
+                        android:text="@string/transfer_amount"/>
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/inp_transfer_amount"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_toLeftOf="@+id/btn_all"
-                        android:layout_centerVertical="true"
-                        android:textColorHint="@color/global_input_hint_color"
-                        android:hint="@string/please_transfer_amount"
+                        android:layout_height="wrap_content"
                         android:background="@null"
+                        android:gravity="right"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_centerVertical="true"
+                        android:hint="@string/please_input_amount"
+                        android:layout_toRightOf="@+id/tv_transfer_label"
+                        android:layout_toLeftOf="@+id/tv_transfer_unit"
+                        android:textColorHint="@color/global_main_gray_color"
                         android:textSize="14sp"
-                        android:inputType="numberDecimal"
+                        />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_transfer_unit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:textSize="12sp"
+                        android:textColor="@color/global_main_text_color"
+                        android:text="@string/place_holder"
+                        tools:text="BTC"/>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_available_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/available"
+                        android:layout_marginEnd="8dp"
+                        android:textSize="12sp"
+                        android:textColor="@color/global_main_gray_color"
                         />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/btn_all"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
+                        android:layout_height="wrap_content"
                         android:text="@string/all"
-                        android:textSize="14sp"
+                        android:textSize="13sp"
                         android:textColor="@color/highlight_text_color"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentEnd="true"
                         />
-                </RelativeLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="16dp"
-                    android:background="@color/global_divider_color"/>
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_available_amount"
-                    android:layout_width="match_parent"
-                    android:layout_height="44dp"
-                    android:text="@string/available"
-                    android:gravity="center_vertical"
-                    android:textSize="12sp"
-                    android:textColor="@color/global_input_profix_text_color"
-                    android:paddingStart="@dimen/main_padding_left"
-                    tools:text="可用: 0 HBC"
-                    />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="8dp"
-                    android:background="@color/global_divider_color"
-                    />
+                </LinearLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:paddingStart="@dimen/main_padding_left"
-                    android:paddingEnd="@dimen/main_padding_right"
-                    >
+                    android:layout_height="48dp"
+                    android:orientation="vertical"
+                    android:layout_marginTop="16dp"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:background="@color/card_bg_color">
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="match_parent"
+                        android:id="@+id/tv_withdraw_fee_label"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="@string/fee"
-                        android:textColor="@color/global_main_text_color"
-                        android:textSize="15sp"
+                        android:text="@string/transfer_fee"
+                        android:textColor="@color/item_label_text_color"
+                        android:textSize="14sp"
+                        android:drawablePadding="5dp"
                         />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_fee"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="@string/place_holder"
+                        android:minWidth="100dp"
+                        android:gravity="center_vertical|right"
                         android:textSize="15sp"
                         android:textColor="@color/global_main_text_color"
-                        android:layout_toLeftOf="@+id/tv_fee_token"
+                        android:layout_toLeftOf="@+id/tv_transfer_fee_token"
+                        android:background="@null"
+                        android:button="@null"
                         android:layout_marginEnd="4dp"
                         android:layout_centerVertical="true"
-                        tools:text="0.00054434"
+                        tools:text="0.005"
                         />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_fee_token"
+                        android:id="@+id/tv_transfer_fee_token"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="HBC"
                         android:textSize="15sp"
                         android:textColor="@color/global_main_gray_color"
                         android:layout_centerVertical="true"
                         android:layout_alignParentEnd="true"
-                        tools:text="HBC"
+                        android:text="HBC"
                         />
                 </RelativeLayout>
             </LinearLayout>
@@ -336,7 +321,7 @@
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:stateListAnimator="@null"
-        android:text="@string/transfer"
+        android:text="@string/confrim_transfer"
         app:backgroundTint="@color/global_button_bg_color"
         app:cornerRadius="6dp" />
 </RelativeLayout>

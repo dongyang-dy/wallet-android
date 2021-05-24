@@ -71,9 +71,9 @@ public class TransferOutActivity extends BaseActivity {
 
     TransactionViewModel mTransactionViewModel;
 
-    //TokenViewModel mTokenViewModel;
 
     private SmartRefreshLayout mRefreshLayout;
+
 
     @Override
     protected int getLayoutId() {
@@ -82,21 +82,17 @@ public class TransferOutActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        tv_center_title.setText(getString(R.string.transfer));
         ARouter.getInstance().inject(this);
+
+        tv_center_title.setText(getString(R.string.transfer));
         mRefreshLayout = findViewById(R.id.refreshLayout);
         transferOutVH = new TransferOutVH(this,findViewById(R.id.root_view));
-        /*//
-        findViewById(R.id.btn_drawwith_coin).setOnClickListener(this::onSubmitAction);
-        findViewById(R.id.btn_transfer_out_token).setOnClickListener(this::chooseTokenAction);*/
-
-        transferOutVH.layout_select_token.setOnClickListener(this::selectTokenAction);
-        transferOutVH.btn_transfer.setOnClickListener(this::transferAction);
+        transferOutVH.updateTokenInfo(m_symbol);
     }
 
     @Override
     protected void addEvent() {
-        transferOutVH.updateTokenInfo(m_symbol);
+
         mBalanceViewModel = ViewModelProviders.of(MainActivityManager._instance.mainActivity).get(BalanceViewModel.class).build(MainActivityManager._instance.mainActivity);
         //资产订阅
         LiveDataBus.getInstance().with(BHConstants.Label_Account, LoadDataModel.class).observe(this, ldm->{
@@ -116,7 +112,71 @@ public class TransferOutActivity extends BaseActivity {
             mBalanceViewModel.getAccountInfo(this, CacheStrategy.onlyRemote());
             //mTokenViewModel.queryToken(this,transferOutVH.tranferToken.symbol);
         });
+
         mRefreshLayout.autoRefresh();
+
+        //转账事件
+        transferOutVH.layout_select_token.setOnClickListener(this::selectTokenAction);
+        transferOutVH.btn_transfer.setOnClickListener(this::transferAction);
+    }
+
+
+    //选择币种
+    public void selectTokenAction(View view){
+        ChooseTokenFragment fragment = ChooseTokenFragment.showFragment(m_symbol, BH_BUSI_TYPE.链内转账.value,this::selectTokenListener);
+        fragment.show(getSupportFragmentManager(),ChooseTokenFragment.class.getName());
+    }
+
+    //选择币种回调
+    private void selectTokenListener(String symbol, int position) {
+        //更新token
+        m_symbol = symbol;
+        transferOutVH.updateTokenInfo(symbol);
+    }
+
+    //转账
+    private void transferAction(View view) {
+        //隐藏键盘
+        ToolUtils.hintKeyBoard(this);
+        boolean flag = transferOutVH.verifyTransferAction();
+        if(!flag){
+            return;
+        }
+
+        Password30PFragment.showPasswordDialog(getSupportFragmentManager(),
+                Password30PFragment.class.getName(),
+                this::transferConfirmAction,0,true);
+    }
+
+    //密码对话框回调
+    public void transferConfirmAction(String password, int position,int verifyPwdWay) {
+
+        String to_address = transferOutVH.inp_transfer_in_address.getText().toString().trim();
+        BigInteger gasPrice = BigInteger.valueOf ((long)(BHConstants.BHT_GAS_PRICE));
+        //转账金额
+        String v_transfer_amount = transferOutVH.inp_transfer_amount.getText().toString().trim();
+        //交易手续费
+        String v_fee_amount = transferOutVH.tv_fee.getText().toString().trim();
+        //创建转账信息
+        List<TxReq.TxMsg> tx_msg_list = BHRawTransaction.createTransferMsg(to_address,v_transfer_amount,m_symbol);
+        mTransactionViewModel.transferInnerExt(this,password,v_fee_amount,tx_msg_list);
+    }
+
+
+    //更新可用资产
+    private void updateAssets(AccountInfo accountInfo) {
+        transferOutVH.updateAssets();
+    }
+
+    //更新转账状态
+    private void updateTransferStatus(LoadDataModel ldm) {
+        if(ldm.loadingStatus== LoadingStatus.SUCCESS){
+            ToastUtils.showToast(getResources().getString(R.string.transfer_in_success));
+            EventBus.getDefault().post(new TransctionEvent());
+            finish();
+        }else{
+            //ToastUtils.showToast(getResources().getString(R.string.transfer_in_fail));
+        }
     }
 
     @Override
@@ -160,66 +220,6 @@ public class TransferOutActivity extends BaseActivity {
             }
         });
     }
-
-    //选择币种
-    public void selectTokenAction(View view){
-        ChooseTokenFragment fragment = ChooseTokenFragment.showFragment(m_symbol, BH_BUSI_TYPE.链内转账.value,this::selectTokenListener);
-        fragment.show(getSupportFragmentManager(),ChooseTokenFragment.class.getName());
-    }
-
-    //选择币种回调
-    private void selectTokenListener(String symbol, int position) {
-        //更新token
-        m_symbol = symbol;
-        transferOutVH.updateTokenInfo(symbol);
-    }
-
-    //转账
-    private void transferAction(View view) {
-       //隐藏键盘
-       ToolUtils.hintKeyBoard(this);
-       boolean flag= transferOutVH.verifyTransferAction();
-       if(!flag){
-           return;
-       }
-
-       Password30PFragment.showPasswordDialog(getSupportFragmentManager(),
-                Password30PFragment.class.getName(),
-                this::transferConfirmAction,0,true);
-    }
-
-    //密码对话框回调
-    public void transferConfirmAction(String password, int position,int verifyPwdWay) {
-
-        String to_address = transferOutVH.inp_transfer_in_address.getText().toString().trim();
-        BigInteger gasPrice = BigInteger.valueOf ((long)(BHConstants.BHT_GAS_PRICE));
-        //转账金额
-        String v_transfer_amount = transferOutVH.inp_transfer_amount.getText().toString().trim();
-        //交易手续费
-        String v_fee_amount = transferOutVH.tv_fee.getText().toString().trim();
-        //创建转账信息
-        List<TxReq.TxMsg> tx_msg_list = BHRawTransaction.createTransferMsg(to_address,v_transfer_amount,m_symbol);
-        mTransactionViewModel.transferInnerExt(this,password,v_fee_amount,tx_msg_list);
-    }
-
-
-    //更新可用资产
-    private void updateAssets(AccountInfo accountInfo) {
-        transferOutVH.updateAssets();
-    }
-
-    //更新转账状态
-    private void updateTransferStatus(LoadDataModel ldm) {
-        if(ldm.loadingStatus== LoadingStatus.SUCCESS){
-            ToastUtils.showToast(getResources().getString(R.string.transfer_in_success));
-            EventBus.getDefault().post(new TransctionEvent());
-            finish();
-        }else{
-            //ToastUtils.showToast(getResources().getString(R.string.transfer_in_fail));
-        }
-    }
-
-
 
     public void refreshFinish(){
         def_dailog_count++;

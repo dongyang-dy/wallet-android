@@ -1,7 +1,5 @@
 package com.bhex.wallet.common.cache;
 
-import com.bhex.tools.utils.LogUtils;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,7 +28,7 @@ public class CacheCenter {
 
     private  CacheCenter(){
         cacheLisenterMap.put(SymbolCache.CACHE_KEY, SymbolCache.getInstance());
-        cacheLisenterMap.put(TokenMapCache.CACHE_CHAIN_KEY,TokenMapCache.getInstance());
+        cacheLisenterMap.put(ConfigMapCache.CACHE_CHAIN_KEY, ConfigMapCache.getInstance());
         cacheLisenterMap.put(RatesCache.CACHE_KEY, RatesCache.getInstance());
     }
 
@@ -54,12 +52,12 @@ public class CacheCenter {
         return (RatesCache)cacheLisenterMap.get(RatesCache.CACHE_KEY);
     }
 
-    public synchronized TokenMapCache getTokenMapCache(){
-        if (cacheLisenterMap.containsKey(TokenMapCache.CACHE_CHAIN_KEY)){
-            return (TokenMapCache)cacheLisenterMap.get(TokenMapCache.CACHE_CHAIN_KEY);
+    public synchronized ConfigMapCache getTokenMapCache(){
+        if (cacheLisenterMap.containsKey(ConfigMapCache.CACHE_CHAIN_KEY)){
+            return (ConfigMapCache)cacheLisenterMap.get(ConfigMapCache.CACHE_CHAIN_KEY);
         }
-        cacheLisenterMap.put(TokenMapCache.CACHE_CHAIN_KEY, TokenMapCache.getInstance());
-        return (TokenMapCache)cacheLisenterMap.get(TokenMapCache.CACHE_CHAIN_KEY);
+        cacheLisenterMap.put(ConfigMapCache.CACHE_CHAIN_KEY, ConfigMapCache.getInstance());
+        return (ConfigMapCache)cacheLisenterMap.get(ConfigMapCache.CACHE_CHAIN_KEY);
     }
 
     /**

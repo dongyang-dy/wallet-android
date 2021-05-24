@@ -57,6 +57,7 @@
         android:layout_marginEnd="20dp"
         android:textColor="@color/global_main_text_color"
         android:textSize="15sp"
+        android:visibility="invisible"
         tools:text="BTC"/>
 
 
@@ -70,6 +71,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:textColor="@color/global_label_text_color"
         android:textSize="12sp"
+        android:visibility="invisible"
         tools:text="余额：1.12345678"/>
 
     <!--<androidx.appcompat.widget.AppCompatImageView

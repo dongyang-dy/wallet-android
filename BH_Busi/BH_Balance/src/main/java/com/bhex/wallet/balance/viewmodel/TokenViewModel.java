@@ -15,7 +15,7 @@ import com.bhex.network.observer.BHBaseObserver;
 import com.bhex.network.utils.JsonUtils;
 import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.ToolUtils;
-import com.bhex.wallet.balance.helper.TokenHelper;
+import com.bhex.wallet.balance.helper.BHTokenHelper;
 import com.bhex.wallet.common.api.BHttpApi;
 import com.bhex.wallet.common.api.BHttpApiInterface;
 import com.bhex.wallet.common.cache.CacheCenter;
@@ -169,7 +169,7 @@ public class TokenViewModel extends ViewModel {
                     SymbolCache.getInstance().putSymbolToMap(coinList,2);
                 }
 
-                List<BHToken> resList = TokenHelper.loadVerifiedToken(chain);
+                List<BHToken> resList = BHTokenHelper.loadVerifiedToken(chain);
                 //过滤所需要币对
                 //RefStreams.of(coinList).filter(bhTokens -> bhTokens.iterator().next().chain==chain);
                 ldm.setData(resList);
@@ -179,7 +179,7 @@ public class TokenViewModel extends ViewModel {
             @Override
             protected void onFailure(int code, String errorMsg) {
                 super.onFailure(code, errorMsg);
-                List<BHToken> list = TokenHelper.loadVerifiedToken(chain);
+                List<BHToken> list = BHTokenHelper.loadVerifiedToken(chain);
                 if(ToolUtils.checkListIsEmpty(list)){
                     LoadDataModel ldm = new LoadDataModel(LoadingStatus.ERROR,errorMsg);
                     queryLiveData.postValue(ldm);

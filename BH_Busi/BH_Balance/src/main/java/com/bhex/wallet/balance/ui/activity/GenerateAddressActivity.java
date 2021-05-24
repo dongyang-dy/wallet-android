@@ -1,5 +1,6 @@
 package com.bhex.wallet.balance.ui.activity;
 
+import android.graphics.drawable.GradientDrawable;
 import android.text.TextUtils;
 import android.view.View;
 
@@ -9,17 +10,19 @@ import androidx.lifecycle.ViewModelProviders;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.bhex.lib.uikit.util.ShapeUtils;
 import com.bhex.network.base.LoadDataModel;
 import com.bhex.network.base.LoadingStatus;
 import com.bhex.network.utils.ToastUtils;
 import com.bhex.tools.constants.BHConstants;
+import com.bhex.tools.utils.ColorUtil;
 import com.bhex.tools.utils.RegexUtil;
 import com.bhex.wallet.balance.R;
 import com.bhex.wallet.balance.event.TransctionEvent;
 import com.bhex.wallet.balance.helper.BHBalanceHelper;
+import com.bhex.wallet.balance.helper.BHTokenHelper;
 import com.bhex.wallet.balance.viewmodel.TransactionViewModel;
 import com.bhex.wallet.common.base.BaseActivity;
-import com.bhex.wallet.common.cache.SymbolCache;
 import com.bhex.wallet.common.config.ARouterConfig;
 import com.bhex.wallet.common.db.entity.BHWallet;
 import com.bhex.wallet.common.manager.BHUserManager;
@@ -58,6 +61,8 @@ public class GenerateAddressActivity extends BaseActivity
 
     private String gas_fee;
 
+    private AppCompatTextView btn_crosslink_address;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_generate_address;
@@ -67,7 +72,8 @@ public class GenerateAddressActivity extends BaseActivity
     @Override
     protected void initView() {
         ARouter.getInstance().inject(this);
-        symbolToken = SymbolCache.getInstance().getBHToken(symbol);
+        symbolToken = BHTokenHelper.getCrossBHToken(symbol,mChain);
+        //
         bhtBalance = BHBalanceHelper.getBHBalanceFromAccount(BHConstants.BHT_TOKEN);
         mCurrentWallet = BHUserManager.getInstance().getCurrentBhWallet();
         initViewContent();
@@ -75,6 +81,7 @@ public class GenerateAddressActivity extends BaseActivity
 
     //初始化内容
     private void initViewContent() {
+        btn_crosslink_address = findViewById(R.id.btn_crosslink_address);
         //标题
         AppCompatTextView tv_center_title = findViewById(R.id.tv_center_title);
         tv_center_title.setText(getResources().getString(R.string.create_crosslink_deposit_address));
@@ -95,6 +102,11 @@ public class GenerateAddressActivity extends BaseActivity
         AppCompatTextView tv_gas_fee = findViewById(R.id.tv_gas_fee);
         tv_gas_fee.setText(gas_fee+" "+BHConstants.BHT_TOKEN.toUpperCase());
 
+        //按钮背景
+        GradientDrawable btn_drawable =
+                ShapeUtils.getRoundRectDrawable((int)getResources().getDimension(R.dimen.main_radius_conner),
+                        ColorUtil.getColor(this,R.color.btn_blue_bg_color));
+        btn_crosslink_address.setBackgroundDrawable(btn_drawable);
     }
 
     @Override
@@ -103,7 +115,7 @@ public class GenerateAddressActivity extends BaseActivity
         transactionViewModel.mutableLiveData.observe(this,ldm->{
             updateGenerateAddress(ldm);
         });
-        findViewById(R.id.btn_crosslink_address).setOnClickListener(this::onViewClicked);
+        btn_crosslink_address.setOnClickListener(this::onViewClicked);
     }
 
 
@@ -150,7 +162,6 @@ public class GenerateAddressActivity extends BaseActivity
             ToastUtils.showToast(getResources().getString(R.string.link_outter_generating));
             EventBus.getDefault().post(new TransctionEvent());
             SequenceManager.getInstance().updateAddressStatus(symbolToken.chain);
-            //AddressGenaratorManager.getInstance().putAddressStatus(symbolToken.chain,ldm.getData());
             finish();
         }
     }
@@ -158,7 +169,7 @@ public class GenerateAddressActivity extends BaseActivity
     //密码提示回调
     @Override
     public void confirmAction(String password, int position,int way) {
-        List<TxReq.TxMsg> tx_msg_list = BHRawTransaction.createGenerateAddressMsg(symbol);
+        List<TxReq.TxMsg> tx_msg_list = BHRawTransaction.createGenerateAddressMsg(mChain);
         transactionViewModel.transferInnerExt(this,password,gas_fee,tx_msg_list);
     }
 }

@@ -119,10 +119,10 @@ public class AccountInfo {
          */
 
         public String symbol;
+        public String chain;
         public boolean is_native;
         public String amount;
         public String external_address;
-        public boolean enable_sendtx;
         public String frozen_amount;
 
         /*public String getSymbol() {

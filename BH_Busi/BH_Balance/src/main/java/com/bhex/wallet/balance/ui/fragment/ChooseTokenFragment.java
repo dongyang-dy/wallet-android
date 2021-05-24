@@ -94,7 +94,7 @@ public class ChooseTokenFragment extends BaseDialogFragment {
         RecycleViewExtDivider ItemDecoration = new RecycleViewExtDivider(
                 getContext(), LinearLayoutManager.VERTICAL,
                 PixelUtils.dp2px(getActivity(),65),0,
-                ColorUtil.getColor(getContext(),R.color.dialog_fragment_divider_color));
+                ColorUtil.getColor(getContext(),R.color.global_divider_color));
 
         rec_token_list.addItemDecoration(ItemDecoration);
 
@@ -129,14 +129,6 @@ public class ChooseTokenFragment extends BaseDialogFragment {
         input_search_content.addTextChangedListener(mTextWatcher);
         btn_sort = mRootView.findViewById(R.id.btn_sort);
         btn_sort.setOnClickListener(v -> {
-            //Streams
-            /*List<BHToken> result = null;
-            if(isAsc){
-                result =  StreamSupport.stream(mDatas).sorted(Comparator.comparing(BHToken::getName)).collect(Collectors.toList());
-            }else{
-                result =  StreamSupport.stream(mDatas).sorted(Comparator.comparing(BHToken::getName).reversed()).collect(Collectors.toList());
-
-            }*/
             List<BHToken> result = new ArrayList<>(mDatas);
             isAsc=!isAsc;
             if(isAsc){
@@ -147,9 +139,6 @@ public class ChooseTokenFragment extends BaseDialogFragment {
             sortResult(isAsc,result);
             mChooseTokenAdapter.setNewInstance(result);
         });
-
-        /*Drawable drawable = ColorUtil.getDrawable(getActivity(),R.mipmap.ic_sort,R.color.global_main_text_color);
-        btn_sort.setBackgroundDrawable(drawable);*/
     }
 
     public static ChooseTokenFragment showFragment(String symbol,String origin,OnChooseTokenListener listener){

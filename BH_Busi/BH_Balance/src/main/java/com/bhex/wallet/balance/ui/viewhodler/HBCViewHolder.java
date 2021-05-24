@@ -44,7 +44,7 @@ public class HBCViewHolder {
     public HBCViewHolder initView(BaseActivity activity,LinearLayout view, BHBalance balance){
         viewHolder = view;
         mContext = activity;
-        tv_token_name = view.findViewById(R.id.tv_token_name);
+        /*tv_token_name = view.findViewById(R.id.tv_token_name);
         tv_hbc_address = view.findViewById(R.id.tv_hbc_address);
         tv_hbc_addr_label = view.findViewById(R.id.tv_hbc_addr_label);
 
@@ -67,7 +67,7 @@ public class HBCViewHolder {
         });
 
         GradientDrawable drawable = ShapeUtils.getRoundRectDrawable(28, ColorUtil.getColor(mContext, R.color.white));
-        tv_apply_test_coin.setBackground(drawable);
+        tv_apply_test_coin.setBackground(drawable);*/
 
         return _instance;
     }

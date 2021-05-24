@@ -13,10 +13,8 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.ColorUtil;
 import com.bhex.tools.utils.PixelUtils;
 import com.bhex.lib.uikit.widget.EmptyLayout;
@@ -29,7 +27,7 @@ import com.bhex.tools.utils.ToolUtils;
 import com.bhex.wallet.balance.R;
 import com.bhex.wallet.balance.R2;
 import com.bhex.wallet.balance.adapter.CoinSearchAdapter;
-import com.bhex.wallet.balance.helper.TokenHelper;
+import com.bhex.wallet.balance.helper.BHTokenHelper;
 import com.bhex.wallet.balance.viewmodel.TokenViewModel;
 import com.bhex.wallet.common.config.ARouterConfig;
 import com.bhex.wallet.common.model.BHToken;
@@ -153,7 +151,7 @@ public class CoinSearchActivity extends BaseActivity implements OnRefreshListene
                 return;
 
             }
-            mTokenList = TokenHelper.loadVerifiedToken(null);
+            mTokenList = BHTokenHelper.loadVerifiedToken(null);
             if(ToolUtils.checkListIsEmpty(mTokenList)){
                 empty_layout.showNoData();
             }else {

@@ -15,7 +15,6 @@ public class BHConstants {
     public static final String FRIST_BOOT = "frist_boot";
     //"com.jrmf360.action.ENTER"
     public static final String  MAIN_PATH = BuildConfig.K_APPLICATION_ID +".action.main";
-
     //选择的货币
     public static final String CURRENCY_USED = "currency";
 
@@ -77,7 +76,6 @@ public class BHConstants {
     public static final String Label_Account = "accountLiveData";
     //助记词备份
     public static final String Label_Mnemonic_Back = "mnemonicBackLiveData";
-
 
     public static final String VETO_OPTION_YES = "Yes";
     public static final String VETO_OPTION_NO = "No";

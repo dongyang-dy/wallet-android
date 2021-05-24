@@ -13,6 +13,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.bhex.lib.uikit.util.ShapeUtils;
 import com.bhex.network.RxSchedulersHelper;
 import com.bhex.network.observer.BHProgressObserver;
@@ -30,11 +31,14 @@ import com.bhex.wallet.balance.helper.BHBalanceHelper;
 import com.bhex.wallet.balance.ui.activity.TransferInActivity;
 import com.bhex.wallet.balance.ui.activity.TransferInCrossActivity;
 import com.bhex.wallet.balance.ui.fragment.DepositTipsFragment;
+import com.bhex.wallet.common.cache.ConfigMapCache;
 import com.bhex.wallet.common.cache.SymbolCache;
+import com.bhex.wallet.common.config.ARouterConfig;
 import com.bhex.wallet.common.db.entity.BHWallet;
 import com.bhex.wallet.common.enums.BH_BUSI_TYPE;
 import com.bhex.wallet.common.manager.BHUserManager;
 import com.bhex.wallet.common.model.BHBalance;
+import com.bhex.wallet.common.model.BHChain;
 import com.bhex.wallet.common.model.BHToken;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.uber.autodispose.AutoDispose;
@@ -51,11 +55,18 @@ public class TransferInCrossVH {
     private TransferInCrossActivity mActivity;
     private View view;
     public String mSymbol;
+    public BHToken mChainToken;
 
     //token-icon
     public AppCompatImageView iv_token_icon;
     //token-name
     public AppCompatTextView tv_token_name;
+
+    //chain-icon
+    public AppCompatImageView iv_chain_icon;
+    //chain-name
+    public AppCompatTextView tv_chain_name;
+
     //token-二维码地址
     public AppCompatImageView iv_address_qr;
     //token-地址
@@ -69,16 +80,28 @@ public class TransferInCrossVH {
     public AppCompatTextView tv_min_deposit_amount;
     //充值入账数量
     public AppCompatTextView tv_deposit_collect_amount;
+    public LinearLayout layout_deposit;
+    //
+    public LinearLayout layout_genarate_address;
+
+    //生成跨链地址
+    public AppCompatTextView btn_genarate_address;
+
     public TransferInCrossVH(TransferInCrossActivity activity, View view, String  symbol) {
         this.mActivity = activity;
         this.view = view;
         this.mSymbol = symbol;
+
         //初始化布局
         btn_save_qr = view.findViewById(R.id.btn_save_qr);
         btn_copy_address = view.findViewById(R.id.btn_copy_address);
         //
         iv_token_icon = view.findViewById(R.id.iv_token_icon);
         tv_token_name = view.findViewById(R.id.tv_token_name);
+
+        iv_chain_icon = view.findViewById(R.id.iv_chain_icon);
+        tv_chain_name = view.findViewById(R.id.tv_chain_name);
+
         //
         iv_address_qr = view.findViewById(R.id.iv_address_qr);
         tv_token_address = view.findViewById(R.id.tv_token_address);
@@ -95,6 +118,14 @@ public class TransferInCrossVH {
                 ColorUtil.getColor(activity,R.color.btn_blue_bg_color));
         btn_copy_address.setBackgroundDrawable(btn_copy_drawable);
 
+        layout_deposit = view.findViewById(R.id.layout_deposit);
+
+        layout_genarate_address = view.findViewById(R.id.layout_genarate_address);
+
+        //
+        btn_genarate_address = view.findViewById(R.id.btn_genarate_address);
+        btn_genarate_address.setBackgroundDrawable(btn_copy_drawable);
+
         //复制地址
         btn_copy_address.setOnClickListener(v -> {
             if (TextUtils.isEmpty(tv_token_address.getText())) {
@@ -109,11 +140,6 @@ public class TransferInCrossVH {
             requestPermissions();
         });
 
-        //入账费用提示
-        /*view.findViewById(R.id.iv_help).setOnClickListener(v->{
-            DepositTipsFragment.newInstance().show(mActivity.getSupportFragmentManager(),DepositTipsFragment.class.getName());
-        });*/
-
         view.findViewById(R.id.tv_min_deposit).setOnClickListener(v->{
             DepositTipsFragment.newInstance(mActivity.getString(R.string.cross_min_deposit_count_tips))
                     .show(mActivity.getSupportFragmentManager(),DepositTipsFragment.class.getName());
@@ -123,35 +149,66 @@ public class TransferInCrossVH {
             DepositTipsFragment.newInstance(mActivity.getString(R.string.cross_collect_deposit_tips))
                     .show(mActivity.getSupportFragmentManager(),DepositTipsFragment.class.getName());
         });
+
+        BHToken token = SymbolCache.getInstance().getBHToken(mSymbol);
+        //获取对应的链
+        if(ToolUtils.checkListIsEmpty(token.uni_tokens)) {
+            return;
+        }
+        mChainToken = token.uni_tokens.get(0);
+
+        //选择链
+        btn_genarate_address.setOnClickListener(v -> {
+            ARouter.getInstance()
+                    .build(ARouterConfig.Balance.Balance_cross_address)
+                    .withString(BHConstants.SYMBOL,mSymbol)
+                    .withString(BHConstants.CHAIN,mChainToken.chain)
+                    .navigation();
+        });
     }
 
-    public void updateTokenInfo(String  symbol){
+    public void updateTokenInfo(String symbol){
         this.mSymbol = symbol;
         BHToken token = SymbolCache.getInstance().getBHToken(mSymbol);
         ImageLoaderUtil.loadImageView(mActivity,token.logo,iv_token_icon,R.mipmap.ic_default_coin);
         tv_token_name.setText(token.name.toUpperCase());
 
-        //获取链对应的资产
-        BHBalance chainBalance = BHBalanceHelper.getBHBalanceFromAccount(token.chain);
-        String deposit_address = chainBalance!=null?chainBalance.external_address:"";
+        //获取对应的链
+        if(mChainToken==null) {
+            return;
+        }
 
-        //二维码
-        Bitmap bitmap = QRCodeEncoder.syncEncodeQRCode(deposit_address,PixelUtils.dp2px(mActivity,168),
-                ColorUtil.getColor(mActivity,android.R.color.black));
-        iv_address_qr.setImageBitmap(bitmap);
-        //链上的地址
-        tv_token_address.setText(chainBalance.external_address);
+        //链Token信息
+        BHChain bhChain = ConfigMapCache.getInstance().getAllChains().get(mChainToken.chain);
+        //链图标
+        ImageLoaderUtil.loadImageViewToCircle(mActivity,bhChain.logo,iv_chain_icon,R.mipmap.ic_default_coin);
+        tv_chain_name.setText(bhChain.full_name);
+
+        //获取链对应的地址
+        //BHBalance chainBalance = BHBalanceHelper.getBHBalanceFromAccount(mChainToken.symbol);
+        String chain_address = BHBalanceHelper.queryAddressByChain(mChainToken.chain);
+
+        if(!TextUtils.isEmpty(chain_address)){
+            layout_deposit.setVisibility(View.VISIBLE);
+            layout_genarate_address.setVisibility(View.GONE);
+            //二维码
+            Bitmap bitmap = QRCodeEncoder.syncEncodeQRCode(chain_address,PixelUtils.dp2px(mActivity,168),
+                    ColorUtil.getColor(mActivity,android.R.color.black));
+            iv_address_qr.setImageBitmap(bitmap);
+            //链上的地址
+            tv_token_address.setText(chain_address);
+        }else{
+            layout_deposit.setVisibility(View.GONE);
+            layout_genarate_address.setVisibility(View.VISIBLE);
+        }
+
 
         //最小充值数量
-        /*String v_amount_str =  String.format(mActivity.getString(R.string.string_deposit_threshold),
-                token.name.toUpperCase(),token.deposit_threshold+" "+token.name.toUpperCase());*/
-        String v_amount_str = token.deposit_threshold+" "+token.name.toUpperCase();
+        String v_amount_str = mChainToken.deposit_threshold+" "+mChainToken.name.toUpperCase();
         tv_min_deposit_amount.setText(v_amount_str);
 
         //充值归集费
-        /*String v_amount_str2 =  String.format(mActivity.getString(R.string.string_deposit_enter_fee),
-                token.collect_fee+" "+token.chain.toUpperCase());*/
-        String v_amount_str2 = token.collect_fee+" "+token.chain.toUpperCase();
+        String v_amount_str2 = mChainToken.collect_fee+" "+mChainToken.chain.toUpperCase();
         tv_deposit_collect_amount.setText(v_amount_str2);
     }
 
@@ -186,9 +243,6 @@ public class TransferInCrossVH {
                 ToastUtils.showToast(mActivity.getResources().getString(R.string.save_success));
             }
         };
-
-        /*Bitmap bitmap = QREncodUtil.createQRCode(tv_token_address.getText().toString(),
-                PixelUtils.dp2px(mActivity,160),PixelUtils.dp2px(mActivity,160),null);*/
 
         Bitmap bitmap = QRCodeEncoder.syncEncodeQRCode(tv_token_address.getText().toString(),PixelUtils.dp2px(mActivity,168),
                 ColorUtil.getColor(mActivity,android.R.color.black));

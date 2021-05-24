@@ -40,13 +40,13 @@
         -->
     </style>
 
-    <style name="text_flag_01">
+    <!--<style name="text_flag_01">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_margin">4dp</item>
         <item name="android:background">@drawable/flag_01</item>
         <item name="android:textColor">#ffffff</item>
-    </style>
+    </style>-->
 
     <!--<style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -160,7 +160,7 @@
         <item name="android:stateListAnimator">@null</item>
     </style>
 
-    <style name="tx_native_link_token">
+    <!--<style name="tx_native_link_token">
         <item name="android:paddingTop">1.5dp</item>
         <item name="android:paddingBottom">1.5dp</item>
         <item name="android:paddingStart">4dp</item>
@@ -169,7 +169,7 @@
         <item name="android:textStyle">normal</item>
         <item name="android:textColor">@color/global_main_text_color</item>
         <item name="android:background">@drawable/shape_native_token</item>
-    </style>
+    </style>-->
 
     <style name="tx_cross_link_token">
         <item name="android:paddingTop">1.5dp</item>
@@ -182,7 +182,7 @@
         <item name="android:background">@drawable/shape_dark20_blue</item>
     </style>
 
-    <style name="token_label_style">
+    <!--<style name="token_label_style">
         <item name="android:paddingTop">1.5dp</item>
         <item name="android:paddingBottom">1.5dp</item>
         <item name="android:paddingStart">4dp</item>
@@ -190,7 +190,7 @@
         <item name="android:textSize">10sp</item>
         <item name="android:textStyle">normal</item>
         <item name="android:background">@drawable/shape_native_token</item>
-    </style>
+    </style>-->
 
     <style name="tx_status_success">
         <item name="android:paddingTop">1dp</item>

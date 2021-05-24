@@ -182,9 +182,7 @@ public class BHBalanceHelper {
             }else{
                 res.add(entry.getValue());
             }
-            /*if(entry.getValue().chain.equalsIgnoreCase(chainToken.chain)){
-                res.add(entry.getValue());
-            }*/
+
         }
 
         Collections.sort(res,((o1, o2) -> {
@@ -260,6 +258,8 @@ public class BHBalanceHelper {
         tv_asset.setTag(R.id.tag_first,allTokenAssetsText);
     }
 
+
+    //获取默认Token列表
     public static List<BHToken> loadDefaultToken() {
         LinkedHashMap<String,BHToken> default_tokens = CacheCenter.getInstance().getSymbolCache().getDefaultTokenList();
         List<BHToken> res = new ArrayList<>();
@@ -277,6 +277,24 @@ public class BHBalanceHelper {
         return res;
     }
 
+    //获取链地址
+    public static String queryAddressByChain(String chain){
+        AccountInfo accountInfo = BHUserManager.getInstance().getAccountInfo();
+        if(accountInfo==null){
+            return "";
+        }
+        if(ToolUtils.checkListIsEmpty(accountInfo.assets)){
+            return "";
+        }
 
+        List<AccountInfo.AssetsBean> assetList = accountInfo.assets;
 
+        for(AccountInfo.AssetsBean assetsBean:assetList){
+            if(!assetsBean.chain.equals(chain)){
+                continue;
+            }
+            return  assetsBean.external_address;
+        }
+        return "";
+    }
 }

@@ -26,6 +26,7 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,6 +38,7 @@ public class ChooseChainFragment extends BaseDialogFragment {
     private ChainAdapter chainAdapter;
     private RecyclerView rec_chain_list;
     private String mChain;
+    private List<BHChain> mChainList;
     private ChooseChainListener mListener;
 
     @Override
@@ -51,9 +53,9 @@ public class ChooseChainFragment extends BaseDialogFragment {
         GradientDrawable drawable = ShapeUtils.getRoundRectTopDrawable(PixelUtils.dp2px(getContext(), 6), ColorUtil.getColor(getContext(), R.color.app_bg), true, 0);
         mRootView.setBackground(drawable);
 
-        List<BHChain> bhChainList = CacheCenter.getInstance().getTokenMapCache().getLoadChains();
+        //List<BHChain> bhChainList = new ArrayList<>(CacheCenter.getInstance().getTokenMapCache().loadChains().values());
         rec_chain_list = mRootView.findViewById(R.id.rec_chain_list);
-        rec_chain_list.setAdapter(chainAdapter = new ChainAdapter(bhChainList));
+        rec_chain_list.setAdapter(chainAdapter = new ChainAdapter(mChainList));
 
         chainAdapter.setOnItemClickListener((adapter, view1, position) -> {
             BHChain bhChain = chainAdapter.getData().get(position);
@@ -68,8 +70,9 @@ public class ChooseChainFragment extends BaseDialogFragment {
         });
     }
 
-    public static ChooseChainFragment getInstance(String chain,ChooseChainListener listener){
+    public static ChooseChainFragment getInstance(List<BHChain> list, String chain,ChooseChainListener listener){
         ChooseChainFragment fragment = new ChooseChainFragment();
+        fragment.mChainList = list;
         fragment.mChain = chain;
         fragment.mListener = listener;
         return fragment;
@@ -83,13 +86,13 @@ public class ChooseChainFragment extends BaseDialogFragment {
 
         @Override
         protected void convert(@NotNull BaseViewHolder holder, BHChain bhChain) {
-            holder.setText(R.id.tv_chain_name,bhChain.chain.toUpperCase());
+            //holder.setText(R.id.tv_chain_name,bhChain.chain.toUpperCase());
             holder.setText(R.id.tv_chain_full,bhChain.full_name);
             AppCompatCheckBox  ck_status = holder.getView(R.id.ck_status);
 
             AppCompatImageView iv_chain_icon = holder.getView(R.id.iv_chain_icon);
-            BHToken bhToken = SymbolCache.getInstance().getBHToken(bhChain.chain);
-            ImageLoaderUtil.loadImageView(getContext(),bhToken!=null?bhToken.logo:"",iv_chain_icon,R.mipmap.ic_default_coin);
+            //BHToken bhToken = SymbolCache.getInstance().getBHToken(bhChain.chain);
+            ImageLoaderUtil.loadImageView(getContext(),bhChain.logo,iv_chain_icon,R.mipmap.ic_default_coin);
 
             if(mChain.equals(bhChain.chain)){
                 ck_status.setChecked(true);

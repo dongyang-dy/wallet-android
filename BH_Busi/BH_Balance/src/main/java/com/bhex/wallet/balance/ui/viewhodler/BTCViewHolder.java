@@ -51,7 +51,7 @@ public class BTCViewHolder {
     public BTCViewHolder initView(BaseActivity activity, RelativeLayout view, BHBalance balance){
         viewHolder = view;
         mContext = activity;
-        layout_btc_address = view.findViewById(R.id.layout_btc_address);
+        /*layout_btc_address = view.findViewById(R.id.layout_btc_address);
         tv_token_name = view.findViewById(R.id.tv_token_name);
         tv_hbc_address = view.findViewById(R.id.tv_hbc_address);
         tv_hbc_addr_label = view.findViewById(R.id.tv_hbc_addr_label);
@@ -74,8 +74,8 @@ public class BTCViewHolder {
         ColorUtil.setIconColor(imageView,51,117,224,255);
 
         view.findViewById(R.id.layout_index_0).bringToFront();
-        /*CardView cardView = view.findViewById(R.id.card_view);
-        CardUtil.setCardShadowColor(cardView, mContext.getResources().getColor(R.color.blue_1F3375E0), mContext.getResources().getColor(R.color.blue_1F3375E0));*/
+        *//*CardView cardView = view.findViewById(R.id.card_view);
+        CardUtil.setCardShadowColor(cardView, mContext.getResources().getColor(R.color.blue_1F3375E0), mContext.getResources().getColor(R.color.blue_1F3375E0));*//*
 
         view.findViewById(R.id.iv_token_qr).setOnClickListener(v -> {
             showBTCQRDialog();
@@ -88,7 +88,7 @@ public class BTCViewHolder {
 
         view.findViewById(R.id.btn_make_address).setOnClickListener(v->{
             makeAddressAction();
-        });
+        });*/
 
 
         return _instance;

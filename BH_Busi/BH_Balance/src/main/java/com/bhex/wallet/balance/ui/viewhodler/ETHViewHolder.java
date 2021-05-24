@@ -55,7 +55,7 @@ public class ETHViewHolder {
     //
     public void setTokenAddress(String symbol) {
         //链地址-label
-        AppCompatTextView tv_token_address_label = viewHolder.findViewById(R.id.tv_token_address_label);
+        /*AppCompatTextView tv_token_address_label = viewHolder.findViewById(R.id.tv_token_address_label);
 
         XUILinearLayout layout_token_address = viewHolder.findViewById(R.id.layout_token_address);
         AppCompatTextView tv_token_address = viewHolder.findViewById(R.id.tv_token_address);
@@ -102,7 +102,7 @@ public class ETHViewHolder {
             });
             layout_token_address.setVisibility(View.GONE);
             layout_token_address_make.setVisibility(View.VISIBLE);
-        }
+        }*/
     }
     /*public void setTokenAddress(String symbol) {
         XUILinearLayout layout_token_address = viewHolder.findViewById(R.id.layout_token_address);

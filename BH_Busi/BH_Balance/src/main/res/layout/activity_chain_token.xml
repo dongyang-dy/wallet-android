@@ -27,9 +27,9 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <include
+                <!--<include
                     android:id="@+id/layout_index_1"
-                    layout="@layout/layout_eth" />
+                    layout="@layout/layout_eth" />-->
 
                 <View
                     android:layout_width="match_parent"

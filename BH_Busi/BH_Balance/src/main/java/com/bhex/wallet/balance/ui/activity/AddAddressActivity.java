@@ -24,14 +24,18 @@ import com.bhex.tools.utils.LogUtils;
 import com.bhex.tools.utils.PathUtils;
 import com.bhex.tools.utils.ToolUtils;
 import com.bhex.wallet.balance.R;
+import com.bhex.wallet.balance.helper.BHTokenHelper;
 import com.bhex.wallet.balance.ui.fragment.ChooseChainFragment;
 import com.bhex.wallet.balance.ui.viewhodler.AddAddressVH;
 import com.bhex.wallet.balance.viewmodel.AddressBookViewModel;
 import com.bhex.wallet.common.base.BaseActivity;
+import com.bhex.wallet.common.cache.CacheCenter;
+import com.bhex.wallet.common.cache.ConfigMapCache;
 import com.bhex.wallet.common.cache.SymbolCache;
 import com.bhex.wallet.common.config.ARouterConfig;
 import com.bhex.wallet.common.db.entity.BHAddressBook;
 import com.bhex.wallet.common.manager.BHUserManager;
+import com.bhex.wallet.common.model.BHChain;
 import com.bhex.wallet.common.model.BHToken;
 import com.bhex.wallet.common.ui.activity.BHQrScanActivity;
 
@@ -39,6 +43,8 @@ import org.bitcoinj.core.Address;
 import org.bitcoinj.core.NetworkParameters;
 import org.bitcoinj.params.MainNetParams;
 import org.bitcoinj.params.TestNet3Params;
+
+import java.util.List;
 
 /**
  * @author gongdongyagn
@@ -81,7 +87,8 @@ public class AddAddressActivity extends BaseActivity {
         });
 
         addAddressVH.layout_choose_chain.setOnClickListener(v -> {
-            ChooseChainFragment.getInstance(bhChainToken.chain,AddAddressActivity.this::chooseChainAction)
+            List<BHChain> bhChainList = BHTokenHelper.getAllBHChainList();
+            ChooseChainFragment.getInstance(bhChainList,bhChainToken.chain,AddAddressActivity.this::chooseChainAction)
                     .show(getSupportFragmentManager(),ChooseChainFragment.class.getName());
         });
     }

@@ -19,7 +19,7 @@
             android:id="@+id/tv_pay_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/choose_address_type"
+            android:text="@string/chain_type"
             android:textSize="20sp"
             android:layout_centerInParent="true"
             android:textColor="@color/global_main_text_color"/>

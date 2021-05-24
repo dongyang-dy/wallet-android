@@ -8,7 +8,7 @@ public class BHChain {
     public String chain;
     public String full_name;
     public boolean single_coin;
-
+    public String logo;
     public BHChain() {
     }
 

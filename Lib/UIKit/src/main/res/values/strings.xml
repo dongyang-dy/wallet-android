@@ -87,7 +87,7 @@
     <string name="import_private_key">导入私钥</string>
     <string name="hint_private_key_input">请输入私钥</string>
     <string name="transfer">转账</string>
-    <string name="transfer2">转账</string>
+    <!--<string name="transfer2">转账</string>-->
     <string name="confrim_transfer">确认转账</string>
     <string name="un_transfer">取消转账</string>
     <string name="make_collection">收款</string>
@@ -102,7 +102,7 @@
     <string name="bh_register_agreement_sub">《服务协议》</string>
     <string name="copy_address">复制地址</string>
     <string name="transfer_in">收款</string>
-    <string name="draw_coin">提现</string>
+    <string name="draw_coin">提币</string>
     <string name="hint_input_copy_address">输入或粘贴地址</string>
     <string name="draw_coin_count">提币数量</string>
     <string name="hint_withdraw_minAmount">最小提币数量%1$s%2$d</string>
@@ -156,6 +156,7 @@
     <string name="crosslink_make_address">跨链地址生成</string>
     <string name="crosslink_address">跨链地址</string>
     <string name="crosslink_deposit_address">跨链充值地址</string>
+    <string name="deposit_address">充值地址</string>
     <string name="cross_deposit">跨链充值</string>
     <string name="cross_withdraw">跨链提币</string>
     <string name="cross_deposit0">跨链充值</string>
@@ -232,7 +233,7 @@
     <string name="please_input_gas_fee">请输入手续费</string>
     <string name="error_input_gas_fes">手续费输入错误</string>
     <string name="gas_fee_high_available_fee">手续费不能大于可用HBC</string>
-    <string name="tip_crosslink_generate">提示：\n你正在为 %1$s 生成跨链充值地址，该地址将由跨链托管节点分布式生成，需要稍微等待一点时间。</string>
+    <string name="tip_crosslink_generate">你正在为 %1$s 生成跨链充值地址，该地址将由跨链托管节点分布式生成，需要稍微等待一点时间。</string>
     <string name="tab_governance_title">治理提案</string>
     <string name="tab_proposals_title">治理提案</string>
     <string name="create_proposals">发起</string>
@@ -534,7 +535,8 @@
     <string name="input_withdraw_address">请输入提币地址</string>
     <string name="input_enter_address">请输入或粘贴地址</string>
     <string name="cross_transfer_out_tips">您正在进行跨链提币,请务必确认提币地址为该链的原生公链地址</string>
-    <string name="transfer_inner_tips">您正在进行BHEX链内转账,请务必确认接收地址以HBC开头</string>
+    <!--<string name="transfer_inner_tips">您正在进行BHEX链内转账,请务必确认接收地址以HBC开头</string>-->
+    <string name="transfer_inner_tips">您正在进行链内转账,请确认地址格式为HBC开头</string>
     <string name="cross_transfer_highlight_text">该链的原生公链地址</string>
 
     <string name="confrim_create">确认创建</string>
@@ -590,4 +592,11 @@
     <string name="verified">已认证</string>
     <string name="unverified">未认证</string>
     <string name="address_exists">地址已存在</string>
+    <string name="chain_type">链类型</string>
+    <string name="deposit_token_name">币种</string>
+    <string name="transfer_token">转账币种</string>
+    <string name="withdraw_token">提币币种</string>
+    <string name="withdraw">提币</string>
+    <string name="confrim_withdraw">确认提币</string>
+    <string name="please_input_amount">请输入数量</string>
 </resources>

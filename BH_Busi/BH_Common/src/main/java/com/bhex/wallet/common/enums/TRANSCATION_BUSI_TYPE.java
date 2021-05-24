@@ -65,7 +65,7 @@ public enum TRANSCATION_BUSI_TYPE {
     }
 
     public static void init(Context context){
-        转账.label = context.getResources().getString(R.string.transfer2);
+        转账.label = context.getResources().getString(R.string.transfer);
         委托.label = context.getResources().getString(R.string.do_entrust);
         解委托.label = context.getResources().getString(R.string.relieve_entrust);
         跨链地址生成.label = context.getResources().getString(R.string.crosslink_address);

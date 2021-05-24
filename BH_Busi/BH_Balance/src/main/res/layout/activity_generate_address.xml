@@ -1,120 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.activity.GenerateAddressActivity">
+    android:layout_height="match_parent">
 
-    <include
-        layout="@layout/layout_toolbar"
-        />
-
-    <com.google.android.material.card.MaterialCardView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/main_margin_left"
-        android:layout_marginEnd="@dimen/main_margin_right"
-        app:cardElevation="0dp"
-        app:strokeWidth="2dp"
-        app:strokeColor="@color/global_divider_color"
-        app:cardCornerRadius="@dimen/main_radius_conner"
-        app:cardForegroundColor="@color/bg_trans"
-        app:cardBackgroundColor="@color/app_bg"
-        app:contentPaddingLeft="10dp"
-        app:contentPaddingRight="10dp"
-        app:contentPaddingTop="16dp"
-        app:contentPaddingBottom="16dp"
-        >
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.activity.GenerateAddressActivity">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_tip_content"
+        <include layout="@layout/layout_toolbar" />
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:textColor="@color/global_secondary_text_color"
-            android:lineSpacingExtra="3dp"
-            android:text="@string/tip_crosslink_generate"
-            />
-
-    </com.google.android.material.card.MaterialCardView>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="32dp"
-        >
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_create_fee_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:textSize="14sp"
-            android:textColor="@color/global_label_text_color"
-            android:text="@string/create_fee"
-            />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_create_fee"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:textSize="14sp"
-            android:textColor="@color/global_secondary_text_color"
-            tools:text="0.0003 HBC"
-            />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="32dp"
-        >
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_gas_fee_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:textSize="14sp"
-            android:textColor="@color/global_label_text_color"
-            android:text="@string/fee"
-            />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_gas_fee"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:textSize="14sp"
-            android:textColor="@color/global_secondary_text_color"
-            tools:text="0.0003 HBC"
-            />
-    </RelativeLayout>
+            android:background="@color/card_bg_color"
+            android:padding="16dp">
 
 
-    <com.google.android.material.button.MaterialButton
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_tip_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@mipmap/ic_info"
+                android:drawablePadding="16dp"
+                android:lineSpacingExtra="3dp"
+                android:text="@string/tip_crosslink_generate"
+                android:textColor="@color/global_main_text_color"
+                android:textSize="12sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginRight="16dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_create_fee_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:text="@string/create_fee"
+                android:textColor="@color/item_label_text_color"
+                android:textSize="14sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_create_fee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:textColor="@color/global_main_text_color"
+                android:textSize="14sp"
+                tools:text="0.0003 HBC" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="16dp"
+            android:background="@color/global_divider_color" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_gas_fee_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:text="@string/fee"
+                android:textColor="@color/global_label_text_color"
+                android:textSize="14sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_gas_fee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:textColor="@color/global_main_text_color"
+                android:textSize="14sp"
+                tools:text="0.0003 HBC" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="16dp"
+            android:background="@color/global_divider_color" />
+
+
+
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/btn_crosslink_address"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginTop="32dp"
+        android:layout_alignParentBottom="true"
         android:layout_marginStart="@dimen/main_margin_left"
         android:layout_marginEnd="@dimen/main_margin_right"
-        android:layout_gravity="bottom"
-        android:insetBottom="0dp"
-        android:insetTop="0dp"
-        app:backgroundTint="@color/global_button_bg_color"
-        app:cornerRadius="@dimen/main_radius_conner"
-        style="@style/main_material_btn"
-        android:textColor="@color/global_button_text_color"
         android:text="@string/confrim_create"
-        android:enabled="true"
-        />
+        android:textColor="@color/global_button_text_color"
+        android:textSize="14sp"
+        android:layout_marginBottom="24dp"
+        android:gravity="center"
+        tools:background="@color/btn_blue_bg_color" />
 
-</LinearLayout>
+</RelativeLayout>
