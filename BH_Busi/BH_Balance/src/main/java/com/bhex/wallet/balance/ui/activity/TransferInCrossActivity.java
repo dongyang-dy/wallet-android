@@ -10,6 +10,9 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.bhex.tools.constants.BHConstants;
 import com.bhex.wallet.balance.R;
 import com.bhex.wallet.balance.R2;
+import com.bhex.wallet.balance.event.TransctionEvent;
+import com.bhex.wallet.balance.helper.BHTokenHelper;
+import com.bhex.wallet.balance.ui.fragment.ChooseChainFragment;
 import com.bhex.wallet.balance.ui.fragment.ChooseTokenFragment;
 import com.bhex.wallet.balance.ui.viewhodler.TransferInCrossVH;
 import com.bhex.wallet.common.base.BaseActivity;
@@ -19,6 +22,12 @@ import com.bhex.wallet.common.enums.BH_BUSI_TYPE;
 import com.bhex.wallet.common.model.BHChain;
 import com.bhex.wallet.common.model.BHToken;
 import com.gyf.immersionbar.ImmersionBar;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -30,7 +39,7 @@ import butterknife.BindView;
 public class TransferInCrossActivity extends BaseActivity {
 
     @Autowired(name= BHConstants.SYMBOL)
-    String  symbol;
+    String m_select_symbol;
 
     BHToken bhToken;
 
@@ -62,30 +71,58 @@ public class TransferInCrossActivity extends BaseActivity {
                 .fitsSystemWindows(true).init();
 
         //获取对应Token
-        bhToken = SymbolCache.getInstance().getBHToken(symbol);
-        transferCrossVH = new TransferInCrossVH(this,findViewById(R.id.root_view),symbol);
-        transferCrossVH.updateTokenInfo(symbol);
+        bhToken = SymbolCache.getInstance().getBHToken(m_select_symbol);
+        transferCrossVH = new TransferInCrossVH(this,findViewById(R.id.root_view),m_select_symbol);
+        transferCrossVH.updateTokenInfo(m_select_symbol);
     }
 
     @Override
     protected void addEvent() {
+        EventBus.getDefault().register(this);
         //选择币种
-        findViewById(R.id.layout_select_token).setOnClickListener(this::chooseTokenAction);
+        transferCrossVH.layout_select_token.setOnClickListener(this::chooseTokenAction);
+        //选择链
+        transferCrossVH.layout_select_chain.setOnClickListener(this::chooseChainAction);
+    }
 
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     //选择币种
     private void chooseTokenAction(View view) {
-        ChooseTokenFragment fragment = ChooseTokenFragment.showFragment(symbol,BH_BUSI_TYPE.跨链转账.value,chooseTokenListener);
+        ChooseTokenFragment fragment = ChooseTokenFragment.showFragment(m_select_symbol,BH_BUSI_TYPE.跨链转账.value,chooseTokenListener);
         fragment.show(getSupportFragmentManager(),ChooseTokenFragment.class.getName());
+    }
 
+    //选择链
+    private void chooseChainAction(View view) {
+        //
+        List<BHChain> chainList = BHTokenHelper.getBHChainList(m_select_symbol);
+        ChooseChainFragment fragment = ChooseChainFragment.getInstance(chainList,transferCrossVH.mChainToken.chain,this::chooseChainListener);
+        fragment.show(getSupportFragmentManager(),ChooseChainFragment.class.getName());
     }
 
     private ChooseTokenFragment.OnChooseTokenListener chooseTokenListener = new ChooseTokenFragment.OnChooseTokenListener() {
         @Override
         public void onChooseClickListener(String symbol, int position) {
+            m_select_symbol = symbol;
             transferCrossVH.updateTokenInfo(symbol);
         }
     };
+
+    //选择链回调
+    private void chooseChainListener(String chain) {
+        transferCrossVH.mChainToken = BHTokenHelper.getCrossBHToken(m_select_symbol,chain);
+        transferCrossVH.updateTokenInfo(m_select_symbol);
+    }
+
+    @Subscribe(threadMode= ThreadMode.MAIN)
+    public void changeAccount(TransctionEvent transctionEvent){
+        transferCrossVH.updateTokenInfo(m_select_symbol);
+    }
 
 }

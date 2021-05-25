@@ -90,20 +90,19 @@ public class BHRawTransaction {
     }
 
     //创建提币交易
-    public static List<TxReq.TxMsg> createwithDrawWMsg( String to,String withDrawAmount, String withDrawFeeAmount, String symbol){
+    public static List<TxReq.TxMsg> createwithDrawWMsg( String to,String withDrawAmount, String withDrawFeeAmount, BHToken withDrawToken, String hbc_symbol){
         List<TxReq.TxMsg> tx_msg_list = new ArrayList<>();
 
 
         String from = BHUserManager.getInstance().getCurrentBhWallet().address;
 
         //提币手续费
-        BHToken symbolBHToken = SymbolCache.getInstance().getBHToken(symbol);
-        BHToken withDrawFeeBHToken = SymbolCache.getInstance().getBHToken(symbolBHToken.chain.toLowerCase());
+        //BHToken symbolBHToken = SymbolCache.getInstance().getBHToken(hbc_symbol);
 
-        BigInteger double_gas_fee =  NumberUtil.mulExt(String.valueOf(Math.pow(10,withDrawFeeBHToken.decimals)),withDrawFeeAmount);
+        BigInteger double_gas_fee =  NumberUtil.mulExt(String.valueOf(Math.pow(10,withDrawToken.decimals)),withDrawFeeAmount);
 
         //提币数量
-        BigInteger double_amount = NumberUtil.mulExt(String.valueOf(Math.pow(10,symbolBHToken.decimals)),withDrawAmount);
+        BigInteger double_amount = NumberUtil.mulExt(String.valueOf(Math.pow(10,withDrawToken.decimals)),withDrawAmount);
 
         TxReq.TxMsg<TransactionMsg.WithdrawalMsg> msg = new TxReq.TxMsg<TransactionMsg.WithdrawalMsg>();
         msg.type = TRANSCATION_BUSI_TYPE.跨链提币.getType();
@@ -112,7 +111,7 @@ public class BHRawTransaction {
 
         withdrawalMsg.from_cu = from;
         withdrawalMsg.to_multi_sign_address = to;
-        withdrawalMsg.symbol = symbol;
+        withdrawalMsg.symbol = withDrawToken.symbol;
         withdrawalMsg.amount = double_amount.toString(10);
         withdrawalMsg.gas_fee = double_gas_fee.toString(10);
         withdrawalMsg.order_id = UUID.randomUUID().toString();

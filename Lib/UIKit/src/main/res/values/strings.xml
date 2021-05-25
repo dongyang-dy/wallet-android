@@ -233,6 +233,7 @@
     <string name="please_input_gas_fee">请输入手续费</string>
     <string name="error_input_gas_fes">手续费输入错误</string>
     <string name="gas_fee_high_available_fee">手续费不能大于可用HBC</string>
+
     <string name="tip_crosslink_generate">你正在为 %1$s 生成跨链充值地址，该地址将由跨链托管节点分布式生成，需要稍微等待一点时间。</string>
     <string name="tab_governance_title">治理提案</string>
     <string name="tab_proposals_title">治理提案</string>
@@ -433,6 +434,7 @@
     <string name="fee_notenough">手续费不足</string>
     <string name="entrust_amount_more_avilable">委托数量不能大于可用数量</string>
     <string name="amount_rule">请输入正确的数量，且不大于可用余额%1$s</string>
+    <string name="amount_max_rule">请输入正确的数量，且不大于%1$s</string>
     <string name="crosss_fee_rule">跨链手续费需为数字，且不能小于%1$s</string>
     <string name="crosss_fee_high_rule">跨链手续费需为数字，且不能大于%1$s</string>
     <string name="not_enough">没有足够的</string>

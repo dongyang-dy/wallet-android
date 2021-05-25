@@ -142,7 +142,6 @@ public class TransferOutActivity extends BaseActivity {
         if(!flag){
             return;
         }
-
         Password30PFragment.showPasswordDialog(getSupportFragmentManager(),
                 Password30PFragment.class.getName(),
                 this::transferConfirmAction,0,true);

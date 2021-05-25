@@ -16,6 +16,7 @@ import com.bhex.network.base.LoadingStatus;
 import com.bhex.network.utils.ToastUtils;
 import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.ColorUtil;
+import com.bhex.tools.utils.LogUtils;
 import com.bhex.tools.utils.RegexUtil;
 import com.bhex.wallet.balance.R;
 import com.bhex.wallet.balance.event.TransctionEvent;
@@ -161,6 +162,7 @@ public class GenerateAddressActivity extends BaseActivity
         if(ldm.loadingStatus== LoadingStatus.SUCCESS){
             ToastUtils.showToast(getResources().getString(R.string.link_outter_generating));
             EventBus.getDefault().post(new TransctionEvent());
+            LogUtils.d("GenerateAddressActivity===>:","symbolToken.chain===="+symbolToken.chain);
             SequenceManager.getInstance().updateAddressStatus(symbolToken.chain);
             finish();
         }

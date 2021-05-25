@@ -87,18 +87,45 @@ public class TransferOutCrossActivity extends BaseActivity {
         transferOutCrossVH = new TransferOutCrossVH(this,findViewById(R.id.root_view));
 
         withDrawToken = BHTokenHelper.getCrossDefaultToken(m_select_symbol);
-        if(withDrawToken!=null){
-            transferOutCrossVH.updateTokenInfo(m_select_symbol,withDrawToken.chain);
-        }
+
     }
 
     @Override
     protected void addEvent() {
+        if(withDrawToken!=null){
+            transferOutCrossVH.updateTokenInfo(m_select_symbol,withDrawToken.chain);
+        }
         //选择币种
         transferOutCrossVH.layout_select_token.setOnClickListener(this::selectTokenAction);
         transferOutCrossVH.btn_drawwith_coin.setOnClickListener(this::withDrawAtion);
         //选择链
         transferOutCrossVH.layout_select_chain.setOnClickListener(this::selectChainAction);
+
+        mBalanceViewModel = ViewModelProviders.of(MainActivityManager._instance.mainActivity).get(BalanceViewModel.class).build(MainActivityManager._instance.mainActivity);
+        //资产订阅
+        LiveDataBus.getInstance().with(BHConstants.Label_Account, LoadDataModel.class).observe(this, ldm->{
+            if(ldm.loadingStatus== LoadingStatus.SUCCESS){
+                updateAssets((AccountInfo) ldm.getData());
+            }
+            refreshFinish();
+        });
+
+        mTransactionViewModel = ViewModelProviders.of(this).get(TransactionViewModel.class);
+        mTransactionViewModel.mutableLiveData.observe(this,ldm -> {
+            updateTransferStatus(ldm);
+        });
+
+
+        mTokenViewModel = ViewModelProviders.of(this).get(TokenViewModel.class);
+        mTokenViewModel.queryLiveData.observe(this,ldm->{
+            if(ldm.loadingStatus==LoadingStatus.SUCCESS){
+                //transferOutCrossVH.tranferToken = (BHToken) ldm.getData();
+                //更新跨链提币手续费
+                //transferOutCrossVH.updateWithDrawFee();
+            }
+            refreshFinish();
+        });
+
     }
 
     //选择币种
@@ -112,7 +139,10 @@ public class TransferOutCrossActivity extends BaseActivity {
         //更新token
         m_select_symbol = symbol;
         withDrawToken = BHTokenHelper.getCrossDefaultToken(m_select_symbol);
+        //更新币种信息
         transferOutCrossVH.updateTokenInfo(symbol,withDrawToken.chain);
+        //更新资产
+        transferOutCrossVH.updateAssets();
     }
 
     //选择币种
@@ -133,14 +163,14 @@ public class TransferOutCrossActivity extends BaseActivity {
         //隐藏键盘
         ToolUtils.hintKeyBoard(this);
 
-        /*boolean flag = transferOutCrossVH.verifyWithDrawAction();
+        boolean flag = transferOutCrossVH.verifyWithDrawAction();
         if(!flag){
             return;
         }
 
         Password30PFragment.showPasswordDialog(getSupportFragmentManager(),
                 Password30PFragment.class.getName(),
-                this::callbackWithdraw,0,true);*/
+                this::callbackWithdraw,0,true);
     }
 
 
@@ -186,6 +216,44 @@ public class TransferOutCrossActivity extends BaseActivity {
                 ToastUtils.showToast(getResources().getString(R.string.encode_qr_fail));
             }
         });
+    }
+
+
+    public void refreshFinish(){
+        def_dailog_count++;
+        if(def_dailog_count==2){
+            mRefreshLayout.finishRefresh();
+        }
+    }
+
+    //更新资产
+    private void updateAssets(AccountInfo accountInfo) {
+        transferOutCrossVH.updateAssets();
+    }
+
+    //更新状态
+    private void updateTransferStatus(LoadDataModel ldm) {
+        if(ldm.loadingStatus== LoadingStatus.SUCCESS){
+            ToastUtils.showToast(getResources().getString(R.string.transfer_in_success));
+            EventBus.getDefault().post(new TransctionEvent());
+            finish();
+        }else{
+            ToastUtils.showToast(getResources().getString(R.string.transfer_in_fail));
+        }
+    }
+
+    public void callbackWithdraw(String password, int position,int verifyPwdWay) {
+        String to_address = transferOutCrossVH.inp_withdraw_address.getText().toString().trim();
+        //提币数量
+        String withDrawAmount = transferOutCrossVH.inp_withdraw_amount.getText().toString().trim();
+        //交易手续费
+        String feeAmount = transferOutCrossVH.tv_fee.getText().toString();
+        //提币手续费
+        String withDrawFeeAmount = transferOutCrossVH.tv_withdraw_fee.getText().toString();
+        //创建提币信息
+        List<TxReq.TxMsg> tx_msg_list = BHRawTransaction.createwithDrawWMsg(to_address,withDrawAmount,withDrawFeeAmount,
+                transferOutCrossVH.withDrawToken,transferOutCrossVH.showToken.symbol);
+        mTransactionViewModel.transferInnerExt(this,password,feeAmount,tx_msg_list);
     }
 
 }

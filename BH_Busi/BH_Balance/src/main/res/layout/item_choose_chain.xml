@@ -38,7 +38,7 @@
         android:layout_marginStart="16dp"
         android:gravity="center_vertical"
         android:textSize="12sp"
-        android:textColor="@color/global_main_gray_color"
+        android:textColor="@color/global_main_text_color"
         tools:text="ETH"
         app:layout_constraintStart_toEndOf="@+id/iv_chain_icon"
         app:layout_constraintTop_toTopOf="parent"

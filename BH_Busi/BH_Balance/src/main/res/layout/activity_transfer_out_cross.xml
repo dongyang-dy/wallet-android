@@ -377,7 +377,7 @@
                             android:drawablePadding="5dp"
                             />
 
-                        <androidx.appcompat.widget.AppCompatEditText
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tv_withdraw_fee"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"

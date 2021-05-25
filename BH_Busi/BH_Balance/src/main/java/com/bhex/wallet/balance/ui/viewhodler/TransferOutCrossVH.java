@@ -72,7 +72,7 @@ public class TransferOutCrossVH {
     //提币手续费
     public AppCompatTextView tv_fee;
     public AppCompatTextView tv_fee_token;
-    public AppCompatEditText tv_withdraw_fee;
+    public AppCompatTextView tv_withdraw_fee;
     public AppCompatTextView tv_withdraw_fee_token;
 
     //全部
@@ -83,7 +83,14 @@ public class TransferOutCrossVH {
     //提币按钮
     public MaterialButton btn_drawwith_coin;
 
+    public BHToken showToken;
+    //提币Token
     public BHToken withDrawToken;
+    //提币资产
+    public BHBalance withDrawBalance;
+
+    //可以提币或转账数量
+    public double available_amount;
 
     public TransferOutCrossVH(BaseActivity m_activity, View mRootView) {
         this.m_activity = m_activity;
@@ -141,11 +148,13 @@ public class TransferOutCrossVH {
         inp_withdraw_amount.setInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_FLAG_DECIMAL);
         tv_withdraw_fee.setInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_FLAG_DECIMAL);
         inp_withdraw_amount.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(BHConstants.BHT_DEFAULT_DECIMAL+1)});
+
+        btn_all.setOnClickListener(this::withdrawAllAction);
     }
 
 
     public void updateTokenInfo(String symbol,String chain) {
-        BHToken showToken = CacheCenter.getInstance().getSymbolCache().getBHToken(symbol);
+        showToken = CacheCenter.getInstance().getSymbolCache().getBHToken(symbol);
 
         withDrawToken = BHTokenHelper.getCrossBHToken(symbol,chain);
 
@@ -170,5 +179,104 @@ public class TransferOutCrossVH {
                     start_index+v_hightlight_text.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
             tv_cross_transfer_out_tip.setText(spannableString);
         }
+
+        //跨链手续费Token
+        tv_withdraw_fee_token.setText(withDrawToken.chain.toUpperCase());
+        tv_withdraw_fee.setText(withDrawToken!=null?withDrawToken.withdrawal_fee:"");
+        //手续费
+        tv_fee.setText(BHUserManager.getInstance().getDefaultGasFee().displayFee);
+        tv_fee_token.setText(BHConstants.BHT_TOKEN.toUpperCase());
     }
+
+    //更新资产
+    public void updateAssets() {
+        withDrawBalance = BHBalanceHelper.getBHBalanceFromAccount(showToken.symbol);
+        //可用数量
+        String available_amount_str =  BHBalanceHelper.getAmountForUser(m_activity,withDrawBalance.amount,"0",showToken.symbol);
+        available_amount = Double.valueOf(available_amount_str);
+        tv_available_amount.setText(m_activity.getString(R.string.available)+" "+available_amount_str+" "+withDrawBalance.name.toUpperCase());
+    }
+
+
+    public boolean verifyWithDrawAction(){
+        //提币地址
+        String v_withdraw_address = inp_withdraw_address.getText().toString().trim();
+        if(TextUtils.isEmpty(v_withdraw_address)){
+            ToastUtils.showToast(m_activity.getResources().getString(R.string.input_enter_address));
+            inp_withdraw_address.requestFocus();
+            return false;
+        }
+
+        //检验地址合法性
+        //1. 判断是否数字或字母
+        if(!RegexUtil.isLetterDigit(v_withdraw_address)){
+            ToastUtils.showToast(m_activity.getString(R.string.address_verify_error));
+            return false;
+        }
+
+        boolean flag = true;
+        //地址检测
+        if(withDrawToken.chain.equals("btc")){
+            flag = AddressUtil.validBtcAddress(v_withdraw_address);
+        }
+
+        if(withDrawToken.chain.equals("eth")){
+            flag = AddressUtil.validEthAddress(v_withdraw_address);
+        }
+
+        if(!flag){
+            ToastUtils.showToast(m_activity.getString(R.string.address_verify_error));
+            return false;
+        }
+
+        //提币数量
+        String v_withdraw_amount = inp_withdraw_amount.getText().toString().trim();
+        if(TextUtils.isEmpty(v_withdraw_amount) || !RegexUtil.checkNumeric(v_withdraw_amount)|| Double.valueOf(v_withdraw_amount)<=0 ){
+            ToastUtils.showToast(m_activity.getResources().getString(R.string.input_withdraw_amount));
+            inp_withdraw_amount.requestFocus();
+            return false;
+        }
+
+        //请输入正确的数量，且不大于可用余额{n}
+        if(!RegexUtil.checkNumeric(v_withdraw_amount) || Double.valueOf(v_withdraw_amount)>available_amount){
+            String tip_text = String.format(m_activity.getString(R.string.amount_rule),String.valueOf(available_amount));
+            inp_withdraw_amount.requestFocus();
+            ToastUtils.showToast(tip_text);
+            return false;
+        }
+
+        //请输入正确的数量，且不大于max_withdrawal_amount
+        if(Double.valueOf(v_withdraw_amount) > Double.valueOf(withDrawToken.max_withdrawal_amount)){
+            String tip_text = String.format(m_activity.getString(R.string.amount_max_rule),withDrawToken.max_withdrawal_amount);
+            inp_withdraw_amount.requestFocus();
+            ToastUtils.showToast(tip_text);
+            return false;
+        }
+
+        //判断手续费
+        BHBalance hbcBalance = BHBalanceHelper.getBHBalanceFromAccount(BHConstants.BHT_TOKEN);
+        if(hbcBalance== null){
+            ToastUtils.showToast(m_activity.getString(R.string.fee_notenough));
+            return false;
+        }
+
+        if(Double.valueOf(hbcBalance.amount) < Double.valueOf(BHUserManager.getInstance().getDefaultGasFee().displayFee)){
+            ToastUtils.showToast(m_activity.getString(R.string.fee_notenough));
+            return false;
+        }
+
+        //判断跨链手续费
+
+
+        return true;
+    }
+
+    //全部提币
+    private void withdrawAllAction(View view) {
+        //主链币
+        inp_withdraw_amount.setText(NumberUtil.toPlainString(available_amount));
+        inp_withdraw_amount.setSelection(inp_withdraw_amount.getText().length());
+        inp_withdraw_amount.requestFocus();
+    }
+
 }

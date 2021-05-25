@@ -5,13 +5,10 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.GradientDrawable;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
-import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bhex.lib.uikit.util.ShapeUtils;
@@ -26,18 +23,15 @@ import com.bhex.tools.utils.LogUtils;
 import com.bhex.tools.utils.PixelUtils;
 import com.bhex.tools.utils.QRCodeEncoder;
 import com.bhex.tools.utils.ToolUtils;
+import com.bhex.tools.utils.ViewUtil;
 import com.bhex.wallet.balance.R;
 import com.bhex.wallet.balance.helper.BHBalanceHelper;
-import com.bhex.wallet.balance.ui.activity.TransferInActivity;
+import com.bhex.wallet.balance.helper.BHTokenHelper;
 import com.bhex.wallet.balance.ui.activity.TransferInCrossActivity;
 import com.bhex.wallet.balance.ui.fragment.DepositTipsFragment;
-import com.bhex.wallet.common.cache.ConfigMapCache;
 import com.bhex.wallet.common.cache.SymbolCache;
 import com.bhex.wallet.common.config.ARouterConfig;
-import com.bhex.wallet.common.db.entity.BHWallet;
-import com.bhex.wallet.common.enums.BH_BUSI_TYPE;
-import com.bhex.wallet.common.manager.BHUserManager;
-import com.bhex.wallet.common.model.BHBalance;
+import com.bhex.wallet.common.manager.SequenceManager;
 import com.bhex.wallet.common.model.BHChain;
 import com.bhex.wallet.common.model.BHToken;
 import com.tbruyelle.rxpermissions2.RxPermissions;
@@ -57,11 +51,13 @@ public class TransferInCrossVH {
     public String mSymbol;
     public BHToken mChainToken;
 
+    public View layout_select_token;
     //token-icon
     public AppCompatImageView iv_token_icon;
     //token-name
     public AppCompatTextView tv_token_name;
 
+    public View layout_select_chain;
     //chain-icon
     public AppCompatImageView iv_chain_icon;
     //chain-name
@@ -96,9 +92,11 @@ public class TransferInCrossVH {
         btn_save_qr = view.findViewById(R.id.btn_save_qr);
         btn_copy_address = view.findViewById(R.id.btn_copy_address);
         //
+        layout_select_token = view.findViewById(R.id.layout_select_token);
         iv_token_icon = view.findViewById(R.id.iv_token_icon);
         tv_token_name = view.findViewById(R.id.tv_token_name);
 
+        layout_select_chain = view.findViewById(R.id.layout_select_chain);
         iv_chain_icon = view.findViewById(R.id.iv_chain_icon);
         tv_chain_name = view.findViewById(R.id.tv_chain_name);
 
@@ -119,12 +117,13 @@ public class TransferInCrossVH {
         btn_copy_address.setBackgroundDrawable(btn_copy_drawable);
 
         layout_deposit = view.findViewById(R.id.layout_deposit);
-
         layout_genarate_address = view.findViewById(R.id.layout_genarate_address);
 
         //
+        GradientDrawable btn_genarate_address_drawable = ShapeUtils.getRoundRectDrawable(PixelUtils.dp2px(activity,100),
+                ColorUtil.getColor(activity,R.color.btn_blue_bg_color));
         btn_genarate_address = view.findViewById(R.id.btn_genarate_address);
-        btn_genarate_address.setBackgroundDrawable(btn_copy_drawable);
+        btn_genarate_address.setBackgroundDrawable(btn_genarate_address_drawable);
 
         //复制地址
         btn_copy_address.setOnClickListener(v -> {
@@ -150,13 +149,7 @@ public class TransferInCrossVH {
                     .show(mActivity.getSupportFragmentManager(),DepositTipsFragment.class.getName());
         });
 
-        BHToken token = SymbolCache.getInstance().getBHToken(mSymbol);
-        //获取对应的链
-        if(ToolUtils.checkListIsEmpty(token.uni_tokens)) {
-            return;
-        }
-        mChainToken = token.uni_tokens.get(0);
-
+        mChainToken = BHTokenHelper.getCrossDefaultToken(mSymbol);
         //选择链
         btn_genarate_address.setOnClickListener(v -> {
             ARouter.getInstance()
@@ -169,24 +162,18 @@ public class TransferInCrossVH {
 
     public void updateTokenInfo(String symbol){
         this.mSymbol = symbol;
-        BHToken token = SymbolCache.getInstance().getBHToken(mSymbol);
-        ImageLoaderUtil.loadImageView(mActivity,token.logo,iv_token_icon,R.mipmap.ic_default_coin);
-        tv_token_name.setText(token.name.toUpperCase());
-
-        //获取对应的链
-        if(mChainToken==null) {
-            return;
-        }
+        BHToken showBhToken = SymbolCache.getInstance().getBHToken(mSymbol);
+        ImageLoaderUtil.loadImageView(mActivity,showBhToken.logo,iv_token_icon,R.mipmap.ic_default_coin);
+        tv_token_name.setText(showBhToken.name.toUpperCase());
 
         //链Token信息
-        BHChain bhChain = ConfigMapCache.getInstance().getAllChains().get(mChainToken.chain);
+        BHChain bhChain = BHTokenHelper.getBHChain(mChainToken.chain);
         //链图标
         ImageLoaderUtil.loadImageViewToCircle(mActivity,bhChain.logo,iv_chain_icon,R.mipmap.ic_default_coin);
         tv_chain_name.setText(bhChain.full_name);
-
         //获取链对应的地址
-        //BHBalance chainBalance = BHBalanceHelper.getBHBalanceFromAccount(mChainToken.symbol);
         String chain_address = BHBalanceHelper.queryAddressByChain(mChainToken.chain);
+        LogUtils.d("GenerateAddressActivity===>:","AddressStatus===="+SequenceManager.getInstance().getAddressStatus());
 
         if(!TextUtils.isEmpty(chain_address)){
             layout_deposit.setVisibility(View.VISIBLE);
@@ -197,7 +184,20 @@ public class TransferInCrossVH {
             iv_address_qr.setImageBitmap(bitmap);
             //链上的地址
             tv_token_address.setText(chain_address);
+        }else if(TextUtils.isEmpty(SequenceManager.getInstance().getAddressStatus())){
+            //清空点击事件
+            ViewUtil.getListenInfo(btn_genarate_address);
+            btn_genarate_address.setText(mActivity.getString(R.string.cross_address_generatoring));
+            layout_deposit.setVisibility(View.GONE);
+            layout_genarate_address.setVisibility(View.VISIBLE);
         }else{
+            layout_genarate_address.setOnClickListener(v -> {
+                ARouter.getInstance()
+                        .build(ARouterConfig.Balance.Balance_cross_address)
+                        .withString(BHConstants.SYMBOL,mSymbol)
+                        .withString(BHConstants.CHAIN,mChainToken.chain)
+                        .navigation();
+            });
             layout_deposit.setVisibility(View.GONE);
             layout_genarate_address.setVisibility(View.VISIBLE);
         }
