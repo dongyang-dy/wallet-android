@@ -82,7 +82,6 @@ public class TokenDetailVH {
 
         //充值
         btn_deposit.setOnClickListener(this::depositAction);
-
         //提现
         btn_withdraw.setOnClickListener(this::withDrawAction);
 

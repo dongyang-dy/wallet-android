@@ -283,10 +283,13 @@ public class PayDetailHelper {
         if(TextUtils.isEmpty(tx_type)){
             return false;
         }
+
         if(tx_type.equals(TRANSCATION_BUSI_TYPE.撤单.getType())||tx_type.equals(TRANSCATION_BUSI_TYPE.撤单.getType())
-                || tx_type.equals(TRANSCATION_BUSI_TYPE.限价单兑换.getType())){
+                || tx_type.equals(TRANSCATION_BUSI_TYPE.限价单兑换.getType()) || tx_type.equals(TRANSCATION_BUSI_TYPE.撤单.getType())
+                || tx_type.equals(TRANSCATION_BUSI_TYPE.领取流动性挖矿奖励.getType()) || tx_type.equals(TRANSCATION_BUSI_TYPE.领取交易挖矿奖励.getType())){
             return false;
         }
+
         return flag;
     }
 
@@ -296,7 +299,7 @@ public class PayDetailHelper {
 
         if(h5Sign.type.equals(TRANSCATION_BUSI_TYPE.撤单.getType())){
             撤单_Entitiy v_撤单_Entitiy = JsonUtils.fromJson(h5Sign.value.toString(), 撤单_Entitiy.class);
-            if(TextUtils.isEmpty(v_撤单_Entitiy.order_ids.toString())|| ToolUtils.checkListIsEmpty(v_撤单_Entitiy.order_ids)){
+            if(TextUtils.isEmpty(v_撤单_Entitiy.order_ids.toString()) || ToolUtils.checkListIsEmpty(v_撤单_Entitiy.order_ids)){
                 return false;
             }
         }

@@ -1,5 +1,6 @@
 package com.bhex.wallet.market.ui.fragment;
 
+import android.text.TextUtils;
 import android.webkit.WebView;
 
 import com.alibaba.fastjson.JSONObject;
@@ -9,6 +10,8 @@ import com.bhex.wallet.common.browse.BaseBowserFragment;
 import com.bhex.wallet.common.browse.wv.WVJBWebViewClient;
 import com.bhex.wallet.common.manager.BHUserManager;
 import com.bhex.wallet.market.model.H5Sign;
+
+import java.util.List;
 
 
 public abstract class JsBowserFragment extends BaseBowserFragment {
@@ -33,7 +36,6 @@ public abstract class JsBowserFragment extends BaseBowserFragment {
             registerHandler("get_account",(data,callback) -> {
                 DexResponse<JSONObject> dexResponse = new DexResponse<JSONObject>(200,"OK");
                 dexResponse.data = new JSONObject();
-                //dexResponse.data.put("address", "HBCjFjeC8LEQjKDggRiNn9YEeS3KtzkPhccU");
                 dexResponse.data.put("address", BHUserManager.getInstance().getCurrentBhWallet().address);
                 callback.callback(JsonUtils.toJson(dexResponse));
             });
@@ -42,10 +44,21 @@ public abstract class JsBowserFragment extends BaseBowserFragment {
                 if(data==null){
                     return;
                 }
-                //LogUtils.d("JsBowserFragment====>","sign=="+data.toString());
-                H5Sign h5Sign = JsonUtils.fromJson(data.toString(), H5Sign.class);
-                PayDetailFragment.newInstance().showDialog(getChildFragmentManager(),PayDetailFragment.class.getSimpleName(),h5Sign);
-                callbackMaps.put(h5Sign.type,callback);
+                LogUtils.d("JsBowserFragment====>","sign=="+data.toString());
+                if(TextUtils.isEmpty(data.toString())){
+                    return;
+                }
+
+                if(data.toString().startsWith("[") ){
+                    List<H5Sign> h5Sign = JsonUtils.getListFromJson(data.toString(), H5Sign.class);
+                    PayDetailFragment.newInstance().showDialog(getChildFragmentManager(),PayDetailFragment.class.getSimpleName(),h5Sign.get(0));
+                    callbackMaps.put(h5Sign.get(0).type,callback);
+                }else{
+                    H5Sign h5Sign = JsonUtils.fromJson(data.toString(), H5Sign.class);
+                    PayDetailFragment.newInstance().showDialog(getChildFragmentManager(),PayDetailFragment.class.getSimpleName(),h5Sign);
+                    callbackMaps.put(h5Sign.type,callback);
+                }
+
             });
         }
     }

@@ -4,6 +4,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.bhex.wallet.common.base.BaseActivity;
 import com.bhex.wallet.common.config.ARouterConfig;
 import com.bhex.wallet.market.R;
+import com.bhex.wallet.market.ui.fragment.MarketFragment;
 
 /**
  * @author gdy
@@ -24,6 +25,7 @@ public class HDexActivity extends BaseActivity {
 
     @Override
     protected void addEvent() {
-
+        MarketFragment fragment = MarketFragment.getInstance();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fl_content, fragment).commit();
     }
 }

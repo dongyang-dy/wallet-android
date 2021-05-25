@@ -7,12 +7,15 @@ import android.util.Pair;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
@@ -50,6 +53,7 @@ import com.bhex.wallet.common.tx.TxReq;
 import com.bhex.wallet.common.ui.fragment.Password30PFragment;
 import com.bhex.wallet.common.utils.LiveDataBus;
 import com.bhex.wallet.common.viewmodel.BalanceViewModel;
+import com.google.android.material.tabs.TabLayout;
 import com.gyf.immersionbar.ImmersionBar;
 
 import java.util.ArrayList;
@@ -74,31 +78,16 @@ public class ValidatorIndexActivity extends BaseActivity<AssetPresenter> {
     @BindView(R2.id.tv_center_title)
     AppCompatTextView tv_center_title;
 
-    @BindView(R2.id.tv_token_address)
-    AppCompatTextView tv_token_address;
+    AppCompatTextView tv_available_text;
+    AppCompatTextView tv_available_amount;
+    AppCompatTextView tv_entrust_amount;
+    AppCompatTextView tv_claimed_reward_amount;
+    AppCompatTextView tv_unbonding_amount;
+    AppCompatTextView tv_unclaimed_reward_amount;
 
-    @BindView(R2.id.tv_wallet_name)
-    TextView tv_wallet_name;
-    @BindView(R2.id.tv_available_label)
-    TextView tv_available_label;
-    @BindView(R2.id.tv_available_amount)
-    CustomTextView tv_available_amount;
-    @BindView(R2.id.tv_entrust_amount)
-    CustomTextView tv_entrust_amount;
-    @BindView(R2.id.tv_unbonding_amount)
-    CustomTextView tv_unbonding_amount;
-    @BindView(R2.id.tv_claimed_reward_amount)
-    CustomTextView tv_claimed_reward_amount;
-    @BindView(R2.id.tv_unclaimed_reward_amount)
-    CustomTextView tv_unclaimed_reward_amount;
-    @BindView(R2.id.btn_unclaimed_reward)
-    TextView btn_unclaimed_reward;
-    @BindView(R2.id.iv_qr_code)
-    ImageView iv_qr_code;
-
-    //private BHToken mSysmbolToken;//hbc
     private BHWallet mBhWallet;
 
+    List<Pair<String, Fragment>> items = new ArrayList<>();
 
     @Override
     protected int getLayoutId() {
@@ -106,86 +95,78 @@ public class ValidatorIndexActivity extends BaseActivity<AssetPresenter> {
     }
 
     @Override
-    protected void initPresenter() {
-        mPresenter = new AssetPresenter(this);
-    }
-
-    @Override
     protected void initView() {
+        mPresenter = new AssetPresenter(this);
         ImmersionBar.with(this)
-                .transparentStatusBar()
-                .statusBarDarkFont(true)
-                .navigationBarDarkIcon(true)
-                .fitsSystemWindows(false).init();
+                .transparentStatusBar().statusBarDarkFont(true)
+                .navigationBarDarkIcon(true).fitsSystemWindows(false).init();
 
-        mBhWallet = BHUserManager.getInstance().getCurrentBhWallet();
+        tv_available_text = findViewById(R.id.tv_available_text);
+        tv_available_amount = findViewById(R.id.tv_available_amount);
+        tv_entrust_amount = findViewById(R.id.tv_entrust_amount);
+        tv_claimed_reward_amount = findViewById(R.id.tv_claimed_reward_amount);
+        tv_unbonding_amount = findViewById(R.id.tv_unbonding_amount);
+        tv_unclaimed_reward_amount = findViewById(R.id.tv_unclaimed_reward_amount);
 
-        tv_center_title.setText(getResources().getString(R.string.delegating));
-        tv_wallet_name.setText(mBhWallet.name);
-        //tv_available_label.setText(getString(R.string.available)+BHConstants.BHT_TOKEN.toUpperCase());
-        tv_available_label.setText(getString(R.string.available));
-        tv_token_address.setTag(mBhWallet.getAddress());
-
-
-        BHWalletHelper.proccessAddress(tv_token_address,mBhWallet.address);
-        //设置背景
-        LinearLayout btn_token_address =  findViewById(R.id.btn_token_address);
-        GradientDrawable drawable = ShapeUtils.getRoundRectDrawable(PixelUtils.dp2px(this,50),
-                ContextCompat.getColor(this,R.color.color_340A1825));
-        btn_token_address.setBackground(drawable);
-        btn_token_address.setOnClickListener(this::showAddressQR);
-
-        //
-        Drawable qr_drawable = ColorUtil.getDrawable(this,R.mipmap.ic_entrust_qr,R.color.white);
-        iv_qr_code.setImageDrawable(qr_drawable);
         initTab();
     }
 
     @Override
     protected void addEvent() {
+        mBhWallet = BHUserManager.getInstance().getCurrentBhWallet();
+        tv_center_title.setText(getResources().getString(R.string.entrust_relive_entrust));
         mBalanceViewModel = ViewModelProviders.of(MainActivityManager._instance.mainActivity).get(BalanceViewModel.class);
+
         LiveDataBus.getInstance().with(BHConstants.Label_Account, LoadDataModel.class).observe(this, ldm -> {
-            updateAssest(ldm);
+            updateAssest();
         });
-        mBalanceViewModel.getAccountInfo(ValidatorIndexActivity.this, null);
 
         mTransactionViewModel = ViewModelProviders.of(this).get(TransactionViewModel.class);
         mTransactionViewModel.validatorLiveData.observe(this,ldm->{
             updateValidatorAddress(ldm);
         });
 
-        //
-        GradientDrawable drawable = ShapeUtils.getRoundRectDrawable(PixelUtils.dp2px(this,20),ColorUtil.getColor(this,R.color.highlight_text_color));
-        btn_unclaimed_reward.setBackground(drawable);
-        btn_unclaimed_reward.setOnClickListener(v -> {
+        updateAssest();
+
+        tv_unclaimed_reward_amount.setOnClickListener(v -> {
             mTransactionViewModel.queryValidatorByAddress(this,1);
         });
     }
 
-    private void updateAssest(LoadDataModel ldm) {
+
+    private void updateAssest() {
         //可用数量
         if(BHUserManager.getInstance().getAccountInfo()==null){
             return;
         }
-        String available_value = NumberUtil.dispalyForUsertokenAmount4Level(BHUserManager.getInstance().getAccountInfo() .available );
+
+        tv_available_text.setText(getString(R.string.available)+BHConstants.BHT_TOKEN.toUpperCase());
+
+        //可用
+        String available_value = NumberUtil.dispalyForUsertokenAmount4Level(BHUserManager.getInstance().getAccountInfo().available );
         tv_available_amount.setText(available_value);
+
         //委托中
         String bonded_value = NumberUtil.dispalyForUsertokenAmount4Level(BHUserManager.getInstance().getAccountInfo().bonded);
         tv_entrust_amount.setText(bonded_value);
+
         //赎回中
         String unbonding_value = NumberUtil.dispalyForUsertokenAmount4Level(BHUserManager.getInstance().getAccountInfo().unbonding);
         tv_unbonding_amount.setText(unbonding_value);
+
         //已收益
         String claimed_reward_value = NumberUtil.dispalyForUsertokenAmount4Level(BHUserManager.getInstance().getAccountInfo().claimed_reward);
         tv_claimed_reward_amount.setText(claimed_reward_value);
+
         //领取收益
         String unclaimed_reward_value = NumberUtil.dispalyForUsertokenAmount4Level(BHUserManager.getInstance().getAccountInfo().unclaimed_reward);
-        tv_unclaimed_reward_amount.setText(unclaimed_reward_value);
+        String v_unclaimed_reward_value = unclaimed_reward_value.concat(" ").concat(getString(R.string.unclaimed_reward));
+        tv_unclaimed_reward_amount.setText(v_unclaimed_reward_value);
 
     }
 
-    private void initTab() {
-        List<Pair<String, Fragment>> items = new ArrayList<>();
+    //初始化Tab
+    private void initTab(){
         ValidatorListFragment validListFragment = new ValidatorListFragment(viewPager);
         Bundle bundle = new Bundle();
         bundle.putInt(ValidatorListFragment.KEY_VALIDATOR_TYPE, BH_BUSI_TYPE.托管节点.getIntValue());
@@ -207,62 +188,18 @@ public class ValidatorIndexActivity extends BaseActivity<AssetPresenter> {
         items.add(new Pair<String, Fragment>(getString(R.string.common_node), invalidListFragment));
         items.add(new Pair<String, Fragment>(getString(R.string.competing_node), competingListFragment));
 
-        viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
-            @Override
-            public int getCount() {
-                return items.size();
-            }
-
-            @Override
-            public Fragment getItem(int position) {
-                return items.get(position).second;
-            }
-
-            @Nullable
-            @Override
-            public CharSequence getPageTitle(int position) {//添加标题Tab
-                return items.get(position).first;
-            }
-
-
-        });
-
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener(){
-
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                //LogUtils.d("ValidatorIndexActivity==","==position=="+position);
-                viewPager.resetHeight(position+1);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-
-        });
-
+        viewPager.setAdapter(new ValidatorVPAdapter(getSupportFragmentManager()));
+        //tab.setupWithViewPager(viewPager);
         tab.setViewPager(viewPager);
-
-        /*LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)viewPager.getLayoutParams();
-        params.height = PixelUtils.dp2px(this,1500);*/
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener(){
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
 
             }
 
             @Override
             public void onPageSelected(int position) {
-                //((CustomViewPager)viewPager).resetHeight(position);
-                //viewPager.resetHeight(position);
-
+                viewPager.resetHeight(position+1);
             }
 
             @Override
@@ -271,6 +208,7 @@ public class ValidatorIndexActivity extends BaseActivity<AssetPresenter> {
             }
         });
     }
+
 
     private List<DelegateValidator> mRewardList;
     private void updateValidatorAddress(LoadDataModel ldm) {
@@ -280,6 +218,7 @@ public class ValidatorIndexActivity extends BaseActivity<AssetPresenter> {
             ToastUtils.showToast(getResources().getString(com.bhex.wallet.balance.R.string.no_profit));
         }
     }
+
 
     public void toDoWithdrawShare(LoadDataModel ldm){
         List<DelegateValidator> dvList =  (List<DelegateValidator>)ldm.getData();
@@ -295,6 +234,7 @@ public class ValidatorIndexActivity extends BaseActivity<AssetPresenter> {
         }
     }
 
+
     Password30PFragment.PasswordClickListener withDrawPwdListener = (password, position,way) -> {
         List<TransactionMsg.ValidatorMsg> validatorMsgs = mPresenter.getAllValidator(mRewardList);
         List<TxReq.TxMsg> tx_msg_list = BHRawTransaction.createRewardMsg(validatorMsgs);
@@ -307,16 +247,30 @@ public class ValidatorIndexActivity extends BaseActivity<AssetPresenter> {
                 withDrawPwdListener,1,true);
     });
 
-    //地址二维码
-    private void showAddressQR(View view) {
-        AddressQRFragment.showFragment(getSupportFragmentManager(),
-                AddressQRFragment.class.getSimpleName(),
-                BHConstants.BHT_TOKEN,
-                tv_token_address.getTag().toString());
-    }
+    //Adapter
+    private class ValidatorVPAdapter extends FragmentPagerAdapter{
 
-    protected  int getStatusColorValue(){
-        return BHConstants.STATUS_COLOR_TRANS;
+        public ValidatorVPAdapter(@NonNull FragmentManager fm) {
+            super(fm,FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        }
+
+        @NonNull
+        @Override
+        public Fragment getItem(int position) {
+            return items.get(position).second;
+        }
+
+        @Override
+        public int getCount() {
+            return items.size();
+        }
+
+        @Nullable
+        @Override
+        public CharSequence getPageTitle(int position) {//添加标题Tab
+            return items.get(position).first;
+        }
+
     }
 
 }

@@ -8,10 +8,10 @@
     >
 
 
-    <com.bhex.lib.uikit.widget.StatusBarView
+    <!--<com.bhex.lib.uikit.widget.StatusBarView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/bg_trans"/>
+        android:background="@color/bg_trans"/>-->
 
     <!--<androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

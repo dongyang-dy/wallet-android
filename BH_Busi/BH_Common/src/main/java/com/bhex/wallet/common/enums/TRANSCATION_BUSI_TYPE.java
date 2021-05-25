@@ -33,6 +33,8 @@ public enum TRANSCATION_BUSI_TYPE {
     移除流动性("bhexchain/openswap/MsgRemoveLiquidity"),
     撤单("bhexchain/openswap/MsgCancelLimitSwap"),
     限价单兑换("bhexchain/openswap/MsgLimitSwap"),
+    领取流动性挖矿奖励("bhexchain/openswap/MsgClaimLPEarning"),
+    领取交易挖矿奖励("bhexchain/openswap/MsgClaimTradeEarning"),
     Other("other");
 
     private String type;

@@ -97,24 +97,24 @@ public class MarketFragment extends JsBowserFragment {
         }
         String v_local_display = ToolUtils.getLocalString(getYActivity());
         url = url.append("?lang=").append(v_local_display);
-        //LogUtils.d("url==="+url.toString());
         return url.toString();
     }
 
-    @OnClick({R2.id.iv_refresh,R2.id.iv_back})
+    @OnClick({R2.id.iv_refresh,R2.id.iv_back,R2.id.iv_close})
     public void onClickView(View view) {
         if (R.id.iv_refresh == view.getId()) {
             startRefreshAction(view);
             mAgentWeb.getUrlLoader().loadUrl(getUrl());
         } else if(R.id.iv_back == view.getId()){
             if(!mAgentWeb.back()){
-
+                getActivity().finish();
             }
+        }else if(R.id.iv_close == view.getId()){
+            getActivity().finish();
         }
     }
     ObjectAnimator  objectAnimator = null;
     private void startRefreshAction(View view) {
-        //AppCompatImageView refreshView = mRootView.findViewById(R.id.iv_refresh);
         objectAnimator = ObjectAnimator.ofFloat(view,"rotation",0,360f)
                 .setDuration(800);
         objectAnimator.setRepeatCount(-1);
@@ -174,5 +174,11 @@ public class MarketFragment extends JsBowserFragment {
             result = getArguments().getString(key,"1");
         }
         return result;
+    }
+
+
+    public static MarketFragment getInstance(){
+        MarketFragment fragment = new MarketFragment();
+        return fragment;
     }
 }

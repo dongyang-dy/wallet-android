@@ -22,9 +22,8 @@
             android:src="@drawable/ic_back"
             android:scaleType="center"
             android:clickable="true"
-            android:visibility="invisible"
-            android:background="?android:selectableItemBackgroundBorderless"
-            />
+            android:visibility="visible"
+            android:background="?android:selectableItemBackgroundBorderless" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_close"
@@ -35,9 +34,8 @@
             android:src="@mipmap/ic_close"
             android:scaleType="center"
             android:clickable="true"
-            android:visibility="gone"
-            android:background="?android:selectableItemBackgroundBorderless"
-            />
+            android:visibility="visible"
+            android:background="?android:selectableItemBackgroundBorderless"/>
 
         <View
             android:id="@+id/view_line"
@@ -47,8 +45,7 @@
             android:layout_height="match_parent"
             android:background="@color/app_bg"
             android:layout_toRightOf="@+id/iv_back"
-            />
-
+            android:visibility="invisible"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_center_title"
@@ -58,8 +55,6 @@
             android:gravity="center"
             android:singleLine="true"
             style="@style/toolbar_layout_title_style"
-            android:layout_toRightOf="@+id/iv_close"
-            android:layout_toLeftOf="@+id/iv_refresh"
             />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -71,6 +66,7 @@
             android:scaleType="center"
             android:clickable="true"
             android:layout_alignParentEnd="true"
+            android:visibility="visible"
             />
 
     </RelativeLayout>

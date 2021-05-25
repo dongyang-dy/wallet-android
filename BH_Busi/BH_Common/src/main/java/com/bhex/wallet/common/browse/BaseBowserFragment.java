@@ -64,7 +64,7 @@ public abstract class BaseBowserFragment extends BaseFragment {
         mAgentWeb.getWebCreator().getWebView().setWebViewClient(getWebViewClient(mAgentWeb.getWebCreator().getWebView()));
         //mAgentWeb.getWebCreator().getWebView().setWebContentsDebuggingEnabled(true);
         String ua = webSettings.getUserAgentString();
-        webSettings.setUserAgentString(ua+";hbtcchainwallet");
+        webSettings.setUserAgentString(ua+";bhexchainwallet");
         callbackMaps = new HashMap<>();
     }
 
@@ -81,9 +81,9 @@ public abstract class BaseBowserFragment extends BaseFragment {
                 super.onReceivedTitle(view, title);
                 String url = view.getUrl();
                 if(!url.startsWith(BHConstants.MARKET_URL)){
-                    getBackView().setVisibility(View.VISIBLE);
+                    //getBackView().setVisibility(View.VISIBLE);
                 }else{
-                    getBackView().setVisibility(View.INVISIBLE);
+                    //getBackView().setVisibility(View.INVISIBLE);
 
                 }
             }
