@@ -28,7 +28,11 @@ import com.bhex.wallet.balance.viewmodel.AnnouncementViewModel;
 import com.bhex.wallet.common.base.BaseFragment;
 import com.bhex.wallet.common.cache.ConfigMapCache;
 import com.bhex.wallet.common.config.ARouterConfig;
+import com.bhex.wallet.common.db.entity.BHWallet;
+import com.bhex.wallet.common.enums.BH_BUSI_TYPE;
 import com.bhex.wallet.common.manager.BHUserManager;
+import com.bhex.wallet.common.manager.MainActivityManager;
+import com.bhex.wallet.common.manager.SecuritySettingManager;
 import com.bhex.wallet.common.model.BHToken;
 import com.bhex.wallet.common.utils.LiveDataBus;
 import com.bhex.wallet.common.viewmodel.BalanceViewModel;
@@ -95,7 +99,12 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
             }
         });
 
-        //
+        //钱包
+        walletViewModel = ViewModelProviders.of(this).get(WalletViewModel.class);
+        walletViewModel.mutableLiveData.observe(this,ldm->{
+            updateWalletStatus(ldm);
+        });
+
         bhTokens = BHBalanceHelper.loadDefaultToken();
         rec_balance = mRootView.findViewById(R.id.rcv_balance);
         balanceAdapter = new HBalanceAdapter(bhTokens);
@@ -114,6 +123,12 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
         refreshLayout.autoRefresh();
 
         balanceViewHolder.iv_open_eye.setOnClickListener(this::isOpenEyeAction);
+
+        //选择钱包
+        balanceViewHolder.tv_wallet_name.setOnClickListener(v -> {
+            AccountListFragment.getInstance(BalanceFragment.this::chooseAccountAction).show(getChildFragmentManager(),
+                    AccountListFragment.class.getName());
+        });
 
         //钱包二维码展示
         balanceViewHolder.iv_wallet_qr.setOnClickListener(v->{
@@ -141,6 +156,21 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
     @Override
     protected void initPresenter() {
         mPresenter = new BalancePresenter(getYActivity());
+    }
+
+    //切换账户--事件
+    private void chooseAccountAction(BHWallet chooseWallet){
+        chooseWallet.isDefault = BH_BUSI_TYPE.默认托管单元.getIntValue();
+        BHUserManager.getInstance().setCurrentBhWallet(chooseWallet);
+        //请显示的资产
+        BHUserManager.getInstance().setAccountInfo(null);
+        balanceAdapter.notifyDataSetChanged();
+        getActivity().recreate();
+        walletViewModel.updateWallet(MainActivityManager.getInstance().mainActivity,chooseWallet,chooseWallet.id,
+                BH_BUSI_TYPE.默认托管单元.getIntValue(),false);
+        balanceViewModel.getAccountInfo(MainActivityManager.getInstance().mainActivity,CacheStrategy.cacheAndRemote());
+        //取消定时
+        SecuritySettingManager.getInstance().request_thirty_in_time(false,"");
     }
 
     //更新公告
@@ -172,6 +202,12 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
     private void isOpenEyeAction(View view) {
         isOpenEye = !isOpenEye;
         updateAssets();
+    }
+
+    private void updateWalletStatus(LoadDataModel ldm) {
+        if(ldm.getLoadingStatus()==LoadDataModel.SUCCESS){
+
+        }
     }
 
     int refreshCount = 0;
