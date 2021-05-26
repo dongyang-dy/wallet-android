@@ -103,8 +103,10 @@ public class BalanceViewHolder {
         double allTokenAssets = BHBalanceHelper.calculateAllTokenPrice(mContext,BHUserManager.getInstance().getAccountInfo());
         String allTokenAssetsText = CurrencyManager.getInstance().getCurrencyDecription(mContext,allTokenAssets);
         if(isOpenEye){
+            iv_open_eye.setImageResource(R.mipmap.ic_asset_open);
             tv_asset.setText(allTokenAssetsText);
         }else{
+            iv_open_eye.setImageResource(R.mipmap.ic_asset_close);
             tv_asset.setText("***");
         }
         //BHBalanceHelper.setTextFristSamll(mContext,tv_asset,allTokenAssetsText);

@@ -55,13 +55,16 @@ public class AddressBookListActivity extends BaseActivity {
     public static final int REQUEST_ADDRESS = 101;
     public static final String RESULT_DATA = "result_data";
 
-    @Autowired(name = BHConstants.SYMBOL)
-    public String symbol;
+    /*@Autowired(name = BHConstants.SYMBOL)
+    public String symbol;*/
 
-    @Autowired(name = "address")
+    @Autowired(name = BHConstants.CHAIN)
+    public String chain;
+
+    @Autowired(name = BHConstants.ADDRESS)
     public String address;
 
-    private BHToken bhToken;
+    //private BHToken bhToken;
 
     @BindView(R2.id.tv_center_title)
     AppCompatTextView tv_center_title;
@@ -82,13 +85,12 @@ public class AddressBookListActivity extends BaseActivity {
     @Override
     protected void initView() {
         ARouter.getInstance().inject(this);
-        bhToken = SymbolCache.getInstance().getBHToken(symbol);
         //设置标题
         tv_center_title.setText(getString(R.string.address_book));
         findViewById(R.id.btn_address_add).setOnClickListener(v -> {
             ARouter.getInstance()
                     .build(ARouterConfig.Balance.Balance_address_add)
-                    .withString(BHConstants.SYMBOL,symbol)
+                    .withString(BHConstants.CHAIN,chain)
                     .navigation();
         });
         rec_address_list.setSwipeMenuCreator(swipeMenuCreator);
@@ -120,7 +122,7 @@ public class AddressBookListActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         String current_wallet_address = BHUserManager.getInstance().getCurrentBhWallet().address;
-        addressBookViewModel.loadAddressBookList(this,current_wallet_address,bhToken.chain);
+        addressBookViewModel.loadAddressBookList(this,current_wallet_address,chain);
     }
 
     //更新列表数据
@@ -142,7 +144,7 @@ public class AddressBookListActivity extends BaseActivity {
     private void deleteAddressStatus(LoadDataModel ldm){
         if(ldm.getLoadingStatus()== LoadingStatus.SUCCESS){
             String current_wallet_address = BHUserManager.getInstance().getCurrentBhWallet().address;
-            addressBookViewModel.loadAddressBookList(this,current_wallet_address,bhToken.chain);
+            addressBookViewModel.loadAddressBookList(this,current_wallet_address,chain);
         }
     }
 

@@ -1,6 +1,7 @@
 package com.bhex.wallet.market.ui.fragment;
 
 import android.animation.ObjectAnimator;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.Animation;
@@ -68,7 +69,7 @@ public class MarketFragment extends JsBowserFragment {
 
     @Override
     protected void initView() {
-        mTokenId = getArgumentValue("go_token");
+        mTokenId = getArgumentValue(BHConstants.GO_TOKEN);
         super.initView();
 
         tv_center_title.setText(getString(R.string.tab_trade));
@@ -177,8 +178,11 @@ public class MarketFragment extends JsBowserFragment {
     }
 
 
-    public static MarketFragment getInstance(){
+    public static MarketFragment getInstance(String go_token){
         MarketFragment fragment = new MarketFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(BHConstants.GO_TOKEN,go_token);
+        fragment.setArguments(bundle);
         return fragment;
     }
 }

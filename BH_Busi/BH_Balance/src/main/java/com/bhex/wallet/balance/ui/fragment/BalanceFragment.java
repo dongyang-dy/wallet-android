@@ -21,10 +21,13 @@ import com.bhex.wallet.balance.R;
 import com.bhex.wallet.balance.adapter.AnnouncementMF;
 import com.bhex.wallet.balance.adapter.HBalanceAdapter;
 import com.bhex.wallet.balance.helper.BHBalanceHelper;
+import com.bhex.wallet.balance.helper.BHTokenHelper;
 import com.bhex.wallet.balance.model.AnnouncementItem;
+import com.bhex.wallet.balance.model.BHTokenItem;
 import com.bhex.wallet.balance.presenter.BalancePresenter;
 import com.bhex.wallet.balance.ui.viewhodler.BalanceViewHolder;
 import com.bhex.wallet.balance.viewmodel.AnnouncementViewModel;
+import com.bhex.wallet.balance.viewmodel.ChainTokenViewModel;
 import com.bhex.wallet.common.base.BaseFragment;
 import com.bhex.wallet.common.cache.ConfigMapCache;
 import com.bhex.wallet.common.config.ARouterConfig;
@@ -59,6 +62,8 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
     private WalletViewModel walletViewModel;
     //资产
     private BalanceViewModel balanceViewModel;
+    //币种
+    private ChainTokenViewModel mChainTokenViewModel;
 
     //资产列表
     private RecyclerView rec_balance;
@@ -105,7 +110,15 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
             updateWalletStatus(ldm);
         });
 
-        bhTokens = BHBalanceHelper.loadDefaultToken();
+        //币种
+        mChainTokenViewModel =  ViewModelProviders.of(getYActivity()).get(ChainTokenViewModel.class);
+        mChainTokenViewModel.mutableLiveData.observe(this,ldm->{
+            //defRefreshCount2++;
+            //updateAssetList((List<BHToken>)ldm.getData());
+            //finishRefresh();
+        });
+
+        bhTokens = BHTokenHelper.loadDefaultToken();
         rec_balance = mRootView.findViewById(R.id.rcv_balance);
         balanceAdapter = new HBalanceAdapter(bhTokens);
         rec_balance.setAdapter(balanceAdapter);
@@ -116,6 +129,9 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
 
         //自动刷新
         refreshLayout.setOnRefreshListener(refreshLayout -> {
+            //获取币种列表
+            //mChainTokenViewModel.loadBalanceByChain(this,BHConstants.BHT_TOKEN);
+
             balanceViewModel.getAccountInfo(getYActivity(), CacheStrategy.cacheAndRemote());
             announcementViewModel.loadAnnouncement(getYActivity());
             ConfigMapCache.getInstance().loadChain();
@@ -142,14 +158,16 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
             ARouter.getInstance().build(ARouterConfig.Balance.Balance_Search).navigation();
         });
 
+        //关闭通知
         mRootView.findViewById(R.id.iv_announce_close).setOnClickListener(v->{
-            //关闭通知
+
             mRootView.findViewById(R.id.layout_announce).setVisibility(View.GONE);
             //
             MarqueeView marqueeView = mRootView.findViewById(R.id.marquee_announce);
             marqueeView.stopFlipping();
         });
 
+        //交易列表
         balanceAdapter.setOnItemClickListener((adapter, view, position) -> {
             BHToken bhTokenItem = balanceAdapter.getData().get(position);
             Postcard postcard = ARouter.getInstance().build(ARouterConfig.Balance.Balance_Token_Detail)
@@ -160,7 +178,13 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
             startActivity(intent);
         });
 
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        List<BHToken>  res = BHTokenHelper.loadTokenByChain(BHConstants.BHT_TOKEN);
+        balanceAdapter.setNewData(res);
     }
 
     @Override
@@ -201,8 +225,6 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
         if(BHUserManager.getInstance().getAccountInfo()==null){
             return;
         }
-
-
         balanceViewHolder.updateAsset(isOpenEye);
         //更新列表资产
         balanceAdapter.setOpenEye(isOpenEye);
@@ -219,6 +241,8 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
 
         }
     }
+
+
 
     int refreshCount = 0;
     public void refreshfinish(){

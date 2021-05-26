@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="?android:selectableItemBackground"
     android:paddingStart="@dimen/main_padding_left"
     android:paddingEnd="@dimen/main_padding_right"
     android:layout_height="@dimen/recycler_item_default_height"

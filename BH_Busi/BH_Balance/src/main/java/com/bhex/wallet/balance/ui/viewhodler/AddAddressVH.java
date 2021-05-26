@@ -17,10 +17,12 @@ import com.bhex.tools.utils.ImageLoaderUtil;
 import com.bhex.tools.utils.LogUtils;
 import com.bhex.tools.utils.RegexUtil;
 import com.bhex.wallet.balance.R;
+import com.bhex.wallet.balance.helper.BHTokenHelper;
 import com.bhex.wallet.balance.ui.activity.AddAddressActivity;
 import com.bhex.wallet.balance.ui.fragment.ChooseChainFragment;
 import com.bhex.wallet.common.cache.SymbolCache;
 import com.bhex.wallet.common.config.ARouterConfig;
+import com.bhex.wallet.common.model.BHChain;
 import com.bhex.wallet.common.model.BHToken;
 import com.bhex.wallet.common.ui.activity.BHQrScanActivity;
 import com.bhex.wallet.common.utils.AddressUtil;
@@ -71,8 +73,9 @@ public class AddAddressVH {
 
 
     public void setChainIcon(String chain) {
-        BHToken bhChainToken = SymbolCache.getInstance().getBHToken(chain);
-        ImageLoaderUtil.loadImageView(activity,bhChainToken.logo,iv_chain_icon,R.mipmap.ic_default_coin);
+        LogUtils.d("AddAddressVH===","chain=="+chain);
+        BHChain bhChain = BHTokenHelper.getBHChain(chain);
+        ImageLoaderUtil.loadImageView(activity,bhChain.logo,iv_chain_icon,R.mipmap.ic_default_coin);
         tv_chain_name.setText(chain.toUpperCase());
     }
 

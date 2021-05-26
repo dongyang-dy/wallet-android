@@ -54,9 +54,9 @@ import java.util.List;
 @Route(path = ARouterConfig.Balance.Balance_address_add,name = "添加地址列表")
 public class AddAddressActivity extends BaseActivity {
 
-    @Autowired(name = BHConstants.SYMBOL)
-    public String symbol;
-    BHToken bhChainToken;
+    @Autowired(name = BHConstants.CHAIN)
+    public String chain;
+    //BHToken bhChainToken;
 
     private AddAddressVH addAddressVH;
     private AddressBookViewModel addressBookViewModel;
@@ -71,10 +71,10 @@ public class AddAddressActivity extends BaseActivity {
         ARouter.getInstance().inject(this);
         addAddressVH = new AddAddressVH(this);
 
-        BHToken bhSymbolToken = SymbolCache.getInstance().getBHToken(symbol);
-        bhChainToken = SymbolCache.getInstance().getBHToken(bhSymbolToken.chain);
+        //BHToken bhSymbolToken = SymbolCache.getInstance().getBHToken(symbol);
+        //bhChainToken = SymbolCache.getInstance().getBHToken(bhSymbolToken.chain);
 
-        addAddressVH.setChainIcon(bhChainToken.chain);
+        addAddressVH.setChainIcon(chain);
     }
 
     @Override
@@ -86,15 +86,15 @@ public class AddAddressActivity extends BaseActivity {
             updateStatus(ldm);
         });
 
-        addAddressVH.layout_choose_chain.setOnClickListener(v -> {
-            List<BHChain> bhChainList = BHTokenHelper.getAllBHChainList();
-            ChooseChainFragment.getInstance(bhChainList,bhChainToken.chain,AddAddressActivity.this::chooseChainAction)
-                    .show(getSupportFragmentManager(),ChooseChainFragment.class.getName());
-        });
+        if(!chain.equalsIgnoreCase(BHConstants.BHT_TOKEN)){
+            addAddressVH.layout_choose_chain.setOnClickListener(v -> {
+                List<BHChain> bhChainList = BHTokenHelper.getAllBHChainList();
+                ChooseChainFragment.getInstance(bhChainList,chain,AddAddressActivity.this::chooseChainAction)
+                        .show(getSupportFragmentManager(),ChooseChainFragment.class.getName());
+            });
+        }
+
     }
-
-
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -135,12 +135,12 @@ public class AddAddressActivity extends BaseActivity {
 
     //保存地址
     private void saveAddressAction(View view) {
-        boolean flag = addAddressVH.verifyInputAction(bhChainToken.chain);
+        boolean flag = addAddressVH.verifyInputAction(chain);
         if(!flag){
             return;
         }
         BHAddressBook addressBook = new BHAddressBook();
-        addressBook.chain = bhChainToken.chain;
+        addressBook.chain = chain;
         //addressBook.symbol = symbol;
         addressBook.wallet_address = BHUserManager.getInstance().getCurrentBhWallet().address;
         addressBook.address = addAddressVH.inp_address.getText().toString().trim();
@@ -167,7 +167,9 @@ public class AddAddressActivity extends BaseActivity {
 
 
     private void chooseChainAction(String chooseChain) {
-        bhChainToken = SymbolCache.getInstance().getBHToken(chooseChain);
+        //bhChainToken = SymbolCache.getInstance().getBHToken(chooseChain);
+        //BHChain bhChain = BHTokenHelper.getBHChain(chooseChain);
+        chain = chooseChain;
         addAddressVH.setChainIcon(chooseChain);
     }
 

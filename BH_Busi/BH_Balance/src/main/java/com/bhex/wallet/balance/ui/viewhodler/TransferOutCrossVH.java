@@ -142,9 +142,9 @@ public class TransferOutCrossVH {
         //地址簿功能
         btn_address_book.setOnClickListener(v->{
             String v_inp_drawwith_address = inp_withdraw_address.getText().toString().trim();
-
+            LogUtils.d("AddAddressVH===","chain==1=="+withDrawToken.chain);
             ARouter.getInstance().build(ARouterConfig.Balance.Balance_address_list)
-                    .withString(BHConstants.SYMBOL,withDrawToken.symbol)
+                    .withString(BHConstants.CHAIN,withDrawToken.chain)
                     .withString(BHConstants.ADDRESS,v_inp_drawwith_address)
                     .navigation(m_activity, AddressBookListActivity.REQUEST_ADDRESS);
         });
@@ -290,4 +290,8 @@ public class TransferOutCrossVH {
         inp_withdraw_amount.requestFocus();
     }
 
+    public void updateWithDrawFee() {
+        tv_withdraw_fee_token.setText(withDrawToken.chain.toUpperCase());
+        tv_withdraw_fee.setText(withDrawToken!=null?withDrawToken.withdrawal_fee:"");
+    }
 }

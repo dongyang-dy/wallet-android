@@ -17,8 +17,10 @@ import com.bhex.network.base.LoadDataModel;
 import com.bhex.network.base.LoadingStatus;
 import com.bhex.network.utils.PackageUtils;
 import com.bhex.network.utils.ToastUtils;
+import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.language.LocalManageUtil;
 import com.bhex.tools.utils.ColorUtil;
+import com.bhex.tools.utils.ToolUtils;
 import com.bhex.wallet.bh_main.R;
 import com.bhex.wallet.bh_main.my.helper.MyHelper;
 import com.bhex.wallet.bh_main.my.ui.item.MyItem;
@@ -93,23 +95,25 @@ public class AboutActivity extends BaseActivity {
     //点击条目
     private void clickItemAction(BaseQuickAdapter<?,?> baseQuickAdapter, View view, int i) {
         switch (i){
-            case 0:
+            /*case 0:
                 ARouter.getInstance().build(ARouterConfig.Market.market_webview)
                         .withString("url", BH_BUSI_URL.版本更新日志.getGotoUrl(this)).navigation();
-                break;
-            case 1:
+                break;*/
+            case 0:
                 isCheckUpdate = true;
                 mUpgradeVM.getUpgradeInfo(this);
                 break;
-            case 2:
-                ARouter.getInstance().build(ARouterConfig.Market.market_webview)
-                    .withString("url", BH_BUSI_URL.联系我们.getGotoUrl(this)).navigation();
+            case 1:
+                /*ARouter.getInstance().build(ARouterConfig.Market.market_webview)
+                    .withString("url", BH_BUSI_URL.联系我们.getGotoUrl(this)).navigation();*/
+                ToolUtils.copyText(BHConstants.EMAIL,this);
+                ToastUtils.showToast(getString(R.string.copyed));
                 break;
         }
     }
 
     private void processUpgradeInfo(LoadDataModel<UpgradeInfo> ldm) {
-        MyItem myItem = mDatas.get(1);
+        MyItem myItem = mDatas.get(0);
         if(ldm.loadingStatus== LoadingStatus.SUCCESS){
             UpgradeInfo upgradeInfo = ldm.getData();
             if(!isCheckUpdate ){

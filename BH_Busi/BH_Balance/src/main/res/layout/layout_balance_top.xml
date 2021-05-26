@@ -9,16 +9,26 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="35dp"
         android:layout_marginStart="20dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:src="@mipmap/ic_bhex_wallet"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_bhex_wallet"/>
+            android:layout_marginStart="4dp"
+            android:layout_toRightOf="@+id/iv_logo"
+            android:src="@mipmap/bg_testnet"
+            />
 
         <!--<FrameLayout
             android:layout_width="wrap_content"
@@ -37,7 +47,7 @@
         </FrameLayout>-->
 
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"

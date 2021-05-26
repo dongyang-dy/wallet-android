@@ -79,13 +79,11 @@ public class CoinSearchActivity extends BaseActivity implements OnRefreshListene
         ARouter.getInstance().inject(this);
 
         mTokenList = BHTokenHelper.loadVerifiedToken(BHConstants.BHT_TOKEN);
-
-
-        recycler_coin.setAdapter(mCoinSearchAdapter = new CoinSearchAdapter(mTokenList));
+        mCoinSearchAdapter = new CoinSearchAdapter(mTokenList);
+        recycler_coin.setAdapter(mCoinSearchAdapter);
 
         RecycleViewExtDivider ItemDecoration = new RecycleViewExtDivider(
                 this,LinearLayoutManager.VERTICAL,
-
                 PixelUtils.dp2px(this,68),
                 0,
                 ColorUtil.getColor(this,R.color.global_divider_color));

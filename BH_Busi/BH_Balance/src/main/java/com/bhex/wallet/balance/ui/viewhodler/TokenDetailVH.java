@@ -158,8 +158,8 @@ public class TokenDetailVH {
     //交易
     private void onTradeAction(View view) {
         Postcard postcard =  ARouter.getInstance()
-                .build(ARouterConfig.Main.main_mainindex)
-                .withString("go_token",mSybmol)
+                .build(ARouterConfig.Market.market_hdex)
+                .withString(BHConstants.GO_TOKEN,mSybmol)
                 .withString("go_position", BH_BUSI_TYPE.市场.value);
         LogisticsCenter.completion(postcard);
         Intent intent = new Intent(activity, postcard.getDestination());

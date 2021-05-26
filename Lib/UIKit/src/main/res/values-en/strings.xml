@@ -170,8 +170,10 @@
     <string name="tab_invalid">Invalid</string>
     <string name="hint_validator_search">Enter the name of the validator</string>
     <string name="voting_power_proportion">Voting consensus</string>
-    <string name="other_delegate_proportion">Commission rate</string>
-    <string name="self_delegate_proportion">Self-delegation</string>
+    <!--<string name="other_delegate_proportion">Commission rate</string>-->
+    <!--<string name="self_delegate_proportion">Self-delegation</string>-->
+    <string name="other_delegate_proportion">APY</string>
+    <string name="self_delegate_proportion">Staking Amount</string>
     <string name="validate_node">Validator node</string>
     <string name="up_time">Active Ratio</string>
     <string name="update_time">Updated time</string>
@@ -516,7 +518,7 @@
     <string name="save_pictrue">Save image</string>
     <string name="switch_cross_link_address">Switch cross-chain custody address</string>
     <string name="switch_hbtc_address">Switch BHEX chain address</string>
-    <string name="hbtc_chain_address">HBTCchain address</string>
+    <string name="hbtc_chain_address">BHEX chain address</string>
     <string name="transcation_record">Trade history</string>
     <string name="trusteeship_node">Custody node</string>
     <string name="common_node">Consensus node</string>
@@ -534,7 +536,7 @@
     <string name="input_withdraw_address">Input withdrawal address</string>
     <string name="input_enter_address">Please enter or paste the address</string>
     <string name="cross_transfer_out_tips">You are withdrawing tokens across the chains.Please ensure that the token withdrawal address is its public chain address</string>
-    <!--<string name="transfer_inner_tips">This account supports HBC, HRC10 and cross-chain custody assets on HBTC chain</string>-->
+    <!--<string name="transfer_inner_tips">This account supports HBC, HRC10 and cross-chain custody assets on BHEX chain</string>-->
     <string name="cross_transfer_highlight_text">Native public chain address</string>
     
     <string name="confrim_create">Comfirm to create</string>

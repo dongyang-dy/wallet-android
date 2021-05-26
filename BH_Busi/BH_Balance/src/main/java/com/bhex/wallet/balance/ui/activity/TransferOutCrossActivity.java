@@ -15,8 +15,10 @@ import com.bhex.lib_qr.XQRCode;
 import com.bhex.lib_qr.util.QRCodeAnalyzeUtils;
 import com.bhex.network.base.LoadDataModel;
 import com.bhex.network.base.LoadingStatus;
+import com.bhex.network.cache.stategy.CacheStrategy;
 import com.bhex.network.utils.ToastUtils;
 import com.bhex.tools.constants.BHConstants;
+import com.bhex.tools.utils.LogUtils;
 import com.bhex.tools.utils.PathUtils;
 import com.bhex.tools.utils.ToolUtils;
 import com.bhex.wallet.balance.R;
@@ -115,17 +117,23 @@ public class TransferOutCrossActivity extends BaseActivity {
             updateTransferStatus(ldm);
         });
 
-
+        //获取币种信息
         mTokenViewModel = ViewModelProviders.of(this).get(TokenViewModel.class);
         mTokenViewModel.queryLiveData.observe(this,ldm->{
             if(ldm.loadingStatus==LoadingStatus.SUCCESS){
-                //transferOutCrossVH.tranferToken = (BHToken) ldm.getData();
-                //更新跨链提币手续费
-                //transferOutCrossVH.updateWithDrawFee();
+                withDrawToken = (BHToken) ldm.getData();
+                transferOutCrossVH.withDrawToken = withDrawToken;
+                transferOutCrossVH.updateWithDrawFee();
             }
             refreshFinish();
         });
 
+        mRefreshLayout.setOnRefreshListener(refreshLayout -> {
+            def_dailog_count = 0;
+            mBalanceViewModel.getAccountInfo(this, CacheStrategy.onlyRemote());
+            mTokenViewModel.queryToken(this,withDrawToken.symbol);
+        });
+        mRefreshLayout.autoRefresh();
     }
 
     //选择币种

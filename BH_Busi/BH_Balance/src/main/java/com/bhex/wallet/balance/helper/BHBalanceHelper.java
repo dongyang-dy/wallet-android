@@ -156,17 +156,7 @@ public class BHBalanceHelper {
         return list;
     }
 
-    public static List<BHToken> loadBalanceByChain(String chainName){
-        LinkedHashMap<String,BHToken> map_tokens =  CacheCenter.getInstance().getSymbolCache().getLocalToken();
-        List<BHToken> res = new ArrayList<>();
-        for (ArrayMap.Entry<String,BHToken> entry:map_tokens.entrySet()){
-            if(!entry.getValue().chain.equalsIgnoreCase(chainName)){
-                continue;
-            }
-            res.add(entry.getValue());
-        }
-        return res;
-    }
+
 
     //
     public static List<BHToken> loadTokenList(String symbol,String flag){
@@ -258,24 +248,6 @@ public class BHBalanceHelper {
         tv_asset.setTag(R.id.tag_first,allTokenAssetsText);
     }
 
-
-    //获取默认Token列表
-    public static List<BHToken> loadDefaultToken() {
-        LinkedHashMap<String,BHToken> default_tokens = CacheCenter.getInstance().getSymbolCache().getDefaultTokenList();
-        List<BHToken> res = new ArrayList<>();
-
-        if(default_tokens.isEmpty()){
-            return res;
-        }
-
-        for(ArrayMap.Entry<String,BHToken> item : default_tokens.entrySet()){
-            if(!item.getValue().chain.equalsIgnoreCase(BHConstants.BHT_TOKEN)){
-                continue;
-            }
-            res.add(item.getValue());
-        }
-        return res;
-    }
 
     //获取链地址
     public static String queryAddressByChain(String chain){

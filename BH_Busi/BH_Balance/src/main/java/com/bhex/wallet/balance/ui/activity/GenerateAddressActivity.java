@@ -51,7 +51,7 @@ public class GenerateAddressActivity extends BaseActivity
     @Autowired(name = BHConstants.SYMBOL)
     String symbol;
 
-    @Autowired(name = "chain")
+    @Autowired(name = BHConstants.CHAIN)
     String mChain;
 
     BHBalance bhtBalance;
@@ -133,7 +133,6 @@ public class GenerateAddressActivity extends BaseActivity
     private void generateCrossLinkAddress() {
 
         if(bhtBalance==null || TextUtils.isEmpty(bhtBalance.amount)||Double.valueOf(bhtBalance.amount)<=0){
-            //ToastUtils.showToast(getResources().getString(R.string.not_have_amount)+BHConstants.BHT_TOKEN.toUpperCase());
             ToastUtils.showToast(getResources().getString(R.string.fee_notenough));
             return;
         }

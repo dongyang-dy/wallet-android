@@ -1,4 +1,4 @@
-hbtc
+bhex
 #myapp
 # ./gradlew clean assembleReleaseChannels
 # ./gradlew clean assembleDebugChannels

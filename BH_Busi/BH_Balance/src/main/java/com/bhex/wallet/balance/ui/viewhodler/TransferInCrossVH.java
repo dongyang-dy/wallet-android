@@ -184,7 +184,7 @@ public class TransferInCrossVH {
             iv_address_qr.setImageBitmap(bitmap);
             //链上的地址
             tv_token_address.setText(chain_address);
-        }else if(TextUtils.isEmpty(SequenceManager.getInstance().getAddressStatus())){
+        }else if(!TextUtils.isEmpty(SequenceManager.getInstance().getAddressStatus())){
             //清空点击事件
             ViewUtil.getListenInfo(btn_genarate_address);
             btn_genarate_address.setText(mActivity.getString(R.string.cross_address_generatoring));

@@ -166,7 +166,7 @@
             <LinearLayout
                 android:id="@+id/layout_main_content"
                 android:layout_width="match_parent"
-                android:layout_height="388dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
@@ -220,6 +220,9 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginTop="16dp"
+                            android:paddingStart="40dp"
+                            android:paddingEnd="40dp"
+                            android:gravity="center"
                             android:textColor="@color/label_address_color"
                             android:textSize="13sp"
                             tools:text="0x626C96F956269bcc09F20421Dbfff6b1EA0CDAC" />

@@ -64,7 +64,7 @@
             android:layout_width="55dp"
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_refresh_a"
+            android:src="@drawable/ic_refresh"
             android:scaleType="center"
             android:clickable="true"
             android:layout_alignParentEnd="true"

@@ -246,8 +246,7 @@ public class SymbolCache extends BaseCache {
                 localTokenList.remove(bhToken.symbol);
             }
         });
-
-
+        
         return localTokenList;
     }
 

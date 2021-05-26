@@ -112,8 +112,8 @@ public class TransferOutVH {
         btn_address_book.setOnClickListener(v->{
             String v_inp_transfer_in_address = inp_transfer_in_address.getText().toString().trim();
             ARouter.getInstance().build(ARouterConfig.Balance.Balance_address_list)
-                    .withString(BHConstants.SYMBOL,tranferToken.symbol)
-                    .withString("address",v_inp_transfer_in_address)
+                    .withString(BHConstants.CHAIN,tranferToken.chain)
+                    .withString(BHConstants.ADDRESS,v_inp_transfer_in_address)
                     .navigation(m_activity, BHQrScanActivity.REQUEST_CODE);
 
         });

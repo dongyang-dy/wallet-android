@@ -83,7 +83,6 @@ public class ToolUtils {
     //关闭软键盘
     public static void hintKeyBoard(Activity context, View view) {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 

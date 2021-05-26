@@ -3,10 +3,13 @@ package com.bhex.wallet.balance.ui.activity;
 import android.view.View;
 
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.bhex.network.base.LoadDataModel;
+import com.bhex.network.base.LoadingStatus;
 import com.bhex.tools.constants.BHConstants;
 import com.bhex.wallet.balance.R;
 import com.bhex.wallet.balance.R2;
@@ -21,6 +24,8 @@ import com.bhex.wallet.common.config.ARouterConfig;
 import com.bhex.wallet.common.enums.BH_BUSI_TYPE;
 import com.bhex.wallet.common.model.BHChain;
 import com.bhex.wallet.common.model.BHToken;
+import com.bhex.wallet.common.utils.LiveDataBus;
+import com.bhex.wallet.common.viewmodel.BalanceViewModel;
 import com.gyf.immersionbar.ImmersionBar;
 
 import org.greenrobot.eventbus.EventBus;
@@ -54,6 +59,9 @@ public class TransferInCrossActivity extends BaseActivity {
 
     TransferInCrossVH transferCrossVH;
 
+    //资产
+    private BalanceViewModel balanceViewModel;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_transfer_in_cross;
@@ -74,16 +82,27 @@ public class TransferInCrossActivity extends BaseActivity {
         bhToken = SymbolCache.getInstance().getBHToken(m_select_symbol);
         transferCrossVH = new TransferInCrossVH(this,findViewById(R.id.root_view),m_select_symbol);
         transferCrossVH.updateTokenInfo(m_select_symbol);
+
     }
 
     @Override
     protected void addEvent() {
         EventBus.getDefault().register(this);
+
+        //资产
+        balanceViewModel = ViewModelProviders.of(this).get(BalanceViewModel.class);
+        //资产订阅
+        LiveDataBus.getInstance().with(BHConstants.Label_Account, LoadDataModel.class).observe(this, ldm->{
+            if(ldm.loadingStatus== LoadingStatus.SUCCESS){
+                updateAddressStatus();
+            }
+        });
         //选择币种
         transferCrossVH.layout_select_token.setOnClickListener(this::chooseTokenAction);
         //选择链
         transferCrossVH.layout_select_chain.setOnClickListener(this::chooseChainAction);
     }
+
 
 
     @Override
@@ -121,7 +140,11 @@ public class TransferInCrossActivity extends BaseActivity {
     }
 
     @Subscribe(threadMode= ThreadMode.MAIN)
-    public void changeAccount(TransctionEvent transctionEvent){
+    public void changeStatus(TransctionEvent transctionEvent){
+        transferCrossVH.updateTokenInfo(m_select_symbol);
+    }
+
+    public void updateAddressStatus(){
         transferCrossVH.updateTokenInfo(m_select_symbol);
     }
 

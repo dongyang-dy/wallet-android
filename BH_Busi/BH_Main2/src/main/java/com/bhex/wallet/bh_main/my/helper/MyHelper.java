@@ -167,10 +167,13 @@ public class MyHelper {
     public static List<MyItem> getAboutUs(Context context){
         List<MyItem> myItems = new ArrayList<>();
         String []res = context.getResources().getStringArray(R.array.about_us_list);
-        for (int i = 0; i < res.length; i++) {
-            MyItem item = new MyItem(i,res[i], true, "");
-            myItems.add(item);
-        }
+
+        MyItem item0 = new MyItem(0,res[0], true, "");
+        myItems.add(item0);
+
+        MyItem item1 = new MyItem(1,res[1], false, BHConstants.EMAIL);
+        myItems.add(item1);
+
         return myItems;
     }
 
