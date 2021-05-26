@@ -21,6 +21,8 @@
 
     <color name="item_label_text_color">#6C7486</color>
 
+    <color name="item_select_bg_color">#304299FF</color>
+
     <!--标签文字颜色-->
     <color name="global_label_text_color">#8F9298</color>
 

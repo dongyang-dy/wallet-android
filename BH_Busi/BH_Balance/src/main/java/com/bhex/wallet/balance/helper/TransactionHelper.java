@@ -43,6 +43,7 @@ public class TransactionHelper {
      */
     public static String getTranscationType(Context context, TransactionOrder txo){
         TransactionOrder.ActivitiesBean bean = txo.activities.get(0);
+        LogUtils.d("TransactionHelper===","bean=="+bean.type);
         StringBuffer type_label = new StringBuffer(
                 TRANSCATION_BUSI_TYPE.getValue(bean.getType())
         );

@@ -42,6 +42,8 @@ import com.bhex.wallet.common.viewmodel.BalanceViewModel;
 import com.bhex.wallet.common.viewmodel.WalletViewModel;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -118,7 +120,7 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
             //finishRefresh();
         });
 
-        bhTokens = BHTokenHelper.loadDefaultToken();
+        //bhTokens = BHTokenHelper.loadTokenByChain(BHConstants.BHT_TOKEN);
         rec_balance = mRootView.findViewById(R.id.rcv_balance);
         balanceAdapter = new HBalanceAdapter(bhTokens);
         rec_balance.setAdapter(balanceAdapter);
@@ -131,7 +133,6 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
         refreshLayout.setOnRefreshListener(refreshLayout -> {
             //获取币种列表
             //mChainTokenViewModel.loadBalanceByChain(this,BHConstants.BHT_TOKEN);
-
             balanceViewModel.getAccountInfo(getYActivity(), CacheStrategy.cacheAndRemote());
             announcementViewModel.loadAnnouncement(getYActivity());
             ConfigMapCache.getInstance().loadChain();
@@ -184,6 +185,12 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
     public void onResume() {
         super.onResume();
         List<BHToken>  res = BHTokenHelper.loadTokenByChain(BHConstants.BHT_TOKEN);
+        /*Collections.sort(res, new Comparator<BHToken>() {
+            @Override
+            public int compare(BHToken o1, BHToken o2) {
+                return o2.symbol.compareToIgnoreCase(o1.symbol);
+            }
+        });*/
         balanceAdapter.setNewData(res);
     }
 

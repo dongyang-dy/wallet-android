@@ -5,6 +5,7 @@ import android.view.View;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 
+import com.bhex.tools.utils.ColorUtil;
 import com.bhex.tools.utils.ImageLoaderUtil;
 import com.bhex.tools.utils.NumberUtil;
 import com.bhex.wallet.balance.R;
@@ -52,6 +53,11 @@ public class ChooseTokenAdapter extends BaseQuickAdapter<BHToken, BaseViewHolder
         String v_token_amount = NumberUtil.dispalyForUsertokenAmount4Level(balance.amount);
         v_token_amount = v_token_amount.concat(" ").concat(item.name.toUpperCase());
         tv_token_amount.setText(v_token_amount);
+        holder.itemView.setBackgroundColor(ColorUtil.getColor(getContext(),R.color.white));
+
+        if(item.symbol.equals(mSymbol)){
+            holder.itemView.setBackgroundColor(ColorUtil.getColor(getContext(),R.color.item_select_bg_color));
+        }
         //tv_token_amount.setText(v_token_amount+" "+item.name.toUpperCase());
 
         //价格

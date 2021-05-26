@@ -85,6 +85,8 @@ public enum TRANSCATION_BUSI_TYPE {
         移除流动性.label = context.getResources().getString(R.string.remove_liquidity);
         撤单.label = context.getResources().getString(R.string.cancel_limit_swap);
         限价单兑换.label = context.getResources().getString(R.string.limit_swap);
+        领取流动性挖矿奖励.label = context.getResources().getString(R.string.claim_lp_earning);
+        领取交易挖矿奖励.label = context.getResources().getString(R.string.claim_trade_earning);
         Other.label = context.getResources().getString(R.string.other);
     }
 

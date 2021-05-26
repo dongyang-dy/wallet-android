@@ -138,7 +138,7 @@ public class TransferOutCrossActivity extends BaseActivity {
 
     //选择币种
     public void selectTokenAction(View view){
-        ChooseTokenFragment fragment = ChooseTokenFragment.showFragment(m_select_symbol, BH_BUSI_TYPE.跨链转账.value,this::selectTokenListener);
+        ChooseTokenFragment fragment = ChooseTokenFragment.showFragment(m_select_symbol, this::selectTokenListener);
         fragment.show(getSupportFragmentManager(),ChooseTokenFragment.class.getName());
     }
 

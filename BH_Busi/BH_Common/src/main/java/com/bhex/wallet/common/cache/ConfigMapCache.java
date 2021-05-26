@@ -87,7 +87,7 @@ public class ConfigMapCache extends BaseCache {
                         if(!JsonUtils.isHasMember(jsonObject,"items")){
                             return;
                         }
-                        //LogUtils.d("TokenMapCache====>:","==jsonObject=="+jsonObject.toString());
+
                         List<BHTokenMapping> tokens = JsonUtils.getListFromJson(jsonObject.toString(),"items", BHTokenMapping.class);
                         //缓存所有的token
                         if(ToolUtils.checkListIsEmpty(tokens)){

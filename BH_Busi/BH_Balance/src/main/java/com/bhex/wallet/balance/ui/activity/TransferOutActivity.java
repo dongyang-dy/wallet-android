@@ -123,7 +123,7 @@ public class TransferOutActivity extends BaseActivity {
 
     //选择币种
     public void selectTokenAction(View view){
-        ChooseTokenFragment fragment = ChooseTokenFragment.showFragment(m_symbol, BH_BUSI_TYPE.链内转账.value,this::selectTokenListener);
+        ChooseTokenFragment fragment = ChooseTokenFragment.showFragment(m_symbol, this::selectTokenListener);
         fragment.show(getSupportFragmentManager(),ChooseTokenFragment.class.getName());
     }
 

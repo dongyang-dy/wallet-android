@@ -120,7 +120,7 @@ public class BHTokenHelper {
 
     //获取默认Token列表
     public static List<BHToken> loadDefaultToken() {
-        LinkedHashMap<String,BHToken> default_tokens = CacheCenter.getInstance().getSymbolCache().getDefaultTokenList();
+        LinkedHashMap<String,BHToken> default_tokens = CacheCenter.getInstance().getSymbolCache().getLocalToken();
         List<BHToken> res = new ArrayList<>();
 
         if(default_tokens.isEmpty()){

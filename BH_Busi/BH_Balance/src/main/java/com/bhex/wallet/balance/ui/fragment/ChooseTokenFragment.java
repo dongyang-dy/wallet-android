@@ -26,6 +26,7 @@ import com.bhex.lib.uikit.widget.EmptyLayout;
 import com.bhex.lib.uikit.widget.RecycleViewExtDivider;
 import com.bhex.lib.uikit.widget.editor.SimpleTextWatcher;
 import com.bhex.network.mvx.base.BaseDialogFragment;
+import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.ColorUtil;
 import com.bhex.tools.utils.LogUtils;
 import com.bhex.tools.utils.PixelUtils;
@@ -33,6 +34,7 @@ import com.bhex.tools.utils.ToolUtils;
 import com.bhex.wallet.balance.R;
 import com.bhex.wallet.balance.adapter.ChooseTokenAdapter;
 import com.bhex.wallet.balance.helper.BHBalanceHelper;
+import com.bhex.wallet.balance.helper.BHTokenHelper;
 import com.bhex.wallet.common.model.BHToken;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 
@@ -54,7 +56,7 @@ public class ChooseTokenFragment extends BaseDialogFragment {
 
     private List<BHToken> mDatas;
     private String mSymbol;
-    private String mOrigin;
+    //private String mOrigin;
     private ChooseTokenAdapter mChooseTokenAdapter;
     private RecyclerView rec_token_list;
     AppCompatImageView iv_close;
@@ -88,7 +90,8 @@ public class ChooseTokenFragment extends BaseDialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         rec_token_list = mRootView.findViewById(R.id.rec_token_list);
-        mDatas = BHBalanceHelper.loadTokenList(mSymbol,mOrigin);
+        //mDatas = BHBalanceHelper.loadTokenList(mSymbol,mOrigin);
+        mDatas = BHTokenHelper.loadTokenByChain(BHConstants.BHT_TOKEN);
         rec_token_list.setAdapter(mChooseTokenAdapter = new ChooseTokenAdapter(mDatas,mSymbol));
 
         RecycleViewExtDivider ItemDecoration = new RecycleViewExtDivider(
@@ -141,10 +144,10 @@ public class ChooseTokenFragment extends BaseDialogFragment {
         });
     }
 
-    public static ChooseTokenFragment showFragment(String symbol,String origin,OnChooseTokenListener listener){
+    public static ChooseTokenFragment showFragment(String symbol,OnChooseTokenListener listener){
         ChooseTokenFragment fragment = new ChooseTokenFragment();
         fragment.mOnChooseItemListener = listener;
-        fragment.mOrigin = origin;
+        //fragment.mOrigin = origin;
         fragment.mSymbol = symbol;
         return  fragment;
     }

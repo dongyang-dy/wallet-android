@@ -13,6 +13,8 @@
     <string name="remove_liquidity">移除流动性</string>
     <string name="limit_swap">限价单兑换</string>
     <string name="cancel_limit_swap">撤单</string>
+    <string name="claim_lp_earning">领取流动性挖矿奖励</string>
+    <string name="claim_trade_earning">领取交易挖矿奖励</string>
     <string name="other">其它</string>
 
     <array name="default_chain_name">

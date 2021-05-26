@@ -86,20 +86,24 @@ public class ChooseChainFragment extends BaseDialogFragment {
 
         @Override
         protected void convert(@NotNull BaseViewHolder holder, BHChain bhChain) {
-            //holder.setText(R.id.tv_chain_name,bhChain.chain.toUpperCase());
             holder.setText(R.id.tv_chain_full,bhChain.full_name);
             AppCompatCheckBox  ck_status = holder.getView(R.id.ck_status);
-
+            ck_status.setVisibility(View.INVISIBLE);
             AppCompatImageView iv_chain_icon = holder.getView(R.id.iv_chain_icon);
             //BHToken bhToken = SymbolCache.getInstance().getBHToken(bhChain.chain);
             ImageLoaderUtil.loadImageView(getContext(),bhChain.logo,iv_chain_icon,R.mipmap.ic_default_coin);
 
-            if(mChain.equals(bhChain.chain)){
+            /*if(mChain.equals(bhChain.chain)){
                 ck_status.setChecked(true);
                 ck_status.setVisibility(View.VISIBLE);
             }else{
                 ck_status.setChecked(false);
                 ck_status.setVisibility(View.INVISIBLE);
+            }*/
+
+            holder.itemView.setBackgroundColor(ColorUtil.getColor(getContext(),R.color.white));
+            if(bhChain.chain.equals(mChain)){
+                holder.itemView.setBackgroundColor(ColorUtil.getColor(getContext(),R.color.item_select_bg_color));
             }
         }
     }
