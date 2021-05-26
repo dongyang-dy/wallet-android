@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.ColorUtil;
 import com.bhex.tools.utils.PixelUtils;
 import com.bhex.lib.uikit.widget.EmptyLayout;
@@ -77,7 +78,7 @@ public class CoinSearchActivity extends BaseActivity implements OnRefreshListene
         tv_center_title.setText(getResources().getString(R.string.add_coin));
         ARouter.getInstance().inject(this);
 
-        //mTokenList = TokenHelper.loadVerifiedToken(mChain);
+        mTokenList = BHTokenHelper.loadVerifiedToken(BHConstants.BHT_TOKEN);
 
 
         recycler_coin.setAdapter(mCoinSearchAdapter = new CoinSearchAdapter(mTokenList));
@@ -180,7 +181,7 @@ public class CoinSearchActivity extends BaseActivity implements OnRefreshListene
             mCoinSearchAdapter.getData().clear();
             mCoinSearchAdapter.notifyDataSetChanged();
             empty_layout.showProgess();
-            mTokenViewModel.search_token(this,search_key.toLowerCase(),null);
+            mTokenViewModel.search_token(this,search_key.toLowerCase(),BHConstants.BHT_TOKEN);
         }
     }
 

@@ -1,5 +1,6 @@
 package com.bhex.wallet.balance.ui.viewhodler;
 
+import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.text.TextUtils;
 import android.view.View;
@@ -8,6 +9,8 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.alibaba.android.arouter.core.LogisticsCenter;
+import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bhex.lib.uikit.util.ShapeUtils;
 import com.bhex.tools.constants.BHConstants;
@@ -21,6 +24,7 @@ import com.bhex.wallet.balance.helper.BHBalanceHelper;
 import com.bhex.wallet.common.base.BaseActivity;
 import com.bhex.wallet.common.cache.CacheCenter;
 import com.bhex.wallet.common.config.ARouterConfig;
+import com.bhex.wallet.common.enums.BH_BUSI_TYPE;
 import com.bhex.wallet.common.manager.BHUserManager;
 import com.bhex.wallet.common.model.BHBalance;
 import com.bhex.wallet.common.model.BHToken;
@@ -84,7 +88,8 @@ public class TokenDetailVH {
         btn_deposit.setOnClickListener(this::depositAction);
         //提现
         btn_withdraw.setOnClickListener(this::withDrawAction);
-
+        //交易
+        btn_trade.setOnClickListener(this::onTradeAction);
     }
 
     public void updateLayout(String symbol){
@@ -148,5 +153,17 @@ public class TokenDetailVH {
         ARouter.getInstance().build(ARouterConfig.Balance.Balance_transfer_out_cross)
                 .withString(BHConstants.SYMBOL,mSybmol)
                 .navigation();
+    }
+
+    //交易
+    private void onTradeAction(View view) {
+        Postcard postcard =  ARouter.getInstance()
+                .build(ARouterConfig.Main.main_mainindex)
+                .withString("go_token",mSybmol)
+                .withString("go_position", BH_BUSI_TYPE.市场.value);
+        LogisticsCenter.completion(postcard);
+        Intent intent = new Intent(activity, postcard.getDestination());
+        intent.putExtras(postcard.getExtras());
+        activity.startActivity(intent);
     }
 }

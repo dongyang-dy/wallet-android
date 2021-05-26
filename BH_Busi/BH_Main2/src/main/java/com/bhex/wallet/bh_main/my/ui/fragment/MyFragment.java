@@ -70,7 +70,7 @@ public class MyFragment extends BaseFragment  {
         rec_my_function.setNestedScrollingEnabled(false);
 
         MyRecyclerViewDivider myRecyclerDivider = new MyRecyclerViewDivider(getContext(),
-                ColorUtil.getColor(getContext(),R.color.global_divider_color),
+                ColorUtil.getColor(getContext(),R.color.page_bg_color),
                 getResources().getDimension(R.dimen.item_large_divider_height),
                 new int[]{1,3});
         rec_my_function.addItemDecoration(myRecyclerDivider);

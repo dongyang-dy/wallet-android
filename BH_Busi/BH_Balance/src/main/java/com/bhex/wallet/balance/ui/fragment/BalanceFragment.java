@@ -142,6 +142,14 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
             ARouter.getInstance().build(ARouterConfig.Balance.Balance_Search).navigation();
         });
 
+        mRootView.findViewById(R.id.iv_announce_close).setOnClickListener(v->{
+            //关闭通知
+            mRootView.findViewById(R.id.layout_announce).setVisibility(View.GONE);
+            //
+            MarqueeView marqueeView = mRootView.findViewById(R.id.marquee_announce);
+            marqueeView.stopFlipping();
+        });
+
         balanceAdapter.setOnItemClickListener((adapter, view, position) -> {
             BHToken bhTokenItem = balanceAdapter.getData().get(position);
             Postcard postcard = ARouter.getInstance().build(ARouterConfig.Balance.Balance_Token_Detail)
@@ -151,6 +159,8 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
             intent.putExtras(postcard.getExtras());
             startActivity(intent);
         });
+
+
     }
 
     @Override

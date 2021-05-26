@@ -92,6 +92,9 @@ public class TransferOutCrossVH {
     //可以提币或转账数量
     public double available_amount;
 
+    //跨链手续费
+    public AppCompatTextView tv_withdraw_fee_label;
+
     public TransferOutCrossVH(BaseActivity m_activity, View mRootView) {
         this.m_activity = m_activity;
         this.mRootView = mRootView;
@@ -129,6 +132,8 @@ public class TransferOutCrossVH {
 
         btn_drawwith_coin  = mRootView.findViewById(R.id.btn_drawwith_coin);
 
+        tv_withdraw_fee_label = mRootView.findViewById(R.id.tv_withdraw_fee_label);
+
         //二维码扫描
         btn_address_scan.setOnClickListener(v -> {
             ARouter.getInstance().build(ARouterConfig.Common.commom_scan_qr).navigation(m_activity, BHQrScanActivity.REQUEST_CODE);
@@ -150,6 +155,12 @@ public class TransferOutCrossVH {
         inp_withdraw_amount.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(BHConstants.BHT_DEFAULT_DECIMAL+1)});
 
         btn_all.setOnClickListener(this::withdrawAllAction);
+
+        //
+        tv_withdraw_fee_label.setOnClickListener(v -> {
+            DepositTipsFragment.newInstance(m_activity.getString(R.string.cross_withdraw_tips))
+                    .show(m_activity.getSupportFragmentManager(),DepositTipsFragment.class.getName());
+        });
     }
 
 

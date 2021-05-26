@@ -193,12 +193,9 @@ public  class TokenDetailActivity extends BaseActivity<AssetPresenter> {
         balanceViewModel.getAccountInfo(TokenDetailActivity.this,null);
         EventBus.getDefault().register(this);
 
-
         //币种详情
         //tv_right_title.setOnClickListener(this::gotoTokenDetail);
     }
-
-
 
     /**
      * 更新资产
