@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import androidx.appcompat.widget.AppCompatTextView;
 
 import com.bhex.tools.utils.LogUtils;
+import com.bhex.wallet.bh_main.my.enums.BUSI_MY_TYPE;
 import com.bhex.wallet.common.base.BaseActivity;
 import com.bhex.network.utils.PackageUtils;
 import com.bhex.tools.constants.BHConstants;
@@ -43,18 +44,24 @@ public class MyHelper {
         List<MyItem> myItems = new ArrayList<>();
 
         String [] res = context.getResources().getStringArray(R.array.my_list_item);
-        for (int i = 0; i < res.length; i++) {
-            MyItem item = new MyItem(i,res[i], true, "");
-            myItems.add(item);
-        }
-        /*boolean flag1 = BHUserManager.getInstance().getCurrentBhWallet().getWay()== MAKE_WALLET_TYPE.创建助记词.getWay();
-        boolean flag2 = BHUserManager.getInstance().getCurrentBhWallet().getWay()== MAKE_WALLET_TYPE.导入助记词.getWay();
 
-        //LogUtils.d("MyHelper===>:","flag1=="+flag1+"flag2=="+flag2);
-        if(!flag1 &&  !flag2){
-            myItems.remove(0);
-        }*/
+        MyItem item_账户与安全 = new MyItem(BUSI_MY_TYPE.账户与安全.index,res[0], true, "");
+        myItems.add(item_账户与安全);
 
+        MyItem item_备份导出 = new MyItem(BUSI_MY_TYPE.备份导出.index,res[1], true, "");
+        myItems.add(item_备份导出);
+
+        MyItem item_公告 = new MyItem(BUSI_MY_TYPE.公告.index,res[2], true, "");
+        myItems.add(item_公告);
+
+        MyItem item_设置 = new MyItem(BUSI_MY_TYPE.设置.index,res[3], true, "");
+        myItems.add(item_设置);
+
+        MyItem item_帮助中心 = new MyItem(BUSI_MY_TYPE.帮助中心.index,res[4], true, "");
+        myItems.add(item_帮助中心);
+
+        MyItem item_关于我们 = new MyItem(BUSI_MY_TYPE.关于我们.index,res[5], true, "");
+        myItems.add(item_关于我们);
         return myItems;
     }
 

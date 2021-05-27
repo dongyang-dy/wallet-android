@@ -1,18 +1,22 @@
 package com.bhex.wallet.balance.ui.viewhodler;
 
+import android.graphics.drawable.GradientDrawable;
 import android.text.InputFilter;
 import android.text.InputType;
+import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.bhex.lib.uikit.util.ShapeUtils;
 import com.bhex.network.utils.ToastUtils;
 import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.ColorUtil;
@@ -92,6 +96,10 @@ public class TransferOutCrossVH {
     //可以提币或转账数量
     public double available_amount;
 
+    public LinearLayout layout_contract;
+    public AppCompatTextView tv_contract_tip;
+    public AppCompatTextView tv_contract_address;
+
     //跨链手续费
     public AppCompatTextView tv_withdraw_fee_label;
 
@@ -134,6 +142,9 @@ public class TransferOutCrossVH {
 
         tv_withdraw_fee_label = mRootView.findViewById(R.id.tv_withdraw_fee_label);
 
+        layout_contract  = mRootView.findViewById(R.id.layout_contract);
+        tv_contract_tip  = mRootView.findViewById(R.id.tv_contract_tip);
+        tv_contract_address = mRootView.findViewById(R.id.tv_contract_address);
         //二维码扫描
         btn_address_scan.setOnClickListener(v -> {
             ARouter.getInstance().build(ARouterConfig.Common.commom_scan_qr).navigation(m_activity, BHQrScanActivity.REQUEST_CODE);
@@ -142,7 +153,7 @@ public class TransferOutCrossVH {
         //地址簿功能
         btn_address_book.setOnClickListener(v->{
             String v_inp_drawwith_address = inp_withdraw_address.getText().toString().trim();
-            LogUtils.d("AddAddressVH===","chain==1=="+withDrawToken.chain);
+            //LogUtils.d("AddAddressVH===","chain==1=="+withDrawToken.chain);
             ARouter.getInstance().build(ARouterConfig.Balance.Balance_address_list)
                     .withString(BHConstants.CHAIN,withDrawToken.chain)
                     .withString(BHConstants.ADDRESS,v_inp_drawwith_address)
@@ -161,6 +172,11 @@ public class TransferOutCrossVH {
             DepositTipsFragment.newInstance(m_activity.getString(R.string.cross_withdraw_tips))
                     .show(m_activity.getSupportFragmentManager(),DepositTipsFragment.class.getName());
         });
+
+        GradientDrawable bg_contract_drawable = ShapeUtils.getRoundRectDrawable(
+                (int)m_activity.getResources().getDimension(R.dimen.main_large_radius_conner),
+                ColorUtil.getColor(m_activity,R.color.color_1F4299FF));
+        layout_contract.setBackground(bg_contract_drawable);
     }
 
 
@@ -197,6 +213,28 @@ public class TransferOutCrossVH {
         //手续费
         tv_fee.setText(BHUserManager.getInstance().getDefaultGasFee().displayFee);
         tv_fee_token.setText(BHConstants.BHT_TOKEN.toUpperCase());
+
+        if(!TextUtils.isEmpty(withDrawToken.issuer)){
+            layout_contract.setVisibility(View.VISIBLE);
+            String v_deposit_contract = String.format(m_activity.getString(R.string.string_withdraw_contract),
+                    bhChain.full_name,
+                    showToken.name.toUpperCase());
+            tv_contract_tip.setText(v_deposit_contract);
+
+            String v_contract_address = m_activity.getString(R.string.string_contract_address)+":"+withDrawToken.issuer;
+
+            SpannableString v_span_contract_address = new SpannableString(v_contract_address);
+
+            ForegroundColorSpan span_color = new ForegroundColorSpan(ColorUtil.getColor(m_activity,R.color.highlight_text_color));
+
+            start_index = v_contract_address.indexOf(withDrawToken.issuer);
+            int end_index = start_index +withDrawToken.issuer.length();
+            v_span_contract_address.setSpan(span_color, start_index, end_index, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+
+            tv_contract_address.setText(v_span_contract_address);
+        }else{
+            layout_contract.setVisibility(View.GONE);
+        }
     }
 
     //更新资产

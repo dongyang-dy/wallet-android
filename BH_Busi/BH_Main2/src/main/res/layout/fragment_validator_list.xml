@@ -13,9 +13,8 @@
         android:layout_marginTop="@dimen/main_margin_top"
         android:layout_marginLeft="@dimen/main_margin_left"
         android:layout_marginRight="@dimen/main_margin_right"
-        android:background="@drawable/shape_input_corner"
-        >
-
+        android:focusableInTouchMode="false"
+        android:background="@drawable/shape_input_corner">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_search_ic"
@@ -42,7 +41,11 @@
             android:textColorHint="@color/global_input_hint_color"
             android:textCursorDrawable="@null"
             android:textSize="15sp"
-            />
+            >
+
+        </androidx.appcompat.widget.AppCompatEditText>
+
+
     </RelativeLayout>
 
 

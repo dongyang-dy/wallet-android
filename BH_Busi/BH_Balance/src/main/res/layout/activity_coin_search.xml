@@ -14,14 +14,13 @@
     <RelativeLayout
         android:id="@+id/layout_search"
         android:layout_width="0dp"
-        android:layout_height="32dp"
+        android:layout_height="48dp"
         android:layout_marginStart="@dimen/main_padding_left"
         android:layout_marginEnd="@dimen/main_padding_right"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/shape_input_corner">
-
+        android:background="@drawable/input_bg_stroke">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_search_ic"
@@ -40,7 +39,7 @@
             android:textCursorDrawable="@null"
             android:background="@null"
             android:layout_marginEnd="@dimen/main_margin_right"
-            android:textSize="15sp"
+            android:textSize="14sp"
             android:textColorHint="@color/global_input_hint_color"
             android:textColor="@color/global_input_text_color"
             android:hint="@string/search_input_token_name"

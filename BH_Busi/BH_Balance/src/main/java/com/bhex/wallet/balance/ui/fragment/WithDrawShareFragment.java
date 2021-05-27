@@ -63,7 +63,7 @@ public class WithDrawShareFragment extends BaseDialogFragment {
 
         params.width = ViewGroup.LayoutParams.MATCH_PARENT;
 
-        params.width = dm.widthPixels- PixelUtils.dp2px(BaseApplication.getInstance(),24);
+        params.width = dm.widthPixels- PixelUtils.dp2px(BaseApplication.getInstance(),48);
         //params.height = PixelUtils.dp2px(BaseApplication.getInstance(),280);
         params.height = WindowManager.LayoutParams.WRAP_CONTENT;
 

@@ -126,7 +126,21 @@ public class NumberUtil {
         BigDecimal b1 = new BigDecimal(d1);
         BigDecimal b2 = new BigDecimal(d2);
         return b1.multiply(b2).toBigInteger();
+    }
 
+    public static String nul_100(String value,int digit){
+        if(TextUtils.isEmpty(value)){
+            return "";
+        }
+
+        try {
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return "";
+        }
+
+        return "";
     }
 
     // 百分比
@@ -230,5 +244,7 @@ public class NumberUtil {
 
         return res.stripTrailingZeros().toPlainString();
     }
+
+
 
 }

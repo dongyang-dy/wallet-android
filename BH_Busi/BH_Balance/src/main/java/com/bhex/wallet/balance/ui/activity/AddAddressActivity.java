@@ -56,7 +56,6 @@ public class AddAddressActivity extends BaseActivity {
 
     @Autowired(name = BHConstants.CHAIN)
     public String chain;
-    //BHToken bhChainToken;
 
     private AddAddressVH addAddressVH;
     private AddressBookViewModel addressBookViewModel;

@@ -1,6 +1,7 @@
 package com.bhex.wallet.bh_main.my.ui.fragment;
 
 
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
@@ -30,6 +31,7 @@ import com.bhex.wallet.common.helper.BHWalletHelper;
 import com.bhex.wallet.common.manager.BHUserManager;
 import com.bhex.wallet.common.model.BHPage;
 import com.bhex.wallet.common.utils.BHTestUtil;
+import com.gyf.immersionbar.ImmersionBar;
 
 import java.util.List;
 
@@ -50,6 +52,9 @@ public class MyFragment extends BaseFragment  {
 
     @BindView(R2.id.tv_address)
     AppCompatTextView tv_address;
+
+    @BindView(R2.id.iv_message)
+    AppCompatImageView iv_message;
     //
     private List<MyItem> mItems;
     private MyAdapter mMyAdapter;
@@ -137,13 +142,18 @@ public class MyFragment extends BaseFragment  {
         msgViewModel.messageLiveData.observe(this,ldm->{
             if(ldm.getLoadingStatus()== LoadingStatus.SUCCESS){
                 BHPage<BHMessage> page =  (BHPage<BHMessage>)ldm.getData();
-                mMyAdapter.changeMessageCount(page.unread);
+                //mMyAdapter.changeMessageCount(page.unread);
+                if(page.unread>0){
+                    iv_message.setImageResource(R.mipmap.ic_message_new);
+                }else{
+                    iv_message.setImageResource(R.mipmap.ic_message);
+                }
             }
         });
 
-        /*mRootView.findViewById(R.id.iv_default_man).setOnClickListener(v -> {
-            BHTestUtil.助记词到地址(getYActivity());
-        });*/
+        iv_message.setOnClickListener(v -> {
+            ARouter.getInstance().build(ARouterConfig.My.My_Message).navigation();
+        });
     }
 
 

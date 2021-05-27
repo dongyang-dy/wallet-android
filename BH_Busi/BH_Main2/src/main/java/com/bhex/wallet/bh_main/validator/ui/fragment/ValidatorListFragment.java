@@ -209,4 +209,9 @@ public class ValidatorListFragment extends BaseFragment<ValidatorListFragmentPre
         }
     };
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ToolUtils.hideSystemSofeKeyboard(getYActivity(),ed_search_content);
+    }
 }

@@ -245,5 +245,6 @@
 
     <color name="stroke_touch_color">#3369E9</color>
     <color name="stroke_normal_color">#C7D3E4</color>
+    <color name="color_1F4299FF">#1F4299FF</color>
 
 </resources>

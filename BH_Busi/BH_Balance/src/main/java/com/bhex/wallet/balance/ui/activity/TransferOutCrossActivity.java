@@ -85,11 +85,8 @@ public class TransferOutCrossActivity extends BaseActivity {
         ARouter.getInstance().inject(this);
         tv_center_title.setText(getString(R.string.cross_withdraw));
         mRefreshLayout = findViewById(R.id.refreshLayout);
-
         transferOutCrossVH = new TransferOutCrossVH(this,findViewById(R.id.root_view));
-
         withDrawToken = BHTokenHelper.getCrossDefaultToken(m_select_symbol);
-
     }
 
     @Override

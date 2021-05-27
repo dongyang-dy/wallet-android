@@ -8,153 +8,194 @@
     android:background="@color/page_bg_color"
     tools:context=".ui.activity.AddAddressActivity">
 
-
     <include
-        layout="@layout/layout_toolbar"
-        />
+        layout="@layout/layout_toolbar"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_below="@+id/toolbar"
-        android:background="@color/app_bg"
-        >
+        android:background="@color/app_bg">
+
         <RelativeLayout
             android:id="@+id/layout_choose_chain"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            >
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/iv_chain_icon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_centerVertical="true"
-                tools:src="@mipmap/ic_btc"
-                />
+            android:layout_height="48dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:background="@drawable/input_bg_stroke">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_chain_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/withdraw_token"
                 android:textSize="14sp"
+                android:textColor="@color/item_label_text_color"
                 android:layout_centerVertical="true"
-                android:textColor="@color/global_main_text_color"
-                tools:text="ETH"
-                android:layout_marginStart="8dp"
-                android:layout_toEndOf="@+id/iv_chain_icon"
                 />
 
-            <androidx.appcompat.widget.AppCompatImageView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/ic_gray_arrow"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                />
+                android:orientation="horizontal" >
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_chain_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center_vertical"
+                    tools:src="@mipmap/ic_btc"
+                    />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_chain_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/global_main_text_color"
+                    android:textSize="14sp"
+                    tools:text="BTC"
+                    />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@mipmap/ic_arrow_a"
+                    />
+            </LinearLayout>
+
         </RelativeLayout>
 
-        <View
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/global_divider_color"
-            android:layout_marginStart="16dp"
-            />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/address"
-            android:layout_marginStart="16dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingTop="14dp"
+            android:paddingBottom="14dp"
             android:layout_marginTop="24dp"
-            android:textColor="@color/global_main_text_color"
-            android:textSize="15sp"
-            />
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:paddingTop="18dp"
-            android:paddingBottom="18dp">
+            android:orientation="vertical"
+            android:background="@drawable/input_bg_stroke">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/address"
+                    android:textColor="@color/item_label_text_color"
+                    android:textSize="15sp"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/btn_address_scan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:src="@mipmap/ic_addrss_scan"/>
+
+
+
+            </RelativeLayout>
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/inp_address"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/layout_action"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:cursorVisible="true"
                 android:layout_centerVertical="true"
-                android:layout_toStartOf="@+id/btn_address_scan"
                 android:textColorHint="@color/global_input_hint_color"
                 android:hint="@string/input_address_hint"
                 android:background="@null"
                 android:textSize="14sp"
-                android:maxLines="2"
+                android:digits="@string/number_letters"
+                tools:text="0x873453D2f3032Eb7bb28d3DF3fe65FdbB5c594fF"
                 />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/btn_address_scan"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@mipmap/ic_qr"
-                android:layout_gravity="center_vertical"
-                android:layout_alignParentEnd="true"
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/input_bg_stroke">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_name_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/string_name"
+                android:textSize="14sp"
+                android:textColor="@color/item_label_text_color"
+                android:layout_centerVertical="true"
+                />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/inp_address_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:gravity="right"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_centerVertical="true"
+                android:hint="@string/string_input_name"
+                android:layout_toRightOf="@+id/tv_name_label"
+                android:textColorHint="@color/global_main_gray_color"
+                android:textSize="14sp"
                 />
 
         </RelativeLayout>
 
-        <View
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/global_divider_color"
-            android:layout_marginStart="16dp"
-            />
+            android:layout_height="48dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/input_bg_stroke">
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/inp_address_name"
-            android:layout_width="match_parent"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:layout_height="56dp"
-            android:layout_toLeftOf="@+id/layout_action"
-            android:layout_centerVertical="true"
-            android:layout_toStartOf="@+id/btn_address_scan"
-            android:textColorHint="@color/global_input_hint_color"
-            android:hint="名称"
-            android:background="@null"
-            android:textSize="14sp"
-            android:maxLines="2"
-            />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/global_divider_color"
-            android:layout_marginStart="16dp"
-            />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_remark_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/string_remark"
+                android:textSize="14sp"
+                android:textColor="@color/item_label_text_color"
+                android:layout_centerVertical="true"
+                />
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/inp_address_remark"
-            android:layout_width="match_parent"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:layout_height="56dp"
-            android:layout_toLeftOf="@+id/layout_action"
-            android:layout_centerVertical="true"
-            android:layout_toStartOf="@+id/btn_address_scan"
-            android:textColorHint="@color/global_input_hint_color"
-            android:hint="@string/remark_optional"
-            android:background="@null"
-            android:textSize="14sp"
-            android:maxLines="2"
-            />
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/inp_address_remark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:gravity="right"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_centerVertical="true"
+                android:hint="@string/remark_optional"
+                android:layout_toRightOf="@+id/tv_remark_label"
+                android:textColorHint="@color/global_main_gray_color"
+                android:textSize="14sp"/>
 
-
-
+        </RelativeLayout>
 
     </LinearLayout>
+
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_save"
         style="@style/main_material_btn"

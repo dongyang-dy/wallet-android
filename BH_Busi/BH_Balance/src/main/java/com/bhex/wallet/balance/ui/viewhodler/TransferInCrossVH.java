@@ -3,7 +3,10 @@ package com.bhex.wallet.balance.ui.viewhodler;
 import android.Manifest;
 import android.graphics.Bitmap;
 import android.graphics.drawable.GradientDrawable;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -83,6 +86,11 @@ public class TransferInCrossVH {
     //生成跨链地址
     public AppCompatTextView btn_genarate_address;
 
+    //合约地址
+    public LinearLayout layout_deposit_contract;
+    public AppCompatTextView tv_deposit_contract;
+    public AppCompatTextView tv_contract_address;
+
     public TransferInCrossVH(TransferInCrossActivity activity, View view, String  symbol) {
         this.mActivity = activity;
         this.view = view;
@@ -106,6 +114,10 @@ public class TransferInCrossVH {
 
         tv_min_deposit_amount = view.findViewById(R.id.tv_min_deposit_amount);
         tv_deposit_collect_amount = view.findViewById(R.id.tv_deposit_collect_amount);
+
+        layout_deposit_contract = view.findViewById(R.id.layout_deposit_contract);
+        tv_deposit_contract = view.findViewById(R.id.tv_deposit_contract);
+        tv_contract_address = view.findViewById(R.id.tv_contract_address);
 
         //设置按钮为圆角
         GradientDrawable btn_save_drawable = ShapeUtils.getRoundRectDrawable(PixelUtils.dp2px(activity,100),
@@ -158,6 +170,11 @@ public class TransferInCrossVH {
                     .withString(BHConstants.CHAIN,mChainToken.chain)
                     .navigation();
         });
+
+        GradientDrawable  bg_deposit_drawable = ShapeUtils.getRoundRectDrawable(
+                (int)mActivity.getResources().getDimension(R.dimen.main_large_radius_conner),
+                ColorUtil.getColor(mActivity,R.color.color_1F4299FF));
+        layout_deposit_contract.setBackground(bg_deposit_drawable);
     }
 
     public void updateTokenInfo(String symbol){
@@ -173,7 +190,7 @@ public class TransferInCrossVH {
         tv_chain_name.setText(bhChain.full_name);
         //获取链对应的地址
         String chain_address = BHBalanceHelper.queryAddressByChain(mChainToken.chain);
-        LogUtils.d("GenerateAddressActivity===>:","AddressStatus===="+SequenceManager.getInstance().getAddressStatus());
+        //LogUtils.d("GenerateAddressActivity===>:","AddressStatus===="+SequenceManager.getInstance().getAddressStatus());
 
         if(!TextUtils.isEmpty(chain_address)){
             layout_deposit.setVisibility(View.VISIBLE);
@@ -202,7 +219,6 @@ public class TransferInCrossVH {
             layout_genarate_address.setVisibility(View.VISIBLE);
         }
 
-
         //最小充值数量
         String v_amount_str = mChainToken.deposit_threshold+" "+mChainToken.name.toUpperCase();
         tv_min_deposit_amount.setText(v_amount_str);
@@ -210,6 +226,30 @@ public class TransferInCrossVH {
         //充值归集费
         String v_amount_str2 = mChainToken.collect_fee+" "+mChainToken.chain.toUpperCase();
         tv_deposit_collect_amount.setText(v_amount_str2);
+
+        //
+        if(!TextUtils.isEmpty(mChainToken.issuer)){
+            layout_deposit_contract.setVisibility(View.VISIBLE);
+            String v_deposit_contract = String.format(mActivity.getString(R.string.string_deposit_contract),
+                    bhChain.full_name,
+                    showBhToken.name.toUpperCase());
+            tv_deposit_contract.setText(v_deposit_contract);
+
+            String v_contract_address = mActivity.getString(R.string.string_contract_address)+":"+mChainToken.issuer;
+
+            SpannableString v_span_contract_address = new SpannableString(v_contract_address);
+
+            ForegroundColorSpan span_color = new ForegroundColorSpan(ColorUtil.getColor(mActivity,R.color.highlight_text_color));
+
+            int start_index = v_contract_address.indexOf(mChainToken.issuer);
+            int end_index = start_index +mChainToken.issuer.length();
+            v_span_contract_address.setSpan(span_color, start_index, end_index, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+
+            tv_contract_address.setText(v_span_contract_address);
+        }else{
+            layout_deposit_contract.setVisibility(View.GONE);
+        }
+
     }
 
     //保存二维码

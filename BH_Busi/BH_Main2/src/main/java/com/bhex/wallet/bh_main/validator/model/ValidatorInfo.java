@@ -42,6 +42,7 @@ public class ValidatorInfo {
     private String self_delegate_proportion;
     private String other_delegate_amount;
     private String other_delegate_proportion;
+    public  String apy;
     private String up_time;
     private boolean jailed;
     private int status;

@@ -32,6 +32,7 @@ import com.bhex.tools.utils.ColorUtil;
 import com.bhex.tools.utils.LogUtils;
 import com.bhex.tools.utils.NumberUtil;
 import com.bhex.tools.utils.PixelUtils;
+import com.bhex.tools.utils.ToolUtils;
 import com.bhex.wallet.balance.model.DelegateValidator;
 import com.bhex.wallet.balance.presenter.AssetPresenter;
 import com.bhex.wallet.balance.ui.fragment.AddressQRFragment;
@@ -183,7 +184,6 @@ public class ValidatorIndexActivity extends BaseActivity<AssetPresenter> {
         bundle2.putInt(ValidatorListFragment.KEY_VALIDATOR_TYPE, BH_BUSI_TYPE.竞争节点.getIntValue());
         competingListFragment.setArguments(bundle2);
 
-
         items.add(new Pair<String, Fragment>(getString(R.string.trusteeship_node), validListFragment));
         items.add(new Pair<String, Fragment>(getString(R.string.common_node), invalidListFragment));
         items.add(new Pair<String, Fragment>(getString(R.string.competing_node), competingListFragment));
@@ -209,7 +209,6 @@ public class ValidatorIndexActivity extends BaseActivity<AssetPresenter> {
         });
     }
 
-
     private List<DelegateValidator> mRewardList;
     private void updateValidatorAddress(LoadDataModel ldm) {
         if(ldm.loadingStatus==LoadDataModel.SUCCESS){
@@ -219,6 +218,11 @@ public class ValidatorIndexActivity extends BaseActivity<AssetPresenter> {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
 
     public void toDoWithdrawShare(LoadDataModel ldm){
         List<DelegateValidator> dvList =  (List<DelegateValidator>)ldm.getData();

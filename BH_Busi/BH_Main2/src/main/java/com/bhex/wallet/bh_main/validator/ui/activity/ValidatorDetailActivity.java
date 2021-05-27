@@ -107,8 +107,8 @@ public class ValidatorDetailActivity extends BaseActivity {
         }
 
         tv_voting_power_proportion.setText(TextUtils.isEmpty(mValidatorInfo.getVoting_power_proportion()) ? "" : mValidatorInfo.getVoting_power_proportion() + "%");
-        tv_self_delegate_proportion.setText(TextUtils.isEmpty(mValidatorInfo.getSelf_delegate_proportion()) ? "" : mValidatorInfo.getSelf_delegate_proportion() + "%");
-        tv_other_delegate_proportion.setText(TextUtils.isEmpty(mValidatorInfo.getOther_delegate_proportion()) ? "" : mValidatorInfo.getVoting_power_proportion() + "%");
+        tv_self_delegate_proportion.setText(TextUtils.isEmpty(mValidatorInfo.getSelf_delegate_proportion()) ? "" : mValidatorInfo.getSelf_delegate_proportion());
+        tv_other_delegate_proportion.setText(TextUtils.isEmpty(mValidatorInfo.apy) ? "" : mValidatorInfo.apy + "%");
         tv_up_time.setText(TextUtils.isEmpty(mValidatorInfo.getUp_time()) ? "" : mValidatorInfo.getUp_time() + "%");
 
         String tv_time = DateUtil.transTimeWithPattern(mValidatorInfo.getLast_voted_time() * 1000, "yyyy/MM/dd hh:mm:ss aa z");
@@ -126,7 +126,7 @@ public class ValidatorDetailActivity extends BaseActivity {
             return "";
         }
         if(originAddress.startsWith(BHConstants.BHT_TOKEN)){
-            originAddress = originAddress.replaceFirst(BHConstants.BHT_TOKEN,BHConstants.BHT_TOKEN.toUpperCase());
+            //originAddress = originAddress.replaceFirst(BHConstants.BHT_TOKEN,BHConstants.BHT_TOKEN.toUpperCase());
         }
         if (originAddress.length()<21) {
             return originAddress;
@@ -143,7 +143,7 @@ public class ValidatorDetailActivity extends BaseActivity {
         });
 
 
-        swipeRefresh.setOnRefreshListener(refreshLayout1 -> {
+        swipeRefresh.setOnRefreshListener(refreshLayout -> {
             getRecord(false);
         });
     }
@@ -173,8 +173,8 @@ public class ValidatorDetailActivity extends BaseActivity {
             if(!TextUtils.isEmpty(copy_text) && copy_text.startsWith(BHConstants.BHT_TOKEN)){
                 copy_text = copy_text.replaceFirst(BHConstants.BHT_TOKEN,BHConstants.BHT_TOKEN.toUpperCase());
             }
+
             ToolUtils.copyText(copy_text, this);
-            //ToolUtils.copyText(mValidatorInfo.getOperator_address(), this);
             ToastUtils.show(getResources().getString(R.string.copyed));
 
         } else if (view.getId() == R.id.btn_transfer_entrust) {
