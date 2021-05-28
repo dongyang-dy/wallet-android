@@ -172,7 +172,7 @@ public class BalanceViewModel extends CacheAndroidViewModel implements Lifecycle
 
 
     private void beginReloadData() {
-        Observable.interval(4000,2000L, TimeUnit.MILLISECONDS)
+        Observable.interval(300,2000L, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 //.as(AutoDispose.autoDisposable(AndroidLifecycleScopeProvider.from(mContext, Lifecycle.Event.ON_DESTROY)))
                 .subscribe(new SimpleObserver<Long>(){

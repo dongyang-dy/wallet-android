@@ -604,8 +604,8 @@
     <string name="confrim_withdraw">确认提币</string>
     <string name="please_input_amount">请输入数量</string>
     <string name="unclaimed_reward">待领取</string>
-    <string name="string_deposit_contract">请充值%1$s链上的%2$s</string>
-    <string name="string_withdraw_contract">请提币%1$s链上的%2$s</string>
+    <string name="string_deposit_contract">请充值%1$s链上的%2$s,合约地址</string>
+    <string name="string_withdraw_contract">请提币%1$s链上的%2$s,合约地址</string>
     <string name="string_contract_address">合约地址</string>
     <string name="string_name">名称</string>
     <string name="string_input_name">输入名称</string>

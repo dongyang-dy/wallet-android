@@ -169,7 +169,7 @@ public class TransactionViewModel extends AndroidViewModel implements LifecycleO
     }
 
     private void beginReloadData() {
-        Observable.interval(3000,5000L, TimeUnit.MILLISECONDS)
+        Observable.interval(300,3000L, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SimpleObserver<Long>() {
                     @Override
@@ -295,7 +295,7 @@ public class TransactionViewModel extends AndroidViewModel implements LifecycleO
                             accountInfo.sequence,feeAmount,txMsgList);
 
                     String body = JsonUtils.toJson(bhSendTranscation);
-                    LogUtils.d("TransactionViewModel==>:","body=="+body);
+                    //LogUtils.d("TransactionViewModel==>:","body=="+body);
                     RequestBody txBody = HUtils.createJson(body);
                     return BHttpApi.getService(BHttpApiInterface.class).sendTransaction(txBody);
                 })
@@ -305,7 +305,7 @@ public class TransactionViewModel extends AndroidViewModel implements LifecycleO
     }
 
     //H5交易
-    public void create_dex_transcation(FragmentActivity activity,String type,JsonObject json, String data){
+    public void create_dex_transcation(FragmentActivity activity,String type,String jsonStr, String data){
         BHProgressObserver<JsonObject> observer = new BHProgressObserver<JsonObject>(activity) {
             @Override
             protected void onSuccess(JsonObject jsonObject) {
@@ -335,8 +335,9 @@ public class TransactionViewModel extends AndroidViewModel implements LifecycleO
                     }
                     //String v_sequence = SequenceManager.getInstance().getSequence(accountInfo.sequence);
                     //LogUtils.d("TransactionViewModel==>:",accountInfo.sequence+"==sequence=="+v_sequence);
+                    JsonArray jsonArray = JsonUtils.getParser().parse(jsonStr).getAsJsonArray();
                     BHSendTranscation bhSendTranscation =
-                            BHTransactionManager.create_dex_transcation(type,json,
+                            BHTransactionManager.create_dex_transcation(jsonArray,
                                     accountInfo.sequence, data);
                     String body = JsonUtils.toJson(bhSendTranscation);
                     RequestBody txBody = HUtils.createJson(body);

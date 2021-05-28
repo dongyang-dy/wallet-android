@@ -233,20 +233,21 @@ public class TransferInCrossVH {
             layout_deposit_contract.setVisibility(View.VISIBLE);
             String v_deposit_contract = String.format(mActivity.getString(R.string.string_deposit_contract),
                     bhChain.full_name,
-                    showBhToken.name.toUpperCase());
+                    showBhToken.name.toUpperCase()).concat(":");
             tv_deposit_contract.setText(v_deposit_contract);
 
-            String v_contract_address = mActivity.getString(R.string.string_contract_address)+":"+mChainToken.issuer;
+            //String v_contract_address = mActivity.getString(R.string.string_contract_address)+":"+mChainToken.issuer;
 
-            SpannableString v_span_contract_address = new SpannableString(v_contract_address);
+            //SpannableString v_span_contract_address = new SpannableString(v_contract_address);
 
-            ForegroundColorSpan span_color = new ForegroundColorSpan(ColorUtil.getColor(mActivity,R.color.highlight_text_color));
+            //ForegroundColorSpan span_color = new ForegroundColorSpan(ColorUtil.getColor(mActivity,R.color.highlight_text_color));
 
-            int start_index = v_contract_address.indexOf(mChainToken.issuer);
-            int end_index = start_index +mChainToken.issuer.length();
-            v_span_contract_address.setSpan(span_color, start_index, end_index, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+            //int start_index = v_contract_address.indexOf(mChainToken.issuer);
+            //int end_index = start_index +mChainToken.issuer.length();
+            //v_span_contract_address.setSpan(span_color, start_index, end_index, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
 
-            tv_contract_address.setText(v_span_contract_address);
+            //tv_contract_address.setText(v_span_contract_address);
+            tv_contract_address.setText(mChainToken.issuer);
         }else{
             layout_deposit_contract.setVisibility(View.GONE);
         }

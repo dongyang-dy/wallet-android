@@ -230,7 +230,7 @@ public class ValidatorIndexActivity extends BaseActivity<AssetPresenter> {
         double all_reward = mPresenter.calAllReward(dvList);
         String def_all_reward = NumberUtil.dispalyForUsertokenAmount4Level(all_reward+"");
         if(Double.valueOf(def_all_reward)<=0){
-            ToastUtils.showToast(getResources().getString(com.bhex.wallet.balance.R.string.no_profit));
+            ToastUtils.showToast(getResources().getString(R.string.no_profit));
         }else {
             mRewardList = dvList;
             WithDrawShareFragment.showWithDrawShareFragment(getSupportFragmentManager(),

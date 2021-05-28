@@ -23,6 +23,7 @@ import com.just.agentweb.IAgentWebSettings;
 import com.just.agentweb.WebChromeClient;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -33,7 +34,7 @@ public abstract class BaseBowserFragment extends BaseFragment {
 
     protected AgentWeb mAgentWeb;
 
-    public Map<String, WVJBWebViewClient.WVJBResponseCallback> callbackMaps;
+    public LinkedHashMap<String, WVJBWebViewClient.WVJBResponseCallback> callbackMaps;
 
 
     public abstract  View getWebRootView();
@@ -65,7 +66,7 @@ public abstract class BaseBowserFragment extends BaseFragment {
         //mAgentWeb.getWebCreator().getWebView().setWebContentsDebuggingEnabled(true);
         String ua = webSettings.getUserAgentString();
         webSettings.setUserAgentString(ua+";bhexchainwallet");
-        callbackMaps = new HashMap<>();
+        callbackMaps = new LinkedHashMap<>();
     }
 
     protected WebChromeClient getWebChromeClient(){

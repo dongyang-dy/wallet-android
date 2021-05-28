@@ -86,6 +86,7 @@ public class SecureTipsFragment extends BaseBottomSheetDialog implements View.On
             Password30PFragment.showPasswordDialog(getActivity().getSupportFragmentManager(),
                     Password30PFragment.class.getName(),
                     SecureTipsFragment.this,0,false);
+
             return;
         }
     }

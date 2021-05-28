@@ -218,10 +218,10 @@ public class TransferOutCrossVH {
             layout_contract.setVisibility(View.VISIBLE);
             String v_deposit_contract = String.format(m_activity.getString(R.string.string_withdraw_contract),
                     bhChain.full_name,
-                    showToken.name.toUpperCase());
+                    showToken.name.toUpperCase()).concat(":");;
             tv_contract_tip.setText(v_deposit_contract);
 
-            String v_contract_address = m_activity.getString(R.string.string_contract_address)+":"+withDrawToken.issuer;
+            /*String v_contract_address = m_activity.getString(R.string.string_contract_address)+":"+withDrawToken.issuer;
 
             SpannableString v_span_contract_address = new SpannableString(v_contract_address);
 
@@ -231,7 +231,9 @@ public class TransferOutCrossVH {
             int end_index = start_index +withDrawToken.issuer.length();
             v_span_contract_address.setSpan(span_color, start_index, end_index, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
 
-            tv_contract_address.setText(v_span_contract_address);
+            tv_contract_address.setText(v_span_contract_address);*/
+
+            tv_contract_address.setText(withDrawToken.issuer);
         }else{
             layout_contract.setVisibility(View.GONE);
         }

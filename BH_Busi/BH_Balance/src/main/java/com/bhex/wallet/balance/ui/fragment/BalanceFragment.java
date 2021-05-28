@@ -134,7 +134,7 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
         refreshLayout.setOnRefreshListener(refreshLayout -> {
             //获取币种列表
             //mChainTokenViewModel.loadBalanceByChain(this,BHConstants.BHT_TOKEN);
-            balanceViewModel.getAccountInfo(getYActivity(), CacheStrategy.cacheAndRemote());
+            balanceViewModel.getAccountInfo(getYActivity(), CacheStrategy.onlyRemote());
             announcementViewModel.loadAnnouncement(getYActivity());
             ConfigMapCache.getInstance().loadChain();
         });
@@ -210,7 +210,7 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
         getActivity().recreate();
         walletViewModel.updateWallet(MainActivityManager.getInstance().mainActivity,chooseWallet,chooseWallet.id,
                 BH_BUSI_TYPE.默认托管单元.getIntValue(),false);
-        balanceViewModel.getAccountInfo(MainActivityManager.getInstance().mainActivity,CacheStrategy.cacheAndRemote());
+        balanceViewModel.getAccountInfo(MainActivityManager.getInstance().mainActivity,CacheStrategy.onlyRemote());
         //取消定时
         SecuritySettingManager.getInstance().request_thirty_in_time(false,"");
     }

@@ -46,6 +46,8 @@ import com.bhex.wallet.common.manager.BHUserManager;
 import com.bhex.wallet.common.manager.SecuritySettingManager;
 import com.bhex.wallet.common.viewmodel.WalletViewModel;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
@@ -61,7 +63,7 @@ public class Password30PFragment extends BaseDialogFragment {
     private int verifyPwdWay = BH_BUSI_TYPE.校验当前账户密码.getIntValue();
 
     private boolean isShow30Password = true;
-
+    public String mHSignKey;
     //选择账户地址
     private String choose_wallet_address;
 
@@ -292,6 +294,10 @@ public class Password30PFragment extends BaseDialogFragment {
                 Password30PFragment p30f = Password30PFragment.showPasswordChooseDialog(mFm,passwordClickListener,position,choose_wallet_address);
                 p30f.show(mFm,Password30PFragment.class.getName());
             }
+        }else{
+            if(!TextUtils.isEmpty(mHSignKey)){
+                EventBus.getDefault().post(mHSignKey);
+            }
         }
     }
 
@@ -307,6 +313,10 @@ public class Password30PFragment extends BaseDialogFragment {
     //点击事件
     private void onViewClick(View view) {
         if(view.getId()==R.id.iv_close){
+            if(!TextUtils.isEmpty(mHSignKey)){
+                EventBus.getDefault().post(mHSignKey);
+            }
+
             dismissAllowingStateLoss();
         }else if(view.getId()==R.id.ck_password){
             ck_password.toggle();

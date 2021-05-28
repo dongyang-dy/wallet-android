@@ -197,8 +197,8 @@
                     app:autoSizeMinTextSize="10sp"
                     app:autoSizeTextType="uniform"
                     app:autoSizeStepGranularity="1sp"
-                    android:textColor="@color/item_label_text_color"
-                    android:text="@string/string_contract_address"
+                    android:textColor="@color/highlight_text_color"
+                    tools:text="@string/string_contract_address"
                     />
 
             </LinearLayout>

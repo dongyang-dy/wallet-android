@@ -278,15 +278,20 @@ public class PayDetailHelper {
 
 
     //判断是否弹出支付详情
-    public static boolean isShowPayDetail(String tx_type){
+    public static boolean isShowPayDetail(List<H5Sign> h5Signs){
         boolean flag = true;
+        if(h5Signs.size()>0){
+            return false;
+        }
+        String tx_type= h5Signs.get(0).type;
+
         if(TextUtils.isEmpty(tx_type)){
             return false;
         }
 
         if(tx_type.equals(TRANSCATION_BUSI_TYPE.撤单.getType())||tx_type.equals(TRANSCATION_BUSI_TYPE.撤单.getType())
                 || tx_type.equals(TRANSCATION_BUSI_TYPE.限价单兑换.getType()) || tx_type.equals(TRANSCATION_BUSI_TYPE.撤单.getType())
-                || tx_type.equals(TRANSCATION_BUSI_TYPE.领取流动性挖矿奖励.getType()) || tx_type.equals(TRANSCATION_BUSI_TYPE.领取交易挖矿奖励.getType())){
+                ){
             return false;
         }
 

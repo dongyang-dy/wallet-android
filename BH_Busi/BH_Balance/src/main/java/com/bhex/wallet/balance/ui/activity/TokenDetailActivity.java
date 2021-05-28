@@ -20,6 +20,8 @@ import com.bhex.lib.uikit.widget.layout.XUIFrameLayout;
 import com.bhex.lib.uikit.widget.layout.XUIRelativeLayout;
 import com.bhex.network.base.LoadDataModel;
 import com.bhex.network.base.LoadingStatus;
+import com.bhex.network.cache.stategy.CacheStrategy;
+import com.bhex.network.cache.stategy.IStrategy;
 import com.bhex.network.utils.ToastUtils;
 import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.ColorUtil;
@@ -181,7 +183,7 @@ public  class TokenDetailActivity extends BaseActivity<AssetPresenter> {
         });
 
         refreshLayout.setOnRefreshListener(refreshLayout -> {
-            balanceViewModel.getAccountInfo(TokenDetailActivity.this,null);
+            balanceViewModel.getAccountInfo(TokenDetailActivity.this,CacheStrategy.onlyRemote());
             transactionViewModel.queryTransctionByAddress(this,
                     BHUserManager.getInstance().getCurrentBhWallet().address, mCurrentPage, symbolToken.symbol, null);
         });
@@ -190,7 +192,7 @@ public  class TokenDetailActivity extends BaseActivity<AssetPresenter> {
             updateValidatorAddress(ldm);
         });*/
 
-        balanceViewModel.getAccountInfo(TokenDetailActivity.this,null);
+        balanceViewModel.getAccountInfo(TokenDetailActivity.this, CacheStrategy.onlyRemote());
         EventBus.getDefault().register(this);
 
         //币种详情

@@ -1,5 +1,6 @@
 package com.bhex.wallet.common.tx;
 
+import com.bhex.network.utils.JsonUtils;
 import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.LogUtils;
 import com.bhex.tools.utils.NumberUtil;
@@ -7,9 +8,13 @@ import com.bhex.wallet.common.cache.CacheCenter;
 import com.bhex.wallet.common.cache.SymbolCache;
 import com.bhex.wallet.common.enums.TRANSCATION_BUSI_TYPE;
 import com.bhex.wallet.common.manager.BHUserManager;
+import com.bhex.wallet.common.model.BHRates;
 import com.bhex.wallet.common.model.BHToken;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -163,16 +168,26 @@ public class BHRawTransaction {
 
 
     //流动性
-    public static BHRawTransaction createBHRaw_transcation(String type, JsonObject json, BigInteger feeAmount, String sequence){
+    public static BHRawTransaction createBHRaw_transcation( JsonArray jsonArray, BigInteger feeAmount, String sequence){
         BHRawTransaction bhRawTransaction = new BHRawTransaction();
         bhRawTransaction.memo = "";
         bhRawTransaction.sequence = sequence;
         bhRawTransaction.msgs = new ArrayList<>();
-        TxReq.TxMsg<JsonObject> txMsg = new TxReq.TxMsg();
-        bhRawTransaction.msgs.add(txMsg);
 
-        txMsg.type = type;
-        txMsg.value = json;
+        for(int i=0;i<jsonArray.size();i++){
+            TxReq.TxMsg<JsonObject> txMsg = new TxReq.TxMsg();
+            JsonObject jsonObject = jsonArray.get(i).getAsJsonObject();
+            if(!jsonObject.get("type").isJsonObject()){
+                txMsg.type = jsonObject.get("type").getAsString();
+            }
+
+            if(!jsonObject.get("type").isJsonObject()){
+                txMsg.value = jsonObject.get("value").getAsJsonObject();
+            }
+
+            bhRawTransaction.msgs.add(txMsg);
+        }
+
 
         bhRawTransaction.fee = getTransactionFee(feeAmount);
         return bhRawTransaction;

@@ -62,7 +62,7 @@ public class PayDetailFragment extends BaseDialogFragment {
     @BindView(R2.id.empty_layout)
     EmptyLayout empty_layout;
 
-    private H5Sign mH5Sign;
+    private List<H5Sign> mH5Sign;
 
     private List<PayDetailItem> mDatas;
 
@@ -111,7 +111,7 @@ public class PayDetailFragment extends BaseDialogFragment {
 
         //请求币种信息
         //
-        List<String> tokenList = PayDetailHelper.loadPayItemToken(getContext(),mH5Sign);
+        List<String> tokenList = PayDetailHelper.loadPayItemToken(getContext(),mH5Sign.get(0));
         payDetailViewModel = ViewModelProviders.of(this).get(PayDetailViewModel.class);
         payDetailViewModel.tokenLiveData.observe(this,ldm->{
             updateTokenDetail();
@@ -127,7 +127,7 @@ public class PayDetailFragment extends BaseDialogFragment {
 
     private void updateTokenDetail() {
         empty_layout.loadSuccess();
-        mDatas = PayDetailHelper.loadPayItemByType(getContext(), mH5Sign);
+        mDatas = PayDetailHelper.loadPayItemByType(getContext(), mH5Sign.get(0));
         rec_pay.setAdapter(mPayDetailAdapter = new PayDetailAdapter(mDatas));
     }
 
@@ -138,22 +138,25 @@ public class PayDetailFragment extends BaseDialogFragment {
         return fragment;
     }
 
-    public void showDialog(FragmentManager fm, String tag, H5Sign sign) {
-        if(PayDetailHelper.isShowPayDetail(sign.type)){
-            PayDetailFragment fragment = new PayDetailFragment();
-            fragment.mH5Sign = sign;
-            fragment.show(fm, tag);
-        }else if(!PayDetailHelper.isHasOrders(sign)){
-            ToastUtils.showToast(BaseApplication.getInstance().getString(R.string.no_order));
-        }else{
+    public void showDialog(FragmentManager fm, String tag, List<H5Sign> sign) {
+        if(PayDetailHelper.isShowPayDetail(sign)){
+            //PayDetailFragment fragment = new PayDetailFragment();
             mH5Sign = sign;
-            Password30PFragment.showPasswordDialog(fm,Password30PFragment.class.getName(),passwordClickListener,0,true);
+            show(fm, tag);
+        }/*else if(!PayDetailHelper.isHasOrders(sign)){
+            ToastUtils.showToast(BaseApplication.getInstance().getString(R.string.no_order));
+        }*/else{
+            mH5Sign = sign;
+            Password30PFragment fragment = Password30PFragment.showPasswordDialog(fm,Password30PFragment.class.getName(),passwordClickListener,0,true);
+            fragment.mHSignKey = mH5Sign.get(0).type;
         }
     }
 
     @OnClick({R2.id.btn_confrim})
     public void onViewClicked(View view) {
-        Password30PFragment.showPasswordDialog(getChildFragmentManager(),Password30PFragment.class.getName(),passwordClickListener,0,true);
+        Password30PFragment fragment =
+                Password30PFragment.showPasswordDialog(getChildFragmentManager(),Password30PFragment.class.getName(),passwordClickListener,0,true);
+        fragment.mHSignKey = mH5Sign.get(0).type;
     }
 
     public class PayDetailAdapter extends BaseQuickAdapter<PayDetailItem, BaseViewHolder> {

@@ -133,10 +133,11 @@ public class ValidatorListFragment extends BaseFragment<ValidatorListFragmentPre
         mValidatorViewModel.getValidatorInfos(getYActivity(),BH_BUSI_TYPE.有效节点.getIntValue());
     }
 
-    /*@Override
+    @Override
     public void onResume() {
         super.onResume();
-    }*/
+        //ToolUtils.hintKeyBoard(getYActivity());
+    }
 
     public void updateRecord(List<ValidatorInfo> datas) {
         //datas.get(0).is_elected =false;

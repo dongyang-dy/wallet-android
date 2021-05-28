@@ -11,6 +11,7 @@ import com.bhex.wallet.common.browse.wv.WVJBWebViewClient;
 import com.bhex.wallet.common.manager.BHUserManager;
 import com.bhex.wallet.market.model.H5Sign;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -48,14 +49,15 @@ public abstract class JsBowserFragment extends BaseBowserFragment {
                 if(TextUtils.isEmpty(data.toString())){
                     return;
                 }
-
                 if(data.toString().startsWith("[") ){
-                    List<H5Sign> h5Sign = JsonUtils.getListFromJson(data.toString(), H5Sign.class);
-                    PayDetailFragment.newInstance().showDialog(getChildFragmentManager(),PayDetailFragment.class.getSimpleName(),h5Sign.get(0));
-                    callbackMaps.put(h5Sign.get(0).type,callback);
+                    List<H5Sign> h5Signs = JsonUtils.getListFromJson(data.toString(), H5Sign.class);
+                    PayDetailFragment.newInstance().showDialog(getChildFragmentManager(),PayDetailFragment.class.getSimpleName(),h5Signs);
+                    callbackMaps.put(h5Signs.get(0).type,callback);
                 }else{
                     H5Sign h5Sign = JsonUtils.fromJson(data.toString(), H5Sign.class);
-                    PayDetailFragment.newInstance().showDialog(getChildFragmentManager(),PayDetailFragment.class.getSimpleName(),h5Sign);
+                    List<H5Sign> h5Signs = new ArrayList<>();
+                    h5Signs.add(h5Sign);
+                    PayDetailFragment.newInstance().showDialog(getChildFragmentManager(),PayDetailFragment.class.getSimpleName(),h5Signs);
                     callbackMaps.put(h5Sign.type,callback);
                 }
 

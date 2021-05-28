@@ -27,6 +27,7 @@ import com.bhex.wallet.common.event.AccountEvent;
 import com.bhex.wallet.common.event.RequestTokenEvent;
 import com.bhex.wallet.market.R;
 import com.bhex.wallet.market.R2;
+import com.bhex.wallet.market.event.H5SignCacelEvent;
 import com.bhex.wallet.market.event.H5SignEvent;
 import com.bhex.wallet.market.model.H5Sign;
 
@@ -34,6 +35,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindView;
@@ -52,7 +54,7 @@ public class MarketFragment extends JsBowserFragment {
     AppCompatImageView ivRefresh;
     @BindView(R2.id.tv_center_title)
     AppCompatTextView tv_center_title;
-    private H5Sign mH5Sign;
+    private List<H5Sign> mH5Signs;
 
     private TransactionViewModel transactionViewModel;
     private String mTokenId;
@@ -145,22 +147,41 @@ public class MarketFragment extends JsBowserFragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void signMessage(H5SignEvent h5SignEvent){
-        mH5Sign = h5SignEvent.h5Sign;
-        transactionViewModel.create_dex_transcation(getYActivity(),h5SignEvent.h5Sign.type,h5SignEvent.h5Sign.value,h5SignEvent.data);
+        mH5Signs = h5SignEvent.h5Sign;
+        transactionViewModel.create_dex_transcation(getYActivity(),h5SignEvent.h5Sign.get(0).type,JsonUtils.toJson(h5SignEvent.h5Sign),h5SignEvent.data);
     }
 
     private void updateTransferStatus(LoadDataModel ldm) {
-        if(mH5Sign==null || TextUtils.isEmpty(mH5Sign.type)) {
+        if(ToolUtils.checkListIsEmpty(mH5Signs)){
             return;
         }
-        WVJBWebViewClient.WVJBResponseCallback callback = callbackMaps.get(mH5Sign.type);
+        WVJBWebViewClient.WVJBResponseCallback callback = callbackMaps.get(mH5Signs.get(0).type);
         if(callback==null){
             return;
         }
+
         DexResponse<JSONObject> dexResponse = new DexResponse(ldm.code,ldm.msg);
         dexResponse.data = JSONObject.parseObject(ldm.getData().toString());
         callback.callback(JsonUtils.toJson(dexResponse));
-        callbackMaps.remove(mH5Sign.type);
+        callbackMaps.remove(mH5Signs.get(0).type);
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void cancelH5Event(String h5SignKey){
+        if(TextUtils.isEmpty(h5SignKey)){
+            return;
+        }
+
+        WVJBWebViewClient.WVJBResponseCallback callback = callbackMaps.get(h5SignKey);
+        if(callback==null){
+            return;
+        }
+
+        DexResponse<JSONObject> dexResponse = new DexResponse(400,"User rejected");
+        dexResponse.data = JSONObject.parseObject("");
+        callback.callback(JsonUtils.toJson(dexResponse));
+        callbackMaps.remove(h5SignKey);
     }
 
     @Override
