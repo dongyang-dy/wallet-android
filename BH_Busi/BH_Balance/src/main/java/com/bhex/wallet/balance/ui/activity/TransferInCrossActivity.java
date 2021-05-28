@@ -11,17 +11,17 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.bhex.network.base.LoadDataModel;
 import com.bhex.network.base.LoadingStatus;
 import com.bhex.tools.constants.BHConstants;
+import com.bhex.tools.utils.PixelUtils;
 import com.bhex.wallet.balance.R;
 import com.bhex.wallet.balance.R2;
 import com.bhex.wallet.balance.event.TransctionEvent;
 import com.bhex.wallet.balance.helper.BHTokenHelper;
-import com.bhex.wallet.balance.ui.fragment.ChooseChainFragment;
 import com.bhex.wallet.balance.ui.fragment.ChooseTokenFragment;
+import com.bhex.wallet.balance.ui.pw.ChooseChainPW;
 import com.bhex.wallet.balance.ui.viewhodler.TransferInCrossVH;
 import com.bhex.wallet.common.base.BaseActivity;
 import com.bhex.wallet.common.cache.SymbolCache;
 import com.bhex.wallet.common.config.ARouterConfig;
-import com.bhex.wallet.common.enums.BH_BUSI_TYPE;
 import com.bhex.wallet.common.model.BHChain;
 import com.bhex.wallet.common.model.BHToken;
 import com.bhex.wallet.common.utils.LiveDataBus;
@@ -121,14 +121,17 @@ public class TransferInCrossActivity extends BaseActivity {
     private void chooseChainAction(View view) {
         //
         List<BHChain> chainList = BHTokenHelper.getBHChainList(m_select_symbol);
-        ChooseChainFragment fragment = ChooseChainFragment.getInstance(chainList,transferCrossVH.mChainToken.chain,this::chooseChainListener);
-        fragment.show(getSupportFragmentManager(),ChooseChainFragment.class.getName());
+        /*ChooseChainFragment fragment = ChooseChainFragment.getInstance(chainList,transferCrossVH.mChainToken.chain,this::chooseChainListener);
+        fragment.show(getSupportFragmentManager(),ChooseChainFragment.class.getName());*/
+        ChooseChainPW chainPW = new ChooseChainPW(this,chainList,transferCrossVH.mChainToken.chain,this::chooseChainListener);
+        chainPW.showAsDropDown(view,0, PixelUtils.dp2px(this,2));
     }
 
     private ChooseTokenFragment.OnChooseTokenListener chooseTokenListener = new ChooseTokenFragment.OnChooseTokenListener() {
         @Override
         public void onChooseClickListener(String symbol, int position) {
             m_select_symbol = symbol;
+            transferCrossVH.mChainToken = BHTokenHelper.getCrossDefaultToken(m_select_symbol);
             transferCrossVH.updateTokenInfo(symbol);
         }
     };

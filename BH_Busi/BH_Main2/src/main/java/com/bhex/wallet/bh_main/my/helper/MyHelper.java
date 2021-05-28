@@ -54,11 +54,11 @@ public class MyHelper {
         MyItem item_公告 = new MyItem(BUSI_MY_TYPE.公告.index,res[2], true, "");
         myItems.add(item_公告);
 
-        MyItem item_设置 = new MyItem(BUSI_MY_TYPE.设置.index,res[3], true, "");
-        myItems.add(item_设置);
-
         MyItem item_帮助中心 = new MyItem(BUSI_MY_TYPE.帮助中心.index,res[4], true, "");
         myItems.add(item_帮助中心);
+
+        MyItem item_设置 = new MyItem(BUSI_MY_TYPE.设置.index,res[3], true, "");
+        myItems.add(item_设置);
 
         MyItem item_关于我们 = new MyItem(BUSI_MY_TYPE.关于我们.index,res[5], true, "");
         myItems.add(item_关于我们);

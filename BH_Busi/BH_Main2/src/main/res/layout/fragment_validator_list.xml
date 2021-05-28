@@ -13,7 +13,8 @@
         android:layout_marginTop="@dimen/main_margin_top"
         android:layout_marginLeft="@dimen/main_margin_left"
         android:layout_marginRight="@dimen/main_margin_right"
-        android:focusableInTouchMode="false"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:background="@drawable/shape_input_corner">
 
         <androidx.appcompat.widget.AppCompatImageView

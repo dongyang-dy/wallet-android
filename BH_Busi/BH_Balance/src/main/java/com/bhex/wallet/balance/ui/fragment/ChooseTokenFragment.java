@@ -163,7 +163,7 @@ public class ChooseTokenFragment extends BaseDialogFragment {
                return;
             }
             List<BHToken> result = StreamSupport.stream(mDatas).filter(item->
-                    item.symbol.toLowerCase().contains(search_key.toLowerCase())
+                    item.name.toLowerCase().contains(search_key.toLowerCase())
             ).collect(Collectors.toList());
 
             sortResult(isAsc,result);

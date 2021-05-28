@@ -185,7 +185,6 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
     @Override
     public void onResume() {
         super.onResume();
-        ToolUtils.hintKeyBoard(getYActivity());
         List<BHToken>  res = BHTokenHelper.loadTokenByChain(BHConstants.BHT_TOKEN);
         /*Collections.sort(res, new Comparator<BHToken>() {
             @Override

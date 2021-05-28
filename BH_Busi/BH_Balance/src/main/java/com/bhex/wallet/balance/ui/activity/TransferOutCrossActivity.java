@@ -20,6 +20,7 @@ import com.bhex.network.utils.ToastUtils;
 import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.LogUtils;
 import com.bhex.tools.utils.PathUtils;
+import com.bhex.tools.utils.PixelUtils;
 import com.bhex.tools.utils.ToolUtils;
 import com.bhex.wallet.balance.R;
 import com.bhex.wallet.balance.R2;
@@ -27,6 +28,7 @@ import com.bhex.wallet.balance.event.TransctionEvent;
 import com.bhex.wallet.balance.helper.BHTokenHelper;
 import com.bhex.wallet.balance.ui.fragment.ChooseChainFragment;
 import com.bhex.wallet.balance.ui.fragment.ChooseTokenFragment;
+import com.bhex.wallet.balance.ui.pw.ChooseChainPW;
 import com.bhex.wallet.balance.ui.viewhodler.TransferOutCrossVH;
 import com.bhex.wallet.balance.viewmodel.TokenViewModel;
 import com.bhex.wallet.balance.viewmodel.TransactionViewModel;
@@ -154,8 +156,10 @@ public class TransferOutCrossActivity extends BaseActivity {
     public void selectChainAction(View view){
         //
         List<BHChain> chainList = BHTokenHelper.getBHChainList(m_select_symbol);
-        ChooseChainFragment fragment = ChooseChainFragment.getInstance(chainList,withDrawToken.chain,this::chooseChainCallback);
-        fragment.show(getSupportFragmentManager(),ChooseChainFragment.class.getName());
+        /*ChooseChainFragment fragment = ChooseChainFragment.getInstance(chainList,withDrawToken.chain,this::chooseChainCallback);
+        fragment.show(getSupportFragmentManager(),ChooseChainFragment.class.getName());*/
+        ChooseChainPW chainPW = new ChooseChainPW(this,chainList,withDrawToken.chain,this::chooseChainCallback);
+        chainPW.showAsDropDown(transferOutCrossVH.layout_select_chain,0, PixelUtils.dp2px(this,2));
     }
 
     private void chooseChainCallback(String chain) {

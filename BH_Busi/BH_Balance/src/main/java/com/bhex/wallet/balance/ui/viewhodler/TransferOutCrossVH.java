@@ -323,7 +323,15 @@ public class TransferOutCrossVH {
     //全部提币
     private void withdrawAllAction(View view) {
         //主链币
-        inp_withdraw_amount.setText(NumberUtil.toPlainString(available_amount));
+        if(TextUtils.isEmpty(withDrawToken.issuer)){
+            String v_available_amount = NumberUtil.sub(String.valueOf(available_amount),withDrawToken.withdrawal_fee);
+            v_available_amount = NumberUtil.dispalyForUsertokenAmount4Level(v_available_amount);
+            inp_withdraw_amount.setText(v_available_amount);
+        }else{
+            //非主链币
+            inp_withdraw_amount.setText(NumberUtil.toPlainString(available_amount));
+        }
+
         inp_withdraw_amount.setSelection(inp_withdraw_amount.getText().length());
         inp_withdraw_amount.requestFocus();
     }

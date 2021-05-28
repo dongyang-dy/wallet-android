@@ -47,7 +47,7 @@ public class ChooseTokenAdapter extends BaseQuickAdapter<BHToken, BaseViewHolder
         holder.setText(R.id.tv_token_id,item.symbol);
 
         AppCompatTextView tv_token_amount = holder.getView(R.id.tv_token_amount);
-        BHBalance balance = BHBalanceHelper.getBHBalanceFromAccount(item.name);
+        BHBalance balance = BHBalanceHelper.getBHBalanceFromAccount(item.symbol);
 
 
         String v_token_amount = NumberUtil.dispalyForUsertokenAmount4Level(balance.amount);

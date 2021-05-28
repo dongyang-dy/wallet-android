@@ -30,10 +30,9 @@
             android:name=".bh_main.ui.activity.MainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize|stateUnspecified|adjustPan">
+            android:windowSoftInputMode="adjustResize|stateUnspecified|adjustPan">
             <intent-filter>
                 <action android:name="${APPLICATION_ID}.action.main" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

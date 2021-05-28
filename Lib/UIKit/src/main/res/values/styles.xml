@@ -317,6 +317,14 @@
         <item name="android:windowAnimationStyle">@style/bottomDialogStyle</item>
     </style>
 
+    <style name="pop_anim_expand_top" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/expand_in_from_top</item>
+        <item name="android:windowExitAnimation">@anim/expand_out_to_top</item>
+    </style>
 
+    <style name="pop_window_anim_style" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/pop_show_anim</item>
+        <item name="android:windowExitAnimation">@anim/pop_hidden_anim</item>
+    </style>
 
 </resources>

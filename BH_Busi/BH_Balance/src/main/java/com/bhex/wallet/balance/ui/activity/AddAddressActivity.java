@@ -22,10 +22,12 @@ import com.bhex.network.utils.ToastUtils;
 import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.LogUtils;
 import com.bhex.tools.utils.PathUtils;
+import com.bhex.tools.utils.PixelUtils;
 import com.bhex.tools.utils.ToolUtils;
 import com.bhex.wallet.balance.R;
 import com.bhex.wallet.balance.helper.BHTokenHelper;
 import com.bhex.wallet.balance.ui.fragment.ChooseChainFragment;
+import com.bhex.wallet.balance.ui.pw.ChooseChainPW;
 import com.bhex.wallet.balance.ui.viewhodler.AddAddressVH;
 import com.bhex.wallet.balance.viewmodel.AddressBookViewModel;
 import com.bhex.wallet.common.base.BaseActivity;
@@ -88,8 +90,10 @@ public class AddAddressActivity extends BaseActivity {
         if(!chain.equalsIgnoreCase(BHConstants.BHT_TOKEN)){
             addAddressVH.layout_choose_chain.setOnClickListener(v -> {
                 List<BHChain> bhChainList = BHTokenHelper.getAllBHChainList();
-                ChooseChainFragment.getInstance(bhChainList,chain,AddAddressActivity.this::chooseChainAction)
-                        .show(getSupportFragmentManager(),ChooseChainFragment.class.getName());
+                /*ChooseChainFragment.getInstance(bhChainList,chain,AddAddressActivity.this::chooseChainAction)
+                        .show(getSupportFragmentManager(),ChooseChainFragment.class.getName());*/
+                ChooseChainPW chainPW = new ChooseChainPW(this,bhChainList,chain,this::chooseChainAction);
+                chainPW.showAsDropDown(addAddressVH.layout_choose_chain,0, PixelUtils.dp2px(this,2));
             });
         }
 

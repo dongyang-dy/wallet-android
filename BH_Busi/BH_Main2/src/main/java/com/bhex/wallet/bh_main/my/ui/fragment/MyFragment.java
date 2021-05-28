@@ -163,7 +163,7 @@ public class MyFragment extends BaseFragment  {
                 .concat("account/")
                 .concat(BHUserManager.getInstance().getCurrentBhWallet().address)
                 .concat("?type=transactions").concat("&lang=").concat(v_local_display);
-        LogUtils.d("MyFragement==>:","url=="+url);
+        //LogUtils.d("MyFragement==>:","url=="+url);
         return url;
     }
 

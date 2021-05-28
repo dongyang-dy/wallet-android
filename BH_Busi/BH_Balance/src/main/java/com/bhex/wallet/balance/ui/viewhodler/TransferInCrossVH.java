@@ -172,7 +172,7 @@ public class TransferInCrossVH {
         });
 
         GradientDrawable  bg_deposit_drawable = ShapeUtils.getRoundRectDrawable(
-                (int)mActivity.getResources().getDimension(R.dimen.main_large_radius_conner),
+                (int)mActivity.getResources().getDimension(R.dimen.middle_radius_conner),
                 ColorUtil.getColor(mActivity,R.color.color_1F4299FF));
         layout_deposit_contract.setBackground(bg_deposit_drawable);
     }
@@ -182,6 +182,7 @@ public class TransferInCrossVH {
         BHToken showBhToken = SymbolCache.getInstance().getBHToken(mSymbol);
         ImageLoaderUtil.loadImageView(mActivity,showBhToken.logo,iv_token_icon,R.mipmap.ic_default_coin);
         tv_token_name.setText(showBhToken.name.toUpperCase());
+
 
         //链Token信息
         BHChain bhChain = BHTokenHelper.getBHChain(mChainToken.chain);

@@ -107,7 +107,7 @@ public class ValidatorDetailActivity extends BaseActivity {
         }
 
         tv_voting_power_proportion.setText(TextUtils.isEmpty(mValidatorInfo.getVoting_power_proportion()) ? "" : mValidatorInfo.getVoting_power_proportion() + "%");
-        tv_self_delegate_proportion.setText(TextUtils.isEmpty(mValidatorInfo.getSelf_delegate_proportion()) ? "" : mValidatorInfo.getSelf_delegate_proportion());
+        tv_self_delegate_proportion.setText(TextUtils.isEmpty(mValidatorInfo.getSelf_delegate_proportion()) ? "" : mValidatorInfo.getSelf_delegate_amount());
         tv_other_delegate_proportion.setText(TextUtils.isEmpty(mValidatorInfo.apy) ? "" : mValidatorInfo.apy + "%");
         tv_up_time.setText(TextUtils.isEmpty(mValidatorInfo.getUp_time()) ? "" : mValidatorInfo.getUp_time() + "%");
 

@@ -19,7 +19,8 @@
         android:visibility="invisible"
         />
 
-    <!--<androidx.appcompat.widget.AppCompatTextView
+    <!--
+    <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -28,7 +29,8 @@
         android:text="@string/slogan"
         android:layout_below="@+id/iv_logo"
         android:layout_centerHorizontal="true"
-        />-->
+        />
+      -->
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

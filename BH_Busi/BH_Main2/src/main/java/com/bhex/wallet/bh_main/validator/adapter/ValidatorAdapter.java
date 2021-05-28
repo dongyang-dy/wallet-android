@@ -47,8 +47,8 @@ public class ValidatorAdapter extends BaseQuickAdapter<ValidatorInfo, BaseViewHo
         viewHolder.setText(R.id.tv_voting_power_proportion, v_voting_power_proportion);
 
         String v_elf_delegate_proportion = "";
-        if(!TextUtils.isEmpty(validatorInfo.getSelf_delegate_proportion())){
-            v_elf_delegate_proportion = validatorInfo.getSelf_delegate_proportion();
+        if(!TextUtils.isEmpty(validatorInfo.getSelf_delegate_amount())){
+            v_elf_delegate_proportion = validatorInfo.getSelf_delegate_amount();
         }
         viewHolder.setText(R.id.tv_self_delegate_proportion,v_elf_delegate_proportion);
 
