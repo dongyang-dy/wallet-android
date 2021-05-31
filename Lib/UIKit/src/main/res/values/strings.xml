@@ -128,7 +128,7 @@
     <string name="success">成功</string>
     <string name="fail">失败</string>
     <string name="processing">处理中</string>
-    <string name="add_coin">添加币种管理</string>
+    <string name="add_coin">添加币种</string>
     <string name="available">可用</string>
     <string name="reload_data">重新加载</string>
     <string name="hold_amount">当前持有</string>
@@ -605,11 +605,9 @@
     <string name="please_input_amount">请输入数量</string>
     <string name="unclaimed_reward">待领取</string>
     <string name="string_deposit_contract">请充值%1$s链上的%2$s,合约地址</string>
-    <string name="string_withdraw_contract">请提币%1$s链上的%2$s,合约地址</string>
+    <string name="string_withdraw_contract">您将提币%1$s链上的%2$s,合约地址</string>
     <string name="string_contract_address">合约地址</string>
     <string name="string_name">名称</string>
     <string name="string_input_name">输入名称</string>
     <string name="string_remark">备注</string>
-
-
 </resources>

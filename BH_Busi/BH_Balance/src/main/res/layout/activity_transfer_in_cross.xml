@@ -59,7 +59,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="12dp"
-                    android:text="@string/deposit_token_name"
+                    android:text="@string/token"
                     android:textColor="@color/item_label_text_color"
                     android:textSize="14sp" />
 

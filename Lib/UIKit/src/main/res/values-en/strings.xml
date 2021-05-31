@@ -128,7 +128,7 @@
     <string name="success">Success</string>
     <string name="fail">Failed</string>
     <string name="processing">Processing</string>
-<!--    <string name="add_coin">Add new asset</string>-->
+    <string name="add_coin">Add Token</string>
     <string name="available">Available</string>
     <string name="reload_data">Reload</string>
     <string name="hold_amount">Current balance</string>
@@ -156,6 +156,7 @@
     <string name="crosslink_make_address">Generate cross-chain address</string>
     <string name="crosslink_address">Cross-chain address</string>
     <string name="crosslink_deposit_address">Cross-chain deposit address</string>
+    <string name="deposit_address">Recharge address</string>
     <string name="cross_deposit">Cross-chain deposit</string>
     <string name="cross_withdraw">Cross-chain withdrawal</string>
     <string name="cross_deposit0">Deposit</string>
@@ -532,11 +533,13 @@
     <string name="select_withdraw_token">token to be withdrawn</string>
     <string name="deposit_token">Token to be deposited</string>
     <!--<string name="hbtc_transfer_in_tip">This account supports HBC, HRC10 and cross-chain custody assets on BHEX chain</string>-->
+    <string name="hbtc_transfer_in_tip">This account supports HBC, HRC10 and cross-chain custody assets on BHEX chain</string>
     <string name="input_receive_address">Input transfer-in address</string>
     <string name="input_withdraw_address">Input withdrawal address</string>
     <string name="input_enter_address">Please enter or paste the address</string>
     <string name="cross_transfer_out_tips">You are withdrawing tokens across the chains.Please ensure that the token withdrawal address is its public chain address</string>
     <!--<string name="transfer_inner_tips">This account supports HBC, HRC10 and cross-chain custody assets on BHEX chain</string>-->
+    <string name="transfer_inner_tips">You are now conducting BHEX on-chain transferring, please make sure the address start with HBC</string>
     <string name="cross_transfer_highlight_text">Native public chain address</string>
     
     <string name="confrim_create">Comfirm to create</string>
@@ -563,7 +566,7 @@
     <string name="export_private_key">Export Private Key</string>
     <string name="export_keystore">Export Keystore</string>
     <string name="delete_wallet">Delete Wallet</string>
-    <string name="update_success">修改成功</string>
+    <string name="update_success">Success</string>
     <string name="save_qr_code">Save QR Code</string>
     <string name="mnemonic_checksum_error">Incorrect Mnemonic checksum</string>
     <string name="delete_wallet_tips">You are using the current account, please switch before deleting</string>
@@ -592,4 +595,18 @@
     <string name="verified">Verified</string>
     <string name="unverified">Unverified</string>
     <string name="address_exists">Address already exists</string>
+    <string name="chain_type">Chain</string>
+    <string name="deposit_token_name">Token</string>
+    <string name="transfer_token">Choose token</string>
+    <string name="withdraw_token">Choose token </string>
+    <string name="withdraw">Withdraw</string>
+    <string name="confrim_withdraw">Confirm to withdraw</string>
+    <string name="please_input_amount">Please enter the amount</string>
+    <string name="unclaimed_reward">unclaimed reward</string>
+    <string name="string_deposit_contract">Please deposit %1$s on %2$s,Contract address</string>
+    <string name="string_withdraw_contract">You will withdraw %1$s on %2$s,Contract address</string>
+    <string name="string_contract_address">Contract address</string>
+    <string name="string_name">Name</string>
+    <string name="string_input_name">Enter the address name</string>
+    <string name="string_remark">Remark</string>
 </resources>

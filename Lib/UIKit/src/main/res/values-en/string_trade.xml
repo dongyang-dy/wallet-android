@@ -13,6 +13,8 @@
     <string name="remove_liquidity">Remove liquidity</string>
     <string name="limit_swap">Limit order swap</string>
     <string name="cancel_limit_swap">Cancel</string>
+    <string name="claim_lp_earning">Claim liquidity reward</string>
+    <string name="claim_trade_earning">Claim trading reward</string>
     <string name="other">Others</string>
 
     <array name="default_chain_name">
