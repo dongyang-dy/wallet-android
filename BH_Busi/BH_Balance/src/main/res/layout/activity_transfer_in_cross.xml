@@ -328,7 +328,7 @@
                         android:textSize="14sp"
                         android:gravity="center"
                         android:textColor="@color/global_main_text_color"
-                        android:text="首次跨链充值\n需申请生成跨链充值地址"
+                        android:text="@string/create_cross_address_info"
                         android:lineSpacingExtra="3dp"/>
 
                     <androidx.appcompat.widget.AppCompatTextView

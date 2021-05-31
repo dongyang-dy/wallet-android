@@ -66,8 +66,9 @@ public class HBalanceAdapter extends BaseQuickAdapter<BHToken, BaseViewHolder> {
         }
     }
 
-    public void setOpenEye(boolean isOpenEye){
+    public void setOpenEye(List<BHToken> datas,boolean isOpenEye){
         this.isOpenEye = isOpenEye;
-        notifyDataSetChanged();
+        setNewData(datas);
     }
+
 }

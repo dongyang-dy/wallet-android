@@ -28,7 +28,7 @@
             android:layout_marginStart="4dp"
             android:layout_toRightOf="@+id/iv_logo"
             android:src="@mipmap/bg_testnet"
-            />
+            android:visibility="gone"/>
 
         <!--<FrameLayout
             android:layout_width="wrap_content"

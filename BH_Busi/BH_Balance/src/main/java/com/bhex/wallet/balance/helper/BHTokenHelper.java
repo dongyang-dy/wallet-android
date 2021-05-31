@@ -1,5 +1,6 @@
 package com.bhex.wallet.balance.helper;
 
+import android.content.Context;
 import android.util.ArrayMap;
 
 import com.bhex.tools.constants.BHConstants;
@@ -10,6 +11,8 @@ import com.bhex.wallet.common.model.BHChain;
 import com.bhex.wallet.common.model.BHToken;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -147,6 +150,34 @@ public class BHTokenHelper {
             res.add(entry.getValue());
         }
         return res;
+    }
+
+
+    public static List<BHToken> sortBHToken(Context context,List<BHToken> orginTokens){
+
+        for(BHToken bhToken:orginTokens){
+            bhToken.amount = BHBalanceHelper.getAmountToCurrencyValue(context,bhToken.symbol);
+        }
+
+        Collections.sort(orginTokens, (o1,o2)->{
+            try{
+                if(o1.name.equalsIgnoreCase(BHConstants.BHT_TOKEN)){
+                    return -1;
+                }else{
+                    if(Double.valueOf(o2.amount)>Double.valueOf(o1.amount)){
+                        return 1;
+                    }else if(Double.valueOf(o2.amount)<Double.valueOf(o1.amount)){
+                        return -1;
+                    }else{
+                        return o1.name.compareToIgnoreCase(o2.name);
+                    }
+                }
+            }catch (Exception e){
+                return 0;
+            }
+        });
+
+        return orginTokens;
     }
 
 }

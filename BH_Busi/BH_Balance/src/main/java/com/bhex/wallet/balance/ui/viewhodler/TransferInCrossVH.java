@@ -164,11 +164,16 @@ public class TransferInCrossVH {
         mChainToken = BHTokenHelper.getCrossDefaultToken(mSymbol);
         //选择链
         btn_genarate_address.setOnClickListener(v -> {
-            ARouter.getInstance()
-                    .build(ARouterConfig.Balance.Balance_cross_address)
-                    .withString(BHConstants.SYMBOL,mSymbol)
-                    .withString(BHConstants.CHAIN,mChainToken.chain)
-                    .navigation();
+            if(btn_genarate_address.getText().toString().equals(mActivity.getString(R.string.cross_address_generatoring))){
+                ToastUtils.showToast(mActivity.getString(R.string.link_outter_generating));
+            }else{
+                ARouter.getInstance()
+                        .build(ARouterConfig.Balance.Balance_cross_address)
+                        .withString(BHConstants.SYMBOL,mSymbol)
+                        .withString(BHConstants.CHAIN,mChainToken.chain)
+                        .navigation();
+            }
+
         });
 
         GradientDrawable  bg_deposit_drawable = ShapeUtils.getRoundRectDrawable(
@@ -191,7 +196,7 @@ public class TransferInCrossVH {
         tv_chain_name.setText(bhChain.full_name);
         //获取链对应的地址
         String chain_address = BHBalanceHelper.queryAddressByChain(mChainToken.chain);
-        //LogUtils.d("GenerateAddressActivity===>:","AddressStatus===="+SequenceManager.getInstance().getAddressStatus());
+        LogUtils.d("GenerateAddressActivity===>:","AddressStatus===="+SequenceManager.getInstance().getAddressStatus());
 
         if(!TextUtils.isEmpty(chain_address)){
             layout_deposit.setVisibility(View.VISIBLE);
@@ -204,20 +209,21 @@ public class TransferInCrossVH {
             tv_token_address.setText(chain_address);
         }else if(!TextUtils.isEmpty(SequenceManager.getInstance().getAddressStatus())){
             //清空点击事件
-            ViewUtil.getListenInfo(btn_genarate_address);
+            //ViewUtil.getListenInfo(btn_genarate_address);
             btn_genarate_address.setText(mActivity.getString(R.string.cross_address_generatoring));
             layout_deposit.setVisibility(View.GONE);
             layout_genarate_address.setVisibility(View.VISIBLE);
         }else{
-            layout_genarate_address.setOnClickListener(v -> {
+            /*btn_genarate_address.setOnClickListener(v -> {
                 ARouter.getInstance()
                         .build(ARouterConfig.Balance.Balance_cross_address)
                         .withString(BHConstants.SYMBOL,mSymbol)
                         .withString(BHConstants.CHAIN,mChainToken.chain)
                         .navigation();
-            });
+            });*/
             layout_deposit.setVisibility(View.GONE);
             layout_genarate_address.setVisibility(View.VISIBLE);
+            btn_genarate_address.setText(mActivity.getString(R.string.click_make_cross_address));
         }
 
         //最小充值数量

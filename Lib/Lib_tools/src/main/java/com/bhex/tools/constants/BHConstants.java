@@ -84,7 +84,8 @@ public class BHConstants {
     public static final String TRANSCTION_MODE = "sync";
     public static final String TRANSCTION_MODE_BLOCK = "block";
     public static final String EMAIL = "wallet@bluehelix.com";
-    public static final String CHAIN_ID = "hbtc-testnet";
+    //public static final String CHAIN_ID = "hbtc-testnet";
+    public static final String CHAIN_ID = "bh-mainnet";
 
     public static String TextProposalType="hbtcchain/gov/TextProposal";
 
@@ -113,6 +114,7 @@ public class BHConstants {
 
     //public static final String API_BASE_URL = "https://explorer.hbtcchain.io/";
     //public static final String MARKET_URL = "https://dex.hbtcchain.io";
-    public static final String API_BASE_URL = "http://hbtc.yym.plus/";
+    //public static final String API_BASE_URL = "http://hbtc.yym.plus/";
+    public static final String API_BASE_URL = "https://explorer.bhexchain.com/";
     public static final String MARKET_URL = "https://hdex.bhexchain.com";
 }

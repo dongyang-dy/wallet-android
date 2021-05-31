@@ -609,4 +609,5 @@
     <string name="string_name">Name</string>
     <string name="string_input_name">Enter the address name</string>
     <string name="string_remark">Remark</string>
+    <string name="create_cross_address_info">Cross-chain deposit address \nneeds to be applied for first deposit</string>
 </resources>

@@ -114,6 +114,9 @@ public class BHToken {
     @Ignore
     public List<String> opcus;
 
+    @Ignore
+    public double amount;
+
     public String getName() {
         return name;
     }

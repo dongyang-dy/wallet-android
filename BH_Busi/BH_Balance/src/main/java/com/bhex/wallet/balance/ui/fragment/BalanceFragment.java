@@ -43,6 +43,7 @@ import com.bhex.wallet.common.viewmodel.BalanceViewModel;
 import com.bhex.wallet.common.viewmodel.WalletViewModel;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -185,13 +186,8 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
     @Override
     public void onResume() {
         super.onResume();
-        List<BHToken>  res = BHTokenHelper.loadTokenByChain(BHConstants.BHT_TOKEN);
-        /*Collections.sort(res, new Comparator<BHToken>() {
-            @Override
-            public int compare(BHToken o1, BHToken o2) {
-                return o2.symbol.compareToIgnoreCase(o1.symbol);
-            }
-        });*/
+        bhTokens = BHTokenHelper.loadTokenByChain(BHConstants.BHT_TOKEN);
+        List<BHToken> res = BHTokenHelper.sortBHToken(getYActivity(),bhTokens);
         balanceAdapter.setNewData(res);
     }
 
@@ -235,7 +231,9 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
         }
         balanceViewHolder.updateAsset(isOpenEye);
         //更新列表资产
-        balanceAdapter.setOpenEye(isOpenEye);
+        List<BHToken>  result = new ArrayList<>(bhTokens);
+        result = BHTokenHelper.sortBHToken(getYActivity(),result);
+        balanceAdapter.setOpenEye(result,isOpenEye);
     }
 
     //是否显示资产

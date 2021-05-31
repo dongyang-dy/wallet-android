@@ -92,6 +92,13 @@ public class BHBalanceHelper {
         return result;
     }
 
+    public static double getAmountToCurrencyValue(Context context,String symbol){
+        BHBalance balance = BHBalanceHelper.getBHBalanceFromAccount(symbol);
+        double symbolPrice = CurrencyManager.getInstance().getCurrencyRate(context,symbol);
+        double asset = NumberUtil.mul(String.valueOf(balance.amount),String.valueOf(symbolPrice));
+        return asset;
+    }
+
     public static String getAmountForUser(BaseActivity context, String amount, String frozen_amount, String symbol) {
         SymbolCache symbolCache = CacheCenter.getInstance().getSymbolCache();
         BHToken bhToken = symbolCache.getBHToken(symbol);

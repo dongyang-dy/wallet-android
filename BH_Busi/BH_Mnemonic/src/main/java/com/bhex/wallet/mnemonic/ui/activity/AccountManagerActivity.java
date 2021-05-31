@@ -71,10 +71,11 @@ public class AccountManagerActivity extends BaseActivity<TrustManagerPresenter>{
         });
 
         rcv_account_manager.setAdapter(accountAdapter = new AccountManagerAdapter(list));
-        balanceViewModel = ViewModelProviders.of(MainActivityManager.getInstance().mainActivity).get(BalanceViewModel.class);
+        balanceViewModel = ViewModelProviders.of(this).get(BalanceViewModel.class);
 
-        balanceViewModel.accountLiveData.observe(MainActivityManager.getInstance().mainActivity,ldm->{
+        balanceViewModel.accountLiveData.observe(this,ldm->{
             if(ldm.getLoadingStatus()== LoadingStatus.SUCCESS){
+                LogUtils.d("getAccountInfoByAddress==","===observe====");
                 accountAdapter.updateAsset(ldm.getData());
             }
         });
