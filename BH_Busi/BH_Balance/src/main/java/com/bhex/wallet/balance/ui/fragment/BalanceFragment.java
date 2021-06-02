@@ -237,6 +237,9 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
         }
         balanceViewHolder.updateAsset(isOpenEye);
         //更新列表资产
+        if(ToolUtils.checkListIsEmpty(bhTokens)){
+            return;
+        }
         List<BHToken>  result = new ArrayList<>(bhTokens);
         result = BHTokenHelper.sortBHToken(getYActivity(),result);
         balanceAdapter.setOpenEye(result,isOpenEye);

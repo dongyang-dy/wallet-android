@@ -19,6 +19,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.bhex.lib.uikit.util.ShapeUtils;
 import com.bhex.network.utils.ToastUtils;
 import com.bhex.tools.constants.BHConstants;
+import com.bhex.tools.language.LocalManageUtil;
 import com.bhex.tools.utils.ColorUtil;
 import com.bhex.tools.utils.ImageLoaderUtil;
 import com.bhex.tools.utils.LogUtils;
@@ -216,9 +217,16 @@ public class TransferOutCrossVH {
 
         if(!TextUtils.isEmpty(withDrawToken.issuer)){
             layout_contract.setVisibility(View.VISIBLE);
-            String v_deposit_contract = String.format(m_activity.getString(R.string.string_withdraw_contract),
-                    bhChain.full_name,
-                    showToken.name.toUpperCase()).concat(":");;
+            String v_deposit_contract = "";
+            if(LocalManageUtil.getSetLanguageLocale(m_activity).getLanguage().contains("zh")){
+                v_deposit_contract = String.format(m_activity.getString(R.string.string_withdraw_contract),
+                        bhChain.full_name,
+                        showToken.name.toUpperCase()).concat(":");;
+            }else{
+                v_deposit_contract = String.format(m_activity.getString(R.string.string_withdraw_contract),
+                        showToken.name.toUpperCase(),
+                        bhChain.full_name).concat(":");
+            }
             tv_contract_tip.setText(v_deposit_contract);
 
             /*String v_contract_address = m_activity.getString(R.string.string_contract_address)+":"+withDrawToken.issuer;

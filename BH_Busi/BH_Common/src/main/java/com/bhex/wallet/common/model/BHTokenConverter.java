@@ -1,12 +1,16 @@
 package com.bhex.wallet.common.model;
 
+import android.text.TextUtils;
+
 import androidx.room.TypeConverter;
 
 import com.bhex.network.utils.JsonUtils;
+import com.bhex.tools.utils.LogUtils;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class BHTokenConverter {
+public class BHTokenConverter implements Serializable {
 
     @TypeConverter
     public String objectToString(List<BHToken> list) {
@@ -15,7 +19,15 @@ public class BHTokenConverter {
 
     @TypeConverter
     public List<BHToken> stringToObject(String json) {
-        return JsonUtils.getListFromJson(json,BHToken.class);
+        try{
+            if(TextUtils.isEmpty(json)){
+                return null;
+            }
+            return JsonUtils.getListFromJson(json,BHToken.class);
+        }catch (Exception e){
+            return null;
+        }
+
 
     }
 

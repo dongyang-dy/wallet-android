@@ -82,7 +82,6 @@ public class TransferInCrossActivity extends BaseActivity {
         bhToken = SymbolCache.getInstance().getBHToken(m_select_symbol);
         transferCrossVH = new TransferInCrossVH(this,findViewById(R.id.root_view),m_select_symbol);
         transferCrossVH.updateTokenInfo(m_select_symbol);
-
     }
 
     @Override
