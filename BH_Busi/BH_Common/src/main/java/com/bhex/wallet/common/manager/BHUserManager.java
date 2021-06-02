@@ -163,15 +163,20 @@ public class BHUserManager {
     }
 
     public synchronized String getSymbolList(){
+        String symbol_list = MMKVManager.getInstance().mmkv().decodeString(BHConstants.TOKEN_DEFAULT_LIST,"");
+
+        if(!TextUtils.isEmpty(symbol_list)){
+            return symbol_list;
+        }
+
         StringBuffer sb = new StringBuffer("");
-        LinkedHashMap<String,BHToken> map_tokens = SymbolCache.getInstance().getLocalToken();
+        LinkedHashMap<String,BHToken> map_tokens = SymbolCache.getInstance().getSymbolMap();
         for(ArrayMap.Entry<String,BHToken> item:map_tokens.entrySet()){
             sb.append(item.getValue().symbol.toUpperCase()).append(",");
         }
 
-        if(TextUtils.isEmpty(sb.toString())){
-            sb.append(MMKVManager.getInstance().mmkv().decodeString(BHConstants.TOKEN_DEFAULT_LIST,sb.toString()));
-        }
+        MMKVManager.getInstance().mmkv().encode(BHConstants.TOKEN_DEFAULT_LIST,sb.toString());
+
         return sb.toString();
     }
 
@@ -184,11 +189,12 @@ public class BHUserManager {
     }
 
     public void clear(){
-        //MainActivityManager._instance.setTargetClass(null);
+
     }
 
+
     // 通过address 获取Wallet
-    public   BHWallet getBHWalletByAddress(String address ){
+    public  BHWallet getBHWalletByAddress(String address ){
         List<BHWallet> list = BHUserManager.getInstance().getAllWallet();
         for(BHWallet item:list){
             if(address.equals(item.address)){

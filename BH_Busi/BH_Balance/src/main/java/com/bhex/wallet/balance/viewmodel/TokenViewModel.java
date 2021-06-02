@@ -10,6 +10,7 @@ import com.bhex.network.RxSchedulersHelper;
 import com.bhex.network.app.BaseApplication;
 import com.bhex.network.base.LoadDataModel;
 import com.bhex.network.base.LoadingStatus;
+import com.bhex.tools.utils.LogUtils;
 import com.bhex.wallet.common.base.BaseActivity;
 import com.bhex.network.observer.BHBaseObserver;
 import com.bhex.network.utils.JsonUtils;
@@ -94,16 +95,20 @@ public class TokenViewModel extends ViewModel {
         //保存币种
         BaseApplication.getInstance().getExecutor().execute(()->{
             if(ToolUtils.checkMapEmpty(map_tokens)){
-                MMKVManager.getInstance().mmkv().remove(BHConstants.SYMBOL_DEFAULT_KEY);
-                return;
+                //MMKVManager.getInstance().mmkv().remove(BHConstants.SYMBOL_DEFAULT_KEY);
+                //return;
             }
             //保存于
             StringBuffer v_token = new StringBuffer("");
-            for (ArrayMap.Entry<String,BHToken> item:map_tokens.entrySet()) {
-                v_token.append(item.getValue().symbol).append("_");
+            if(!ToolUtils.checkMapEmpty(map_tokens)){
+                for (ArrayMap.Entry<String,BHToken> item:map_tokens.entrySet()) {
+                    v_token.append(item.getValue().symbol).append("_");
+                }
             }
 
             MMKVManager.getInstance().mmkv().encode(BHConstants.SYMBOL_DEFAULT_KEY, v_token.toString());
+
+            //移除于
             String remove_key = MMKVManager.getInstance().mmkv().decodeString(BHConstants.SYMBOL_REMOVE_KEY,"");
             if(checked){
                 remove_key = remove_key.replace(bhToken.symbol+"_","");
@@ -114,6 +119,7 @@ public class TokenViewModel extends ViewModel {
                     MMKVManager.getInstance().mmkv().encode(BHConstants.SYMBOL_REMOVE_KEY,remove_key);
                 }
             }
+            LogUtils.d("TokenViewModel====>","==remove_key=="+remove_key);
         });
 
     }

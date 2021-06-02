@@ -25,7 +25,7 @@ public class BHTokenHelper {
 
     public static List<BHToken> loadVerifiedToken(String chain) {
         //官方认证
-        //ArrayMap<String,BHToken> map_tokens = CacheCenter.getInstance().getSymbolCache().getVerifiedToken();
+        LinkedHashMap<String,BHToken> map_tokens = CacheCenter.getInstance().getSymbolCache().getVerifiedToken();
         //本地存储
         LinkedHashMap<String, BHToken> local_tokens = CacheCenter.getInstance().getSymbolCache().getLocalToken();
         //合并
@@ -35,9 +35,9 @@ public class BHTokenHelper {
             merge_tokens.putAll(local_tokens);
         }
 
-        /*if(map_tokens!=null && map_tokens.size()>0){
+        if(map_tokens!=null && map_tokens.size()>0){
             merge_tokens.putAll(map_tokens);
-        }*/
+        }
 
         List<BHToken> res = new ArrayList<>();
         for (ArrayMap.Entry<String, BHToken> item : merge_tokens.entrySet()) {

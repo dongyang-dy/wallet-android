@@ -47,6 +47,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import java8.util.stream.IntStreams;
+import java8.util.stream.RefStreams;
 import java8.util.stream.StreamSupport;
 
 /**
@@ -69,6 +70,9 @@ public class SymbolCache extends BaseCache {
     private LinkedHashMap<String,BHToken> defaultTokenList = new LinkedHashMap<>();
     private LinkedHashMap<String,BHToken> localTokenList = new LinkedHashMap<>();
     private LinkedHashMap<String,BHToken> verifiedTokenList = new LinkedHashMap<>();
+    private StringBuffer symbol_key = new StringBuffer("");
+
+    private static final String SYMBOL_KEY = "SYMBOL_KEY";
 
     private BHTokenDao mBhTokenDao = AppDataBase.getInstance(BaseApplication.getInstance()).bhTokenDao();
 
@@ -177,6 +181,9 @@ public class SymbolCache extends BaseCache {
     public synchronized void putSymbolToMap(List<BHToken> coinList,int way){
         for(BHToken item:coinList){
             symbolMap.put(item.symbol,item);
+            if(symbol_key.indexOf(item.symbol+"_")<0){
+                symbol_key.append(item.symbol).append("_");
+            }
             if(way==BH_BUSI_TYPE.默认币种.getIntValue()){
                 defaultTokenList.put(item.symbol,item);
             }
@@ -184,8 +191,14 @@ public class SymbolCache extends BaseCache {
                 verifiedTokenList.put(item.symbol,item);
             }
         }
+
+        if(TextUtils.isEmpty(symbol_key)){
+            MMKVManager.getInstance().mmkv().encode(BHConstants.TOKEN_DEFAULT_LIST,symbol_key.toString());
+        }
+
         BaseApplication.getInstance().getExecutor().execute(()->{
             mBhTokenDao.insert(coinList);
+
         });
     }
 
@@ -208,27 +221,31 @@ public class SymbolCache extends BaseCache {
     public synchronized LinkedHashMap<String,BHToken> getLocalToken(){
         localTokenList.putAll(defaultTokenList);
 
-        String default_symbol = MMKVManager.getInstance().mmkv().decodeString(BHConstants.SYMBOL_DEFAULT_KEY);
-        if(TextUtils.isEmpty(default_symbol)){
+        String default_symbol = MMKVManager.getInstance().mmkv().decodeString(BHConstants.SYMBOL_DEFAULT_KEY,"");
+        /*if(TextUtils.isEmpty(default_symbol)){
             return localTokenList;
-        }
+        }*/
 
         //保存本地
         String []a_default_symbol = default_symbol.split("_");
-        if(a_default_symbol.length==0){
+        /*if(a_default_symbol.length==0){
             return localTokenList;
-        }
+        }*/
 
-        for(int i= 0;i<a_default_symbol.length;i++){
-            BHToken bhToken = symbolMap.get(a_default_symbol[i]);
-            if(bhToken==null){
-                continue;
+        //defaultTokenList.clear();
+        if(a_default_symbol!=null && a_default_symbol.length>0){
+            for(int i= 0;i<a_default_symbol.length;i++){
+                BHToken bhToken = symbolMap.get(a_default_symbol[i]);
+                if(bhToken==null){
+                    continue;
+                }
+                localTokenList.put(bhToken.symbol,bhToken);
             }
-            localTokenList.put(bhToken.symbol,bhToken);
         }
 
         //
         String remove_symbol = MMKVManager.getInstance().mmkv().decodeString(BHConstants.SYMBOL_REMOVE_KEY);
+        //LogUtils.d("remove_symbol===>"+remove_symbol);
         if(TextUtils.isEmpty(remove_symbol)){
             return localTokenList;
         }
@@ -249,7 +266,13 @@ public class SymbolCache extends BaseCache {
         return localTokenList;
     }
 
+    public synchronized LinkedHashMap<String,BHToken> getVerifiedToken(){
+        return verifiedTokenList;
+    }
 
+    public synchronized LinkedHashMap<String,BHToken> getSymbolMap(){
+        return symbolMap;
+    }
 
     public synchronized int getDecimals(String symbol){
         if(symbolMap.get(symbol)!=null){

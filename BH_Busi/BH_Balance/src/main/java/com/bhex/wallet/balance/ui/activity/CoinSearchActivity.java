@@ -59,7 +59,7 @@ public class CoinSearchActivity extends BaseActivity implements OnRefreshListene
     @BindView(R2.id.empty_layout)
     EmptyLayout empty_layout;
 
-    /*@Autowired(name= BHConstants.CHAIN)
+    /*@Autowired(name=BHConstants.CHAIN)
     public String mChain;*/
 
     CoinSearchAdapter mCoinSearchAdapter;

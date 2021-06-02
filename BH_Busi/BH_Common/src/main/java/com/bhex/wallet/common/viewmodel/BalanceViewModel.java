@@ -139,7 +139,7 @@ public class BalanceViewModel extends CacheAndroidViewModel implements Lifecycle
     public void getRateToken(BaseActivity activity,IStrategy strategy){
         Type type = (new TypeToken<List<BHRates>>() {}).getType();
         String balacne_list = BHUserManager.getInstance().getSymbolList();
-        balacne_list = balacne_list.replace("_",",").toUpperCase();
+        balacne_list = balacne_list.replace("_",",");
         //LogUtils.d("RatesCache====T=>:","==onSuccess=="+balacne_list);
         //LogUtils.d("balacne_list=="+balacne_list);
 

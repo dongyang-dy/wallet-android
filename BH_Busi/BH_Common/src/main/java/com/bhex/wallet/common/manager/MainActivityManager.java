@@ -15,8 +15,6 @@ public class MainActivityManager {
 
     public  BaseActivity mainActivity;
 
-    //private Class targetClass;
-
     private MainActivityManager(){
 
     }

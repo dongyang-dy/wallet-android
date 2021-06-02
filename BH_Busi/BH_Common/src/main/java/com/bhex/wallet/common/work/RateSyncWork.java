@@ -44,7 +44,7 @@ public class RateSyncWork extends RxWorker {
     public Single<ListenableWorker.Result> createWork() {
         Type type = (new TypeToken<List<BHRates>>() {}).getType();
         String balacne_list = BHUserManager.getInstance().getSymbolList();
-        balacne_list = balacne_list.replace("_",",").toUpperCase();
+        balacne_list = balacne_list.replace("_",",");
 
         RequestBody txBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)

@@ -17,6 +17,7 @@ import com.bhex.network.base.LoadDataModel;
 import com.bhex.network.base.LoadingStatus;
 import com.bhex.network.cache.stategy.CacheStrategy;
 import com.bhex.tools.constants.BHConstants;
+import com.bhex.tools.utils.LogUtils;
 import com.bhex.tools.utils.ToolUtils;
 import com.bhex.wallet.balance.R;
 import com.bhex.wallet.balance.adapter.AnnouncementMF;
@@ -78,6 +79,7 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
 
     private boolean isOpenEye = true;
 
+    private View layout_empty_asset;
     @Override
     public int getLayoutId() {
         return R.layout.fragment_balance;
@@ -86,6 +88,8 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
     @Override
     protected void initView() {
         refreshLayout = mRootView.findViewById(R.id.refreshLayout);
+        layout_empty_asset = View.inflate(getYActivity(),R.layout.layout_empty_asset,null);
+
         balanceViewHolder = new BalanceViewHolder(getYActivity(),mRootView.findViewById(R.id.layout_balance_top));
 
         //通知公告
@@ -126,6 +130,8 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
         rec_balance = mRootView.findViewById(R.id.rcv_balance);
         balanceAdapter = new HBalanceAdapter(bhTokens);
         rec_balance.setAdapter(balanceAdapter);
+
+        balanceAdapter.setEmptyView(layout_empty_asset);
     }
 
     @Override
