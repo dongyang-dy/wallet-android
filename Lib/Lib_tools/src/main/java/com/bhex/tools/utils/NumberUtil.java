@@ -103,9 +103,20 @@ public class NumberUtil {
     }
 
     public static Double add(String value1, String value2) {
-        BigDecimal b1 = new BigDecimal(value1);
-        BigDecimal b2 = new BigDecimal(value2);
-        return b1.add(b2).doubleValue();
+        try{
+            if(TextUtils.isEmpty(value1)){
+                value1 = "0";
+            }
+
+            if(TextUtils.isEmpty(value2)){
+                value2 = "0";
+            }
+            BigDecimal b1 = new BigDecimal(value1);
+            BigDecimal b2 = new BigDecimal(value2);
+            return b1.add(b2).doubleValue();
+        }catch (Exception e){
+            return 0d;
+        }
     }
 
 

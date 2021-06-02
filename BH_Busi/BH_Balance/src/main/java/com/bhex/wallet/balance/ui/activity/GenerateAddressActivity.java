@@ -17,6 +17,7 @@ import com.bhex.network.utils.ToastUtils;
 import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.ColorUtil;
 import com.bhex.tools.utils.LogUtils;
+import com.bhex.tools.utils.NumberUtil;
 import com.bhex.tools.utils.RegexUtil;
 import com.bhex.wallet.balance.R;
 import com.bhex.wallet.balance.event.TransctionEvent;
@@ -137,16 +138,22 @@ public class GenerateAddressActivity extends BaseActivity
             return;
         }
 
-        if(TextUtils.isEmpty(gas_fee)||Double.valueOf(gas_fee)<=0){
+        /*if(TextUtils.isEmpty(gas_fee)||Double.valueOf(gas_fee)<=0){
             ToastUtils.showToast(getResources().getString(R.string.please_input_gas_fee));
             return;
-        }
+        }*/
 
-        if(!RegexUtil.checkNumeric(gas_fee)){
+        /*if(!RegexUtil.checkNumeric(gas_fee)){
             ToastUtils.showToast(getResources().getString(R.string.error_input_gas_fes));
             return;
-        }
+        }*/
 
+        //总共手续费
+        double d_total_fee = NumberUtil.add(gas_fee,symbolToken.open_fee);
+        if(Double.valueOf(bhtBalance.amount)<d_total_fee){
+            ToastUtils.showToast(getResources().getString(R.string.fee_notenough));
+            return;
+        }
 
         Password30PFragment.showPasswordDialog(getSupportFragmentManager(),
                 Password30PFragment.class.getName(),

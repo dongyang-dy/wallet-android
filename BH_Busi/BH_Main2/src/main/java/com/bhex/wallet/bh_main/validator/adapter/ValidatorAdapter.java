@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import androidx.appcompat.widget.AppCompatTextView;
 
 import com.bhex.tools.constants.BHConstants;
+import com.bhex.tools.utils.NumberUtil;
 import com.bhex.wallet.bh_main.R;
 import com.bhex.wallet.bh_main.validator.model.ValidatorInfo;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -48,8 +49,11 @@ public class ValidatorAdapter extends BaseQuickAdapter<ValidatorInfo, BaseViewHo
 
         String v_elf_delegate_proportion = "";
         if(!TextUtils.isEmpty(validatorInfo.getSelf_delegate_amount())){
-            v_elf_delegate_proportion = validatorInfo.getSelf_delegate_amount();
+            //v_elf_delegate_proportion = validatorInfo.getSelf_delegate_amount();
         }
+        double d_elf_delegate_proportion = NumberUtil.add(validatorInfo.getSelf_delegate_amount(),validatorInfo.getOther_delegate_amount());
+        v_elf_delegate_proportion = NumberUtil.dispalyForUsertokenAmount4Level(String.valueOf(d_elf_delegate_proportion));
+
         viewHolder.setText(R.id.tv_self_delegate_proportion,v_elf_delegate_proportion);
 
         String v_apy = "";

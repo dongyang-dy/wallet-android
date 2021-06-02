@@ -19,6 +19,7 @@ import com.bhex.network.RxSchedulersHelper;
 import com.bhex.network.observer.BHProgressObserver;
 import com.bhex.network.utils.ToastUtils;
 import com.bhex.tools.constants.BHConstants;
+import com.bhex.tools.language.LocalManageUtil;
 import com.bhex.tools.utils.ColorUtil;
 import com.bhex.tools.utils.FileUtils;
 import com.bhex.tools.utils.ImageLoaderUtil;
@@ -214,13 +215,6 @@ public class TransferInCrossVH {
             layout_deposit.setVisibility(View.GONE);
             layout_genarate_address.setVisibility(View.VISIBLE);
         }else{
-            /*btn_genarate_address.setOnClickListener(v -> {
-                ARouter.getInstance()
-                        .build(ARouterConfig.Balance.Balance_cross_address)
-                        .withString(BHConstants.SYMBOL,mSymbol)
-                        .withString(BHConstants.CHAIN,mChainToken.chain)
-                        .navigation();
-            });*/
             layout_deposit.setVisibility(View.GONE);
             layout_genarate_address.setVisibility(View.VISIBLE);
             btn_genarate_address.setText(mActivity.getString(R.string.click_make_cross_address));
@@ -237,10 +231,18 @@ public class TransferInCrossVH {
         //
         if(!TextUtils.isEmpty(mChainToken.issuer)){
             layout_deposit_contract.setVisibility(View.VISIBLE);
-            String v_deposit_contract = String.format(mActivity.getString(R.string.string_deposit_contract),
-                    bhChain.full_name,
-                    showBhToken.name.toUpperCase()).concat(":");
-            tv_deposit_contract.setText(v_deposit_contract);
+            if(LocalManageUtil.getSetLanguageLocale(mActivity).getLanguage().contains("zh")){
+                String v_deposit_contract = String.format(mActivity.getString(R.string.string_deposit_contract),
+                        bhChain.full_name,
+                        showBhToken.name.toUpperCase()).concat(":");
+                tv_deposit_contract.setText(v_deposit_contract);
+            }else{
+                String v_deposit_contract = String.format(mActivity.getString(R.string.string_deposit_contract),
+                        showBhToken.name.toUpperCase(),
+                         bhChain.full_name).concat(":");
+                tv_deposit_contract.setText(v_deposit_contract);
+            }
+
 
             //String v_contract_address = mActivity.getString(R.string.string_contract_address)+":"+mChainToken.issuer;
 

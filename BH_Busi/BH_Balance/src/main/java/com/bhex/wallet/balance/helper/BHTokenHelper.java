@@ -1,6 +1,7 @@
 package com.bhex.wallet.balance.helper;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.ArrayMap;
 
 import com.bhex.tools.constants.BHConstants;
@@ -154,8 +155,13 @@ public class BHTokenHelper {
 
 
     public static List<BHToken> sortBHToken(Context context,List<BHToken> orginTokens){
-
+        if(ToolUtils.checkListIsEmpty(orginTokens)){
+            return  orginTokens;
+        }
         for(BHToken bhToken:orginTokens){
+            if(bhToken==null || TextUtils.isEmpty(bhToken.symbol)){
+                continue;
+            }
             bhToken.amount = BHBalanceHelper.getAmountToCurrencyValue(context,bhToken.symbol);
         }
 
