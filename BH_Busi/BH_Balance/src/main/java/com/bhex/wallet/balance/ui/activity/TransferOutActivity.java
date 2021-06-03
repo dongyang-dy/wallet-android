@@ -3,6 +3,7 @@ package com.bhex.wallet.balance.ui.activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.text.TextUtils;
 import android.view.View;
 
 import androidx.appcompat.widget.AppCompatTextView;
@@ -57,6 +58,9 @@ public class TransferOutActivity extends BaseActivity {
     @Autowired(name=BHConstants.SYMBOL)
     String m_symbol;
 
+    @Autowired(name=BHConstants.ADDRESS)
+    String m_address;
+
     @BindView(R2.id.tv_center_title)
     AppCompatTextView tv_center_title;
 
@@ -88,6 +92,11 @@ public class TransferOutActivity extends BaseActivity {
         mRefreshLayout = findViewById(R.id.refreshLayout);
         transferOutVH = new TransferOutVH(this,findViewById(R.id.root_view));
         transferOutVH.updateTokenInfo(m_symbol);
+        //设置 地址
+        if(!TextUtils.isEmpty(m_address)){
+            transferOutVH.inp_transfer_in_address.setText(m_address);
+            transferOutVH.inp_transfer_in_address.setSelection(m_address.length());
+        }
     }
 
     @Override

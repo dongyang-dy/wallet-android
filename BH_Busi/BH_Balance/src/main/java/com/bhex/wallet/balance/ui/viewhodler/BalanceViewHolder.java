@@ -1,13 +1,18 @@
 package com.bhex.wallet.balance.ui.viewhodler;
 
 import android.content.Context;
+import android.graphics.drawable.GradientDrawable;
 import android.view.View;
 
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.bhex.lib.uikit.util.ShapeUtils;
 import com.bhex.tools.constants.BHConstants;
+import com.bhex.tools.utils.ColorUtil;
+import com.bhex.tools.utils.PixelUtils;
 import com.bhex.wallet.balance.R;
 import com.bhex.wallet.balance.helper.BHBalanceHelper;
 import com.bhex.wallet.balance.ui.fragment.AccountListFragment;
@@ -19,6 +24,7 @@ import com.bhex.wallet.common.enums.BH_BUSI_TYPE;
 import com.bhex.wallet.common.helper.BHWalletHelper;
 import com.bhex.wallet.common.manager.BHUserManager;
 import com.bhex.wallet.common.manager.CurrencyManager;
+import com.bhex.wallet.common.ui.activity.BHQrScanActivity;
 
 /**
  * @author gongdongyang
@@ -35,6 +41,8 @@ public class BalanceViewHolder {
     public AppCompatTextView tv_wallet_name;
     //钱包地址
     public AppCompatTextView tv_wallet_address;
+    //钱包地址扫描
+    public AppCompatImageView btn_address_scan;
     //资产
     public AppCompatTextView tv_asset;
     //钱包二维码地址展示
@@ -50,6 +58,11 @@ public class BalanceViewHolder {
 
         tv_wallet_name = viewHolder.findViewById(R.id.tv_wallet_name);
         tv_wallet_name.setText(currentWallet.name);
+
+        //背景
+        GradientDrawable bg_wallet_drawable = ShapeUtils.getRoundRectDrawable(PixelUtils.dp2px(mContext,15),
+                ColorUtil.getColor(mContext,R.color.white));
+        tv_wallet_name.setBackgroundDrawable(bg_wallet_drawable);
 
         tv_wallet_address = viewHolder.findViewById(R.id.tv_wallet_address);
         BHWalletHelper.proccessAddress(tv_wallet_address,currentWallet.address);
@@ -69,6 +82,15 @@ public class BalanceViewHolder {
             ARouter.getInstance().build(ARouterConfig.Trusteeship.Trusteeship_Add_Index).withInt(BHConstants.FLAG,1).navigation();
         });
         iv_open_eye = viewHolder.findViewById(R.id.iv_open_eye);
+
+        //
+
+        btn_address_scan =  viewHolder.findViewById(R.id.btn_address_scan);
+
+        //二维码扫描
+        btn_address_scan.setOnClickListener(v -> {
+            ARouter.getInstance().build(ARouterConfig.Common.commom_scan_qr).navigation(mContext, BHQrScanActivity.REQUEST_CODE);
+        });
     }
 
     //转入

@@ -1,6 +1,10 @@
 package com.bhex.wallet.balance.ui.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.util.DebugUtils;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -13,11 +17,15 @@ import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bhex.lib.uikit.widget.text.marqueen.MarqueeFactory;
 import com.bhex.lib.uikit.widget.text.marqueen.MarqueeView;
+import com.bhex.lib_qr.XQRCode;
+import com.bhex.lib_qr.util.QRCodeAnalyzeUtils;
 import com.bhex.network.base.LoadDataModel;
 import com.bhex.network.base.LoadingStatus;
 import com.bhex.network.cache.stategy.CacheStrategy;
+import com.bhex.network.utils.ToastUtils;
 import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.LogUtils;
+import com.bhex.tools.utils.PathUtils;
 import com.bhex.tools.utils.ToolUtils;
 import com.bhex.wallet.balance.R;
 import com.bhex.wallet.balance.adapter.AnnouncementMF;
@@ -39,6 +47,8 @@ import com.bhex.wallet.common.manager.BHUserManager;
 import com.bhex.wallet.common.manager.MainActivityManager;
 import com.bhex.wallet.common.manager.SecuritySettingManager;
 import com.bhex.wallet.common.model.BHToken;
+import com.bhex.wallet.common.ui.activity.BHQrScanActivity;
+import com.bhex.wallet.common.utils.AddressUtil;
 import com.bhex.wallet.common.utils.LiveDataBus;
 import com.bhex.wallet.common.viewmodel.BalanceViewModel;
 import com.bhex.wallet.common.viewmodel.WalletViewModel;
@@ -120,11 +130,11 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
 
         //币种
         mChainTokenViewModel =  ViewModelProviders.of(getYActivity()).get(ChainTokenViewModel.class);
-        mChainTokenViewModel.mutableLiveData.observe(this,ldm->{
+        /*mChainTokenViewModel.mutableLiveData.observe(this,ldm->{
             //defRefreshCount2++;
             //updateAssetList((List<BHToken>)ldm.getData());
             //finishRefresh();
-        });
+        });*/
 
         //bhTokens = BHTokenHelper.loadTokenByChain(BHConstants.BHT_TOKEN);
         rec_balance = mRootView.findViewById(R.id.rcv_balance);
@@ -257,13 +267,51 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
         }
     }
 
-
-
     int refreshCount = 0;
     public void refreshfinish(){
         if(++refreshCount==2){
             refreshLayout.finishRefresh();
             refreshCount=0;
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //LogUtils.d("BalanceFragment====>:","==onActivityResult==");
+        if (requestCode == BHQrScanActivity.REQUEST_CODE ) {
+            if(resultCode == Activity.RESULT_OK){
+                String qrCode  = data.getExtras().getString(XQRCode.RESULT_DATA);
+                if(AddressUtil.validHbcAddress(qrCode)){
+                    ARouter.getInstance().build(ARouterConfig.Balance.Balance_transfer_out)
+                            .withString(BHConstants.SYMBOL, BHConstants.BHT_TOKEN)
+                            .withString(BHConstants.ADDRESS, qrCode)
+                            .withInt(BHConstants.WAY, BH_BUSI_TYPE.链内转账.getIntValue())
+                            .navigation();
+                }
+            }else if(resultCode == BHQrScanActivity.REQUEST_IMAGE){
+                getAnalyzeQRCodeResult(data.getData());
+            }
+        }
+    }
+
+    private void getAnalyzeQRCodeResult(Uri uri) {
+        XQRCode.analyzeQRCode(PathUtils.getFilePathByUri(getYActivity(), uri), new QRCodeAnalyzeUtils.AnalyzeCallback() {
+            @Override
+            public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
+                if(AddressUtil.validHbcAddress(result)){
+                    ARouter.getInstance().build(ARouterConfig.Balance.Balance_transfer_out)
+                            .withString(BHConstants.SYMBOL, BHConstants.BHT_TOKEN)
+                            .withString(BHConstants.ADDRESS, result)
+                            .withInt(BHConstants.WAY, BH_BUSI_TYPE.链内转账.getIntValue())
+                            .navigation();
+                }
+            }
+
+            @Override
+            public void onAnalyzeFailed() {
+                ToastUtils.showToast(getResources().getString(R.string.encode_qr_fail));
+            }
+        });
     }
 }

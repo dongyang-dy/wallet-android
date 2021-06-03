@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/page_bg_color"
+    android:background="@mipmap/bg_balance"
     android:orientation="vertical"
     tools:context=".ui.fragment.BalanceFragment">
 
@@ -87,7 +87,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:text="@string/tab_balance_title"
-                            android:textColor="#979CAA"
+                            android:textColor="@color/item_label_text_color"
                             android:textSize="14sp" />
 
                         <androidx.appcompat.widget.AppCompatImageView

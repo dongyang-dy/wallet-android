@@ -72,9 +72,9 @@ public class BHQrScanActivity extends BaseActivity {
     @Override
     protected void initView() {
         tv_center_title.setText(getResources().getString(R.string.qr_code));
-        ImmersionBar.with(this).statusBarColor(com.bhex.network.R.color.status_bar_bg_blue)
+        ImmersionBar.with(this).statusBarColor(R.color.blue_bg)
                 .statusBarDarkFont(false)
-                .barColor(com.bhex.network.R.color.status_bar_bg_blue)
+                .barColor(R.color.blue_bg)
                 .fitsSystemWindows(true).init();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

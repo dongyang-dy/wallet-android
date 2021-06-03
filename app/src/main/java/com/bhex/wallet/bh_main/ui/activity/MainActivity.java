@@ -1,9 +1,12 @@
 package com.bhex.wallet.bh_main.ui.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -13,6 +16,7 @@ import com.bhex.lib.uikit.util.BottomNavigationViewUtil;
 import com.bhex.network.utils.ToastUtils;
 import com.bhex.tools.utils.LogUtils;
 import com.bhex.wallet.R;
+import com.bhex.wallet.balance.ui.fragment.BalanceFragment;
 import com.bhex.wallet.bh_main.persenter.MainPresenter;
 import com.bhex.wallet.common.base.BaseActivity;
 import com.bhex.wallet.common.config.ARouterConfig;
@@ -23,6 +27,7 @@ import com.bhex.wallet.common.event.NightEvent;
 import com.bhex.wallet.common.manager.AppStatusManager;
 import com.bhex.wallet.common.manager.MainActivityManager;
 import com.bhex.wallet.common.manager.SequenceManager;
+import com.bhex.wallet.common.ui.activity.BHQrScanActivity;
 import com.bhex.wallet.common.viewmodel.BalanceViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.gyf.immersionbar.ImmersionBar;
@@ -186,5 +191,13 @@ public class MainActivity extends BaseActivity<MainPresenter> {
     }
 
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //LogUtils.d("BalanceFragment====>:","==onActivityResult==");
 
+        FragmentManager manager = getSupportFragmentManager();
+        Fragment dstFragment = manager.findFragmentByTag(BalanceFragment.class.getSimpleName());
+        dstFragment.onActivityResult(requestCode, resultCode, data);
+    }
 }

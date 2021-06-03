@@ -5,15 +5,14 @@
     android:id="@+id/layout_balance_top"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@mipmap/bg_balance_index"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:layout_marginStart="20dp">
+        android:layout_marginTop="26dp"
+        android:layout_marginStart="22dp">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_logo"
@@ -52,7 +51,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp">
 
@@ -60,21 +59,43 @@
             android:id="@+id/tv_wallet_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/global_main_text_color"
-            android:drawableEnd="@mipmap/ic_black_arrow"
-            android:layout_centerVertical="true"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:drawableEnd="@mipmap/ic_address_arrow"
             android:gravity="center_vertical"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            tools:text="Acicii"/>
+            android:textColor="@color/item_main_text_color"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            tools:background="@color/white"
+            tools:text="Acicii" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_add_wallet"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_add_wallet"
             android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"/>
+            android:layout_alignParentEnd="true"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/btn_address_scan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_balance_scan"
+                android:layout_marginEnd="12dp"
+                />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_add_wallet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_add_wallet"
+                />
+
+        </LinearLayout>
+
+
     </RelativeLayout>
 
     <RelativeLayout
@@ -82,9 +103,18 @@
         android:layout_height="200dp"
         android:layout_marginStart="18dp"
         android:layout_marginEnd="18dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="14dp"
         android:orientation="vertical"
         android:background="@mipmap/bg_balance_card">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:src="@mipmap/ic_bhex_mask"
+            tools:background="#FF0000"
+            />
 
         <LinearLayout
             android:id="@+id/layout_address"
@@ -120,7 +150,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_below="@+id/layout_address"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="12dp"
             android:layout_marginStart="24dp">
 
 
@@ -150,7 +180,7 @@
             android:textSize="30sp"
             android:textStyle="bold"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="5dp"
             android:gravity="center_vertical"
             android:includeFontPadding="false"
             android:textColor="@color/white"

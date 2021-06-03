@@ -122,8 +122,8 @@ public class TransferOutCrossVH {
 
         inp_withdraw_address = mRootView.findViewById(R.id.inp_withdraw_address);
 
-        btn_address_scan = mRootView.findViewById(R.id.btn_address_scan);
-        btn_address_book = mRootView.findViewById(R.id.btn_address_book);
+        /*btn_address_scan = mRootView.findViewById(R.id.btn_address_scan);
+        btn_address_book = mRootView.findViewById(R.id.btn_address_book);*/
 
         tv_cross_transfer_out_tip = mRootView.findViewById(R.id.tv_cross_transfer_out_tip);
 
