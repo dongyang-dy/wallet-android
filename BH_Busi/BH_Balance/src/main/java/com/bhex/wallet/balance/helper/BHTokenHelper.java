@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 
 import com.bhex.tools.constants.BHConstants;
+import com.bhex.tools.utils.LogUtils;
 import com.bhex.tools.utils.ToolUtils;
 import com.bhex.wallet.common.cache.CacheCenter;
 import com.bhex.wallet.common.cache.ConfigMapCache;
@@ -12,6 +13,7 @@ import com.bhex.wallet.common.model.BHChain;
 import com.bhex.wallet.common.model.BHToken;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
@@ -158,6 +160,7 @@ public class BHTokenHelper {
         if(ToolUtils.checkListIsEmpty(orginTokens)){
             return  orginTokens;
         }
+
         for(BHToken bhToken:orginTokens){
             if(bhToken==null || TextUtils.isEmpty(bhToken.symbol)){
                 continue;
@@ -165,25 +168,36 @@ public class BHTokenHelper {
             bhToken.amount = BHBalanceHelper.getAmountToCurrencyValue(context,bhToken.symbol);
         }
 
+
         Collections.sort(orginTokens, (o1,o2)->{
             try{
-                if(o1.name.equalsIgnoreCase(BHConstants.BHT_TOKEN)){
+                if(Double.valueOf(o2.amount)>Double.valueOf(o1.amount)){
+                    return 1;
+                }else if(Double.valueOf(o2.amount)<Double.valueOf(o1.amount)){
                     return -1;
                 }else{
-                    if(Double.valueOf(o2.amount)>Double.valueOf(o1.amount)){
-                        return 1;
-                    }else if(Double.valueOf(o2.amount)<Double.valueOf(o1.amount)){
-                        return -1;
-                    }else{
-                        return o1.name.compareToIgnoreCase(o2.name);
-                    }
+                    return o1.name.compareToIgnoreCase(o2.name);
                 }
             }catch (Exception e){
                 return 0;
             }
         });
+        //HBC放最前
+        List<BHToken> result = new ArrayList<>();
+        for(BHToken bhToken:orginTokens){
+            if(bhToken.name.equalsIgnoreCase(BHConstants.BHT_TOKEN)){
+                result.add(bhToken);
+            }
+        }
 
-        return orginTokens;
+        for(BHToken bhToken:orginTokens){
+            if(!bhToken.name.equalsIgnoreCase(BHConstants.BHT_TOKEN)){
+                result.add(bhToken);
+            }
+        }
+
+        //LogUtils.d("BHTokenHelper====>", Arrays.deepToString(orginTokens.toArray()));
+        return result;
     }
 
 }

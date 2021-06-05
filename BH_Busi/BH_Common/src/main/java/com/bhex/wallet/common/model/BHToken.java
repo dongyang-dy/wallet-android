@@ -121,7 +121,15 @@ public class BHToken {
         return name;
     }
 
-/*@ColumnInfo(name = "default_token") // 1 默认币
+    @Override
+    public String toString() {
+        return "BHToken{" +
+                "name='" + name + '\'' +
+                ", symbol='" + symbol + '\'' +
+                '}';
+    }
+
+    /*@ColumnInfo(name = "default_token") // 1 默认币
     public boolean defaultToken;
 
     @ColumnInfo(name = "verified_token") //1 官方认证币

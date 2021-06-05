@@ -137,7 +137,7 @@
     <string name="genarate_cross_address">Generate cross-chain address</string>
     <string name="hidden_small_token">Hide small balance</string>
     <string name="transfer_address">Transfer address</string>
-    <string name="transfer_amount">Input Amount</string>
+    <string name="transfer_amount">Transfer amount</string>
     <string name="crosslink_withdraw_tip">·You are withdrawing tokens across the chains\n·Please ensure that you are using the cross-chain token withdrawal\n·Please ensure that the token withdrawal address is similar to its public chain address</string>
     <string name="linkinner_withdraw_tip">·You are making on-chain transfer\n·Be sure to use the on-chain channel \n·Please do confirm that the token withdrawal address start by "HBC"</string>
 
@@ -529,7 +529,8 @@
     <string name="risk_content">Root device detected, please confirm to continue to using</string>
     <string name="keep_on">Continue</string>
     <string name="transfer_out_address">Transfer-out address</string>
-    <string name="string_transfer_in_address">Transfer-in address</string>
+    <!--<string name="string_transfer_in_address">Transfer-in address</string>-->
+    <string name="string_transfer_in_address">To-address</string>
     <string name="select_withdraw_token">token to be withdrawn</string>
     <string name="deposit_token">Token to be deposited</string>
     <!--<string name="hbtc_transfer_in_tip">This account supports HBC, HRC10 and cross-chain custody assets on BHEX chain</string>-->

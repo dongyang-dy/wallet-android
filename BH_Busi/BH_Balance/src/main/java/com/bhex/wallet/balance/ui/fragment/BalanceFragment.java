@@ -246,6 +246,7 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
             return;
         }
         balanceViewHolder.updateAsset(isOpenEye);
+
         //更新列表资产
         if(ToolUtils.checkListIsEmpty(bhTokens)){
             return;

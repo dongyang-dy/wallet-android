@@ -97,11 +97,11 @@ android {
             debuggable true
             //buildConfigField("String", "API_HOST_URL", "\"${API_HOST_DEBUG_URL}\"")
             //不显示Log　Zipalign优化
-            zipAlignEnabled true
+            zipAlignEnabled false
             //移除无用的resource文件
-            shrinkResources true
+            shrinkResources false
             //启用混淆
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             ndk {
                 //这里要加上，否则debug包会出问题,后面两个为可选，x86建议加上不然部分模拟器回报错
