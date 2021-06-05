@@ -84,7 +84,7 @@ public class CoinSearchActivity extends BaseActivity implements OnRefreshListene
 
         RecycleViewExtDivider ItemDecoration = new RecycleViewExtDivider(
                 this,LinearLayoutManager.VERTICAL,
-                PixelUtils.dp2px(this,68),
+                PixelUtils.dp2px(this,64),
                 0,
                 ColorUtil.getColor(this,R.color.global_divider_color));
         recycler_coin.addItemDecoration(ItemDecoration);

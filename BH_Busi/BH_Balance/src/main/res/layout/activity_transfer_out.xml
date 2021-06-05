@@ -219,7 +219,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:textSize="12sp"
+                        android:textSize="14sp"
                         android:textColor="@color/global_main_text_color"
                         android:text="@string/place_holder"
                         tools:text="BTC"/>
@@ -255,6 +255,7 @@
                 </LinearLayout>
 
                 <RelativeLayout
+                    android:id="@+id/layout_fee_tips"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:orientation="vertical"

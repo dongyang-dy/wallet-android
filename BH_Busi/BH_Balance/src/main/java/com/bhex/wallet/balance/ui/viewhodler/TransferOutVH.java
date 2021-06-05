@@ -1,6 +1,6 @@
 package com.bhex.wallet.balance.ui.viewhodler;
 
-import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.SpannableString;
@@ -8,12 +8,14 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
+import android.widget.RelativeLayout;
 
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.bhex.lib.uikit.util.ShapeUtils;
 import com.bhex.network.utils.ToastUtils;
 import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.ColorUtil;
@@ -79,6 +81,8 @@ public class TransferOutVH {
     //可以提币或转账数量
     public double available_amount;
 
+    public RelativeLayout layout_fee_tips;
+
     public TransferOutVH(BaseActivity activity, View rootView){
         this.m_activity = activity;
         this.mRootView = rootView;
@@ -139,6 +143,12 @@ public class TransferOutVH {
 
             tv_transfer_out_tip.setText(spannableString);
         }
+
+        layout_fee_tips = mRootView.findViewById(R.id.layout_fee_tips);
+        GradientDrawable bg_tips_drawable = ShapeUtils.getRoundRectDrawable(
+                (int)m_activity.getResources().getDimension(R.dimen.middle_radius_conner),
+                ColorUtil.getColor(m_activity,R.color.card_bg_color));
+        layout_fee_tips.setBackground(bg_tips_drawable);
 
     }
 

@@ -65,6 +65,8 @@ public class TransferInVH {
 
     public FrameLayout layout_token_icon;
 
+    //public LinearLayout layout_fee_tips;
+
     public TransferInVH( TransferInActivity mActivity,View mRootView) {
         this.mActivity = mActivity;
         this.mRootView = mRootView;
@@ -106,6 +108,7 @@ public class TransferInVH {
         btn_save_qr.setOnClickListener(v->{
             requestPermissions();
         });
+
     }
 
     public void updateTokenInfo(String symbol){

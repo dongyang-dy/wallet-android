@@ -6,6 +6,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
+import android.text.style.CharacterStyle;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -184,81 +185,88 @@ public class TransferInCrossVH {
     }
 
     public void updateTokenInfo(String symbol){
-        this.mSymbol = symbol;
-        BHToken showBhToken = SymbolCache.getInstance().getBHToken(mSymbol);
-        ImageLoaderUtil.loadImageView(mActivity,showBhToken.logo,iv_token_icon,R.mipmap.ic_default_coin);
-        tv_token_name.setText(showBhToken.name.toUpperCase());
+        try{
+            this.mSymbol = symbol;
+            BHToken showBhToken = SymbolCache.getInstance().getBHToken(mSymbol);
+            ImageLoaderUtil.loadImageView(mActivity,showBhToken.logo,iv_token_icon,R.mipmap.ic_default_coin);
+            tv_token_name.setText(showBhToken.name.toUpperCase());
 
 
-        //链Token信息
-        BHChain bhChain = BHTokenHelper.getBHChain(mChainToken.chain);
-        //链图标
-        ImageLoaderUtil.loadImageViewToCircle(mActivity,bhChain.logo,iv_chain_icon,R.mipmap.ic_default_coin);
-        tv_chain_name.setText(bhChain.full_name);
-        //获取链对应的地址
-        String chain_address = BHBalanceHelper.queryAddressByChain(mChainToken.chain);
-        LogUtils.d("GenerateAddressActivity===>:","AddressStatus===="+SequenceManager.getInstance().getAddressStatus());
+            //链Token信息
+            BHChain bhChain = BHTokenHelper.getBHChain(mChainToken.chain);
+            //链图标
+            ImageLoaderUtil.loadImageViewToCircle(mActivity,bhChain.logo,iv_chain_icon,R.mipmap.ic_default_coin);
+            tv_chain_name.setText(bhChain.full_name);
+            //获取链对应的地址
+            String chain_address = BHBalanceHelper.queryAddressByChain(mChainToken.chain);
+            //LogUtils.d("GenerateAddressActivity===>:","AddressStatus===="+SequenceManager.getInstance().getAddressStatus());
 
-        if(!TextUtils.isEmpty(chain_address)){
-            layout_deposit.setVisibility(View.VISIBLE);
-            layout_genarate_address.setVisibility(View.GONE);
-            //二维码
-            Bitmap bitmap = QRCodeEncoder.syncEncodeQRCode(chain_address,PixelUtils.dp2px(mActivity,168),
-                    ColorUtil.getColor(mActivity,android.R.color.black));
-            iv_address_qr.setImageBitmap(bitmap);
-            //链上的地址
-            tv_token_address.setText(chain_address);
-        }else if(!TextUtils.isEmpty(SequenceManager.getInstance().getAddressStatus())){
-            //清空点击事件
-            //ViewUtil.getListenInfo(btn_genarate_address);
-            btn_genarate_address.setText(mActivity.getString(R.string.cross_address_generatoring));
-            layout_deposit.setVisibility(View.GONE);
-            layout_genarate_address.setVisibility(View.VISIBLE);
-        }else{
-            layout_deposit.setVisibility(View.GONE);
-            layout_genarate_address.setVisibility(View.VISIBLE);
-            btn_genarate_address.setText(mActivity.getString(R.string.click_make_cross_address));
-        }
-
-        //最小充值数量
-        String v_amount_str = mChainToken.deposit_threshold+" "+mChainToken.name.toUpperCase();
-        tv_min_deposit_amount.setText(v_amount_str);
-
-        //充值归集费
-        String v_amount_str2 = mChainToken.collect_fee+" "+mChainToken.chain.toUpperCase();
-        tv_deposit_collect_amount.setText(v_amount_str2);
-
-        //
-        if(!TextUtils.isEmpty(mChainToken.issuer)){
-            layout_deposit_contract.setVisibility(View.VISIBLE);
-            if(LocalManageUtil.getSetLanguageLocale(mActivity).getLanguage().contains("zh")){
-                String v_deposit_contract = String.format(mActivity.getString(R.string.string_deposit_contract),
-                        bhChain.full_name,
-                        showBhToken.name.toUpperCase()).concat(":");
-                tv_deposit_contract.setText(v_deposit_contract);
+            if(!TextUtils.isEmpty(chain_address)){
+                layout_deposit.setVisibility(View.VISIBLE);
+                layout_genarate_address.setVisibility(View.GONE);
+                //二维码
+                Bitmap bitmap = QRCodeEncoder.syncEncodeQRCode(chain_address,PixelUtils.dp2px(mActivity,168),
+                        ColorUtil.getColor(mActivity,android.R.color.black));
+                iv_address_qr.setImageBitmap(bitmap);
+                //链上的地址
+                tv_token_address.setText(chain_address);
+            }else if(!TextUtils.isEmpty(SequenceManager.getInstance().getAddressStatus())){
+                //清空点击事件
+                //ViewUtil.getListenInfo(btn_genarate_address);
+                btn_genarate_address.setText(mActivity.getString(R.string.cross_address_generatoring));
+                layout_deposit.setVisibility(View.GONE);
+                layout_genarate_address.setVisibility(View.VISIBLE);
             }else{
-                String v_deposit_contract = String.format(mActivity.getString(R.string.string_deposit_contract),
-                        showBhToken.name.toUpperCase(),
-                         bhChain.full_name).concat(":");
-                tv_deposit_contract.setText(v_deposit_contract);
+                layout_deposit.setVisibility(View.GONE);
+                layout_genarate_address.setVisibility(View.VISIBLE);
+                btn_genarate_address.setText(mActivity.getString(R.string.click_make_cross_address));
             }
 
+            //最小充值数量
+            String v_amount_str = mChainToken.deposit_threshold+" "+mChainToken.name.toUpperCase();
+            tv_min_deposit_amount.setText(v_amount_str);
 
-            //String v_contract_address = mActivity.getString(R.string.string_contract_address)+":"+mChainToken.issuer;
+            //充值归集费
+            String v_amount_str2 = mChainToken.collect_fee+" "+mChainToken.chain.toUpperCase();
+            tv_deposit_collect_amount.setText(v_amount_str2);
 
-            //SpannableString v_span_contract_address = new SpannableString(v_contract_address);
+            //
+            String v_deposit_contract = "";
+            if(!TextUtils.isEmpty(mChainToken.issuer)){
+                layout_deposit_contract.setVisibility(View.VISIBLE);
 
-            //ForegroundColorSpan span_color = new ForegroundColorSpan(ColorUtil.getColor(mActivity,R.color.highlight_text_color));
+                if(LocalManageUtil.getSetLanguageLocale(mActivity).getLanguage().contains("zh")){
+                    v_deposit_contract = String.format(mActivity.getString(R.string.string_deposit_contract),
+                            bhChain.full_name,
+                            showBhToken.name.toUpperCase()).concat(":");
+                    //tv_deposit_contract.setText(v_deposit_contract);
+                }else{
+                    v_deposit_contract = String.format(mActivity.getString(R.string.string_deposit_contract),
+                            showBhToken.name.toUpperCase(),
+                            bhChain.full_name).concat(":");
+                    //tv_deposit_contract.setText(v_deposit_contract);
+                }
 
-            //int start_index = v_contract_address.indexOf(mChainToken.issuer);
-            //int end_index = start_index +mChainToken.issuer.length();
-            //v_span_contract_address.setSpan(span_color, start_index, end_index, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                SpannableString v_span_deposit_contract = new SpannableString(v_deposit_contract);
+                ForegroundColorSpan span_color = new ForegroundColorSpan(ColorUtil.getColor(mActivity,R.color.transfer_highlight_text_color));
 
-            //tv_contract_address.setText(v_span_contract_address);
-            tv_contract_address.setText(mChainToken.issuer);
-        }else{
-            layout_deposit_contract.setVisibility(View.GONE);
+                int start_index_0 = v_deposit_contract.indexOf(bhChain.full_name);
+                int end_index_0 = start_index_0 +bhChain.full_name.length();
+                v_span_deposit_contract.setSpan(CharacterStyle.wrap(span_color), start_index_0, end_index_0, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+
+                int start_index_1 = v_deposit_contract.indexOf(showBhToken.name.toUpperCase());
+                int end_index_1 = start_index_1 +showBhToken.name.length();
+                v_span_deposit_contract.setSpan(CharacterStyle.wrap(span_color), start_index_1, end_index_1, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+
+                tv_deposit_contract.setText(v_span_deposit_contract);
+                tv_contract_address.setText(mChainToken.issuer);
+            }else{
+                layout_deposit_contract.setVisibility(View.GONE);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
+
 
     }
 

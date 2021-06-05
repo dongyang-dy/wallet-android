@@ -31,7 +31,7 @@
             android:textSize="20sp"
             android:textColor="@color/global_main_text_color"
             android:layout_centerVertical="true"
-            android:textStyle="bold"
+            android:textStyle="normal"
             tools:text="Aclili"
             />
 

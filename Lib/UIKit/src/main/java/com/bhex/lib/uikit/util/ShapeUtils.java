@@ -31,7 +31,7 @@ public class ShapeUtils {
     }
 
     public static GradientDrawable getRoundRectBottomDrawable(int radius, int color) {
-        float[] radius_f = {0, 0, 0, 0, 0, 0, radius, radius};
+        float[] radius_f = {0, 0, 0, 0, radius, radius, radius, radius};
         GradientDrawable drawable = new GradientDrawable();
         drawable.setCornerRadii(radius_f);
         drawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
@@ -84,4 +84,5 @@ public class ShapeUtils {
         drawable.setStroke(isFill ? 0 : strokeWidth, color);
         return drawable;
     }
+
 }

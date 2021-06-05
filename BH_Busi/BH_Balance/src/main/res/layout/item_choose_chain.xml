@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:gravity="center_vertical"
-        android:textSize="12sp"
+        android:textSize="14sp"
         android:textColor="@color/global_main_text_color"
         tools:text="ETH"
         app:layout_constraintStart_toEndOf="@+id/iv_chain_icon"
@@ -57,11 +57,11 @@
         android:button="@drawable/checkbox_style"
         android:visibility="invisible"/>
     
-    <View
+    <!--<View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/global_divider_color"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"/>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

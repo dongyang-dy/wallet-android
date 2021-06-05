@@ -7,6 +7,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.CharacterStyle;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -102,7 +103,9 @@ public class TransferOutCrossVH {
     public AppCompatTextView tv_contract_address;
 
     //跨链手续费
+    public LinearLayout layout_fee_tips;
     public AppCompatTextView tv_withdraw_fee_label;
+
 
     public TransferOutCrossVH(BaseActivity m_activity, View mRootView) {
         this.m_activity = m_activity;
@@ -175,76 +178,95 @@ public class TransferOutCrossVH {
         });
 
         GradientDrawable bg_contract_drawable = ShapeUtils.getRoundRectDrawable(
-                (int)m_activity.getResources().getDimension(R.dimen.main_large_radius_conner),
+                (int)m_activity.getResources().getDimension(R.dimen.middle_radius_conner),
                 ColorUtil.getColor(m_activity,R.color.color_1F4299FF));
         layout_contract.setBackground(bg_contract_drawable);
+
+        layout_fee_tips = mRootView.findViewById(R.id.layout_fee_tips);
+
+        GradientDrawable bg_tips_drawable = ShapeUtils.getRoundRectDrawable(
+                (int)m_activity.getResources().getDimension(R.dimen.middle_radius_conner),
+                ColorUtil.getColor(m_activity,R.color.card_bg_color));
+        layout_fee_tips.setBackground(bg_tips_drawable);
     }
 
 
     public void updateTokenInfo(String symbol,String chain) {
-        showToken = CacheCenter.getInstance().getSymbolCache().getBHToken(symbol);
+        try{
+            showToken = CacheCenter.getInstance().getSymbolCache().getBHToken(symbol);
 
-        withDrawToken = BHTokenHelper.getCrossBHToken(symbol,chain);
+            withDrawToken = BHTokenHelper.getCrossBHToken(symbol,chain);
 
-        //设置提币Token
-        tv_withdraw_token.setText(showToken.name.toUpperCase());
-        tv_withdraw_unit.setText(showToken.name.toUpperCase());
-        ImageLoaderUtil.loadImageViewToCircle(m_activity,showToken.logo,iv_token_icon,R.mipmap.ic_default_coin);
-        //获取链的BHChain
-        BHChain bhChain = BHTokenHelper.getBHChain(chain);
-        tv_chain_name.setText(bhChain.full_name);
-        ImageLoaderUtil.loadImageViewToCircle(m_activity,bhChain.logo,iv_chain_icon,R.mipmap.ic_default_coin);
+            //设置提币Token
+            tv_withdraw_token.setText(showToken.name.toUpperCase());
+            tv_withdraw_unit.setText(showToken.name.toUpperCase());
+            ImageLoaderUtil.loadImageViewToCircle(m_activity,showToken.logo,iv_token_icon,R.mipmap.ic_default_coin);
+            //获取链的BHChain
+            BHChain bhChain = BHTokenHelper.getBHChain(chain);
+            tv_chain_name.setText(bhChain.full_name);
+            ImageLoaderUtil.loadImageViewToCircle(m_activity,bhChain.logo,iv_chain_icon,R.mipmap.ic_default_coin);
 
-        //设置提示文本颜色
-        String v_cross_transfer_tips = m_activity.getString(R.string.cross_transfer_out_tips);
-        String v_hightlight_text = m_activity.getString(R.string.cross_transfer_highlight_text);
-        SpannableString spannableString = new SpannableString(v_cross_transfer_tips);
-        int start_index = v_cross_transfer_tips.indexOf(v_hightlight_text);
-        if(start_index>=0){
-            //设置HBC 高亮
-            ForegroundColorSpan colorSpan = new ForegroundColorSpan(ColorUtil.getColor(m_activity,R.color.transfer_highlight_text_color));
-            spannableString.setSpan(colorSpan,start_index ,
-                    start_index+v_hightlight_text.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-            tv_cross_transfer_out_tip.setText(spannableString);
-        }
-
-        //跨链手续费Token
-        tv_withdraw_fee_token.setText(withDrawToken.chain.toUpperCase());
-        tv_withdraw_fee.setText(withDrawToken!=null?withDrawToken.withdrawal_fee:"");
-        //手续费
-        tv_fee.setText(BHUserManager.getInstance().getDefaultGasFee().displayFee);
-        tv_fee_token.setText(BHConstants.BHT_TOKEN.toUpperCase());
-
-        if(!TextUtils.isEmpty(withDrawToken.issuer)){
-            layout_contract.setVisibility(View.VISIBLE);
-            String v_deposit_contract = "";
-            if(LocalManageUtil.getSetLanguageLocale(m_activity).getLanguage().contains("zh")){
-                v_deposit_contract = String.format(m_activity.getString(R.string.string_withdraw_contract),
-                        bhChain.full_name,
-                        showToken.name.toUpperCase()).concat(":");;
-            }else{
-                v_deposit_contract = String.format(m_activity.getString(R.string.string_withdraw_contract),
-                        showToken.name.toUpperCase(),
-                        bhChain.full_name).concat(":");
+            //设置提示文本颜色
+            String v_cross_transfer_tips = m_activity.getString(R.string.cross_transfer_out_tips);
+            String v_hightlight_text = m_activity.getString(R.string.cross_transfer_highlight_text);
+            SpannableString spannableString = new SpannableString(v_cross_transfer_tips);
+            int start_index = v_cross_transfer_tips.indexOf(v_hightlight_text);
+            if(start_index>=0){
+                //设置HBC 高亮
+                ForegroundColorSpan colorSpan = new ForegroundColorSpan(ColorUtil.getColor(m_activity,R.color.transfer_highlight_text_color));
+                spannableString.setSpan(colorSpan,start_index ,
+                        start_index+v_hightlight_text.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+                tv_cross_transfer_out_tip.setText(spannableString);
             }
-            tv_contract_tip.setText(v_deposit_contract);
 
-            /*String v_contract_address = m_activity.getString(R.string.string_contract_address)+":"+withDrawToken.issuer;
+            //跨链手续费Token
+            tv_withdraw_fee_token.setText(withDrawToken.chain.toUpperCase());
+            tv_withdraw_fee.setText(withDrawToken!=null?withDrawToken.withdrawal_fee:"");
+            //手续费
+            tv_fee.setText(BHUserManager.getInstance().getDefaultGasFee().displayFee);
+            tv_fee_token.setText(BHConstants.BHT_TOKEN.toUpperCase());
 
-            SpannableString v_span_contract_address = new SpannableString(v_contract_address);
+            String v_deposit_contract = "";
+            if(!TextUtils.isEmpty(withDrawToken.issuer)){
+                layout_contract.setVisibility(View.VISIBLE);
 
-            ForegroundColorSpan span_color = new ForegroundColorSpan(ColorUtil.getColor(m_activity,R.color.highlight_text_color));
+                if(LocalManageUtil.getSetLanguageLocale(m_activity).getLanguage().contains("zh")){
+                    v_deposit_contract = String.format(m_activity.getString(R.string.string_withdraw_contract),
+                            bhChain.full_name,
+                            showToken.name.toUpperCase()).concat(":");;
+                }else{
+                    v_deposit_contract = String.format(m_activity.getString(R.string.string_withdraw_contract),
+                            showToken.name.toUpperCase(),
+                            bhChain.full_name).concat(":");
+                }
 
-            start_index = v_contract_address.indexOf(withDrawToken.issuer);
-            int end_index = start_index +withDrawToken.issuer.length();
-            v_span_contract_address.setSpan(span_color, start_index, end_index, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
 
-            tv_contract_address.setText(v_span_contract_address);*/
+                //String v_contract_address = m_activity.getString(R.string.string_contract_address)+":"+withDrawToken.issuer;
 
-            tv_contract_address.setText(withDrawToken.issuer);
-        }else{
-            layout_contract.setVisibility(View.GONE);
+                SpannableString v_span_deposit_contract = new SpannableString(v_deposit_contract);
+
+                ForegroundColorSpan span_color = new ForegroundColorSpan(ColorUtil.getColor(m_activity,R.color.transfer_highlight_text_color));
+
+                int start_index0 = v_deposit_contract.indexOf(bhChain.full_name);
+                int end_index0 = start_index0 +bhChain.full_name.length();
+                v_span_deposit_contract.setSpan(CharacterStyle.wrap(span_color), start_index0, end_index0, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+
+
+                int start_index1 = v_deposit_contract.indexOf(showToken.name.toUpperCase());
+                int end_index2 = start_index1 +showToken.name.toUpperCase().length();
+                v_span_deposit_contract.setSpan(CharacterStyle.wrap(span_color), start_index1, end_index2, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+
+                tv_contract_tip.setText(v_span_deposit_contract);
+
+
+                tv_contract_address.setText(withDrawToken.issuer);
+            }else{
+                layout_contract.setVisibility(View.GONE);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
+
     }
 
     //更新资产
@@ -333,17 +355,25 @@ public class TransferOutCrossVH {
     //全部提币
     private void withdrawAllAction(View view) {
         //主链币
-        if(TextUtils.isEmpty(withDrawToken.issuer)){
-            String v_available_amount = NumberUtil.sub(String.valueOf(available_amount),withDrawToken.withdrawal_fee);
-            v_available_amount = NumberUtil.dispalyForUsertokenAmount4Level(v_available_amount);
-            inp_withdraw_amount.setText(v_available_amount);
-        }else{
-            //非主链币
-            inp_withdraw_amount.setText(NumberUtil.toPlainString(available_amount));
+        try{
+            if(TextUtils.isEmpty(withDrawToken.issuer)){
+                String v_available_amount = NumberUtil.sub(String.valueOf(available_amount),withDrawToken.withdrawal_fee);
+                if(Double.valueOf(v_available_amount)<0){
+                    v_available_amount = "0";
+                }
+                v_available_amount = NumberUtil.dispalyForUsertokenAmount4Level(v_available_amount);
+                inp_withdraw_amount.setText(v_available_amount);
+            }else{
+                //非主链币
+                inp_withdraw_amount.setText(NumberUtil.toPlainString(available_amount));
+            }
+
+            inp_withdraw_amount.setSelection(inp_withdraw_amount.getText().length());
+            inp_withdraw_amount.requestFocus();
+        }catch (Exception e){
+            e.printStackTrace();
         }
 
-        inp_withdraw_amount.setSelection(inp_withdraw_amount.getText().length());
-        inp_withdraw_amount.requestFocus();
     }
 
     public void updateWithDrawFee() {
