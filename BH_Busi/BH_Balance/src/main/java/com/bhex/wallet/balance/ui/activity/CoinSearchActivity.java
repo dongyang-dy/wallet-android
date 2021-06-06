@@ -17,6 +17,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.ColorUtil;
+import com.bhex.tools.utils.LogUtils;
 import com.bhex.tools.utils.PixelUtils;
 import com.bhex.lib.uikit.widget.EmptyLayout;
 import com.bhex.lib.uikit.widget.RecycleViewExtDivider;
@@ -150,7 +151,7 @@ public class CoinSearchActivity extends BaseActivity implements OnRefreshListene
                 return;
 
             }
-            mTokenList = BHTokenHelper.loadVerifiedToken(null);
+            mTokenList = BHTokenHelper.loadVerifiedToken(BHConstants.BHT_TOKEN);
             if(ToolUtils.checkListIsEmpty(mTokenList)){
                 empty_layout.showNoData();
             }else {
@@ -191,7 +192,8 @@ public class CoinSearchActivity extends BaseActivity implements OnRefreshListene
         if(!TextUtils.isEmpty(search_key)){
             mTokenViewModel.search_token(this,search_key.toLowerCase(),null);
         }else{
-            mTokenViewModel.loadVerifiedToken(this,null);
+            LogUtils.d("CoinSearchActivity====>:","==onRefresh==isEmpty");
+            mTokenViewModel.loadVerifiedToken(this,BHConstants.BHT_TOKEN);
         }
     }
 }

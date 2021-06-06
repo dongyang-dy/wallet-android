@@ -80,7 +80,7 @@
                 android:id="@+id/inp_wallet_name"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@null"
+                android:background="@drawable/input_bg_stroke"
                 android:textCursorDrawable="@null"
                 android:textColor="@color/global_input_text_color"
                 android:textColorHint="@color/global_input_hint_color"

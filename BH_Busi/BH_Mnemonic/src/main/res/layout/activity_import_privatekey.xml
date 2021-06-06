@@ -71,10 +71,6 @@
         android:layout_marginEnd="@dimen/main_padding_right"
         android:layout_marginStart="@dimen/main_padding_left"
         android:layout_marginTop="16dp"
-        android:background="@color/global_input_background"
-        app:xui_borderColor="@color/global_input_stroke"
-        app:xui_radius="@dimen/input_radius_conner"
-        app:xui_borderWidth="1dp"
         >
 
 
@@ -83,7 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:singleLine="false"
-            android:background="@null"
+            android:background="@drawable/input_bg_stroke"
             android:textSize="15sp"
             android:gravity="top"
             app:layout_constraintStart_toStartOf="parent"

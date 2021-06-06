@@ -10,14 +10,14 @@
         android:id="@+id/layout_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_input_corner">
+        >
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/input_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="48dp"
             android:layout_marginTop="0dp"
-            android:background="@null"
+            android:background="@drawable/input_bg_stroke"
             android:focusable="true"
             android:gravity="center_vertical"
             android:inputType="text"

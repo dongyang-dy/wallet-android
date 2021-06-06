@@ -280,7 +280,8 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_withdraw_label"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
                         android:layout_centerVertical="true"
                         android:textSize="14sp"
                         android:textColor="@color/item_label_text_color"
@@ -289,9 +290,9 @@
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/inp_withdraw_amount"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@null"
-                        android:gravity="right"
+                        android:gravity="center|right"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp"
                         android:layout_centerVertical="true"

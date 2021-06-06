@@ -90,10 +90,10 @@ public class AddAddressActivity extends BaseActivity {
         if(!chain.equalsIgnoreCase(BHConstants.BHT_TOKEN)){
             addAddressVH.layout_choose_chain.setOnClickListener(v -> {
                 List<BHChain> bhChainList = BHTokenHelper.getAllBHChainList();
-                /*ChooseChainFragment.getInstance(bhChainList,chain,AddAddressActivity.this::chooseChainAction)
-                        .show(getSupportFragmentManager(),ChooseChainFragment.class.getName());*/
-                ChooseChainPW chainPW = new ChooseChainPW(this,bhChainList,chain,this::chooseChainAction);
-                chainPW.showAsDropDown(addAddressVH.layout_choose_chain,0, PixelUtils.dp2px(this,2));
+                ChooseChainFragment.getInstance(bhChainList,chain,AddAddressActivity.this::chooseChainAction)
+                        .show(getSupportFragmentManager(),ChooseChainFragment.class.getName());
+                /*ChooseChainPW chainPW = new ChooseChainPW(this,bhChainList,chain,this::chooseChainAction);
+                chainPW.showAsDropDown(addAddressVH.layout_choose_chain,0, PixelUtils.dp2px(this,2));*/
             });
         }
 

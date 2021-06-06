@@ -30,9 +30,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import com.bhex.lib.uikit.R;
 import com.bhex.lib.uikit.util.ShapeUtils;
 import com.bhex.tools.utils.ColorUtil;
-import com.bhex.tools.utils.LogUtils;
 import com.bhex.tools.utils.PixelUtils;
-import com.google.android.material.shape.MaterialShapeUtils;
 
 /**
  * Created by BHEX.
@@ -84,7 +82,7 @@ public class InputView extends LinearLayout implements View.OnClickListener {
         hint = typedArray.getString(R.styleable.InputView_hint);
         editable = typedArray.getBoolean(R.styleable.InputView_editable,true);
         mMode = typedArray.getInt(R.styleable.InputView_textType,-1);
-        LayoutInflater.from(context).inflate(R.layout.view_input_edittext_layout,
+        LayoutInflater.from(context).inflate(R.layout.layout_input_edittext,
                 this, true);
         setOrientation(HORIZONTAL);
 

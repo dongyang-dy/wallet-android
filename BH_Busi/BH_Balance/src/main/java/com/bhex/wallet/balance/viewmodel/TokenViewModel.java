@@ -166,6 +166,7 @@ public class TokenViewModel extends ViewModel {
         BHBaseObserver<JsonArray> observer = new BHBaseObserver<JsonArray>() {
             @Override
             protected void onSuccess(JsonArray jsonArray) {
+                LogUtils.d("TokenViewModel==>:",jsonArray.toString());
                 if(jsonArray==null){
                     return;
                 }
@@ -185,6 +186,7 @@ public class TokenViewModel extends ViewModel {
             @Override
             protected void onFailure(int code, String errorMsg) {
                 super.onFailure(code, errorMsg);
+                LogUtils.d("TokenViewModel==>errorMsg:",errorMsg);
                 List<BHToken> list = BHTokenHelper.loadVerifiedToken(chain);
                 if(ToolUtils.checkListIsEmpty(list)){
                     LoadDataModel ldm = new LoadDataModel(LoadingStatus.ERROR,errorMsg);
