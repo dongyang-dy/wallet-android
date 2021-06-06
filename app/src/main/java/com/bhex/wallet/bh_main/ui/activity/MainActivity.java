@@ -63,6 +63,7 @@ public class MainActivity extends BaseActivity<MainPresenter> {
 
     @Override
     protected void initView() {
+        getWindow().setWindowAnimations(com.bhex.wallet.balance.R.style.WindowAnimationFadeInOut);
         ARouter.getInstance().inject(this);
         MainActivityManager._instance.mainActivity = this;
         //CurrencyManager.getInstance().init(this);
@@ -153,7 +154,8 @@ public class MainActivity extends BaseActivity<MainPresenter> {
         mBottomNavigationView.setSelectedItemId(mBottomNavigationView.getMenu().getItem(0).getItemId());
         getPresenter().showIsBackup();
         SequenceManager.getInstance().initSequence();*/
-        recreate();
+        //getWindow().setWindowAnimations(R.style.WindowAnimationFadeInOut);
+        //startActivity(new Intent(this,MainActivity.class));
         isReset = true;
     }
 

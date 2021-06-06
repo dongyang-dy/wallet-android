@@ -219,6 +219,7 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
         //请显示的资产
         BHUserManager.getInstance().setAccountInfo(null);
         balanceAdapter.notifyDataSetChanged();
+
         getActivity().recreate();
         walletViewModel.updateWallet(MainActivityManager.getInstance().mainActivity,chooseWallet,chooseWallet.id,
                 BH_BUSI_TYPE.默认托管单元.getIntValue(),false);
