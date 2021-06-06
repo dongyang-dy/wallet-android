@@ -244,7 +244,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/rl_no_with_veto_option" />
 
 
-                <com.bhex.lib.uikit.widget.CustomTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_available_amount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -290,7 +290,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/ed_fee" />
 
-                <com.bhex.lib.uikit.widget.CustomTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_speedup_amount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

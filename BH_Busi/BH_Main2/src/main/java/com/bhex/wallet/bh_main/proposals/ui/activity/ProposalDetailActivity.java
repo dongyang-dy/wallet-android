@@ -13,9 +13,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.bhex.lib.uikit.widget.CustomTextView;
 import com.bhex.network.base.LoadingStatus;
-import com.bhex.wallet.common.base.BaseActivity;
 import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.ColorUtil;
 import com.bhex.tools.utils.DateUtil;
@@ -24,6 +22,7 @@ import com.bhex.wallet.bh_main.R;
 import com.bhex.wallet.bh_main.R2;
 import com.bhex.wallet.bh_main.proposals.model.ProposalInfo;
 import com.bhex.wallet.bh_main.proposals.viewmodel.ProposalViewModel;
+import com.bhex.wallet.common.base.BaseActivity;
 import com.bhex.wallet.common.config.ARouterConfig;
 import com.google.android.material.button.MaterialButton;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -47,20 +46,20 @@ public class ProposalDetailActivity extends BaseActivity {
     @BindView(R2.id.tv_status)
     AppCompatTextView tv_status;
     @BindView(R2.id.tv_id)
-    CustomTextView tv_id;
+    AppCompatTextView tv_id;
 
     @BindView(R2.id.tv_type)
     AppCompatTextView tv_type;
     @BindView(R2.id.tv_validator)
-    CustomTextView tv_validator;
+    AppCompatTextView tv_validator;
     @BindView(R2.id.tv_time)
-    CustomTextView tv_time;
+    AppCompatTextView tv_time;
     @BindView(R2.id.tv_pledge)
-    CustomTextView tv_pledge;
+    AppCompatTextView tv_pledge;
     @BindView(R2.id.tv_veto_time1)
-    CustomTextView tv_veto_time1;
+    AppCompatTextView tv_veto_time1;
     @BindView(R2.id.tv_veto_time2)
-    CustomTextView tv_veto_time2;
+    AppCompatTextView tv_veto_time2;
     @BindView(R2.id.tv_veto_time_title)
     AppCompatTextView tv_veto_time_title;
     @BindView(R2.id.tv_pledge_title)
@@ -83,13 +82,13 @@ public class ProposalDetailActivity extends BaseActivity {
 
 
     @BindView(R2.id.tv_veto_yes_rate)
-    CustomTextView tv_veto_yes_rate;
+    AppCompatTextView tv_veto_yes_rate;
     @BindView(R2.id.tv_veto_no_rate)
-    CustomTextView tv_veto_no_rate;
+    AppCompatTextView tv_veto_no_rate;
     @BindView(R2.id.tv_veto_abstain_rate)
-    CustomTextView tv_veto_abstain_rate;
+    AppCompatTextView tv_veto_abstain_rate;
     @BindView(R2.id.tv_veto_no_with_veto_rate)
-    CustomTextView tv_veto_no_with_veto_rate;
+    AppCompatTextView tv_veto_no_with_veto_rate;
 
 
     ProposalViewModel mProposalViewModel;

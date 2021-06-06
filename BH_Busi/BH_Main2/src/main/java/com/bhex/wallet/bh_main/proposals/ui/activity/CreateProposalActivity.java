@@ -12,12 +12,10 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.bhex.lib.uikit.widget.CustomTextView;
 import com.bhex.lib.uikit.widget.editor.SimpleTextWatcher;
 import com.bhex.lib.uikit.widget.editor.WithDrawInput;
 import com.bhex.network.base.LoadDataModel;
 import com.bhex.network.base.LoadingStatus;
-import com.bhex.wallet.common.base.BaseActivity;
 import com.bhex.network.utils.ToastUtils;
 import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.NumberUtil;
@@ -27,6 +25,7 @@ import com.bhex.wallet.bh_main.R;
 import com.bhex.wallet.bh_main.R2;
 import com.bhex.wallet.bh_main.proposals.presenter.CreateProposalPresenter;
 import com.bhex.wallet.bh_main.proposals.viewmodel.ProposalViewModel;
+import com.bhex.wallet.common.base.BaseActivity;
 import com.bhex.wallet.common.config.ARouterConfig;
 import com.bhex.wallet.common.manager.BHUserManager;
 import com.bhex.wallet.common.model.AccountInfo;
@@ -67,7 +66,7 @@ public class CreateProposalActivity extends BaseActivity<CreateProposalPresenter
     AppCompatTextView tv_description_length;
 
     @BindView(R2.id.tv_available_amount)
-    CustomTextView tv_available_amount;
+    AppCompatTextView tv_available_amount;
 
     @BindView(R2.id.ed_pledge_amount)
     WithDrawInput ed_pledge_amount;

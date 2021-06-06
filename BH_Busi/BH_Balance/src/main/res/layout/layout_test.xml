@@ -179,7 +179,7 @@
                             android:textColor="@color/total_assert_text_color"
                             android:textSize="17sp" />
 
-                        <com.bhex.lib.uikit.widget.CustomTextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tv_asset"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

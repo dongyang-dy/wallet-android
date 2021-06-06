@@ -88,7 +88,7 @@
                 android:textSize="15sp"
                 />
 
-            <com.bhex.lib.uikit.widget.CustomTextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_available_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -206,7 +206,7 @@
                 android:visibility="gone"
                 />
 
-            <com.bhex.lib.uikit.widget.CustomTextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_speedup_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -10,9 +10,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.bhex.lib.uikit.widget.CustomTextView;
 import com.bhex.network.base.LoadingStatus;
-import com.bhex.wallet.common.base.BaseActivity;
 import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.DateUtil;
 import com.bhex.tools.utils.ToolUtils;
@@ -21,6 +19,7 @@ import com.bhex.wallet.bh_main.R2;
 import com.bhex.wallet.bh_main.validator.enums.ENTRUST_BUSI_TYPE;
 import com.bhex.wallet.bh_main.validator.model.ValidatorInfo;
 import com.bhex.wallet.bh_main.validator.viewmodel.ValidatorViewModel;
+import com.bhex.wallet.common.base.BaseActivity;
 import com.bhex.wallet.common.config.ARouterConfig;
 import com.hjq.toast.ToastUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -43,21 +42,21 @@ public class ValidatorDetailActivity extends BaseActivity {
     @BindView(R2.id.tv_validator_name)
     AppCompatTextView tv_validator_name;
     @BindView(R2.id.tv_voting_power_proportion)
-    CustomTextView tv_voting_power_proportion;
+    AppCompatTextView tv_voting_power_proportion;
     @BindView(R2.id.tv_self_delegate_proportion)
-    CustomTextView tv_self_delegate_proportion;
+    AppCompatTextView tv_self_delegate_proportion;
     @BindView(R2.id.tv_up_time)
-    CustomTextView tv_up_time;
+    AppCompatTextView tv_up_time;
     @BindView(R2.id.tv_other_delegate_proportion)
-    CustomTextView tv_other_delegate_proportion;
+    AppCompatTextView tv_other_delegate_proportion;
     @BindView(R2.id.tv_update_time)
-    CustomTextView tv_update_time;
+    AppCompatTextView tv_update_time;
     @BindView(R2.id.tv_max_rate)
-    CustomTextView tv_max_rate;
+    AppCompatTextView tv_max_rate;
     @BindView(R2.id.tv_max_change_rate)
-    CustomTextView tv_max_change_rate;
+    AppCompatTextView tv_max_change_rate;
     @BindView(R2.id.tv_address_value)
-    CustomTextView tv_address_value;
+    AppCompatTextView tv_address_value;
     @BindView(R2.id.tv_website_value)
     AppCompatTextView tv_website_value;
     @BindView(R2.id.tv_detail_value)

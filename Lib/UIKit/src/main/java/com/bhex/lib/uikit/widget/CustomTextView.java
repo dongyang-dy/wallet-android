@@ -15,7 +15,7 @@ import com.bhex.lib.uikit.util.TypefaceUtils;
  * User: zhou chang
  * Date: 2020/4/14
  */
-public class CustomTextView extends AppCompatTextView {
+/*public class CustomTextView extends AppCompatTextView {
     public CustomTextView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
@@ -41,4 +41,4 @@ public class CustomTextView extends AppCompatTextView {
             //TypefaceUtils.setTextTypeface(getContext(),this);
         }
     }
-}
+}*/

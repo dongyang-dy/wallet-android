@@ -6,14 +6,14 @@
     android:layout_height="wrap_content"
     android:background="@color/app_bg"
     android:orientation="vertical"
-    android:paddingLeft="@dimen/main_padding_left"
-    android:paddingRight="@dimen/main_padding_right"
     tools:context=".my.ui.fragment.UpdateName2Fragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:layout_marginStart="@dimen/main_margin_left"
+        android:layout_marginEnd="@dimen/main_margin_right"
         >
 
 
@@ -38,25 +38,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="@dimen/main_margin_left"
+        android:layout_marginEnd="@dimen/main_margin_right"
         >
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/inp_wallet_name"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:hint="请输入名称"
+            android:layout_height="48dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            tools:hint="@string/please_input_name"
             android:textColorHint="@color/global_main_gray_color"
             android:textColor="@color/global_main_text_color"
             android:textSize="14sp"
             android:maxLines="1"
-            android:background="@color/app_bg"
-            android:layout_marginEnd="4dp"
+            android:background="@drawable/input_bg_stroke"
             />
 
-        <View
+       <!-- <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/global_divider_color"/>
+            android:background="@color/global_divider_color"/>-->
 
     </LinearLayout>
 
@@ -89,6 +93,8 @@
         android:insetBottom="0dp"
         android:stateListAnimator="@null"
         android:layout_marginBottom="@dimen/main_margin_bottom"
+        android:layout_marginStart="@dimen/main_margin_left"
+        android:layout_marginEnd="@dimen/main_margin_right"
         style="@style/main_material_btn"
         android:enabled="true"
         app:backgroundTint="@color/global_button_bg_color"

@@ -110,7 +110,7 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_status_title" />
 
 
-                <com.bhex.lib.uikit.widget.CustomTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_id"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/dp_40"
@@ -167,7 +167,7 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_type" />
 
 
-                <com.bhex.lib.uikit.widget.CustomTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_validator"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/dp_40"
@@ -196,7 +196,7 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_validator_title" />
 
 
-                <com.bhex.lib.uikit.widget.CustomTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_time"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/dp_40"
@@ -224,7 +224,7 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_time_title" />
 
 
-                <com.bhex.lib.uikit.widget.CustomTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_pledge"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/dp_40"
@@ -251,7 +251,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_pledge_title" />
 
-                <com.bhex.lib.uikit.widget.CustomTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_veto_time1"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/dp_40"
@@ -267,7 +267,7 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_pledge_title"
                     tools:text="3" />
 
-                <com.bhex.lib.uikit.widget.CustomTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_veto_time2"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/dp_40"
@@ -329,7 +329,7 @@
                         app:layout_constraintTop_toBottomOf="@id/tv_veto_result" />
 
 
-                    <com.bhex.lib.uikit.widget.CustomTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_veto_yes_rate"
                         android:layout_width="0dp"
                         android:layout_height="32dp"
@@ -370,7 +370,7 @@
                         app:layout_constraintTop_toBottomOf="@id/tv_veto_yes" />
 
 
-                    <com.bhex.lib.uikit.widget.CustomTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_veto_no_rate"
                         android:layout_width="0dp"
                         android:layout_height="32dp"
@@ -411,7 +411,7 @@
                         app:layout_constraintTop_toBottomOf="@id/tv_veto_no" />
 
 
-                    <com.bhex.lib.uikit.widget.CustomTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_veto_abstain_rate"
                         android:layout_width="0dp"
                         android:layout_height="32dp"
@@ -452,7 +452,7 @@
                         app:layout_constraintTop_toBottomOf="@id/tv_veto_abstain"/>
 
 
-                    <com.bhex.lib.uikit.widget.CustomTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_veto_no_with_veto_rate"
                         android:layout_width="0dp"
                         android:layout_height="32dp"

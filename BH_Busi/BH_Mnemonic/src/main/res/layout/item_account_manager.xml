@@ -11,7 +11,7 @@
     android:layout_marginStart="@dimen/main_margin_left"
     android:layout_marginEnd="@dimen/main_margin_left"
     android:padding="16dp"
-    app:xui_radius="20dp">
+    app:xui_radius="12dp">
 
     <RelativeLayout
         android:layout_width="match_parent"

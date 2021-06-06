@@ -90,7 +90,7 @@
             android:text="@string/other_delegate_proportion"
             />
 
-        <com.bhex.lib.uikit.widget.CustomTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_voting_power_proportion"
             android:layout_width="0dp"
             android:layout_height="28dp"
@@ -103,7 +103,7 @@
             android:text=""
             tools:text="39.00%"
             />
-        <com.bhex.lib.uikit.widget.CustomTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_self_delegate_proportion"
             android:layout_width="0dp"
             android:layout_height="28dp"
@@ -117,7 +117,7 @@
             tools:text="39.00"
             />
 
-        <com.bhex.lib.uikit.widget.CustomTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_other_delegate_proportion"
             android:layout_width="0dp"
             android:layout_height="28dp"

@@ -29,7 +29,7 @@
                 android:lineSpacingExtra="3dp"
                 android:text="@string/tip_crosslink_generate"
                 android:textColor="@color/global_main_text_color"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
         </RelativeLayout>
 
@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="24dp"
             android:layout_marginRight="16dp">
 
             <androidx.appcompat.widget.AppCompatTextView

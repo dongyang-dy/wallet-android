@@ -110,7 +110,7 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_validator_name" />
 
 
-                <com.bhex.lib.uikit.widget.CustomTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_voting_power_proportion"
                     android:layout_width="0dp"
                     android:layout_height="32dp"
@@ -141,7 +141,7 @@
                     app:layout_constraintTop_toBottomOf="@id/voting_power_proportion" />
 
 
-                <com.bhex.lib.uikit.widget.CustomTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_self_delegate_proportion"
                     android:layout_width="0dp"
                     android:layout_height="32dp"
@@ -171,7 +171,7 @@
                     app:layout_constraintTop_toBottomOf="@id/self_delegate_proportion" />
 
 
-                <com.bhex.lib.uikit.widget.CustomTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_up_time"
                     android:layout_width="0dp"
                     android:layout_height="32dp"
@@ -201,7 +201,7 @@
                     app:layout_constraintTop_toBottomOf="@id/up_time" />
 
 
-                <com.bhex.lib.uikit.widget.CustomTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_other_delegate_proportion"
                     android:layout_width="0dp"
                     android:layout_height="32dp"
@@ -231,7 +231,7 @@
                     app:layout_constraintTop_toBottomOf="@id/other_delegate_amount" />
 
 
-                <com.bhex.lib.uikit.widget.CustomTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_update_time"
                     android:layout_width="0dp"
                     android:layout_height="32dp"
@@ -261,7 +261,7 @@
                     app:layout_constraintTop_toBottomOf="@id/update_time" />
 
 
-                <com.bhex.lib.uikit.widget.CustomTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_max_rate"
                     android:layout_width="0dp"
                     android:layout_height="32dp"
@@ -291,7 +291,7 @@
                     app:layout_constraintTop_toBottomOf="@id/max_rate" />
 
 
-                <com.bhex.lib.uikit.widget.CustomTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_max_change_rate"
                     android:layout_width="0dp"
                     android:layout_height="32dp"
@@ -333,7 +333,7 @@
                     app:layout_constraintTop_toBottomOf="@id/divider_line" />
 
 
-                <com.bhex.lib.uikit.widget.CustomTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_address_value"
                     android:layout_width="0dp"
                     android:layout_height="32dp"
