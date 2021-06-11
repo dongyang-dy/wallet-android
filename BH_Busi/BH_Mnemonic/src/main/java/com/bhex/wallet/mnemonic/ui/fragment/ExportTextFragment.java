@@ -30,6 +30,12 @@ public class ExportTextFragment extends BaseFragment {
 
     public static final String KEY_FLAG = BHConstants.FLAG;
 
+    @BindView(R2.id.tv_backup_tip_2)
+    AppCompatTextView tv_backup_tip_2;
+
+    @BindView(R2.id.tv_backup_tip_4)
+    AppCompatTextView tv_backup_tip_4;
+
     @BindView(R2.id.et_private_key)
     AppCompatEditText et_private_key;
 
@@ -59,13 +65,17 @@ public class ExportTextFragment extends BaseFragment {
         chooseWallet = BHUserManager.getInstance().getBHWalletByAddress(wallet_address);
 
         if(BH_BUSI_TYPE.备份私钥.value.equals(flag)){
-            //et_private_key.setText(BHUserManager.getInstance().getOriginContext(mCurrentWallet.keystorePath,inptPwd));
+            tv_backup_tip_2.setText(getString(R.string.backup_text_tip_2));
+            tv_backup_tip_4.setText(getString(R.string.backup_text_tip_4));
             et_private_key.setText(BHWalletHelper.getOriginPK(chooseWallet.keystorePath,inptPwd));
-            //btn_copy.setText(getString(R.string.copy_privatekey));
+
         }else{
+            tv_backup_tip_2.setText(getString(R.string.backup_text_tip_ks2));
+            tv_backup_tip_4.setText(getString(R.string.backup_text_tip_ks4));
             et_private_key.setText(BHWalletHelper.getOriginKeyStore(chooseWallet.keystorePath));
             //btn_copy.setText(getString(R.string.copy_keystore));
         }
+
     }
 
 

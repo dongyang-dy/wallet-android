@@ -92,7 +92,6 @@ public class ChooseTokenFragment extends BaseBottomSheetDialog {
         if(mOrigin==0){
             mDatas = CacheCenter.getInstance().getTokenMapCache().getTokenMappings();
             mChooseTokenAdapter = new ChooseTokenAdapter(mDatas,mIssueSymbol,mOrigin);
-
         }else{
             mDatas = CacheCenter.getInstance().getTokenMapCache().getTokenMapping(mIssueSymbol);
             mChooseTokenAdapter = new ChooseTokenAdapter(mDatas,mTargetSymbol,mOrigin);

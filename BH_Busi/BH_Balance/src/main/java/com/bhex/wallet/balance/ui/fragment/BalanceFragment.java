@@ -43,6 +43,7 @@ import com.bhex.wallet.common.cache.ConfigMapCache;
 import com.bhex.wallet.common.config.ARouterConfig;
 import com.bhex.wallet.common.db.entity.BHWallet;
 import com.bhex.wallet.common.enums.BH_BUSI_TYPE;
+import com.bhex.wallet.common.event.AccountEvent;
 import com.bhex.wallet.common.manager.BHUserManager;
 import com.bhex.wallet.common.manager.MainActivityManager;
 import com.bhex.wallet.common.manager.SecuritySettingManager;
@@ -53,6 +54,10 @@ import com.bhex.wallet.common.utils.LiveDataBus;
 import com.bhex.wallet.common.viewmodel.BalanceViewModel;
 import com.bhex.wallet.common.viewmodel.WalletViewModel;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -97,6 +102,8 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
 
     @Override
     protected void initView() {
+        EventBus.getDefault().register(this);
+
         refreshLayout = mRootView.findViewById(R.id.refreshLayout);
         layout_empty_asset = View.inflate(getYActivity(),R.layout.layout_empty_asset,null);
 
@@ -202,9 +209,20 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
     @Override
     public void onResume() {
         super.onResume();
+        LogUtils.d("BalanceFragment====>","===onResume==="+isVisible());
         bhTokens = BHTokenHelper.loadTokenByChain(BHConstants.BHT_TOKEN);
         List<BHToken> res = BHTokenHelper.sortBHToken(getYActivity(),bhTokens);
         balanceAdapter.setNewData(res);
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(!hidden){
+            LogUtils.d("BalanceFragment====>","===onHiddenChanged==="+hidden);
+            balanceViewHolder.updateWalletName();
+        }
+
     }
 
     @Override
@@ -219,6 +237,7 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
         //请显示的资产
         BHUserManager.getInstance().setAccountInfo(null);
         balanceAdapter.notifyDataSetChanged();
+        getYActivity().getWindow().setWindowAnimations(R.style.WindowAnimationFadeInOut);
 
         getActivity().recreate();
         walletViewModel.updateWallet(MainActivityManager.getInstance().mainActivity,chooseWallet,chooseWallet.id,
@@ -268,6 +287,19 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
 
         }
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void changeAccount(AccountEvent walletEvent){
+        LogUtils.d("BalanceFragment====>;","==changeAccount==");
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
 
     int refreshCount = 0;
     public void refreshfinish(){

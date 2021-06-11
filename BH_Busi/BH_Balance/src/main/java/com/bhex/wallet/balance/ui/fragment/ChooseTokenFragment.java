@@ -61,7 +61,8 @@ public class ChooseTokenFragment extends BaseDialogFragment {
     private RecyclerView rec_token_list;
     AppCompatImageView iv_close;
     AppCompatEditText input_search_content;
-    EmptyLayout empty_layout;
+    //EmptyLayout empty_layout;
+    View layout_empty_data;
     AppCompatImageView btn_sort;
     private OnChooseTokenListener mOnChooseItemListener;
     @Override
@@ -92,8 +93,11 @@ public class ChooseTokenFragment extends BaseDialogFragment {
         rec_token_list = mRootView.findViewById(R.id.rec_token_list);
         //mDatas = BHBalanceHelper.loadTokenList(mSymbol,mOrigin);
         mDatas = BHTokenHelper.loadTokenByChain(BHConstants.BHT_TOKEN);
+
         rec_token_list.setAdapter(mChooseTokenAdapter = new ChooseTokenAdapter(mDatas,mSymbol));
 
+        layout_empty_data = View.inflate(view.getContext(),R.layout.layout_empty_data,null);
+        mChooseTokenAdapter.setEmptyView(layout_empty_data);
         RecycleViewExtDivider ItemDecoration = new RecycleViewExtDivider(
                 getContext(), LinearLayoutManager.VERTICAL,
                 PixelUtils.dp2px(getActivity(),65),0,
@@ -102,6 +106,10 @@ public class ChooseTokenFragment extends BaseDialogFragment {
         rec_token_list.addItemDecoration(ItemDecoration);
 
         mChooseTokenAdapter.setOnItemClickListener(this::onItemClick);
+
+        //
+
+
     }
 
     private void onItemClick(BaseQuickAdapter<?,?> baseQuickAdapter, View view, int position) {
@@ -124,7 +132,7 @@ public class ChooseTokenFragment extends BaseDialogFragment {
         mRootView.setBackground(bg_drawable);
 
         iv_close = mRootView.findViewById(R.id.iv_close);
-        empty_layout = mRootView.findViewById(R.id.empty_layout);
+        //empty_layout = mRootView.findViewById(R.id.empty_layout);
         input_search_content = mRootView.findViewById(R.id.input_search_content);
         iv_close.setOnClickListener(v -> {
             dismissAllowingStateLoss();
@@ -168,13 +176,6 @@ public class ChooseTokenFragment extends BaseDialogFragment {
 
             sortResult(isAsc,result);
 
-            if(ToolUtils.checkListIsEmpty(result)){
-                empty_layout.showNoData();
-                mChooseTokenAdapter.setNewData(result);
-                return;
-            }
-
-            empty_layout.loadSuccess();
             mChooseTokenAdapter.setNewData(result);
         }
     };

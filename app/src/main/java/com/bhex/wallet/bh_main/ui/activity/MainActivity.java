@@ -63,10 +63,8 @@ public class MainActivity extends BaseActivity<MainPresenter> {
 
     @Override
     protected void initView() {
-        getWindow().setWindowAnimations(com.bhex.wallet.balance.R.style.WindowAnimationFadeInOut);
         ARouter.getInstance().inject(this);
         MainActivityManager._instance.mainActivity = this;
-        //CurrencyManager.getInstance().init(this);
         SequenceManager.getInstance().initSequence();
         RefreshLayoutManager.init();
         TRANSCATION_BUSI_TYPE.init(this);
@@ -75,7 +73,6 @@ public class MainActivity extends BaseActivity<MainPresenter> {
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-
         if(savedInstanceState!=null && !isReset){
             mCurrentCheckId = savedInstanceState.getInt("index",0);
         }
@@ -150,13 +147,15 @@ public class MainActivity extends BaseActivity<MainPresenter> {
 
     @Subscribe(threadMode= ThreadMode.MAIN)
     public void changeAccount(AccountEvent accountEvent){
-        /*isReset = true;
-        mBottomNavigationView.setSelectedItemId(mBottomNavigationView.getMenu().getItem(0).getItemId());
+        /*mBottomNavigationView.setSelectedItemId(mBottomNavigationView.getMenu().getItem(0).getItemId());
         getPresenter().showIsBackup();
-        SequenceManager.getInstance().initSequence();*/
-        //getWindow().setWindowAnimations(R.style.WindowAnimationFadeInOut);
-        //startActivity(new Intent(this,MainActivity.class));
+        SequenceManager.getInstance().initSequence();
+        getWindow().setWindowAnimations(R.style.WindowAnimationFadeInOut);
+        startActivity(new Intent(this,MainActivity.class));
+        isReset = true;*/
+        recreate();
         isReset = true;
+
     }
 
     @Subscribe(threadMode= ThreadMode.MAIN)

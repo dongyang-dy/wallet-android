@@ -8,7 +8,7 @@
     <string name="get_auth_code">获取验证码</string>
     <string name="import_auth_code">输入验证码</string>
     <string name="resend">重新发送</string>
-    <string name="app_no_data">暂无记录</string>
+    <string name="app_no_data">暂无数据</string>
     <string name="http_loading">数据请求中</string>
     <string name="app_try_again">暂无数据，点击重试</string>
     <string name="net_error_msg">网络异常</string>
@@ -405,8 +405,10 @@
     <string name="backup_qr_tip_6">·二维码一旦被他人获取将造成不可挽回的资产损失</string>
     <string name="backup_text_tip_1">离线保存</string>
     <string name="backup_text_tip_2">·切勿保存至邮箱、记事本、网盘、聊天工具等</string>
+    <string name="backup_text_tip_ks2">·切勿保存至邮箱、记事本、网盘、聊天工具等</string>
     <string name="backup_text_tip_3">·请勿使用网络传输</string>
     <string name="backup_text_tip_4">·请勿通过网络工具传输，一旦被黑客获取将造成不可挽回的资产损失</string>
+    <string name="backup_text_tip_ks4">·切勿保存至邮箱、记事本、网盘、聊天工具等</string>
     <string name="backup_text_tip_5">·建议离线设备通过扫二维码方式传输</string>
     <string name="backup_text_tip_6">·建议使用密码管理工具管理</string>
     <string name="backup_text_tip_7">密码管理工具保存</string>

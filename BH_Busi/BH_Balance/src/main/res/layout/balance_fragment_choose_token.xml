@@ -112,20 +112,13 @@
             />
     </RelativeLayout>
 
-    <FrameLayout
+    <!--<FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="300dp"
         >
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rec_token_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:overScrollMode="never"
-            tools:listitem="@layout/balance_item_choose_token"
-            />
+
 
         <com.bhex.lib.uikit.widget.EmptyLayout
             android:id="@+id/empty_layout"
@@ -134,6 +127,16 @@
             android:layout_gravity="center"
             android:visibility="gone"
             tools:visibility="visible"/>
-    </FrameLayout>
+    </FrameLayout>-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rec_token_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:minHeight="300dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:overScrollMode="never"
+        tools:listitem="@layout/balance_item_choose_token"
+        />
 
 </LinearLayout>

@@ -83,7 +83,7 @@ public class ExportIndexActivity extends BaseActivity {
         if(flag.equals(BH_BUSI_TYPE.备份私钥.value)){
             ARouter.getInstance().build(ARouterConfig.TRUSTEESHIP_EXPORT_PRIVATEKEY)
                     .withString(BHConstants.TITLE,title)
-                    .withString("flag",flag)
+                    .withString(BHConstants.FLAG,flag)
                     .withString(BHConstants.WALLET_ADDRESS,wallet_address)
                     .withString(BHConstants.INPUT_PASSWORD,inputPwd)
                     .navigation();
@@ -91,7 +91,7 @@ public class ExportIndexActivity extends BaseActivity {
         }else{
             ARouter.getInstance().build(ARouterConfig.TRUSTEESHIP_EXPORT_KEYSTORE)
                     .withString(BHConstants.TITLE,title)
-                    .withString("flag",flag)
+                    .withString(BHConstants.FLAG,flag)
                     .withString(BHConstants.WALLET_ADDRESS,wallet_address)
                     .withString(BHConstants.INPUT_PASSWORD,inputPwd)
                     .navigation();

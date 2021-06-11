@@ -405,8 +405,10 @@
     <string name="backup_qr_tip_6">·Irreversible lost of assets may happen when others acquired the QR code </string>
     <string name="backup_text_tip_1">Keep offline</string>
     <string name="backup_text_tip_2">·Do not save your PrivateKey using mailbox, notepad, computer harddisk, messaging app such as Whatsapp, Wechat, Telegram etc.</string>
+    <string name="backup_text_tip_ks2">·Do not save your Keystore using mailbox, notepad, computer harddisk, messaging app such as Whatsapp, Wechat, Telegram etc.</string>
     <string name="backup_text_tip_3">·Do not use the network transmission</string>
     <string name="backup_text_tip_4">·Do not send/transmit your PrivateKey on the network due to the risk of being compromised</string>
+    <string name="backup_text_tip_ks4">·Do not send/transmit your Keystore on the network due to the risk of being compromised</string>
     <string name="backup_text_tip_5">·It is recommended by using offline devices</string>
     <string name="backup_text_tip_6">·Password management tools are recommended</string>
     <string name="backup_text_tip_7">Password management tool</string>

@@ -59,15 +59,19 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
-                    android:layout_height="23dp"
+                    android:layout_height="wrap_content"
                     android:text="@string/import_mnemonic"
                     android:textSize="16sp"
                     android:gravity="center_vertical"
-                    android:textColor="@color/global_main_text_color"/>
+                    android:textColor="@color/global_main_text_color"
+                    app:autoSizeMaxTextSize="16sp"
+                    app:autoSizeMinTextSize="12sp"
+                    app:autoSizeTextType="uniform"
+                    android:maxLines="1"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
-                    android:layout_height="19dp"
+                    android:layout_height="wrap_content"
                     android:text="@string/import_mnemonic_subtitle"
                     android:textSize="13sp"
                     android:gravity="center_vertical"
@@ -114,7 +118,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
-                    android:layout_height="23dp"
+                    android:layout_height="wrap_content"
                     android:text="@string/import_keystore"
                     android:textSize="16sp"
                     android:gravity="center_vertical"
@@ -122,7 +126,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
-                    android:layout_height="19dp"
+                    android:layout_height="wrap_content"
                     android:text="@string/import_keystore_subtitle"
                     android:textSize="13sp"
                     android:gravity="center_vertical"
@@ -170,7 +174,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
-                    android:layout_height="23dp"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:text="@string/import_private_key"
                     android:textColor="@color/global_main_text_color"
@@ -178,11 +182,16 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
-                    android:layout_height="19dp"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:text="@string/import_pk_subtitle"
                     android:textColor="@color/global_main_text_color"
-                    android:textSize="13sp" />
+                    android:textSize="13sp"
+                    app:autoSizeMaxTextSize="13sp"
+                    app:autoSizeMinTextSize="10sp"
+                    app:autoSizeTextType="uniform"
+                    android:maxLines="1"
+                    />
             </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatImageView
