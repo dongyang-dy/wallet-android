@@ -93,7 +93,7 @@ public class AddressBookViewModel extends AndroidViewModel {
         Observable.create((emitter)->{
             try{
                 //判断地址是否存在
-                BHAddressBook item = addressBookDao.existsAddress(addressBook.address,addressBook.chain);
+                BHAddressBook item = addressBookDao.existsAddress(addressBook.address,addressBook.wallet_address,addressBook.chain);
                 if(item!=null){
                     emitter.onNext(item.id);
                 }else{

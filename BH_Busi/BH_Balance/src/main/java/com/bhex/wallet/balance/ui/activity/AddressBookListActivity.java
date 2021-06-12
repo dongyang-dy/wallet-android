@@ -18,6 +18,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.bhex.lib.uikit.widget.EmptyLayout;
 import com.bhex.network.base.LoadDataModel;
 import com.bhex.network.base.LoadingStatus;
+import com.bhex.network.utils.ToastUtils;
 import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.PixelUtils;
 import com.bhex.tools.utils.ToolUtils;
@@ -143,6 +144,7 @@ public class AddressBookListActivity extends BaseActivity {
 
     private void deleteAddressStatus(LoadDataModel ldm){
         if(ldm.getLoadingStatus()== LoadingStatus.SUCCESS){
+            ToastUtils.showToast(getString(R.string.deleted));
             String current_wallet_address = BHUserManager.getInstance().getCurrentBhWallet().address;
             addressBookViewModel.loadAddressBookList(this,current_wallet_address,chain);
         }

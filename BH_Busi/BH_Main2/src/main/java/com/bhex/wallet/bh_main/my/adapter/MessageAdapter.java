@@ -31,7 +31,7 @@ public class MessageAdapter extends BaseQuickAdapter<BHMessage, BaseViewHolder> 
     @Override
     protected void convert(@NotNull BaseViewHolder vh, BHMessage bhm) {
         try{
-            String []message_type = getContext().getResources().getStringArray(com.bhex.wallet.balance.R.array.Message_type);
+            String []message_type = getContext().getResources().getStringArray(R.array.Message_type);
 
             vh.setText(R.id.tv_tx_type,message_type[bhm.tx_type-1]);
             //token-name

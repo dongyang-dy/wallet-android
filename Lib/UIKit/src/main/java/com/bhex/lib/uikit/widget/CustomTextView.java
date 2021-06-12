@@ -1,15 +1,5 @@
 package com.bhex.lib.uikit.widget;
 
-import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Typeface;
-import android.util.AttributeSet;
-import android.widget.TextView;
-
-import androidx.appcompat.widget.AppCompatTextView;
-
-import com.bhex.lib.uikit.util.TypefaceUtils;
-
 /**
  * Created by BHEX.
  * User: zhou chang

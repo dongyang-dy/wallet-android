@@ -10,15 +10,10 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 
-
-import com.bhex.lib.uikit.util.TypefaceUtils;
 import com.bhex.network.app.BaseApplication;
 import com.bhex.tools.language.LocalManageUtil;
-import com.bhex.tools.utils.LogUtils;
 import com.bhex.wallet.common.manager.MMKVManager;
 import com.bhex.wallet.common.manager.MainActivityManager;
-import com.bhex.wallet.common.manager.SequenceManager;
-import com.bhex.wallet.common.viewmodel.BalanceViewModel;
 import com.bhex.wallet.common.work.RateSyncWork;
 
 import java.util.concurrent.TimeUnit;

@@ -31,6 +31,6 @@ public interface BHAddressBookDao {
     @Query("SELECT * FROM tab_address_book")
     List<BHAddressBook> loadAddressBook();
 
-    @Query("SELECT * FROM tab_address_book where address=:p_address and chain=:p_chain")
-    BHAddressBook existsAddress(String p_address,String p_chain );
+    @Query("SELECT * FROM tab_address_book where address=:p_address  and wallet_address =:p_wallet_address and chain=:p_chain")
+    BHAddressBook existsAddress(String p_address,String p_wallet_address,String p_chain );
 }

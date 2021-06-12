@@ -53,7 +53,7 @@ public class TransactionHelper {
                     TransactionOrder.ActivitiesBean.ValueBean.class);
             String address = BHUserManager.getInstance().getCurrentBhWallet().address;
             if(transferBean.getTo_address().equals(address)){
-                type_label.delete(0,type_label.length()).append(context.getResources().getString(R.string.make_collection));
+                type_label.delete(0,type_label.length()).append(context.getResources().getString(R.string.transfer_in));
             }
         }
         if(txo.activities.size()>1){

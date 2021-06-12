@@ -25,7 +25,7 @@
         app:autoSizeTextType="uniform"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeMaxTextSize="17sp"
-        app:autoSizeStepGranularity="2sp"
+        app:autoSizeStepGranularity="1sp"
         />
 
     <!--

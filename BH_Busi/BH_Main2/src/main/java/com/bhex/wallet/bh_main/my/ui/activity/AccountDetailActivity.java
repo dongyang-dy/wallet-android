@@ -141,6 +141,7 @@ public class AccountDetailActivity extends BaseActivity {
     //删除账户--
     private void deleteWalletStatus(LoadDataModel ldm){
         if(ldm.getLoadingStatus()==LoadDataModel.SUCCESS){
+            ToastUtils.showToast(getString(R.string.deleted));
             finish();
         }
     }
