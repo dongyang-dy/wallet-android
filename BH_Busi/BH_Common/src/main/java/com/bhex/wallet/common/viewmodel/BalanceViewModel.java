@@ -68,7 +68,6 @@ public class BalanceViewModel extends CacheAndroidViewModel implements Lifecycle
 
     //获取资产
     public void getAccountInfo(BaseActivity activity,IStrategy strategy){
-
         Type type = (new TypeToken<JsonObject>() {}).getType();
         String cache_key = BHUserManager.getInstance().getCurrentBhWallet().address+"_"+BH_BUSI_TYPE.账户资产缓存.value;
         BHBaseObserver<JsonObject> observer = new BHBaseObserver<JsonObject>(false) {

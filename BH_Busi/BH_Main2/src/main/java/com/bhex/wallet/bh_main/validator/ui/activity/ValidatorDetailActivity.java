@@ -162,7 +162,7 @@ public class ValidatorDetailActivity extends BaseActivity {
         getRecord(true);
     }
 
-    @OnClick({R2.id.iv_copy, R2.id.btn_transfer_entrust, R2.id.btn_relieve_entrust, R2.id.btn_do_entrust})
+    @OnClick({R2.id.iv_copy, R2.id.btn_transfer_entrust, R2.id.btn_relieve_entrust, R2.id.btn_do_entrust,R2.id.iv_website_copy})
     public void onViewClicked(View view) {
         if (view.getId() == R.id.iv_copy) {
             if (mValidatorInfo==null){
@@ -191,6 +191,17 @@ public class ValidatorDetailActivity extends BaseActivity {
                     .withObject("validatorInfo", mValidatorInfo)
                     .withInt("bussiType", ENTRUST_BUSI_TYPE.DO_ENTRUS.getTypeId())
                     .navigation();
+        } else if(view.getId() == R.id.iv_website_copy){
+            if (mValidatorInfo==null){
+                return;
+            }
+
+            String copy_text = mValidatorInfo.getDescription().getWebsite();
+            if(TextUtils.isEmpty(copy_text)){
+                return;
+            }
+            ToolUtils.copyText(copy_text, this);
+            ToastUtils.show(getResources().getString(R.string.copyed));
         }
     }
 

@@ -227,6 +227,9 @@ public class BHBalanceHelper {
      */
     public static double calculateAllTokenPrice(Context context,AccountInfo accountInfo){
         double allTokenPrice = 0;
+        if(accountInfo==null){
+            return allTokenPrice;
+        }
         List<AccountInfo.AssetsBean> list = accountInfo.assets;
         if(list==null || list.size()==0){
             return allTokenPrice;

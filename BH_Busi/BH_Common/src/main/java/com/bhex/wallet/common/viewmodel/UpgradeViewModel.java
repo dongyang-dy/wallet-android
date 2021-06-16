@@ -44,8 +44,8 @@ public class UpgradeViewModel extends AndroidViewModel {
      * 获取版本信息
      * @param activity
      */
-    public void getUpgradeInfo(BaseActivity activity){
-        BHBaseObserver<JsonObject> observer = new BHBaseObserver<JsonObject>(false) {
+    public void getUpgradeInfo(BaseActivity activity,boolean isShowDialog){
+        BHProgressObserver<JsonObject> observer = new BHProgressObserver<JsonObject>(activity,isShowDialog,false) {
             @Override
             protected void onSuccess(JsonObject jsonObject) {
                 //LogUtils.d("UpgradeViewModel==>","jsonObject=="+jsonObject.toString());

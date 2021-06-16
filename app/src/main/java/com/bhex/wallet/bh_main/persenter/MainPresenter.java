@@ -63,7 +63,7 @@ public class MainPresenter extends BasePresenter {
         mUpgradeVM.upgradeLiveData.observe(getActivity(),ldm->{
             processUpgradeInfo(ldm);
         });
-        mUpgradeVM.getUpgradeInfo(getActivity());
+        mUpgradeVM.getUpgradeInfo(getActivity(),false);
     }
 
     /**

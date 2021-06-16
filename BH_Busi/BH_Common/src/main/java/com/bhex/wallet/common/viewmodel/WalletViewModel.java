@@ -136,7 +136,7 @@ public class WalletViewModel extends ViewModel {
             public void onNext(List<BHWallet> bhWalletList) {
                 super.onNext(bhWalletList);
                 LoadDataModel<List<BHWallet>> loadDataModel = new LoadDataModel<>(bhWalletList);
-                mutableWallentLiveData.postValue(loadDataModel);
+                mutableWallentLiveData.setValue(loadDataModel);
             }
 
             @Override
@@ -151,6 +151,7 @@ public class WalletViewModel extends ViewModel {
                 BHUserManager.getInstance().setAllWallet(list);
             }
             emitter.onNext(list);
+            emitter.onComplete();
         }).subscribeOn(AndroidSchedulers.mainThread())
                 .as(AutoDispose.autoDisposable(AndroidLifecycleScopeProvider.from(activity)))
                 .subscribe(observer);

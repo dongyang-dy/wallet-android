@@ -119,7 +119,7 @@ public class SymbolCache extends BaseCache {
                 .subscribe(new BHBaseObserver<JsonArray>(false) {
                     @Override
                     protected void onSuccess(JsonArray jsonArray) {
-
+                        LogUtils.d("SymbolCache====>","===onSuccess===");
                         if(jsonArray==null){
                             return;
                         }
@@ -140,7 +140,7 @@ public class SymbolCache extends BaseCache {
                     @Override
                     protected void onFailure(int code, String errorMsg) {
                         super.onFailure(code, errorMsg);
-                        //LogUtils.d("BalanceAdapter==>","onFailure==");
+                        LogUtils.d("SymbolCache====>","onFailure==");
                     }
                 });
     }

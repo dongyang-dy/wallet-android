@@ -330,7 +330,7 @@
                     android:textColor="@color/global_label_text_color"
                     android:textSize="@dimen/sp_13"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/divider_line" />
+                    app:layout_constraintTop_toBottomOf="@+id/divider_line" />
 
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -345,9 +345,9 @@
                     android:maxLines="1"
                     android:textColor="@color/global_main_text_color"
                     android:textSize="@dimen/sp_13"
-                    app:layout_constraintEnd_toStartOf="@id/iv_copy"
-                    app:layout_constraintStart_toEndOf="@id/tv_address_title"
-                    app:layout_constraintTop_toBottomOf="@id/divider_line"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_copy"
+                    app:layout_constraintStart_toEndOf="@+id/tv_address_title"
+                    app:layout_constraintTop_toBottomOf="@+id/divider_line"
                     tools:text="BHA620BA13...6B86E9E36B" />
 
 
@@ -361,7 +361,7 @@
                     android:src="@mipmap/icon_paste"
                     android:tag="0"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/divider_line" />
+                    app:layout_constraintTop_toBottomOf="@+id/divider_line" />
 
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -389,9 +389,20 @@
                     android:textColor="@color/global_main_text_color"
                     android:textSize="@dimen/sp_13"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/tv_website_title"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_website_copy"
                     app:layout_constraintTop_toBottomOf="@id/tv_address_value"
                     tools:text="https://www.jfsldfjsljs.com" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_website_copy"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginRight="24dp"
+                    android:src="@mipmap/icon_paste"
+                    android:tag="1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_website_title"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_website_title"/>
 
                 <View
                     android:id="@+id/divider_line1"
@@ -402,7 +413,7 @@
                     android:background="@color/global_divider_color"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_website_value"></View>
+                    app:layout_constraintTop_toBottomOf="@+id/tv_website_value"/>
 
 
                 <androidx.appcompat.widget.AppCompatTextView

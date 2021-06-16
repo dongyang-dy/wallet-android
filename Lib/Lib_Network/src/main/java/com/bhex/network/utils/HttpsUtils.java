@@ -1,12 +1,16 @@
 package com.bhex.network.utils;
 
+import android.content.Context;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.KeyManagementException;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.security.UnrecoverableKeyException;
+import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
@@ -21,6 +25,8 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509TrustManager;
 
+import okhttp3.OkHttpClient;
+
 /**
  * Created by gongdongyang on 2018/9/17.
  */
@@ -31,10 +37,6 @@ public class HttpsUtils
     {
         public SSLSocketFactory sSLSocketFactory;
         public X509TrustManager trustManager;
-    }
-
-    public static void getSslSocketFactoryExt(){
-        //BaseApplication.getInstance()
     }
 
     public static SSLParams getSslSocketFactory(InputStream[] certificates, InputStream bksFile, String password)
@@ -51,7 +53,7 @@ public class HttpsUtils
                 trustManager = new MyTrustManager(chooseTrustManager(trustManagers));
             } else{
 
-                trustManager = new UnSafeTrustManager();
+                //trustManager = new UnSafeTrustManager();
             }
             sslContext.init(keyManagers, new TrustManager[]{trustManager},null);
             sslParams.sSLSocketFactory = sslContext.getSocketFactory();
@@ -69,7 +71,7 @@ public class HttpsUtils
         }
     }
 
-    private class UnSafeHostnameVerifier implements HostnameVerifier
+    /*private class UnSafeHostnameVerifier implements HostnameVerifier
     {
         @Override
         public boolean verify(String hostname, SSLSession session)
@@ -90,6 +92,7 @@ public class HttpsUtils
         public void checkServerTrusted(X509Certificate[] chain, String authType)
                 throws CertificateException
         {
+
         }
 
         @Override
@@ -97,7 +100,7 @@ public class HttpsUtils
         {
             return new X509Certificate[]{};
         }
-    }
+    }*/
 
     private static TrustManager[] prepareTrustManager(InputStream... certificates)
     {
@@ -117,9 +120,8 @@ public class HttpsUtils
                 {
                     if (certificate != null)
                         certificate.close();
-                } catch (IOException e)
+                } catch (IOException e) {
 
-                {
                 }
             }
             TrustManagerFactory trustManagerFactory = null;
@@ -202,9 +204,9 @@ public class HttpsUtils
 
         public MyTrustManager(X509TrustManager localTrustManager) throws NoSuchAlgorithmException, KeyStoreException
         {
-            TrustManagerFactory var4 = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
-            var4.init((KeyStore) null);
-            defaultTrustManager = chooseTrustManager(var4.getTrustManagers());
+            TrustManagerFactory tmf = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+            tmf.init((KeyStore) null);
+            defaultTrustManager = chooseTrustManager(tmf.getTrustManagers());
             this.localTrustManager = localTrustManager;
         }
 
@@ -234,4 +236,29 @@ public class HttpsUtils
             return new X509Certificate[0];
         }
     }
+
+    //只信任指定证书（传入raw资源ID）
+    public static void setCertificate(Context context, OkHttpClient.Builder okHttpClientBuilder, int cerResID) {
+        try {
+            CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");
+            InputStream inputStream = context.getResources().openRawResource(cerResID);
+            Certificate ca = certificateFactory.generateCertificate(inputStream);
+
+            KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
+            keyStore.load(null, null);
+            keyStore.setCertificateEntry("ca", ca);
+
+            inputStream.close();
+
+            TrustManagerFactory tmf = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+            tmf.init(keyStore);
+
+            SSLContext sslContext = SSLContext.getInstance("TLS");
+            sslContext.init(null, tmf.getTrustManagers(), new SecureRandom());
+            okHttpClientBuilder.sslSocketFactory(sslContext.getSocketFactory(), (X509TrustManager) tmf.getTrustManagers()[0]);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

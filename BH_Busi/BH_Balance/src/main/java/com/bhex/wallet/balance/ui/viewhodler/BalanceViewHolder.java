@@ -133,4 +133,14 @@ public class BalanceViewHolder {
         }
         //BHBalanceHelper.setTextFristSamll(mContext,tv_asset,allTokenAssetsText);
     }
+
+    /*public void updateAssetFailStatus(boolean isOpenEye){
+        if(isOpenEye){
+            iv_open_eye.setImageResource(R.mipmap.ic_asset_open);
+            tv_asset.setText(mContext.getString(R.string.place_holder));
+        }else{
+            iv_open_eye.setImageResource(R.mipmap.ic_asset_close);
+            tv_asset.setText("***");
+        }
+    }*/
 }

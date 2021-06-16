@@ -85,7 +85,7 @@ public class AboutActivity extends BaseActivity {
             processUpgradeInfo(ldm);
         });
 
-        mUpgradeVM.getUpgradeInfo(this);
+        mUpgradeVM.getUpgradeInfo(this,false);
 
         //复制联系我们
         tv_contact_us.setOnClickListener(v -> {
@@ -96,7 +96,7 @@ public class AboutActivity extends BaseActivity {
         //点击更新版本检测
         tv_version_update.setOnClickListener(v -> {
             isCheckUpdate = true;
-            mUpgradeVM.getUpgradeInfo(this);
+            mUpgradeVM.getUpgradeInfo(this,true);
         });
     }
 

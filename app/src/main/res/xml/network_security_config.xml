@@ -8,18 +8,18 @@
         </trust-anchors>-->
     </base-config>
     <domain-config >
-        <domain includeSubdomains="true">explorer.hbtcchain.io</domain>
+        <domain includeSubdomains="true">explorer.bhexchain.com</domain>
         <pin-set>
-            <pin digest="SHA-256">ONUV2iewvbpTvPliXQM1Mol7j9PPZgGYT6/7WhJ0yy0=</pin>
-            <pin digest="SHA-256">4H6OXny7MqJPbCOTpHyS0fSSUeHk/I5nKbIyuQwnfsA=</pin>
+            <pin digest="SHA-256">L8SvB7TGIYZ/23zmJchRPc9CZP+1gNYqy0F9Bi1zdko=</pin>
+            <pin digest="SHA-256">jzqM6/58ozsPRvxUzg0hzjM+GcfwhTbU/G0TCDvL7hU=</pin>
         </pin-set>
     </domain-config>
 
     <domain-config >
-        <domain includeSubdomains="true">hbtc.yym.plus</domain>
+        <domain includeSubdomains="true">hdex.bhexchain.com</domain>
         <pin-set>
-            <pin digest="SHA-256">ONUV2iewvbpTvPliXQM1Mol7j9PPZgGYT6/7WhJ0yy0=</pin>
-            <pin digest="SHA-256">4H6OXny7MqJPbCOTpHyS0fSSUeHk/I5nKbIyuQwnfsA=</pin>
+            <pin digest="SHA-256">L8SvB7TGIYZ/23zmJchRPc9CZP+1gNYqy0F9Bi1zdko=</pin>
+            <pin digest="SHA-256">jzqM6/58ozsPRvxUzg0hzjM+GcfwhTbU/G0TCDvL7hU=</pin>
         </pin-set>
     </domain-config>
 </network-security-config>

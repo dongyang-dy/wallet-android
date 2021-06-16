@@ -124,9 +124,13 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
         //资产订阅
         LiveDataBus.getInstance().with(BHConstants.Label_Account, LoadDataModel.class).observe(this, ldm->{
             refreshfinish();
-            if(ldm.loadingStatus==LoadingStatus.SUCCESS){
+            updateAssets();
+            /*if(ldm.loadingStatus==LoadingStatus.SUCCESS){
                 updateAssets();
-            }
+            }else{
+                //LogUtils.d("BalanceFragment===","==onFail==");
+                //balanceViewHolder.updateAssetFailStatus(isOpenEye);
+            }*/
         });
 
         //钱包
@@ -153,7 +157,7 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
 
     @Override
     protected void addEvent() {
-
+        LogUtils.d("BalanceFragment====>:","==addEvent===");
         //自动刷新
         refreshLayout.setOnRefreshListener(refreshLayout -> {
             //获取币种列表
@@ -262,9 +266,9 @@ public class BalanceFragment extends BaseFragment<BalancePresenter> {
 
     //更新资产
     private void updateAssets() {
-        if(BHUserManager.getInstance().getAccountInfo()==null){
+        /*if(BHUserManager.getInstance().getAccountInfo()==null){
             return;
-        }
+        }*/
         balanceViewHolder.updateAsset(isOpenEye);
 
         //更新列表资产

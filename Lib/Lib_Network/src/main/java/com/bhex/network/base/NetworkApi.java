@@ -1,20 +1,23 @@
 package com.bhex.network.base;
 
-import android.os.Build;
 import android.util.Log;
 
 import com.bhex.network.BuildConfig;
+import com.bhex.network.R;
+import com.bhex.network.cache.utils.LogUtils;
 import com.bhex.network.environment.EnvironmentActivity;
 import com.bhex.network.environment.IEnvironment;
 import com.bhex.network.errorhandler.HttpErrorHandler;
 import com.bhex.network.interceptor.CommonRequestInterceptor;
-import com.bhex.network.interceptor.CommonResponseInterceptor;
 import com.bhex.network.utils.HttpsUtils;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 
-import java.net.Proxy;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLSession;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -72,8 +75,7 @@ public abstract class NetworkApi implements IEnvironment {
 
 
     public OkHttpClient getOkHttpClient() {
-        HttpsUtils.SSLParams sslParams = HttpsUtils.getSslSocketFactory(null, null, null);
-
+        //HttpsUtils.SSLParams sslParams = HttpsUtils.getSslSocketFactory(null, null, null);
 
         if (mOkHttpClient == null) {
             OkHttpClient.Builder okHttpClientBuilder = new OkHttpClient.Builder();
@@ -87,20 +89,37 @@ public abstract class NetworkApi implements IEnvironment {
             okHttpClientBuilder.readTimeout(15, TimeUnit.SECONDS);//10秒读取超时
             //okHttpClientBuilder.sslSocketFactory(sslParams.sSLSocketFactory, sslParams.trustManager);
             //okHttpClientBuilder.proxy(Proxy.NO_PROXY);
-            CertificatePinner certificatePinner = new CertificatePinner.Builder()
+           /* CertificatePinner certificatePinner = new CertificatePinner.Builder()
                     .add("explorer.hbtcchain.io", "sha256/ONUV2iewvbpTvPliXQM1Mol7j9PPZgGYT6/7WhJ0yy0=")
                     .add("explorer.hbtcchain.io", "sha256/4H6OXny7MqJPbCOTpHyS0fSSUeHk/I5nKbIyuQwnfsA=")
                     .add("dex.hbtcchain.io","sha256/ONUV2iewvbpTvPliXQM1Mol7j9PPZgGYT6/7WhJ0yy0=")
                     .add("dex.hbtcchain.io","sha256/4H6OXny7MqJPbCOTpHyS0fSSUeHk/I5nKbIyuQwnfsA=")
-                    .build();
+                    .build();*/
             //okHttpClientBuilder.certificatePinner(certificatePinner);
 
             if(BuildConfig.DEBUG){
                 okHttpClientBuilder.addNetworkInterceptor(new StethoInterceptor());
             }
 
+            HttpsUtils.setCertificate(iNetworkRequiredInfo.getApplicationContext(),okHttpClientBuilder, R.raw.bhexchain);
+
             okHttpClientBuilder.addInterceptor(new CommonRequestInterceptor(iNetworkRequiredInfo));
+
             //okHttpClientBuilder.addInterceptor(new CommonResponseInterceptor());
+            /*okHttpClientBuilder.hostnameVerifier(new HostnameVerifier() {
+                @Override
+                public boolean verify(String hostname, SSLSession session) {
+                    System.out.println("NetworkApi====>:hostname=="+hostname);
+                    //LogUtils.debug("NetworkApi====>:hostname=="+hostname);
+                    if("explorer.bhexchain.com".equals(hostname)){
+                        return true;
+                    }else{
+                        HostnameVerifier hv = HttpsURLConnection.getDefaultHostnameVerifier();
+                        return hv.verify(hostname,session);
+                    }
+                    //return true;
+                }
+            });*/
 
             if (iNetworkRequiredInfo != null && (iNetworkRequiredInfo.isDebug())) {
                 HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();

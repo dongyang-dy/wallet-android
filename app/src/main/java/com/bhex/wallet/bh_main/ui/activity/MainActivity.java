@@ -76,7 +76,7 @@ public class MainActivity extends BaseActivity<MainPresenter> {
         if(savedInstanceState!=null && !isReset){
             mCurrentCheckId = savedInstanceState.getInt("index",0);
         }
-        LogUtils.d("MainActivity===>:","==onRestoreInstanceState==mCurrentCheckId=="+mCurrentCheckId+"=isReset="+isReset);
+        //LogUtils.d("MainActivity===>:","==onRestoreInstanceState==mCurrentCheckId=="+mCurrentCheckId+"=isReset="+isReset);
         mBottomNavigationView.setSelectedItemId(mBottomNavigationView.getMenu().getItem(mCurrentCheckId).getItemId());
     }
 

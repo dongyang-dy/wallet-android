@@ -13,6 +13,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.language.LocalManageUtil;
 import com.bhex.tools.utils.CheckSysUtils;
+import com.bhex.tools.utils.LogUtils;
 import com.bhex.tools.utils.NavigateUtil;
 import com.bhex.wallet.R;
 import com.bhex.wallet.app.BHApplication;
@@ -27,6 +28,8 @@ import com.bhex.wallet.mnemonic.MnemonicIndexActivity;
 import com.gyf.immersionbar.ImmersionBar;
 import com.uber.autodispose.AutoDispose;
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider;
+
+import org.web3j.protocol.core.methods.response.Log;
 
 import java.util.concurrent.TimeUnit;
 
@@ -78,8 +81,9 @@ public class SplashActivity extends AppCompatActivity {
     //去首页
     public void goto_Index(){
         Disposable disposable = Observable.just(0).timer(1000, TimeUnit.MILLISECONDS)
-                .as(AutoDispose.autoDisposable(AndroidLifecycleScopeProvider.from(this)))
+                //.as(AutoDispose.autoDisposable(AndroidLifecycleScopeProvider.from(this)))
                 .subscribe(aLong -> {
+                    LogUtils.d("SplashActivity===>:","==aLong=="+aLong);
                     //首次启动
                     if (!BHUserManager.getInstance().isHasWallet()) {
                         ARouter.getInstance().build(ARouterConfig.MNEMONIC_INDEX_PAGE).navigation();
