@@ -71,7 +71,7 @@
         style="@style/main_btn_style"
         android:layout_marginBottom="40dp"
         android:layout_marginTop="26dp"
-        android:text="@string/sure"
+        android:text="@string/delete"
         android:enabled="false"
         />
 

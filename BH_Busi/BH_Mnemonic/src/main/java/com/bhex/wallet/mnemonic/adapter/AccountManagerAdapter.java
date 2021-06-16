@@ -11,6 +11,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.bhex.network.base.LoadingStatus;
+import com.bhex.tools.utils.ColorUtil;
 import com.bhex.tools.utils.LogUtils;
 import com.bhex.tools.utils.NumberUtil;
 import com.bhex.wallet.common.db.entity.BHWallet;
@@ -56,8 +57,10 @@ public class AccountManagerAdapter extends BaseQuickAdapter<BHWalletItem, BaseVi
 
         if(currentWallet.address.equals(bhWallet.address)){
             holder.getView(R.id.iv_wallet_check).setVisibility(View.VISIBLE);
+            holder.itemView.setBackgroundColor(ColorUtil.getColor(getContext(),R.color.bg_wallet_checked));
         }else{
             holder.getView(R.id.iv_wallet_check).setVisibility(View.INVISIBLE);
+            holder.itemView.setBackgroundColor(ColorUtil.getColor(getContext(),R.color.bg_wallet_uncheck));
         }
 
         //LogUtils.d("AccountManagerAdapter==","bhWallet.asset==>:"+bhWallet.asset);

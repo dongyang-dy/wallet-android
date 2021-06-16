@@ -203,7 +203,7 @@
         <item name="android:background">@drawable/shape_20_green</item>
     </style>
 
-    <style name="tx_status_fail">
+    <!--<style name="tx_status_fail">
         <item name="android:paddingTop">1dp</item>
         <item name="android:paddingBottom">1dp</item>
         <item name="android:paddingStart">2dp</item>
@@ -213,7 +213,7 @@
         <item name="android:textStyle">normal</item>
         <item name="android:textColor">@color/color_red</item>
         <item name="android:background">@color/color_20_red</item>
-    </style>
+    </style>-->
 
     <style name="bt_theme_blue" parent="@android:style/Widget.Material.Button.Borderless">
         <item name="android:textSize">15sp</item>
