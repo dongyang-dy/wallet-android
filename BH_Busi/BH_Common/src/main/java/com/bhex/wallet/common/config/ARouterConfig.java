@@ -54,7 +54,7 @@ public class ARouterConfig {
 
     //托管单元-钱包账户
     public static class Trusteeship{
-        public static final String Trusteeship_Add_Index = "/Trusteeship/add/index";
+        public static final String Trusteeship_Add_Index = "/trusteeship/add/index";
 
     }
     /**

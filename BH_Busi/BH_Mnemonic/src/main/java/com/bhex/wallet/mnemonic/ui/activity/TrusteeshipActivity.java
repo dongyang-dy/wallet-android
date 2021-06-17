@@ -107,7 +107,7 @@ public class TrusteeshipActivity extends BaseCacheActivity<TrusteeshipPresenter>
             BHUserManager.getInstance().getCreateWalletParams().name = inp_wallet_name.getText().toString().trim();
             ARouter.getInstance()
                     .build(ARouterConfig.TRUSTEESHIP_MNEMONIC_SECOND)
-                    .withInt("way",mWay)
+                    .withInt(BHConstants.WAY,mWay)
                     .navigation();
         }
     }

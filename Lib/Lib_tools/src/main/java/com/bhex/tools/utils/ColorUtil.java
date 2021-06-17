@@ -50,7 +50,11 @@ public class ColorUtil {
 
     @SuppressLint("ResourceType")
     private static ColorStateList createColorStateList(Context context, @IdRes int disable_color_id, @IdRes int enable_color_id) {
-         int[] colors = new int[]{ContextCompat.getColor(context, disable_color_id), ContextCompat.getColor(context, enable_color_id)};
+        int[] colors = new int[]{ContextCompat.getColor(context, disable_color_id), ContextCompat.getColor(context, enable_color_id)};
         int[][] states = new int[2][];
+        states[0] = new int[] { android.R.attr.state_pressed, android.R.attr.state_enabled };
+        states[1] = new int[] { -android.R.attr.state_enabled };
+        ColorStateList colorList = new ColorStateList(states, colors);
+        return colorList;
     }
 }

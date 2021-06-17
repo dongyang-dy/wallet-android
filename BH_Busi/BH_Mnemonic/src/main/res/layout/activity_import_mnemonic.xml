@@ -24,6 +24,17 @@
             style="@style/toolbar_layout_title_style"
             android:text="@string/import_mnemonic"
             tools:text="@string/import_mnemonic"/>
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_scan_qr"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center|right"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/ic_qr"
+            android:paddingEnd="15dp"/>
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -58,7 +69,7 @@
         android:background="@color/card_bg_color">
 
 
-       <androidx.appcompat.widget.AppCompatEditText
+       <!--<androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/et_mnemonic"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -66,14 +77,13 @@
             android:visibility="gone"
             android:textSize="15sp"
             android:gravity="top"
-            android:hint="@string/mnemonic_input_hint"
             android:textColorHint="@color/global_input_hint_color"
             android:textColor="@color/global_main_text_color"
             android:padding="16dp"
             android:inputType="text"
             android:layout_marginBottom="30dp"
             android:textCursorDrawable="@null"
-            />
+            />-->
 
 
         <com.bhex.lib.uikit.widget.MnemonicInputView

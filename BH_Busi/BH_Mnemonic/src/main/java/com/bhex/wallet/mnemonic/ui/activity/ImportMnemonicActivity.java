@@ -1,11 +1,15 @@
 package com.bhex.wallet.mnemonic.ui.activity;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.text.Editable;
 import android.text.InputType;
 import android.view.Gravity;
 import android.view.View;
 
 import androidx.appcompat.widget.AppCompatEditText;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
@@ -13,8 +17,12 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bhex.lib.uikit.widget.MnemonicInputView;
 import com.bhex.lib.uikit.widget.editor.SimpleTextWatcher;
+import com.bhex.lib_qr.XQRCode;
+import com.bhex.lib_qr.util.QRCodeAnalyzeUtils;
 import com.bhex.network.utils.ToastUtils;
+import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.LogUtils;
+import com.bhex.tools.utils.PathUtils;
 import com.bhex.tools.utils.RegexUtil;
 import com.bhex.tools.utils.ToolUtils;
 import com.bhex.wallet.common.base.BaseCacheActivity;
@@ -22,6 +30,7 @@ import com.bhex.wallet.common.config.ARouterConfig;
 import com.bhex.wallet.common.enums.BH_BUSI_TYPE;
 import com.bhex.wallet.common.enums.MAKE_WALLET_TYPE;
 import com.bhex.wallet.common.manager.BHUserManager;
+import com.bhex.wallet.common.ui.activity.BHQrScanActivity;
 import com.bhex.wallet.common.utils.BHWalletUtils;
 import com.bhex.wallet.mnemonic.R;
 import com.bhex.wallet.mnemonic.R2;
@@ -47,11 +56,14 @@ public class ImportMnemonicActivity extends BaseCacheActivity implements Mnemoni
     @BindView(R2.id.btn_next)
     AppCompatTextView btn_next;
 
-    @BindView(R2.id.et_mnemonic)
-    AppCompatEditText et_mnemonic;
+    //@BindView(R2.id.et_mnemonic)
+    //AppCompatEditText et_mnemonic;
 
     @BindView(R2.id.input_mnemonic)
     MnemonicInputView input_mnemonic;
+
+    @BindView(R2.id.btn_scan_qr)
+    AppCompatImageView btn_scan_qr;
 
 
     private List<String> mnemonicItems = new ArrayList<>();
@@ -69,7 +81,7 @@ public class ImportMnemonicActivity extends BaseCacheActivity implements Mnemoni
     protected void initView() {
         input_mnemonic.setWordList(mOriginWords);
         input_mnemonic.setInputViewChangeListener(this);
-        et_mnemonic.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+        /*et_mnemonic.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
         et_mnemonic.setGravity(Gravity.TOP);
         et_mnemonic.setSingleLine(false);
         et_mnemonic.setHorizontallyScrolling(false);
@@ -85,7 +97,7 @@ public class ImportMnemonicActivity extends BaseCacheActivity implements Mnemoni
                     btn_next.setEnabled(true);
                 }
             }
-        });
+        });*/
 
         input_mnemonic.addEditText(null);
     }
@@ -95,14 +107,18 @@ public class ImportMnemonicActivity extends BaseCacheActivity implements Mnemoni
 
     }
 
-    @OnClick({R2.id.btn_next})
+    @OnClick({R2.id.btn_next,R2.id.btn_scan_qr})
     public void onViewClicked(View view) {
         if(view.getId()==R.id.btn_next){
-            importMnemoic(et_mnemonic.getText().toString().trim());
+            importMnemoic();
+        }else if(view.getId()==R.id.btn_scan_qr){
+            scanMnemoicAction();
         }
     }
 
-    private boolean checkIsEmpty(){
+
+
+    /*private boolean checkIsEmpty(){
         String mnemoicStr = et_mnemonic.getText().toString().trim();
 
         boolean flag = RegexUtil.checkIsLetter(mnemoicStr);
@@ -113,11 +129,11 @@ public class ImportMnemonicActivity extends BaseCacheActivity implements Mnemoni
             return true;
         }
         return false;
-    }
+    }*/
     /**
      * 导入助记词
      */
-    private void importMnemoic(String mnemoicStr) {
+    private void importMnemoic() {
         boolean flag = true;
 
         mnemonicItems = input_mnemonic.getAllMnemonic();
@@ -148,7 +164,7 @@ public class ImportMnemonicActivity extends BaseCacheActivity implements Mnemoni
 
         BHUserManager.getInstance().getCreateWalletParams().mWords = mnemonicItems;
         ARouter.getInstance().build(ARouterConfig.TRUSTEESHIP_MNEMONIC_FRIST)
-                .withInt("way", MAKE_WALLET_TYPE.导入助记词.getWay())
+                .withInt(BHConstants.WAY, MAKE_WALLET_TYPE.导入助记词.getWay())
                 .navigation();
     }
 
@@ -180,5 +196,36 @@ public class ImportMnemonicActivity extends BaseCacheActivity implements Mnemoni
         }
 
         input_mnemonic.setInputViewStatus();
+    }
+
+    //扫描助记词
+    private void scanMnemoicAction() {
+        ARouter.getInstance().build(ARouterConfig.Common.commom_scan_qr).navigation(this, BHQrScanActivity.REQUEST_CODE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == BHQrScanActivity.REQUEST_CODE) {
+            if(resultCode==RESULT_OK){
+                String qrCode  = data.getExtras().getString(XQRCode.RESULT_DATA);
+                input_mnemonic.importMnemonic(qrCode);
+            }else if(resultCode == BHQrScanActivity.REQUEST_IMAGE){
+                getAnalyzeQRCodeResult(data.getData());
+            }
+        }
+    }
+
+    private void getAnalyzeQRCodeResult(Uri uri) {
+        XQRCode.analyzeQRCode(PathUtils.getFilePathByUri(this, uri), new QRCodeAnalyzeUtils.AnalyzeCallback() {
+            @Override
+            public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
+                input_mnemonic.importMnemonic(result);
+            }
+            @Override
+            public void onAnalyzeFailed() {
+                ToastUtils.showToast(getResources().getString(R.string.encode_qr_fail));
+            }
+        });
     }
 }

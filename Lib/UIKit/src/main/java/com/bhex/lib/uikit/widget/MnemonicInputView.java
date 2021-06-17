@@ -24,10 +24,12 @@ import androidx.core.content.ContextCompat;
 
 import com.bhex.lib.uikit.R;
 import com.bhex.tools.utils.ColorUtil;
+import com.bhex.tools.utils.LogUtils;
 import com.bhex.tools.utils.PixelUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * Created by BHEX.
@@ -76,6 +78,7 @@ public class MnemonicInputView extends ViewGroup {
         //获取子View个数
         int childCount = getChildCount();
         int left =0,top =0,right = 0,bottom =0;
+        //Log.d("MnemonicInputView==>:","childCount=="+childCount);
         for(int i = 0;i < childCount; i ++){
             View child = getChildAt(i);
             //测量子View的宽和高
@@ -153,6 +156,13 @@ public class MnemonicInputView extends ViewGroup {
             return;
         }
 
+        //如果之前是空白
+        AppCompatEditText editText = (AppCompatEditText)getChildAt(getChildCount()-1);
+        if(editText!=null && TextUtils.isEmpty(editText.getText().toString())){
+            editText.setText(context);
+            return;
+        }
+
         AppCompatEditText et = new AppCompatEditText(getContext());
         et.setTextColor(ContextCompat.getColor(mContext, R.color.global_main_text_color));
         et.setTextSize(TypedValue.COMPLEX_UNIT_SP,13);
@@ -166,11 +176,13 @@ public class MnemonicInputView extends ViewGroup {
         //setEditTextInhibitInputSpace(et);
         et.addTextChangedListener(new MnemonicTextWatch(et));
         et.setOnKeyListener(new MnemonicOnKeyListener(et));
+        //setEditTextInhibitInputSpace(et);
         //et.setFocusable(true);//获得焦点
         //et.setFocusableInTouchMode(true);//获得焦点
         if(!TextUtils.isEmpty(context)){
             et.setText(context.trim());
         }
+
         et.requestFocus();
 
         if(mWordList.contains(context)){
@@ -225,9 +237,13 @@ public class MnemonicInputView extends ViewGroup {
     public static void setEditTextInhibitInputSpace(EditText editText){
         InputFilter filter=new InputFilter() {
             @Override
-            public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
-                if(source.equals(" "))return "";
-                else return null;
+            public CharSequence filter(CharSequence charSequence, int start, int end, Spanned dest, int dstart, int dend) {
+                String regex = "^[\u4E00-\u9FA5]+$";
+                boolean isChinese = Pattern.matches(regex, charSequence.toString());
+                if (!Character.isLetterOrDigit(charSequence.charAt(start)) || isChinese) {
+                    return "";
+                }
+                return null;
             }
         };
         editText.setFilters(new InputFilter[]{filter});
@@ -254,6 +270,7 @@ public class MnemonicInputView extends ViewGroup {
         @Override
         public void afterTextChanged(Editable s) {
             String text = textView.getText().toString();
+            LogUtils.d("MnemonicInputView===>:","text==="+text);
             if(!TextUtils.isEmpty(text)){
                 String []array = text.split("\\s+");
                 if(array.length>1){
@@ -283,10 +300,10 @@ public class MnemonicInputView extends ViewGroup {
         @Override
         public boolean onKey(View v, int keyCode, KeyEvent event) {
             Log.d("MnemonicInputView==>","keyCode=="+KeyEvent.keyCodeToString(keyCode));
-            if(keyCode == KeyEvent.KEYCODE_SPACE){
+            /*if(keyCode == KeyEvent.KEYCODE_SPACE){
                 addEditText(null);
-                return true;
-            }
+                //return false;
+            }*/
 
             if(keyCode == KeyEvent.KEYCODE_DEL && event.getAction()==KeyEvent.ACTION_UP){
                 String text = textView.getText().toString();
@@ -342,5 +359,23 @@ public class MnemonicInputView extends ViewGroup {
             drawable.setStroke(strokeWidth, strokeColor);
         }
         return drawable;
+    }
+
+    public void importMnemonic(String mnemonic){
+
+        if(getChildCount()==0){
+            return;
+        }
+
+        for(int i=0;i<getChildCount()-1;i++){
+            removeView(getChildAt(i));
+        }
+
+        if(getChildCount()==0){
+            return;
+        }
+
+        AppCompatEditText editText = (AppCompatEditText)getChildAt(0);
+        editText.setText(mnemonic);
     }
 }
