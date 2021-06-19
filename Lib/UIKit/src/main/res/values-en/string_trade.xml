@@ -17,10 +17,10 @@
     <string name="claim_trade_earning">Claim trading reward</string>
     <string name="other">Others</string>
 
-    <array name="default_chain_name">
-        <item>BHEX Chain Testnet</item>
+    <!--<array name="default_chain_name">
+        <item>BHEX Chain</item>
         <item>Bitcoin</item>
         <item>Ethereum</item>
         <item>Tron</item>
-    </array>
+    </array>-->
 </resources>

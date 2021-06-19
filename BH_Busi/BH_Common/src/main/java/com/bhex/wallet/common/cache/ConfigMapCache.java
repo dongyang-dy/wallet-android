@@ -8,6 +8,7 @@ import com.bhex.network.cache.RxCache;
 import com.bhex.network.cache.data.CacheResult;
 import com.bhex.network.observer.BHBaseObserver;
 import com.bhex.network.utils.JsonUtils;
+import com.bhex.tools.constants.BHConstants;
 import com.bhex.tools.utils.LogUtils;
 import com.bhex.tools.utils.ToolUtils;
 import com.bhex.wallet.common.R;
@@ -214,7 +215,8 @@ public class ConfigMapCache extends BaseCache {
         }
 
         String[] chain_list = BHUserManager.getInstance().getUserBalanceList().split("_");
-        String[] default_chain_name = BaseApplication.getInstance().getResources().getStringArray(R.array.default_chain_name);
+        //String[] default_chain_name = BaseApplication.getInstance().getResources().getStringArray(R.array.default_chain_name);
+        String[] default_chain_name = BHConstants.default_chain;
 
         IntStreams.range(0,chain_list.length).forEach(value -> {
             BHChain bhChain = new BHChain(chain_list[value],default_chain_name[value]);

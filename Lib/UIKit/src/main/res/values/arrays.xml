@@ -71,8 +71,8 @@
         <item>收款</item>-->
         <item>@string/transfer</item>
         <item>@string/transfer_in</item>
-        <item>充值</item>
-        <item>提币</item>
+        <item>@string/deposit</item>
+        <item>@string/withdraw</item>
     </string-array>
 
     <string-array name="Cross_operator_list">

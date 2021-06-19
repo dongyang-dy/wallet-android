@@ -71,8 +71,8 @@
         <item>In</item>-->
         <item>@string/transfer</item>
         <item>@string/transfer_in</item>
-        <item>Deposit</item>
-        <item>Withdrawal</item>
+        <item>@string/deposit</item>
+        <item>@string/withdraw</item>
     </string-array>
 
     <string-array name="Cross_operator_list">

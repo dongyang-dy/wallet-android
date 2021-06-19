@@ -45,7 +45,6 @@
     <string name="tab_my_title">My</string>
     <string name="service_agreement">Service Agreement</string>
     <string name="agreement_index_1">To be continued, you must read and accept the terms of our Privacy Agreemen</string>
-    <string name="agreement_context">Do not save your mnemonic phrase using mailbox, notepad, computer harddisk, messaging app such as Whatsapp, Wechat, Telegram etc, Do not save, screenshot or take photo of mnemonic phrase, Make sure the mnemonic phrase is not visible to anyone or surrounded by the public camera(s)</string>
     <string name="confirm">Confirm</string>
     <string name="import_mnemonic_tips">Please input your 12 word mnemonic phrase with spaces in between</string>
     <string name="import_mnemonic">Import Mnemonic Phrases</string>
